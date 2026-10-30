@@ -1,0 +1,16 @@
+# Public repo: publish only the app itself. Plans, docs, tools and drafts stay on this computer.
+/*
+!/.gitignore
+!/.nojekyll
+!/README.md
+!/index.html
+!/manifest.webmanifest
+!/sw.js
+!/icon-*.png
+!/apple-touch-icon.png
+!/audio/
+/audio/*
+!/audio/雲禪_程式生成配樂樣本.mp3
+!/audio/ai/
+/audio/ai/*
+!/audio/ai/*.mp3

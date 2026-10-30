@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="雲禪">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
 /* Layout: one-screen phone app for elders — header, one active panel, a 4-tab bar. Night (altar wood) by default, a high-contrast Day mode;
    the bead, wooden-fish and dedication screens always stay "altar" dark so the 3D props glow. Minimum type ≈ 17px. */
@@ -428,12 +428,31 @@ button,a,summary,.lsitem{touch-action:manipulation}
 .splay{flex:0 0 auto;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--brass);background:#140d0999;color:var(--brass);display:grid;place-items:center;cursor:pointer;padding:0}
 .splay svg{width:20px;height:20px}
 .spick{flex:1;min-width:0;min-height:48px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;background:none;border:0;padding:0;color:var(--paper);font:inherit;text-align:left;cursor:pointer;text-shadow:0 1px 8px #000,0 0 18px #000a}
-.spick b{font-family:var(--display);font-size:1.15rem;font-weight:900;color:#ffe2a8;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.spick span{font-size:.85rem;color:var(--muted)}
+.spick span{font-size:.78rem;color:var(--brass);letter-spacing:.22em;opacity:.9}
+.spick b{font-family:var(--display);font-size:1.25rem;font-weight:900;letter-spacing:.08em;color:#fff1cf;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spick b::after{content:"⌄";font-family:var(--body);font-weight:400;font-size:.8em;color:var(--brass);margin-left:.4em;position:relative;top:-.15em}
 .splay:focus-visible,.spick:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:12px}
-.ticker{position:absolute;z-index:3;top:calc(var(--g) + 58px);left:0;right:0;height:3.4rem;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-.ticker span{position:absolute;left:0;top:50%;transform:translate(0,-50%);white-space:nowrap;font-family:var(--display);font-weight:900;font-size:1.65rem;letter-spacing:.12em;color:#ffe2a8;text-shadow:0 2px 16px #000,0 0 30px #000b;will-change:transform}
-#p-beads .hud{z-index:3;top:calc(var(--g) + 58px + 3.8rem)}
+/* a scripture banner: hairline gold rules above and below, fading at both ends with the mask */
+.ticker::before,.ticker::after{content:"";position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 10%,#e2b36355 50%,transparent 90%)}
+.ticker::before{top:3px}.ticker::after{bottom:3px}
+.ticker{position:absolute;z-index:3;top:calc(var(--g) + 64px);left:0;right:0;height:3.4rem;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+/* subtitles read like a scripture banner, not karaoke: lighter serif, wide spacing, soft parchment colour, no glow */
+.ticker span{position:absolute;left:0;top:50%;transform:translate(0,-50%);white-space:nowrap;font-family:var(--display);font-weight:500;font-size:1.3rem;letter-spacing:.32em;color:#f3e6c8;text-shadow:0 1px 10px #000c,0 0 24px #0009;will-change:transform,opacity}
+#p-beads .hud{z-index:3;top:calc(var(--g) + 64px + 4rem);gap:.15rem}
+#p-beads .hrow,#p-beads .jizi{display:none!important}
+/* the counter is a small mala: 108 dots, the big mother bead at the top, passed beads in gold, the current one glowing */
+.mala{position:relative;width:6.6rem;height:6.6rem}
+.mala svg{width:100%;height:100%;overflow:visible}
+.mala .md{fill:#2a1a0c;opacity:.28;transition:opacity .25s,fill .25s}
+.mala .md.on{fill:#7a3b1e;opacity:.95;stroke:#f3d9a0;stroke-width:.35}
+.mala .md.cur{fill:#fff4dc;opacity:1;stroke:#7a3b1e;stroke-width:.7}
+.mnum{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;text-shadow:0 2px 12px #000,0 0 22px #000a}
+.mnum b{font-family:var(--display);font-weight:900;font-size:2.25rem;color:#fff4dc;font-variant-numeric:tabular-nums}
+.mnum span{font-family:var(--display);font-size:.8rem;color:var(--brass);letter-spacing:.3em;padding-left:.3em;margin-top:.2rem}
+.mround,.mtotal{width:6.6rem;text-align:center;text-shadow:0 1px 8px #000,0 0 18px #000a}
+.mround{font-family:var(--display);font-size:1.02rem;font-weight:700;letter-spacing:.28em;padding-left:.28em;color:var(--brass)}
+.mtotal{font-size:.8rem;color:var(--muted);letter-spacing:.05em}
+.hud.right .mround,.hud.right .mtotal{align-self:flex-end}
 .glow{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 4s ease;background:radial-gradient(85% 60% at 55% 48%,#ffd88a5c,transparent 70%)}
 #p-beads.complete .glow{opacity:1}
 .scard{border-bottom:1px solid var(--line);padding:.7rem 0}
@@ -491,11 +510,14 @@ button,a,summary,.lsitem{touch-action:manipulation}
       <div class="glow" aria-hidden="true"></div>
       <div class="sbar" id="sBar">
         <button class="splay" id="sPlay" aria-label="播放經文"></button>
-        <button class="spick" id="sPick" aria-haspopup="dialog"><b id="sName"></b><span id="sSub"></span></button>
+        <button class="spick" id="sPick" aria-haspopup="dialog"><span id="sSub"></span><b id="sName"></b></button>
       </div>
       <div class="ticker" id="ticker" aria-hidden="true"><span id="tickTxt"></span></div>
       <div class="hud" id="hud">
         <div class="hname" id="bName"></div>
+        <div class="mala" id="mala" role="img" aria-label="此圈 0 珠"><svg viewBox="0 0 120 120" aria-hidden="true"></svg><div class="mnum"><b id="mNum">0</b><span>珠</span></div></div>
+        <div class="mround" id="mRound">第一輪</div>
+        <div class="mtotal" id="mTotal">今日 0 珠</div>
         <div class="hrow">
           <div class="ringbox" aria-hidden="true">
             <svg class="pring" viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="52"/><circle class="arc" id="bArc" cx="60" cy="60" r="52"/></svg>
@@ -1220,23 +1242,23 @@ const YAOSHI = T("t-yaoshi");
 const WANGSHENG = T("t-wangsheng");
 const WISHES = [
   { id:"daily", title:"日常念佛", who:"阿彌陀佛", note:"每天念佛，安住身心", items:[
-    { name:"阿彌陀佛聖號", text:"南無阿彌陀佛", unit:"聲", goal:108, link:{ url:"https://www.youtube.com/watch?v=dwNqjYg4PWE", label:"承天禪寺・阿彌陀佛聖號" } } ], sutra:"" },
+    { name:"阿彌陀佛聖號", text:"南無阿彌陀佛", unit:"聲", goal:108 } ], sutra:"" },
   { id:"health", title:"身體健康", who:"藥師佛", note:"祈求病苦消除、身心安康", items:[
-    { name:"藥師佛聖號", text:"南無藥師琉璃光如來", unit:"聲", goal:108, link:{ url:"https://www.youtube.com/watch?v=Ihwm0VgQv9A", label:"藥師佛聖號 108 遍（法鼓山唱誦版）" } },
-    { name:"藥師灌頂真言", lines:YAOSHI, unit:"遍", goal:21, link:{ url:"https://www.youtube.com/watch?v=x0l1dtTFcv4", label:"佛光山梵唄・藥師灌頂真言" } } ], sutra:"藥師經" },
+    { name:"藥師佛聖號", text:"南無藥師琉璃光如來", unit:"聲", goal:108 },
+    { name:"藥師灌頂真言", lines:YAOSHI, unit:"遍", goal:21 } ], sutra:"藥師經" },
   { id:"peace", title:"平安消災", who:"觀世音菩薩", note:"祈求出入平安、逢凶化吉", items:[
-    { name:"觀音聖號", text:"南無觀世音菩薩", unit:"聲", goal:108, link:{ url:"https://www.youtube.com/watch?v=qnx5Aj-gjDU", label:"法鼓山・觀世音菩薩聖號 10 分鐘" } },
-    { name:"六字大明咒", text:"唵嘛呢叭咪吽", unit:"遍", goal:108, link:{ url:"https://www.youtube.com/watch?v=ZDjQGLrVgN8", label:"六字大明咒唱誦" } } ], sutra:"觀世音菩薩普門品" },
+    { name:"觀音聖號", text:"南無觀世音菩薩", unit:"聲", goal:108 },
+    { name:"六字大明咒", text:"唵嘛呢叭咪吽", unit:"遍", goal:108 } ], sutra:"觀世音菩薩普門品" },
   { id:"wealth", title:"事業財運", who:"福德正神（土地公）", note:"祈求事業順遂、守成有餘", items:[
-    { name:"福德正神聖號", text:"福德正神", unit:"聲", goal:108, link:{ url:"https://www.youtube.com/watch?v=Hw_Y_jcqbIg", label:"福德正神真經（三聖宮・台語課誦）" } } ], sutra:"" },
+    { name:"福德正神聖號", text:"福德正神", unit:"聲", goal:108 } ], sutra:"" },
   { id:"family", title:"追思親人", who:"阿彌陀佛", note:"為往生親眷祈願，願生淨土", items:[
-    { name:"阿彌陀佛聖號", text:"南無阿彌陀佛", unit:"聲", goal:108, link:{ url:"https://www.youtube.com/watch?v=dwNqjYg4PWE", label:"承天禪寺・阿彌陀佛聖號" } },
-    { name:"往生咒", lines:WANGSHENG, unit:"遍", goal:21, link:{ url:"https://www.youtube.com/watch?v=84714oPovUQ", label:"往生咒 21 遍（國語課誦）" } } ], sutra:"阿彌陀經" },
+    { name:"阿彌陀佛聖號", text:"南無阿彌陀佛", unit:"聲", goal:108 },
+    { name:"往生咒", lines:WANGSHENG, unit:"遍", goal:21 } ], sutra:"阿彌陀經" },
   { id:"calm", title:"心安好眠", who:"般若心經", note:"放下煩惱，身心安寧", items:[
-    { name:"般若波羅蜜多心經", lines:HEART, unit:"遍", goal:7, link:{ url:"https://www.youtube.com/watch?v=r-uOBJ0KE9k", label:"心經 7 遍（法鼓山）" } } ], sutra:"" },
+    { name:"般若波羅蜜多心經", lines:HEART, unit:"遍", goal:7 } ], sutra:"" },
   { id:"wisdom", title:"智慧考運", who:"文殊菩薩", note:"祈求智慧開啟、學業順利", items:[
     { name:"文殊菩薩聖號", text:"南無大智文殊師利菩薩", unit:"聲", goal:108 },
-    { name:"文殊心咒", text:"嗡阿惹巴扎那諦", unit:"遍", goal:108, link:{ url:"https://www.youtube.com/watch?v=z_0swy-1ZmA", label:"文殊菩薩心咒 108 遍" } } ], sutra:"" }
+    { name:"文殊心咒", text:"嗡阿惹巴扎那諦", unit:"遍", goal:108 } ], sutra:"" }
 ];
 const FREE = { name:"自由念佛", text:"南無阿彌陀佛", unit:"聲", goal:0 };
 S.links = S.links || {};
@@ -1491,6 +1513,8 @@ function renderHud(){
   sb.replaceChildren(ph("經文音樂："), ph(on ? `${nowName} ›` : lsCur ? `${nowName}（已暫停） ›` : "選一首 ›"));
   sb.setAttribute("aria-label", on ? `正在播放${lsCur.s.title}，點一下更換經文音樂` : "選擇撥珠時播放的經文音樂");
   paintSBar(); paintTicker();
+  paintMala(sess ? sessDone() % PER_LOOP : ((counted % PER_LOOP) + PER_LOOP) % PER_LOOP,
+            (sess ? Math.floor(sessDone() / PER_LOOP) : td.loops) + 1, td.beads);
   const meta = sess && S.rec[it.name], lk = sess && linkFor(it), a = $("sLink");
   const inl = sess && !meta && INLINE[it.name] ? LS_ALL[INLINE[it.name]] : null;
   a.hidden = !lk || !!meta || !!inl;
@@ -2372,7 +2396,8 @@ if (SR){
 
 /* ================= 聽經：點一下就播放 ================= */
 // Catalog of public podcast episodes (official publishers where possible), streamed from the original host.
-const LISTEN = {"chant":[{"id":"c-heart","title":"般若波羅蜜多心經","who":"見輝法師 讀誦","src":"見輝法師讀誦經典（Podcast）","eps":[{"t":"般若波羅蜜多心經","u":"https://m.cdn.firstory.me/track/ckoed02l2f0zl089911lck2cx/ckoed6yquf75x0828mlhhm9kw/https%3A%2F%2Fd3mww1g1pfq2pt.cloudfront.net%2FRecord%2Fckoed02l2f0zl089911lck2cx%2F1620394730620.mp3?v=1620394743386","d":139}],"tags":"短"},{"id":"c-pumen","title":"觀世音菩薩普門品","who":"見輝法師 恭誦","src":"見輝法師讀誦經典（Podcast）","eps":[{"t":"觀世音菩薩普門品","u":"https://m.cdn.firstory.me/track/ckoed02l2f0zl089911lck2cx/clfkt81zp012101tlg8x051tc/https%3A%2F%2Fd3mww1g1pfq2pt.cloudfront.net%2FRecord%2Fckoed02l2f0zl089911lck2cx%2Fclfkt81zp012201tl62x26pej.mp3?v=1679557604009","d":820}],"tags":""},{"id":"c-jingang","title":"金剛經","who":"見輝法師 恭誦","src":"見輝法師讀誦經典（Podcast）","eps":[{"t":"金剛經","u":"https://m.cdn.firstory.me/track/ckoed02l2f0zl089911lck2cx/ckoed9o6an6jx08298l7x12tp/https%3A%2F%2Fd3mww1g1pfq2pt.cloudfront.net%2FRecord%2Fckoed02l2f0zl089911lck2cx%2F1620394864768.mp3?v=1620394870622","d":2331}],"tags":""},{"id":"c-puxian","title":"普賢行願品","who":"見輝法師 恭誦","src":"見輝法師讀誦經典（Podcast）","eps":[{"t":"普賢行願品","u":"https://m.cdn.firstory.me/track/ckoed02l2f0zl089911lck2cx/clcfitun5002s01yg577k79n8/https%3A%2F%2Fd3mww1g1pfq2pt.cloudfront.net%2FRecord%2Fckoed02l2f0zl089911lck2cx%2Fclcfitun5002t01yg1kue1v9m.mp3?v=1672707600259","d":2722}],"tags":""},{"id":"c-yijiao","title":"佛遺教經","who":"見輝法師 恭誦","src":"見輝法師讀誦經典（Podcast）","eps":[{"t":"佛遺教經","u":"https://m.cdn.firstory.me/track/ckoed02l2f0zl089911lck2cx/clfktevss012601tlcq289luq/https%3A%2F%2Fd3mww1g1pfq2pt.cloudfront.net%2FRecord%2Fckoed02l2f0zl089911lck2cx%2Fclfktevss012701tldlbvabuq.mp3?v=1679557960451","d":2883}],"tags":""}],"name":[{"id":"n-chengtian","title":"南無阿彌陀佛・六字二音","who":"承天禪寺","src":"虛空念佛機（Podcast 合輯）","eps":[{"t":"南無阿彌陀佛・六字二音","u":"https://m.cdn.firstory.me/play.mp3?url=https%3A%2F%2Fd3mww1g1pfq2pt.cloudfront.net%2FRecord%2Fckzicljg1021a08815kciv14i%2Fcl6u6gmqo01vd01xof5r4drqw.mp3%3Fv%3D1660539121541","d":2712}],"tags":""},{"id":"n-ddm","title":"阿彌陀佛・四字四音","who":"法鼓山僧團","src":"虛空念佛機（Podcast 合輯）","eps":[{"t":"阿彌陀佛・四字四音","u":"https://m.cdn.firstory.me/play.mp3?url=https%3A%2F%2Fd3mww1g1pfq2pt.cloudfront.net%2FRecord%2Fckzicljg1021a08815kciv14i%2F1644889373507.mp3%3Fv%3D1673696624409","d":3618}],"tags":""},{"id":"n-tw","title":"南無阿彌陀佛・台語清念","who":"慧淨法師","src":"虛空念佛機（Podcast 合輯）","eps":[{"t":"南無阿彌陀佛・台語清念","u":"https://m.cdn.firstory.me/play.mp3?url=https%3A%2F%2Fd3mww1g1pfq2pt.cloudfront.net%2FRecord%2Fckzicljg1021a08815kciv14i%2F1644807571867.mp3%3Fv%3D1644807579151","d":1798}],"tags":"台語"},{"id":"n-slow","title":"阿彌陀佛・清念慢版","who":"淨空老和尚","src":"虛空念佛機（Podcast 合輯）","eps":[{"t":"阿彌陀佛・清念慢版","u":"https://m.cdn.firstory.me/play.mp3?url=https%3A%2F%2Fd3mww1g1pfq2pt.cloudfront.net%2FRecord%2Fckzicljg1021a08815kciv14i%2Fcl6u6yhzb01vt01xogc06budc.mp3%3Fv%3D1660552814851","d":3724}],"tags":""},{"id":"n-fgs","title":"南無阿彌陀佛・七音調","who":"佛光山梵唄讚頌團","src":"虛空念佛機（Podcast 合輯）","eps":[{"t":"南無阿彌陀佛・七音調","u":"https://m.cdn.firstory.me/play.mp3?url=https%3A%2F%2Fd3mww1g1pfq2pt.cloudfront.net%2FRecord%2Fckzicljg1021a08815kciv14i%2F1644889029201.mp3%3Fv%3D1644889040245","d":2888}],"tags":""}],"talk":[{"id":"t-heart","title":"心經・觀自在","who":"聖嚴法師 講","src":"法鼓山・聖嚴法師經典學院（Podcast）","eps":[{"t":"第 1 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/39a34b51-c7dd-4186-972a-a7b04440b0f8/rssFileVip.mp3?timestamp=1688525140370","d":1077},{"t":"第 2 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/7e551a2f-65b2-4aa9-a093-7b3562bf3a4e/rssFileVip.mp3?timestamp=1688525142062","d":847},{"t":"第 3 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/3f5d9292-e19b-4aaf-889b-6b9aa1113d8d/rssFileVip.mp3?timestamp=1688525147844","d":1281},{"t":"第 4 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/cea2713d-d60d-4502-80c2-2ea8fdaac6d8/rssFileVip.mp3?timestamp=1688525143930","d":953},{"t":"第 5 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/cb10e3be-d185-4fa0-ab93-05dc0eb29fe9/rssFileVip.mp3?timestamp=1688525133893","d":577},{"t":"第 6 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/42617239-012f-42c8-a4cc-62fdacdae837/rssFileVip.mp3?timestamp=1688525127464","d":1055},{"t":"第 7 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/da71309f-4fb7-402b-9f2d-c0ec3cbb98e6/rssFileVip.mp3?timestamp=1688525140240","d":1348},{"t":"第 8 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/50899992-3062-48b0-9ee6-d8281d834161/rssFileVip.mp3?timestamp=1688525148369","d":1501},{"t":"第 9 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/fb3b12df-bbe8-44e6-a25d-6d810354fd39/rssFileVip.mp3?timestamp=1688525127917","d":632}]},{"id":"t-amt","title":"佛說阿彌陀經","who":"聖嚴法師 講","src":"法鼓山・聖嚴法師經典學院（Podcast）","eps":[{"t":"第 1 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/71983b68-87b5-4e56-aef9-fa588757d602/rssFileVip.mp3?timestamp=1688525148674","d":1380},{"t":"第 2 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/94e4ea86-c222-4e71-95b2-73e0ebbcec30/rssFileVip.mp3?timestamp=1688525144420","d":1311},{"t":"第 3 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/e99c6e37-4cf6-4056-9b51-0d466cfa2fe2/rssFileVip.mp3?timestamp=1688525142217","d":1910},{"t":"第 4 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/181a984c-6a86-44ec-9f23-0748d59bad0c/rssFileVip.mp3?timestamp=1688525140832","d":1037},{"t":"第 5 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/38176ed5-2525-4ccf-a382-5cb779e0f125/rssFileVip.mp3?timestamp=1688525142522","d":843},{"t":"第 6 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/78f35172-a000-4ab7-819f-fa124b11afdb/rssFileVip.mp3?timestamp=1688525135425","d":908}]},{"id":"t-ciyun","title":"慈雲懺主淨土文","who":"聖嚴法師 講","src":"法鼓山・聖嚴法師經典學院（Podcast）","eps":[{"t":"第 1 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/ee26e1bc-f71d-48f5-805e-f2629d180fd7/rssFileVip.mp3?timestamp=1701742404555","d":552},{"t":"第 2 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/fd3875a5-a95f-491d-b65a-b96bbcaeefeb/rssFileVip.mp3?timestamp=1701742404446","d":1579},{"t":"第 3 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/70141b4a-541f-4e74-95ac-aa103e3c9488/rssFileVip.mp3?timestamp=1702347240648","d":1513},{"t":"第 4 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/51b57a7f-af5c-4228-997f-61777312db00/rssFileVip.mp3?timestamp=1702349370291","d":481},{"t":"第 5 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/6f47138a-5e3f-4c03-8e68-5065270fcd61/rssFileVip.mp3?timestamp=1702952017428","d":766},{"t":"第 6 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/19d44b6b-6b60-4575-b411-b964f31fecf7/rssFileVip.mp3?timestamp=1702952017524","d":477},{"t":"第 7 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/e04fe815-d029-40ce-8104-76ab873f34fd/rssFileVip.mp3?timestamp=1703556810106","d":423},{"t":"第 8 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/f6f4a676-1571-4b6e-a0fe-9126e2cfff96/rssFileVip.mp3?timestamp=1703556809974","d":1066}],"tags":"晨朝十念出處"},{"id":"t-jg","title":"金剛經・如是說","who":"聖嚴法師 講","src":"法鼓山・聖嚴法師經典學院（Podcast）","eps":[{"t":"第 1 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/e05613ba-e17c-4951-92b7-8bd7caae8394/rssFileVip.mp3?timestamp=1688525136377","d":884},{"t":"第 2 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/f5b4f19b-41ff-4e0d-9f71-aa0be655d0f1/rssFileVip.mp3?timestamp=1688525141185","d":727},{"t":"第 3 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/5b43cd5f-ef25-4f8c-b030-3698839be376/rssFileVip.mp3?timestamp=1688525139897","d":1391},{"t":"第 4 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/15325b87-ac0e-4264-8622-c250652f8011/rssFileVip.mp3?timestamp=1688525145128","d":1311},{"t":"第 5 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/824a6e78-b86e-4481-9644-e46773ed5c3e/rssFileVip.mp3?timestamp=1688525127821","d":1262},{"t":"第 6 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/4c5ab8b8-26c3-4e46-99a7-0b4f48faa304/rssFileVip.mp3?timestamp=1688525136187","d":812},{"t":"第 7 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/34c18459-2a0b-49ea-a685-bc36c87d5d48/rssFileVip.mp3?timestamp=1688525148432","d":1096},{"t":"第 8 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/96dc540f-1ad5-4b29-9108-89a1086b9d47/rssFileVip.mp3?timestamp=1688525125913","d":1081},{"t":"第 9 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/086d7b34-445d-4907-b827-1632aff4f865/rssFileVip.mp3?timestamp=1688525140168","d":940}]},{"id":"t-dz","title":"地藏菩薩本願經","who":"聖嚴法師 講","src":"法鼓山・聖嚴法師經典學院（Podcast）","eps":[{"t":"第 1 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/681ae466-16f0-46e4-8aa4-ee5c9005b7f0/rssFileVip.mp3?timestamp=1688525137893","d":604},{"t":"第 2 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/255b15ed-d247-4835-b7e6-a7dd0be28464/rssFileVip.mp3?timestamp=1688525126899","d":777},{"t":"第 3 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/1dca62e5-a5b2-477e-a2db-b9f7ee1a6af3/rssFileVip.mp3?timestamp=1688525144129","d":558},{"t":"第 4 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/f475a8c8-e46f-4e98-99de-90f0c7879113/rssFileVip.mp3?timestamp=1688525134685","d":723},{"t":"第 5 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/2174856e-286d-480c-b57b-85389abd713c/rssFileVip.mp3?timestamp=1688525135278","d":557},{"t":"第 6 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/073a6cde-0af7-4dff-bfdd-683947d2984f/rssFileVip.mp3?timestamp=1688525132773","d":471},{"t":"第 7 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/baac7d90-28eb-4b5f-abc5-96e2daa369bf/rssFileVip.mp3?timestamp=1688525142859","d":656},{"t":"第 8 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/5ed49b51-ba2d-4064-ab41-67dafbec9de2/rssFileVip.mp3?timestamp=1688525131519","d":420},{"t":"第 9 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/82443331-f91f-458a-8b34-fbb69e2c8a40/rssFileVip.mp3?timestamp=1688525145298","d":621},{"t":"第 10 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/5046c615-7c30-44e6-b5a7-bfb7f11702e4/rssFileVip.mp3?timestamp=1688525145881","d":617},{"t":"第 11 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/0e2fede2-e95c-4172-9b00-8ae1bc5aeee3/rssFileVip.mp3?timestamp=1688525140908","d":685},{"t":"第 12 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/bb5bc9ca-887d-4a0a-9d17-a7274af4e54c/rssFileVip.mp3?timestamp=1688525128864","d":853},{"t":"第 13 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/0ce4d029-9106-4c63-9b5f-a84ced02b5b7/rssFileVip.mp3?timestamp=1688525132269","d":800},{"t":"第 14 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/bc3aa6fa-cf55-48e0-b726-fb6962e38aca/rssFileVip.mp3?timestamp=1688525133816","d":649},{"t":"第 15 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/4ad3702d-ab52-4a5a-b2c0-087f36eb0dd2/rssFileVip.mp3?timestamp=1688525129387","d":576},{"t":"第 16 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/dcb09450-10c7-463b-a758-88654926ffe6/rssFileVip.mp3?timestamp=1688525145219","d":648},{"t":"第 17 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/322fb210-3158-4fbd-955c-ee9f66e7adbe/rssFileVip.mp3?timestamp=1688525145803","d":683},{"t":"第 18 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/0099978b-f246-4859-b654-f6c5a77a3ff6/rssFileVip.mp3?timestamp=1688525147563","d":366}]},{"id":"t-wls","title":"無量壽經","who":"聖嚴法師 講","src":"法鼓山・聖嚴法師經典學院（Podcast）","eps":[{"t":"第 1 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/f55e164d-53f3-416f-849e-51edcc4e7d5a/rssFileVip.mp3?timestamp=1688525146264","d":1392},{"t":"第 2 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/594dcc14-c83d-4adb-87a7-f28a76dfbd08/rssFileVip.mp3?timestamp=1688525140030","d":1035},{"t":"第 3 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/bb73baf9-b660-4439-ae17-137978306eb5/rssFileVip.mp3?timestamp=1688525127190","d":971},{"t":"第 4 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/df51336e-aac3-40b3-b32f-cf40c65adbef/rssFileVip.mp3?timestamp=1688525130552","d":1045},{"t":"第 5 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/3132bb89-7db1-4336-9f42-24ffb1235536/rssFileVip.mp3?timestamp=1688525139963","d":644},{"t":"第 6 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/292148d5-b668-4b5c-9096-fc65c9c1adb8/rssFileVip.mp3?timestamp=1688525133411","d":1411},{"t":"第 7 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/ccc829cd-86d0-4faf-aac3-8ce44e2f895d/rssFileVip.mp3?timestamp=1688525127667","d":1273},{"t":"第 8 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/593332c6-467f-495a-8bbc-8b5fbe94e995/rssFileVip.mp3?timestamp=1688525134403","d":857},{"t":"第 9 集","u":"https://track.fstry.me/p/rxznhs7w/rss.soundon.fm/rssf/5440c9b1-f88c-4d30-b493-8a1f3a941d35/feedurl/9a9a20b5-cc71-4732-bd17-4a24844e046f/rssFileVip.mp3?timestamp=1688525138167","d":1185}]}],"qa":[{"id":"q-sy","title":"聖嚴法師答客問","who":"聖嚴法師","src":"法鼓山・聖嚴法師答客問（Podcast）","eps":[{"t":"看破紅塵才學佛？","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/71c4ac4b-3de8-43bd-9fb2-4b5210d597ef/rssFileVip.mp3?timestamp=1655293556089","d":2433},{"t":"學佛後就要放下興趣嗜好？","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/c6fb2766-eed8-4ef5-8b03-1c9af871850f/rssFileVip.mp3?timestamp=1655293576510","d":2899},{"t":"信佛有所求是功利？","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/41548080-2384-452a-a090-3178caee9295/rssFileVip.mp3?timestamp=1655293555390","d":1578},{"t":"要如何把佛法融合在生活中？","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/e6a7d337-6fb5-42d0-abe0-4d15332dac39/rssFileVip.mp3?timestamp=1655293542008","d":654},{"t":"佛教徒要如何拿捏名利追求跟修行的尺度?","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/1295fae2-b895-472b-9392-a2224002c6bc/rssFileVip.mp3?timestamp=1655293538517","d":679},{"t":"在家居士如何作定課?","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/4cbe113d-884f-46c1-89d3-d0fae91d4c8f/rssFileVip.mp3?timestamp=1655293538778","d":1010},{"t":"佛教徒比較重視理論，基督教比較重視實際?","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/eee5debe-4770-49a9-aa24-b16de14cef2b/rssFileVip.mp3?timestamp=1655293539258","d":403},{"t":"在家居士如何設佛堂？","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/faf332ad-da76-49d2-800a-23ad4ac3482f/rssFileVip.mp3?timestamp=1655293559550","d":1673},{"t":"佛教徒一定要吃素？","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/0d2edf24-833a-4aa2-856d-f46d210efe60/rssFileVip.mp3?timestamp=1655293538753","d":850},{"t":"佛教徒該如何舉行喪葬儀式？","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/dc75cb82-378e-4b6d-b6e2-0c060f2c5ce2/rssFileVip.mp3?timestamp=1655293552864","d":1359},{"t":"如何分辨佛教寺廟？","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/958be078-a2bc-4e6c-9e2d-48f8db517d6d/rssFileVip.mp3?timestamp=1655293546134","d":1148},{"t":"民間的普渡活動跟佛教的盂蘭盆法會有何不同?","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/5637713f-5473-48e7-82bb-3bc34e39ee36/rssFileVip.mp3?timestamp=1655293538096","d":601},{"t":"佛教對於命相風水的看法","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/bfd16aad-c407-4efa-9f36-cbc59b04aa81/rssFileVip.mp3?timestamp=1655293543765","d":672},{"t":"佛教如何看待天災人禍？","u":"https://rss.soundon.fm/rssf/c9a1b7ae-37c4-49e6-8340-92a856c5f040/feedurl/61e6ede6-1f00-4480-8e27-5ab7364c6f6f/rssFileVip.mp3?timestamp=1655293377058","d":634}]}]};
+// only our own audio ships: third-party recitations and talks were removed until written licences exist
+const LISTEN = {};
 // 雲禪's own track: generated by tools/generate_bed.py, no third-party rights, so it can ship as-is
 LISTEN.bed = [{ id:"b-bed", title:"雲禪睡前配樂", who:"雲禪自製・頌缽、長音、木魚", src:"雲禪程式生成配樂（自有版權）",
   eps:[{ t:"頌缽與木魚（每分鐘 56 下）", u:"audio/雲禪_程式生成配樂樣本.mp3", d:150 }], tags:"可整夜循環" }];
@@ -2381,10 +2406,10 @@ LISTEN.bed = [{ id:"b-bed", title:"雲禪睡前配樂", who:"雲禪自製・頌�
 const SONGS = (() => { try{ return JSON.parse(document.getElementById("songs").textContent).songs || []; }catch(e){ return []; } })();
 LISTEN.song = SONGS.map(sg => ({ id:sg.id, title:sg.item, who:"雲禪 AI 唱誦・經文校對中", src:"雲禪 AI 唱誦（自有版權）",
   tags:"有字幕", eps:sg.versions.map(v => ({ t:`${v.label}版`, u:v.u, d:v.d, cues:v.cues })) }));
-const LS_GROUPS = [...(SONGS.length ? [["song","雲禪唱誦","AI 唱誦配經文字幕，可以邊聽邊撥珠"]] : []), ["bed","睡前配樂","雲禪自製，沒有版權疑慮，可搭配定時關閉"],["chant","誦經","隨法師恭誦經文"],["name","念佛","行住坐臥，佛號不斷"],["talk","法師講經","聖嚴法師開示經義，下回自動接續"],["qa","法師答問","學佛常見疑問，一問一答"]];
+const LS_GROUPS = [...(SONGS.length ? [["song","雲禪唱誦","AI 唱誦配經文字幕，可以邊聽邊撥珠"]] : []), ["bed","睡前配樂","雲禪自製，沒有版權疑慮，可搭配定時關閉"]];
 const LS_ALL = {}; Object.values(LISTEN).forEach(g => g.forEach(s => LS_ALL[s.id] = s));
 // bead-screen chants that have a real recording we can play in place
-const INLINE = { "自由念佛":"n-chengtian", "阿彌陀佛聖號":"n-chengtian", "般若波羅蜜多心經":"c-heart" };
+const INLINE = {};
 SONGS.forEach(sg => { INLINE[sg.item] = sg.id; });   // a chant track takes over as the lead voice for its item
 const isSong = id => !!id && id.startsWith("s-");
 const songWord = it => it.lines ? it.lines[it.lines.length - 1].replace(/[，。]/g, "").slice(-2) : "";
@@ -2440,12 +2465,20 @@ talk.addEventListener("timeupdate", () => {
 let songLast = -1;
 function songSync(){
   const ep = lsCur && lsCur.ep;
-  if (!ep || !ep.cues || !sess || !sess.item.lines || INLINE[sess.item.name] !== lsCur.s.id) return;
+  if (!ep || !ep.cues || talk.paused) return;
+  const lines = T(aboutOf(lsCur.s.id).text || "");
+  if (!lines.length) return;
   const t = talk.currentTime, c = ep.cues.find(x => t >= x[0] && t < x[1]);
-  if (!c || c[0] === songLast) return;
-  songLast = c[0]; sess.lineIdx = c[2];
-  tick(sess.item.lines[c[2]].replace(/[，。]$/, ""), (c[1] - c[0]) * 1000, "cue:" + c[0]);
-  renderSess();
+  if (!c){
+    // intro, outro or a long rest: the whole text flows; a short breath between lines keeps the last line
+    const next = ep.cues.find(x => x[0] > t);
+    if (songLast >= 0 && next && next[0] - t < 3) return;
+    songLast = -2; tick(flowText(lsCur.s), 0, "flow:" + lsCur.s.id); return;
+  }
+  if (c[0] === songLast) return;
+  songLast = c[0];
+  if (sess && sess.item.lines && INLINE[sess.item.name] === lsCur.s.id) sess.lineIdx = c[2];
+  tick(lines[c[2]].replace(/[，。]$/, ""), (c[1] - c[0]) * 1000, "cue:" + c[0]);
 }
 talk.addEventListener("ended", () => {
   if (!lsCur) return;
@@ -2542,9 +2575,10 @@ function renderTodayListen(){
   const box = $("hListen"); box.innerHTML = "";
   const h = new Date().getHours();
   let id, idx = null, name, who, opts = null;
-  if (h < 11){ id = "c-heart"; name = "晨誦《心經》"; who = "見輝法師恭誦・二分鐘"; }
-  else if (h < 19){ const sr = LS_ALL["q-sy"]; id = sr.id; idx = dayNo() % sr.eps.length; name = `法師答問：${sr.eps[idx].t}`; who = `聖嚴法師・${mins(sr.eps[idx].d)} 分鐘`; }
-  else { id = "n-tw"; name = "安眠念佛（台語）"; who = "慧淨法師・三十分鐘後自止"; opts = { sleep:30 }; }
+  // our own tracks only: the temple chant by day, the bedtime music (stops after 30 minutes) at night
+  const sg = SONGS.length && LS_ALL[SONGS[0].id];
+  if (sg && h < 19){ id = sg.id; idx = 0; name = `${sg.title}・${sg.eps[0].t}`; who = "雲禪 AI 唱誦・有經文字幕"; }
+  else { id = "b-bed"; name = "雲禪睡前配樂"; who = "頌缽與木魚・三十分鐘後自止"; opts = { sleep:30 }; }
   const lab = document.createElement("div"); lab.className = "tlab"; lab.innerHTML = "<b>今日聞法</b>";
   const nm = document.createElement("div"); nm.className = "tname"; nm.textContent = name;
   const w = document.createElement("div"); w.className = "twho"; w.textContent = who;
@@ -2815,8 +2849,9 @@ const PAUSE_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="tru
 function paintSBar(){
   const on = lsCur && !talk.paused, it = curItem(), done = $("p-beads").classList.contains("complete");
   $("sPlay").innerHTML = on ? PAUSE_SVG : PLAY_SVG; $("sPlay").setAttribute("aria-label", on ? "暫停經文" : "播放經文");
-  $("sName").textContent = lsCur ? `${lsCur.s.title}${lsCur.s.eps.length > 1 ? "・" + lsCur.ep.t : ""}` : (sess ? it.name : "安靜撥珠");
-  $("sSub").textContent = done && routine ? "已圓滿・輕觸進入下一步" : "選擇經文 ⌄";
+  $("sName").textContent = lsCur ? lsCur.s.title : (sess ? it.name : "選擇經文");
+  $("sSub").textContent = done && routine ? "已圓滿・輕觸進入下一步" : !lsCur ? "安靜撥珠" :
+    isSong(lsCur.s.id) ? `雲禪唱誦・${lsCur.ep.t}` : "雲禪配樂";
 }
 // one line per cue slides in from the right, rests, and leaves to the left; without cues the whole text scrolls on
 let tickAnim = null, tickKey = "";
@@ -2826,27 +2861,46 @@ function tick(text, ms, key){
   tickKey = key;
   const box = $("ticker"), el = $("tickTxt");
   if (tickAnim){ tickAnim.cancel(); tickAnim = null; }
-  el.textContent = text || "";
+  el.textContent = text || ""; el.style.opacity = "";
   if (!text) return;
   const W = box.clientWidth, w = el.scrollWidth, mid = Math.max(16, (W - w) / 2);
   if (ms < 0 || reduceMotion.matches){ el.style.transform = `translate(${mid}px,-50%)`; return; }
   if (ms > 0){
-    const a = w <= W - 32 ? mid : 16, b = w <= W - 32 ? mid : W - w - 16;
-    tickAnim = el.animate([{ transform:`translate(${W}px,-50%)` }, { transform:`translate(${a}px,-50%)`, offset:.15 },
-      { transform:`translate(${b}px,-50%)`, offset:.85 }, { transform:`translate(${-w}px,-50%)` }], { duration:ms, easing:"ease-in-out", fill:"forwards" });
+    // one sung line: fades in, drifts gently left while it is sung, fades out (a long line pans instead)
+    const fits = w <= W - 32, a = fits ? mid + 22 : 16, b = fits ? mid - 22 : W - w - 16;
+    tickAnim = el.animate([{ transform:`translate(${a}px,-50%)`, opacity:0 }, { opacity:1, offset:.2 }, { opacity:1, offset:.8 },
+      { transform:`translate(${b}px,-50%)`, opacity:0 }], { duration:ms, easing:"linear", fill:"forwards" });
   } else {
-    tickAnim = el.animate([{ transform:`translate(${W}px,-50%)` }, { transform:`translate(${-w}px,-50%)` }], { duration:(W + w) / 55 * 1000, iterations:Infinity });
+    // no line timing (intro, outro, plain recordings): the whole text drifts by slowly and quietly
+    el.style.opacity = .75;
+    tickAnim = el.animate([{ transform:`translate(${W}px,-50%)` }, { transform:`translate(${-w}px,-50%)` }], { duration:(W + w) / 32 * 1000, iterations:Infinity });
   }
 }
+const flowText = sr => { const ab = aboutOf(sr.id), lines = ab.text ? T(ab.text) : [];
+  return (lines.length === 1 ? Array(6).fill(lines[0]) : lines.map(l => l.replace(/[，。]$/, ""))).join("　　"); };
 function paintTicker(){
   const it = curItem(), sr = lsCur && lsCur.s, on = sr && !talk.paused;
-  if (on && lsCur.ep.cues) return;   // chant tracks: songSync moves the line with the singing
   if (on){
-    const ab = aboutOf(sr.id), lines = ab.text ? T(ab.text) : [];
-    if (lines.length){ tick((lines.length === 1 ? Array(6).fill(lines[0]) : lines.map(l => l.replace(/[，。]$/, ""))).join("　　"), 0, "loop:" + sr.id); return; }
+    if (lsCur.ep.cues && songLast >= 0) return;   // a sung line is on screen; songSync moves on to the next
+    tick(flowText(sr), flowText(sr) ? 0 : -1, "flow:" + sr.id); return;
   }
   const still = it.lines ? it.lines[sess ? sess.lineIdx : 0].replace(/[，。]$/, "") : it.text;
   tick(still, -1, "still:" + still);
+}
+const ZH = "零一二三四五六七八九";
+const zhNum = n => n <= 10 ? (n === 10 ? "十" : ZH[n]) : n < 20 ? "十" + ZH[n % 10] : n < 100 ? ZH[Math.floor(n / 10)] + "十" + (n % 10 ? ZH[n % 10] : "") : String(n);
+function paintMala(inRound, round, total){
+  const svg = $("mala").querySelector("svg");
+  if (!svg.childElementCount){
+    for (let i = 0; i < PER_LOOP; i++){
+      const a = -Math.PI / 2 + 2 * Math.PI * i / PER_LOOP, c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      c.setAttribute("cx", (60 + 54 * Math.cos(a)).toFixed(2)); c.setAttribute("cy", (60 + 54 * Math.sin(a)).toFixed(2));
+      c.setAttribute("r", i ? 1.55 : 3.4); c.setAttribute("class", "md"); svg.appendChild(c);
+    }
+  }
+  [...svg.children].forEach((c, i) => c.setAttribute("class", "md" + (i && i < inRound ? " on" : "") + (i === inRound % PER_LOOP ? " cur" : "")));
+  $("mNum").textContent = inRound; $("mRound").textContent = `第${zhNum(round)}輪`; $("mTotal").textContent = `今日 ${fmt(total)} 珠`;
+  $("mala").setAttribute("aria-label", `第${zhNum(round)}輪，此圈 ${inRound} 珠，今日共 ${total} 珠`);
 }
 function openSutras(){ renderSutras(); openSheetEl($("musicSheet")); }
 $("sPlay").onclick = () => { ac(); if (lsCur) talk.paused ? talkPlay() : talk.pause(); else openSutras(); };
@@ -2880,14 +2934,10 @@ function renderSutras(){
   }));
 }
 // choosing a track also chooses what the beads count: its own chant (in 遍) or free holy-name beading
+// choosing a track only changes what plays: beading stays one tap one bead, 108 beads one round
 function selectTrack(sr, idx = null){
-  const ab = aboutOf(sr.id), name = ab.item || (isSong(sr.id) ? Object.keys(INLINE).find(k => INLINE[k] === sr.id) : null);
   showTab("beads", true);   // show the stage first: drawing beads on a hidden (zero-size) stage throws
-  if (!routine){
-    const w = name && WISHES.find(x => x.items.some(i => i.name === name)), it = w && w.items.find(i => i.name === name);
-    if (it){ if (!sess || sess.item.name !== it.name) startSession(w, it, true); }
-    else if (sess) endSession();
-  }
+  if (sess && !routine) endSession();
   if (!(lsCur && lsCur.s.id === sr.id && !talk.paused && (idx == null || lsCur.i === idx))) playSeries(sr.id, idx, { loop:true });
   renderHud();
 }

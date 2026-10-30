@@ -625,7 +625,11 @@ header.top .hq{gap:2px;align-items:center}
 .tquote .src{margin:12px 0 0;font-size:.82rem;letter-spacing:.08em;color:var(--brass)}
 .tquote .plain{margin:8px auto 0;max-width:24em;font-size:.95rem;line-height:1.75;color:var(--muted)}
 .tquote .acts{display:flex;justify-content:center;gap:22px;margin-top:14px}
-.tquote .acts button{background:none;border:0;color:var(--brass);font:inherit;font-size:.92rem;letter-spacing:.12em;min-height:44px;padding:0 4px;cursor:pointer}
+/* 分享普法: an obvious, quiet button — gold hairline pill with a share glyph, warm glow on press */
+.tquote .share{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 26px 0 22px;border-radius:999px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b3631f,#e2b36308);color:#ffe2a8;font:inherit;font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:.28em;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff14,0 4px 16px #0005;transition:background .2s,box-shadow .2s}
+.tquote .share svg{width:20px;height:20px;flex:none}
+.tquote .share:active{background:linear-gradient(180deg,#e2b36340,#e2b36318);box-shadow:inset 0 1px 0 #ffffff14,0 0 18px #e2b36344}
+.tquote .share:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .tsect{display:flex;align-items:center;gap:12px;margin:30px 0 6px;font-family:var(--display);font-size:.92rem;font-weight:700;letter-spacing:.35em;color:var(--brass)}
 .tsect::after{content:"";order:2;flex:1;height:1px;background:linear-gradient(90deg,#e2b36355,transparent)}
 .tsect em,.tsect .tnav{order:3;font-style:normal;font-family:var(--body);font-size:.85rem;letter-spacing:.05em;color:var(--muted);font-weight:400}
@@ -1888,11 +1892,11 @@ function renderToday(){
   $("tHello").textContent = h < 11 ? "早安" : h < 18 ? "午安" : "晚安";
   $("tFeast").hidden = !f; if (f) $("tFeast").textContent = `今逢${f.name}`;
   // daily quote
-  const q = quoteToday(), qb = $("tQuote"); qb.innerHTML = '<p class="q"></p><p class="src"></p><p class="plain"></p><div class="acts"><button id="tqSay">聆聽</button><button id="tqCard">製成吉祥圖</button></div>';
+  const q = quoteToday(), qb = $("tQuote"); qb.innerHTML = '<p class="q"></p><p class="src"></p><p class="plain"></p><div class="acts"><button class="share" id="tqCard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/></svg><span>分享普法</span></button></div>';
   q.text.split(/(?<=[；。！？])/).filter(Boolean).forEach(part => { const sp = document.createElement("span"); sp.style.display = "block"; sp.textContent = part; qb.querySelector(".q").appendChild(sp); }); qb.querySelector(".src").textContent = quoteSrc(q) + (quoteDraft(q) ? "・經文校對中" : "");
   qb.querySelector(".plain").textContent = q.plain;
-  $("tqSay").onclick = () => { try{ speechSynthesis.cancel(); }catch(e){} speak(`${q.text}。${q.plain}`, () => {}); };
-  $("tqCard").onclick = async () => { const b = $("tqCard"); b.textContent = "製作中……"; const r = await shareGreeting(); b.textContent = r === "shared" ? "已分享" : r === "saved" ? "已存成圖片" : "製成吉祥圖"; };
+  $("tqCard").onclick = async () => { const t = $("tqCard").querySelector("span"); t.textContent = "製作圖卡中……"; const r = await shareGreeting();
+    t.textContent = r === "shared" ? "已分享，隨喜功德" : r === "saved" ? "圖卡已存好" : "分享普法"; };
   // tasks
   const t = today().tasks || {}, box = $("tTasks"); box.innerHTML = "";
   const row = (stage, title, detail, action, adjust) => {

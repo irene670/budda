@@ -502,6 +502,38 @@ header.top .hq{gap:2px;align-items:center}
 #setBtn::before{content:"";position:absolute;left:-4px;top:12px;bottom:12px;width:1px;background:var(--line)}
 #setBtn .lbl{display:none}
 #setBtn svg{width:22px;height:22px}
+/* ---- v7 視覺（2026-10-31）：AI 生成的極樂世界意境圖（ChatGPT，歸使用者所有）＋可換的撥珠背景＋迴向紀錄 ---- */
+#p-beads.photo{background:#140d09 var(--bd) center/cover no-repeat}
+#p-beads.photo::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(#0e0805d6 0%,#0e080555 26%,#0e080514 50%,#0e080566 80%,#0e0805e0 100%)}
+.bdgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:.4rem}
+.bdgrid button{position:relative;aspect-ratio:3/4;border-radius:12px;border:1.5px solid var(--line);background:#2a1d14 center/cover no-repeat;overflow:hidden;padding:0;cursor:pointer}
+.bdgrid button span{position:absolute;left:0;right:0;bottom:0;padding:16px 4px 6px;font-size:.8rem;color:#fff4dc;background:linear-gradient(transparent,#000c);text-align:center;letter-spacing:.1em}
+.bdgrid button[aria-pressed="true"]{border-color:var(--brass);box-shadow:0 0 0 2px var(--brass)}
+.hero{position:relative;overflow:hidden;border-radius:22px;padding:1.4rem 1.1rem 1.2rem;min-height:8.5rem;display:flex;flex-direction:column;justify-content:flex-end;background:#1c130d url(assets/img/hero-home.webp) center/cover no-repeat;border:1px solid #e2b36340;box-shadow:0 10px 30px #0007}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0e0805e8 0%,#0e0805a0 45%,#0e080522 100%),linear-gradient(transparent 40%,#0e0805b0)}
+.hero>*{position:relative}
+.hero h2{color:#fff4dc;text-shadow:0 2px 12px #000}
+.hero p,.hero .hint{color:#f3e6c8!important;text-shadow:0 1px 8px #000}
+.hero-listen{background-image:url(assets/img/hero-listen.webp)}
+.hero-dedi{background-image:url(assets/img/lotus-dedication.webp);background-position:center 60%}
+.todaycard,.vcard,.streak,.tile,.lsitem,.nowcard,.pcard,.stat{background:linear-gradient(180deg,#ffffff08,#00000014),var(--bg-2);border-color:#e2b36333;box-shadow:inset 0 1px 0 #ffffff0a,0 6px 18px #0004}
+.todaycard .tlab b,.vcard .tlab b{letter-spacing:.2em}
+.lotusimg{width:min(72vw,300px);aspect-ratio:1;object-fit:cover;-webkit-mask-image:radial-gradient(circle,#000 52%,transparent 71%);mask-image:radial-gradient(circle,#000 52%,transparent 71%);opacity:.35;transform:scale(.9);transition:opacity 2.4s ease,transform 3s ease}
+.dedi.go .lotusimg{opacity:1;transform:scale(1)}
+.dedi .lotus{display:none}
+.shead2{display:flex;align-items:center;justify-content:space-between}
+.dlog h3{margin-top:.6rem}
+.dlpeople,.dllist{display:flex;flex-direction:column;gap:10px}
+.dlp{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:16px;border:1px solid #e2b36333;background:var(--bg-2)}
+.dlp b{font-family:var(--display);font-size:1.1rem}
+.dlp span{display:block;font-size:.85rem;color:var(--muted)}
+.dlp .n{text-align:right;font-family:var(--display);color:var(--brass);font-size:1.05rem;white-space:nowrap}
+.dlp .n small{display:block;font-family:var(--body);color:var(--muted);font-size:.8rem}
+.dle{padding:12px 14px;border-radius:16px;border:1px solid #e2b36333;background:var(--bg-2);display:flex;flex-direction:column;gap:4px}
+.dle time{font-size:.85rem;color:var(--muted);letter-spacing:.05em}
+.dle .m{font-family:var(--display);color:var(--brass)}
+.dle .w{line-height:1.6}
+.dle .v{font-size:.85rem;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.rays{animation:none}.lotus .petal,.lotus .seed,.dverse span,.dto,.dfin,.merit{animation-duration:.01s;animation-delay:0s}.finger{animation:none}}
 </style>
 
@@ -526,7 +558,7 @@ header.top .hq{gap:2px;align-items:center}
     <!-- 今日 -->
     <section class="panel" id="p-home" hidden aria-label="功課">
       <div class="home">
-        <div class="hello"><h2 id="hHello">您好</h2><p id="hDate"></p><div class="feast" id="hFeast" hidden></div></div>
+        <div class="hello hero"><h2 id="hHello">您好</h2><p id="hDate"></p><div class="feast" id="hFeast" hidden></div></div>
         <div class="streak">
           <div class="snum"><b id="hStreak">0</b><span>天</span></div>
           <div><div class="slab" id="hStreakLab">連續精進</div><div class="week" id="hWeek"></div></div>
@@ -622,7 +654,7 @@ header.top .hq{gap:2px;align-items:center}
     <!-- 聽經 -->
     <section class="panel" id="p-listen" hidden aria-label="聽經">
       <div class="listen">
-        <div><h2>聞法</h2><p class="hint">輕觸即播，再觸暫停；鎖屏亦可續聽，下回自上次處接續。</p></div>
+        <div class="hero hero-listen"><h2>聞法</h2><p class="hint">輕觸即播，再觸暫停；鎖屏亦可續聽，下回自上次處接續。</p></div>
         <div class="todaycard mini" id="hListen"></div>
         <div class="nowcard" id="lsNow" hidden>
           <div class="hint">播放中</div>
@@ -662,6 +694,14 @@ header.top .hq{gap:2px;align-items:center}
     </section>
 
     <!-- 紀錄 -->
+    <section class="panel" id="p-dedilog" hidden aria-label="迴向紀錄">
+      <div class="log dlog">
+        <button class="btn ghost back" id="dlBack">‹ 返回</button>
+        <div class="hero hero-dedi"><h2>迴向紀錄</h2><p class="hint" id="dlTotal"></p></div>
+        <h3>各迴向對象累計</h3><div class="dlpeople" id="dlPeople"></div>
+        <h3>每一次迴向</h3><div class="dllist" id="dlList"></div>
+      </div>
+    </section>
     <section class="panel" id="p-log" hidden aria-label="功課紀錄">
       <div class="log">
         <button class="btn ghost back" id="logBack">‹ 回功課</button>
@@ -694,7 +734,7 @@ header.top .hq{gap:2px;align-items:center}
 <!-- sheets -->
 <div class="scrim" id="scrim" hidden></div>
 <div class="sheet" id="dediSheet" hidden role="dialog" aria-label="迴向">
-  <h3>迴向</h3>
+  <div class="shead2"><h3>迴向</h3><button class="link" id="dLog">迴向紀錄 ›</button></div>
   <p class="dmerit" id="dMerit"></p>
   <div class="lab">迴向給（可多選，會記住）</div>
   <div id="dPeople" class="dpeople"></div>
@@ -746,6 +786,7 @@ header.top .hq{gap:2px;align-items:center}
   <h3>設定</h3>
   <div class="lab">字體大小</div><div class="seg" data-set="big"><button data-v="0">大</button><button data-v="1">特大</button></div>
   <div class="lab">撥珠的手</div><div class="seg" data-set="hand"><button data-v="L">左手</button><button data-v="R">右手</button></div>
+  <div class="lab">撥珠背景</div><div class="bdgrid" id="bdGrid"></div>
   <div class="lab">畫面顏色</div><div class="seg" data-set="mode"><button data-v="night">夜間</button><button data-v="day">白天</button></div>
   <div class="lab">聲音／震動</div><div class="row"><div class="seg" data-set="sound"><button data-v="1">聲音開</button><button data-v="0">關</button></div><div class="seg" data-set="haptic"><button data-v="1">震動開</button><button data-v="0">關</button></div></div>
   <div class="lab">每日提醒</div><div class="row" id="remindRow"><button class="chip" data-rem="am">早課 7:00</button><button class="chip" data-rem="pm">晚課 20:00</button></div>
@@ -766,6 +807,7 @@ header.top .hq{gap:2px;align-items:center}
   <canvas id="motes" aria-hidden="true"></canvas>
   <div class="rays" aria-hidden="true"></div>
   <div class="dedi-in">
+    <img class="lotusimg" src="assets/img/lotus-dedication.webp" alt="" aria-hidden="true">
     <svg class="lotus" viewBox="-130 -140 260 175" aria-hidden="true">
       <defs>
         <radialGradient id="halo"><stop offset="0" stop-color="#ffd98f" stop-opacity=".55"/><stop offset="1" stop-color="#ffd98f" stop-opacity="0"/></radialGradient>
@@ -1074,6 +1116,8 @@ function initThree(){
   const ct = clothTex(); ct.repeat.set(3, 3);
   table = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.MeshStandardMaterial({ map:ct, roughness:0.78, metalness:0.05 }));
   table.position.z = -RB; table.receiveShadow = true; scene.add(table);
+  // a photo backdrop replaces the cloth with a shadow-only surface, so the beads still cast soft shadows onto it
+  table.userData.cloth = table.material; table.userData.shadow = new THREE.ShadowMaterial({ opacity:0.4 });
 
   ring = new THREE.Group(); scene.add(ring);
   geo = new THREE.SphereGeometry(RB, 72, 48);
@@ -1167,7 +1211,7 @@ function useFlat(on){
   } else { renderer.domElement.hidden = false; if (flatC.c) flatC.c.hidden = true; }
   resizeStage();
 }
-function ensureStage(){ if (stageReady) return; stageReady = true; useFlat(!!S.flat || !threeOK); }
+function ensureStage(){ if (stageReady) return; stageReady = true; useFlat(!!S.flat || !threeOK); applyBackdrop(); }
 function resizeStage(){
   if (!stageReady) return;
   if (flatOn){ const c = flatC.c, r = Math.min(2, devicePixelRatio||1); c.width = Math.max(1, stage.clientWidth*r); c.height = Math.max(1, stage.clientHeight*r); flatC.g.setTransform(r,0,0,r,0,0); drawFlat(); }
@@ -1179,8 +1223,10 @@ function drawFlat(){
   const g = flatC.g; if (!g) return;
   const { w, h, r, R, step } = flatGeom(), sd = side();
   jolt *= 0.78;
-  const bg = g.createRadialGradient(w*.5,h*.45,0,w*.5,h*.45,Math.max(w,h)*.75); bg.addColorStop(0,"#8d6526"); bg.addColorStop(1,"#3b260f");
-  g.fillStyle = bg; g.fillRect(0,0,w,h);
+  if ((S.backdrop || "cloth") === "cloth"){
+    const bg = g.createRadialGradient(w*.5,h*.45,0,w*.5,h*.45,Math.max(w,h)*.75); bg.addColorStop(0,"#8d6526"); bg.addColorStop(1,"#3b260f");
+    g.fillStyle = bg; g.fillRect(0,0,w,h);
+  } else g.clearRect(0,0,w,h);
   const apex = w/2 + sd*Math.min(w*0.12, 60), cx = apex + sd*R - sd*jolt*20, cy = h*0.5 + jolt*25;
   g.strokeStyle = "#7a1610"; g.lineWidth = Math.max(2, r*0.1); g.beginPath(); g.arc(cx, cy, R, 0, Math.PI*2); g.stroke();
   const P = shown(), base = Math.floor(P), pal = PAL[S.mat] || PAL.zitan;
@@ -1205,7 +1251,7 @@ function drawFrame(){ if (!stageReady) return; if (flatOn) drawFlat(); else if (
 const redraw = drawFrame;
 
 function addBeads(n, crossedMother){
-  const d = today(); d.beads += n; pushGong(); if (crossedMother) d.loops += 1;
+  const d = today(); d.beads += n; pend().beads += n; pushGong(); if (crossedMother) d.loops += 1;
   if (sess){ d.items[sess.item.name] = (d.items[sess.item.name]||0) + n; }
   renderHud(); save();
   if (sess && !sess.goalHit && sessDone() >= goalOf(sess.item)){ sess.goalHit = true; onGoalReached(); }
@@ -1942,10 +1988,11 @@ function dediState(){
 }
 const personLabel = x => x.name ? `${x.call} ${x.name}` : x.call;
 function meritText(){
-  const d = today(), parts = [`撥珠 ${fmt(d.beads)} 珠`];
-  if (lsCur) parts.push(`恭聽《${lsCur.s.title}》`);
-  if (d.fish) parts.push(`敲木魚 ${fmt(d.fish)} 下`);
-  return "今日" + parts.join("，");
+  const m = pend(), parts = [];
+  if (m.beads) parts.push(`撥珠 ${fmt(m.beads)} 珠`);
+  if (m.sutras.length) parts.push(m.sutras.map(t => `恭聽《${t}》`).join("、"));
+  if (m.fish) parts.push(`敲木魚 ${fmt(m.fish)} 下`);
+  return parts.length ? "此次" + parts.join("，") : "此次誠心合掌";
 }
 let dEdit = null;   // the person being edited in the form, or {} for a new one
 function openDedi(){
@@ -2005,6 +2052,40 @@ $("dDel").onclick = () => {
 $("dVerseSeg").querySelectorAll("button").forEach(b => b.onclick = () => { const st = dediState(); st.verse = b.dataset.v; st.verseSet = true; save(); paintDedi(); });
 $("dBy").addEventListener("change", () => { dediState().by = $("dBy").value.trim(); save(); });
 $("dClose").onclick = closeSheets;
+let dlFrom = "beads";
+$("dLog").onclick = () => { dlFrom = activeTab; closeSheets(); showTab("dedilog"); };
+$("dlBack").onclick = () => showTab(dlFrom === "dedilog" ? "beads" : dlFrom);
+const VERSE_NAME = { normal:"普迴向偈", jingtu:"淨土迴向偈" };
+function renderDediLog(){
+  const log = S.dediLog || [], beads = log.reduce((a, r) => a + r.beads, 0);
+  $("dlTotal").textContent = log.length ? `共迴向 ${log.length} 次・累計 ${fmt(beads)} 珠` : "還沒有迴向紀錄。撥珠或聽經後，按撥珠頁左下角的蓮花「迴向」。";
+  // totals per person: every time they were included, and the beads of those dedications
+  const per = new Map();
+  log.forEach(r => r.who.forEach(w => { const k = w.id || w.label, x = per.get(k) || { label:w.label, wish:w.wish, n:0, beads:0, last:0 };
+    x.n++; x.beads += r.beads; if (r.t >= x.last){ x.last = r.t; x.label = w.label; x.wish = w.wish; } per.set(k, x); }));
+  const pp = $("dlPeople"); pp.innerHTML = "";
+  [...per.values()].sort((a, b) => b.n - a.n || b.last - a.last).forEach(x => {
+    const d = document.createElement("div"); d.className = "dlp";
+    d.innerHTML = '<div><b></b><span></span></div><div class="n"><span class="a"></span><small></small></div>';
+    d.querySelector("b").textContent = x.label; d.querySelector("div span").textContent = `祈願${x.wish}`;
+    d.querySelector(".a").textContent = `${x.n} 次`; d.querySelector("small").textContent = `${fmt(x.beads)} 珠`;
+    pp.appendChild(d);
+  });
+  const ll = $("dlList"); ll.innerHTML = "";
+  log.slice().reverse().forEach(r => {
+    const t = new Date(r.t), e = document.createElement("div"); e.className = "dle";
+    const parts = [];
+    if (r.beads) parts.push(`撥珠 ${fmt(r.beads)} 珠`);
+    if (r.sutras.length) parts.push(r.sutras.map(x => `《${x}》`).join(""));
+    if (r.fish) parts.push(`木魚 ${fmt(r.fish)} 下`);
+    e.innerHTML = '<time></time><div class="m"></div><div class="w"></div><div class="v"></div>';
+    e.querySelector("time").textContent = `${t.getFullYear()}/${t.getMonth()+1}/${t.getDate()}　${String(t.getHours()).padStart(2,"0")}:${String(t.getMinutes()).padStart(2,"0")}${r.by ? "　" + r.by : ""}`;
+    e.querySelector(".m").textContent = parts.join("・") || "誠心合掌";
+    e.querySelector(".w").textContent = "迴向給　" + r.who.map(w => `${w.label}（${w.wish}）`).join("、");
+    e.querySelector(".v").textContent = VERSE_NAME[r.verse] || "";
+    ll.appendChild(e);
+  });
+}
 $("dediBtn").onclick = () => { ac(); openDedi(); };
 // step 2: the lotus opens and the dedication is spoken line by line, then the verse, then 圓滿
 $("dStart").onclick = () => {
@@ -2024,8 +2105,12 @@ $("dStart").onclick = () => {
   document.querySelector("#dStage2 .dfin").style.animationDelay = (after + verseNow.length * 1.3 + 0.8) + "s";
   bell(); buzz([40,80,40]);
   S.famSel = who.map(personLabel).join("、");
-  const now = new Date();
-  S.ded.push(`${now.getMonth()+1}/${now.getDate()}　${meritText()}，迴向給${S.famSel}`); save();
+  const now = new Date(), m = pend();
+  S.ded.push(`${now.getMonth()+1}/${now.getDate()}　${meritText()}，迴向給${S.famSel}`);
+  (S.dediLog = S.dediLog || []).push({ t:now.getTime(), beads:m.beads, fish:m.fish, sutras:m.sutras.slice(), by:st.by, verse,
+    who:who.map(x => ({ id:x.id, label:personLabel(x), wish:x.wish, kind:x.kind })) });
+  S.pend = { beads:0, fish:0, sutras:[] };   // dedicated: the count on the bead page starts again from zero
+  save(); renderHud();
   moteBoost = 1; startMotes();
 };
 document.getElementById("dDone").onclick = document.getElementById("dLater").onclick = () => {
@@ -2214,7 +2299,7 @@ function knock(){
   hitAt = performance.now();
   setTimeout(() => { woodblock(); buzz([24]); }, 45);   // sound lands when the head meets the wood
   const m = document.createElement("span"); m.className = "merit"; m.textContent = "功德 +1"; fishStage.appendChild(m); setTimeout(()=>m.remove(), 1000);
-  const d = today(); d.fish += 1; document.getElementById("fCount").textContent = fmt(d.fish); save();
+  const d = today(); d.fish += 1; pend().fish += 1; document.getElementById("fCount").textContent = fmt(d.fish); save();
 }
 fishStage.addEventListener("pointerdown", e => { e.preventDefault(); ac(); knock(); });
 fishStage.addEventListener("keydown", e => { if (e.key===" "||e.key==="Enter"){ e.preventDefault(); ac(); knock(); } });
@@ -2420,7 +2505,7 @@ $("inviteBtn").onclick = () => {
 
 /* ================= 設定 ================= */
 const setSheet = $("setSheet");
-function openSet(){ paintSettings(); openSheetEl(setSheet); }
+function openSet(){ paintSettings(); renderBackdrops(); openSheetEl(setSheet); }
 $("setBtn").onclick = openSet;
 function setVal(k){
   return { big: S.big ? "1" : "0", mode: S.mode==="day" ? "day" : "night", hand: S.hand, sound: S.sound ? "1" : "0", haptic: S.haptic ? "1" : "0",
@@ -2581,6 +2666,7 @@ function playSeries(id, idx, opts){
   lsCur = { s:sr, i:idx, ep }; S.lep[id] = idx; save(); lsMsg("");
   talk.src = ep.u; talk.volume = 1;
   talk.loop = id.startsWith("n-") || id.startsWith("b-") || isSong(id) || !!(opts && opts.loop);
+  if (isSong(id) && !pend().sutras.includes(sr.title)){ pend().sutras.push(sr.title); save(); }
   songLast = -1;
   const at = S.lpos[ep.u] || 0; lsLastT = at;
   // chant tracks always start from the top, so the first pass is counted whole
@@ -2965,12 +3051,14 @@ function renderInstall(){
 }
 
 /* ================= tabs ================= */
-const panels = { home:"p-home", beads:"p-beads", listen:"p-listen", fish:"p-fish", ask:"p-ask", log:"p-log" };
+setTimeout(applyBackdrop, 0);   // the photo backdrop is CSS, so it shows even before the beads are drawn
+const panels = { home:"p-home", beads:"p-beads", listen:"p-listen", fish:"p-fish", ask:"p-ask", log:"p-log", dedilog:"p-dedilog" };
 let activeTab = "beads";
 function showTab(t, force){
   if (t !== "beads" && playing && playMode !== "file" && playMode !== "rec") stopListen();
   activeTab = t;
-  const navT = t === "fish" || t === "log" ? "home" : t;
+  const navT = t === "fish" || t === "log" ? "home" : t === "dedilog" ? "" : t;
+  if (t === "dedilog") renderDediLog();
   document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab===navT));
   for (const k in panels) $(panels[k]).hidden = (k !== t);
   if (t === "beads"){
@@ -3038,6 +3126,8 @@ function paintTicker(){
   const still = it.lines ? it.lines[sess ? sess.lineIdx : 0].replace(/[，。]$/, "") : it.text;
   tick(still, -1, "still:" + still);
 }
+// merit not yet dedicated: beads, wooden-fish strikes and sutras heard since the last 迴向; reset when dedicating
+const pend = () => (S.pend = S.pend || { beads:0, fish:0, sutras:[] });
 const ZH = "零一二三四五六七八九";
 const zhNum = n => n <= 10 ? (n === 10 ? "十" : ZH[n]) : n < 20 ? "十" + ZH[n % 10] : n < 100 ? ZH[Math.floor(n / 10)] + "十" + (n % 10 ? ZH[n % 10] : "") : String(n);
 function paintMala(inRound, round, total){
@@ -3050,8 +3140,26 @@ function paintMala(inRound, round, total){
     }
   }
   [...svg.children].forEach((c, i) => c.setAttribute("class", "md" + (i && i < inRound ? " on" : "") + (i === inRound % PER_LOOP ? " cur" : "")));
-  $("mNum").textContent = inRound; $("mRound").textContent = `第${zhNum(round)}輪`; $("mTotal").textContent = `今日 ${fmt(total)} 珠`;
-  $("mala").setAttribute("aria-label", `第${zhNum(round)}輪，此圈 ${inRound} 珠，今日共 ${total} 珠`);
+  $("mNum").textContent = inRound; $("mRound").textContent = `第${zhNum(round)}輪`; $("mTotal").textContent = `累計 ${fmt(pend().beads)} 珠`;
+  $("mala").setAttribute("aria-label", `第${zhNum(round)}輪，此圈 ${inRound} 珠，尚未迴向的累計 ${pend().beads} 珠`);
+}
+const BACKDROPS = [["cloth","黃緞雲紋"],["bg-pureland","極樂天宮"],["bg-lotus-pond","八功德池"],["bg-golden-hall","金色大殿"],["bg-cloud-temple","雲海聖山"],["bg-sandalwood","檀香供桌"]];
+function applyBackdrop(){
+  const id = S.backdrop || "cloth", pb = $("p-beads");
+  pb.classList.toggle("photo", id !== "cloth");
+  pb.style.setProperty("--bd", id === "cloth" ? "none" : `url(assets/img/${id}.webp)`);
+  if (typeof table !== "undefined" && table && table.userData.cloth) table.material = id === "cloth" ? table.userData.cloth : table.userData.shadow;
+  if (stageReady) drawFrame();
+}
+function renderBackdrops(){
+  const box = $("bdGrid"); box.innerHTML = "";
+  BACKDROPS.forEach(([id, name]) => {
+    const b = document.createElement("button"); b.setAttribute("aria-pressed", (S.backdrop || "cloth") === id); b.setAttribute("aria-label", `撥珠背景：${name}`);
+    b.style.backgroundImage = id === "cloth" ? "radial-gradient(circle at 50% 45%,#c9963f,#5a3a14)" : `url(assets/img/${id}.webp)`;
+    const t = document.createElement("span"); t.textContent = name; b.appendChild(t);
+    b.onclick = () => { S.backdrop = id; save(); applyBackdrop(); renderBackdrops(); };
+    box.appendChild(b);
+  });
 }
 function openSutras(){ renderSutras(); openSheetEl($("musicSheet")); }
 $("sPlay").onclick = () => { ac(); if (lsCur) talk.paused ? talkPlay() : talk.pause(); else openSutras(); };

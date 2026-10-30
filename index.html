@@ -1455,7 +1455,8 @@ function renderHud(){
   const sb = $("bSong"), firstSong = SONGS.length && LS_ALL[SONGS[0].id];
   sb.hidden = !sg && !(firstSong && !sess && !routine);
   if (!sg && !sb.hidden){
-    sb.replaceChildren(`跟著 AI 唱誦撥珠：${SONGS[0].item} ›`);
+    const nm = document.createElement("span"); nm.textContent = `${SONGS[0].item} ›`;   // keep the name on one line
+    sb.replaceChildren("跟著 AI 唱誦撥珠：", nm);
     sb.setAttribute("aria-label", `開始跟著 AI 唱誦撥珠，${SONGS[0].item}`);
   }
   if (sg){

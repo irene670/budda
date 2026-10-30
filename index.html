@@ -472,8 +472,8 @@ button,a,summary,.lsitem{touch-action:manipulation}
 .dperson .who span{font-size:.85rem;color:var(--muted)}
 .dperson .edit{flex:0 0 auto;min-height:44px;min-width:44px;background:none;border:0;color:var(--muted);font:inherit;font-size:.9rem;cursor:pointer}
 .dform{border:1px solid var(--line);border-radius:16px;padding:12px;margin:.4rem 0;display:flex;flex-direction:column;gap:.35rem}
-.dwish .chip[aria-pressed="true"],#dKind button[aria-pressed="true"]{border-color:var(--brass);color:var(--brass)}
-.dto .dl{display:block;animation:line 1.2s both;animation-delay:var(--d);font-size:1.02rem;font-weight:600;letter-spacing:.14em;line-height:1.7}
+.dwish .chip[aria-pressed="true"]{border-color:var(--brass);color:var(--brass)}
+.dto .dl{display:block;animation:line 1.2s both;animation-delay:var(--d);font-size:1.1rem;font-weight:600;letter-spacing:.14em;line-height:1.75;color:#fff4dc;text-shadow:0 1px 2px #000,0 0 14px #000,0 0 28px #000c}
 .dto .dl.p{font-size:1.15rem;letter-spacing:.12em;font-weight:600;color:#fff1cf}
 .glow{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 4s ease;background:radial-gradient(85% 60% at 55% 48%,#ffd88a5c,transparent 70%)}
 #p-beads.complete .glow{opacity:1}
@@ -877,7 +877,7 @@ let canVibrate = false;
 try { canVibrate = typeof navigator.vibrate === "function" && navigator.vibrate(0) !== false; } catch(e){}
 let jolt = 0;   // visual "kick" so the click is felt by the eye even where the phone can't vibrate
 function buzz(pattern){
-  jolt = Array.isArray(pattern) && pattern.length > 1 ? 0.22 : 0.12;
+  // no visual kick: the bead's own glide is the feedback, so the scene never shakes
   if (!S.haptic) return;
   if (canVibrate){ try{ navigator.vibrate(pattern); return; }catch(e){} }
   try{
@@ -891,6 +891,10 @@ const stage = document.getElementById("beadStage");
 const PER_LOOP = 108, RB = 0.74, SPACING = RB*2.04, RING = 11.5, STEP = SPACING/RING, M = 8;
 let renderer, scene, camera, ring, beads = [], tassel, mats = {}, geo, motherGeo, visH = 1, visW = 1;
 let pos = Math.round(S.pos || 0), counted = pos, target = null, vel = 0, running = false, pressing = false, threeOK = !!window.THREE;
+// glide: a tap's tween to the next bead; bite: how much of the detent click shows (full while the finger drags, none while gliding)
+let glide = null, bite = 0;
+const easeInOut = k => k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3) / 2;
+const shown = () => pos + (detent(pos) - pos) * bite;
 // Detent: a bead resists the thumb, then pops over the knot at the halfway point and settles.
 function detent(p){
   const b = Math.floor(p), f = p - b, k = 2.8;
@@ -1121,7 +1125,7 @@ function layout(){
   jolt *= 0.78;
   ring.position.set(-sd*jolt*0.6, -0.2 - jolt, 0);
   ring.userData.cord.position.set(cx, 0, 0);
-  const P = detent(pos), base = Math.floor(P), up = new THREE.Vector3(0,1,0), mat = getMat(S.mat);
+  const P = shown(), base = Math.floor(P), up = new THREE.Vector3(0,1,0), mat = getMat(S.mat);
   let motherShown = false;
   for (let k=-M-1;k<=M;k++){
     const m = beads[k+M+1], j = base + k;
@@ -1179,7 +1183,7 @@ function drawFlat(){
   g.fillStyle = bg; g.fillRect(0,0,w,h);
   const apex = w/2 + sd*Math.min(w*0.12, 60), cx = apex + sd*R - sd*jolt*20, cy = h*0.5 + jolt*25;
   g.strokeStyle = "#7a1610"; g.lineWidth = Math.max(2, r*0.1); g.beginPath(); g.arc(cx, cy, R, 0, Math.PI*2); g.stroke();
-  const P = detent(pos), base = Math.floor(P), pal = PAL[S.mat] || PAL.zitan;
+  const P = shown(), base = Math.floor(P), pal = PAL[S.mat] || PAL.zitan;
   for (let k=-14;k<=14;k++){
     const j = base + k, a = (P - j)*step, x = cx - sd*R*Math.cos(a), y = cy + R*Math.sin(a);
     if (y < -3*r || y > h + 3*r) continue;
@@ -1208,7 +1212,12 @@ function addBeads(n, crossedMother){
 }
 function updateCounter(){ renderHud(); }
 function step(){
-  if (target !== null){
+  bite += ((pressing ? 1 : 0) - bite) * 0.2;
+  if (glide){
+    const k = Math.min(1, (performance.now() - glide.t0) / glide.dur);
+    pos = glide.from + (glide.to - glide.from) * easeInOut(k);
+    if (k >= 1){ pos = glide.to; glide = null; target = null; }
+  } else if (target !== null){
     const dpos = target - pos;
     if (Math.abs(dpos) < 0.002){ pos = target; target = null; } else pos += dpos * 0.22;
   }
@@ -1252,11 +1261,19 @@ function loop(){
   };
   requestAnimationFrame(tick);
 }
-function advanceBead(){ pos = Math.round(pos) + 0.5; checkCross(); target = Math.round(pos); if (activeTab !== "beads") pos = target; }
+// a tap pulls the string down one whole bead: it glides there (step() eases toward target) and is counted as it
+// passes the halfway point, like a thumb drawing a real bead; quick taps queue up to three beads ahead
+function advanceBead(){
+  const from = target !== null ? target : Math.round(pos);
+  target = Math.min(from + 1, Math.round(pos) + 3);
+  if (activeTab !== "beads"){ pos = target; glide = null; checkCross(); return; }
+  // ease-in-out over ~0.3 s per bead, like a thumb drawing it down; a queued tap restarts from where the string is
+  glide = { from:pos, to:target, t0:performance.now(), dur:300 * Math.max(1, target - pos) };
+}
 function bindDrag(){
   let down = false, lastY = 0, lastT = 0, moved = 0;
   const pxPerBead = () => flatOn ? 2.04*flatGeom().r : SPACING * stage.clientHeight / visH;
-  stage.addEventListener("pointerdown", e => { ac(); down = pressing = true; lastY = e.clientY; lastT = performance.now(); moved = 0; vel = 0; target = null; try{ stage.setPointerCapture(e.pointerId); }catch(_){} });
+  stage.addEventListener("pointerdown", e => { ac(); down = pressing = true; lastY = e.clientY; lastT = performance.now(); moved = 0; vel = 0; target = null; glide = null; try{ stage.setPointerCapture(e.pointerId); }catch(_){} });
   stage.addEventListener("pointermove", e => {
     if (!down) return;
     const dy = e.clientY - lastY, now = performance.now(), db = dy / pxPerBead();

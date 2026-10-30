@@ -534,6 +534,83 @@ header.top .hq{gap:2px;align-items:center}
 .dle .m{font-family:var(--display);color:var(--brass)}
 .dle .w{line-height:1.6}
 .dle .v{font-size:.85rem;color:var(--muted)}
+/* ---- v8 三頁改版（2026-10-31）：功課、聞法、問道共用一套語言——意境主視覺、金色細字段落標題、深色玻璃卡片、襯線大字 ---- */
+.home,.listen{gap:14px;padding-block:16px 40px}
+.sect{display:flex;align-items:center;gap:10px;margin-top:8px;font-family:var(--display);font-size:.95rem;font-weight:700;letter-spacing:.35em;color:var(--brass)}
+.sect>span{white-space:nowrap;flex:none}
+.sect::after{content:"";flex:1;min-width:24px;height:1px;background:linear-gradient(90deg,#e2b36366,transparent)}
+.sect .link{order:3;margin-left:auto;padding:0 0 0 8px;font-family:var(--body);font-size:.9rem;letter-spacing:.05em;color:var(--muted);text-decoration:none;min-height:44px}
+.hero{min-height:12.5rem;padding:1.3rem 1.1rem 1.1rem}
+.hero h2{font-size:2rem;letter-spacing:.06em}
+.hstreak{display:flex;align-items:center;gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid #e2b36340}
+.hstreak .snum{color:#ffe2a8}.hstreak .snum b{font-size:2.3rem}
+.hstreak .slab{color:#f3e6c8;font-size:.9rem;letter-spacing:.1em}
+.hstreak .week i{border-color:#f3e6c866;color:#f3e6c8;background:#0e080555}
+.hstreak .week i.on{background:var(--brass);border-color:var(--brass);color:var(--brass-ink)}
+.home>.feast{margin-top:0}
+.todaycard{position:relative;overflow:hidden;border-radius:22px;padding:20px 18px 18px;gap:10px}
+.todaycard::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,#e2b36322,transparent 70%);pointer-events:none}
+.todaycard .tlab b{font-family:var(--display);letter-spacing:.35em;font-size:.95rem}
+.todaycard .tname{font-size:1.8rem;letter-spacing:.06em}
+.todaycard .twho{color:var(--muted);font-size:.95rem}
+.btn.huge,.todaycard .btn{background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c;box-shadow:inset 0 1px 0 #fff6,0 6px 18px #d39d4533;border:0}
+.btn.huge{font-family:var(--display);font-weight:900;letter-spacing:.5em;padding-left:1.5em}
+#hOther .link,#hChange{text-decoration:none}
+#hOther .link{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:56px;padding:0 18px;border-radius:16px;border:1px solid #e2b36333;background:var(--bg-2);color:var(--paper);font-size:1.02rem}
+.vcard.verse{position:relative;padding:22px 20px 18px;text-align:center;border-radius:22px;gap:10px}
+.vcard.verse .tlab{display:none}
+.vcard.verse::before,.vcard.verse::after{content:"";position:absolute;width:22px;height:22px;border:1px solid #e2b36388}
+.vcard.verse::before{left:12px;top:12px;border-right:0;border-bottom:0}
+.vcard.verse::after{right:12px;bottom:12px;border-left:0;border-top:0}
+.vcard.verse .vq{font-size:1.45rem;letter-spacing:.12em;line-height:1.75}
+.vcard.verse .vs{font-size:.88rem;letter-spacing:.05em}
+.vcard.verse .vp{font-size:1rem}
+.vcard.verse .row{justify-content:center;gap:10px;margin-top:4px}
+.vcard.verse .btn.ghost{border-radius:999px;font-size:.95rem;padding:.55rem 1rem;border-color:#e2b36355;color:var(--brass)}
+.tools{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.tools .tool{grid-column:span 2}.tools .tool:nth-child(n+4){grid-column:span 3}
+.tool{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:96px;border-radius:18px;border:1px solid #e2b36333;background:linear-gradient(180deg,#ffffff08,#00000014),var(--bg-2);color:var(--paper);font:inherit;font-size:.95rem;letter-spacing:.12em;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff0a}
+.tool svg{width:30px;height:30px;color:var(--brass)}
+.tool:active{transform:scale(.97)}
+.tool:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+/* 聞法 */
+.lsgroup h3{font-family:var(--display);font-size:.95rem;font-weight:700;letter-spacing:.35em;color:var(--brass);display:flex;align-items:center;gap:10px}
+.lsgroup h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#e2b36366,transparent)}
+.lsitem{padding:10px;gap:14px;border-radius:18px;align-items:stretch}
+.lscover{position:relative;flex:none;width:84px;min-height:96px;border-radius:12px;background:#2a1d14 center/cover no-repeat;overflow:hidden;box-shadow:inset 0 0 0 1px #e2b36333}
+.lscover .lsic{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:40px;height:40px;background:#0e0805b0;color:#ffe2a8;border:1px solid #e2b36388;font-size:.95rem}
+.lstx{justify-content:center;padding:4px 4px 4px 0}
+.lstx b{font-size:1.2rem;letter-spacing:.05em}
+.lsabout{color:var(--muted);font-size:.88rem;line-height:1.55;margin-top:2px}
+.lsbadge{display:inline-block;margin-left:6px;padding:0 7px;border-radius:999px;border:1px solid #e2b36366;color:var(--brass);font-size:.72rem;font-family:var(--body);font-weight:400;vertical-align:3px;letter-spacing:.05em}
+.lsbead{margin:8px 0 0;width:100%;border-radius:14px}
+.nowcard{border:1px solid #e2b36388;border-radius:22px;background:linear-gradient(180deg,#e2b36314,transparent 60%),var(--bg-2);box-shadow:0 10px 30px #0006}
+.nowcard .hbar{height:3px;border-radius:2px;background:#e2b36333;overflow:hidden}
+.nowcard .hbar i{display:block;height:100%;background:var(--brass)}
+.nowctl .btn{border-radius:999px}
+.nowctl .main{background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c;border:0}
+.lsnote{font-size:.82rem;line-height:1.6;opacity:.8;margin-top:8px}
+/* 問道 */
+.askhead{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #e2b36326;background:linear-gradient(180deg,#e2b36312,transparent)}
+.askhead img{width:56px;height:56px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px #e2b36366,0 0 22px #e2b36333}
+.askhead h2{margin:0;font-family:var(--display);font-weight:900;font-size:1.45rem;letter-spacing:.2em;color:var(--paper)}
+.askhead p{margin:2px 0 0;font-size:.9rem;color:var(--muted)}
+.asknote{margin:12px 16px 0;padding:10px 14px;border-radius:14px;border:1px dashed #e2b36366;color:var(--muted);font-size:.9rem;line-height:1.6}
+.chat{gap:14px;padding:16px}
+.msg{font-size:1.08rem;line-height:1.85;padding:14px 16px;border-radius:18px}
+.msg.ai{background:linear-gradient(180deg,#ffffff07,transparent),var(--bg-2);border:1px solid #e2b36333;border-left:2px solid var(--brass);border-top-left-radius:6px;font-family:var(--display);letter-spacing:.03em}
+.msg.me{background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c}
+.msg .who{letter-spacing:.3em;font-size:.85rem}
+.sugg{gap:8px}
+.sugg .lab{font-family:var(--display);letter-spacing:.3em;color:var(--brass);font-size:.9rem;margin-top:4px}
+.sugg button{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;border:1px solid #e2b36333;background:var(--bg-2);border-radius:14px;font-size:1rem}
+.sugg button::after{content:"›";color:var(--brass);font-size:1.2rem}
+.composer{gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid #e2b36326;background:var(--bg-2)}
+.composer input{border-radius:999px;padding:.8rem 1.1rem;border:1px solid #e2b36344}
+.composer .send{flex:none;width:48px;height:48px;border-radius:50%;border:0;display:grid;place-items:center;background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c;cursor:pointer}
+.composer .send svg{width:22px;height:22px}
+.composer .send:disabled{opacity:.5}
+.mic{border-radius:50%;width:48px;height:48px}
 @media (prefers-reduced-motion:reduce){.rays{animation:none}.lotus .petal,.lotus .seed,.dverse span,.dto,.dfin,.merit{animation-duration:.01s;animation-delay:0s}.finger{animation:none}}
 </style>
 
@@ -558,21 +635,25 @@ header.top .hq{gap:2px;align-items:center}
     <!-- 今日 -->
     <section class="panel" id="p-home" hidden aria-label="功課">
       <div class="home">
-        <div class="hello hero"><h2 id="hHello">您好</h2><p id="hDate"></p><div class="feast" id="hFeast" hidden></div></div>
-        <div class="streak">
-          <div class="snum"><b id="hStreak">0</b><span>天</span></div>
-          <div><div class="slab" id="hStreakLab">連續精進</div><div class="week" id="hWeek"></div></div>
+        <div class="hello hero">
+          <h2 id="hHello">您好</h2><p id="hDate"></p>
+          <div class="hstreak"><div class="snum"><b id="hStreak">0</b><span>天</span></div><div><div class="slab" id="hStreakLab">連續精進</div><div class="week" id="hWeek"></div></div></div>
         </div>
+        <div class="feast" id="hFeast" hidden></div>
         <div id="hMem"></div>
+        <div class="sect"><span>今日功課</span><button class="link" id="hChange">更換功課 ›</button></div>
         <div class="plans" id="hPlans"></div>
         <div id="hOther"></div>
-        <button class="link" id="hChange">選擇功課・早晚課設定</button>
-        <div class="vcard" id="hVerse"></div>
-        <div class="tiles">
-          <button class="tile" id="tFish"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 17c0-6 4.5-9 10-9s10 3 10 8.5S19 23 14 23 4 22 4 17Z"/><path d="M7 18c4 1.5 10 1.5 15-1"/><circle cx="9" cy="13" r="1"/></svg>敲木魚</button>
-          <button class="tile" id="tDedi"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 23c-5 0-9-3-9-6 3 0 5 1 6.5 3M14 23c5 0 9-3 9-6-3 0-5 1-6.5 3M14 23c-2.5-2-4-5-4-8.5S12 8 14 5c2 3 4 6 4 9.5S16.5 21 14 23Z"/></svg>迴向</button>
+        <div class="sect"><span>每日法語</span></div>
+        <div class="vcard verse" id="hVerse"></div>
+        <div class="sect"><span>修持</span></div>
+        <div class="tools">
+          <button class="tool" id="tFish"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 17c0-6 4.5-9 10-9s10 3 10 8.5S19 23 14 23 4 22 4 17Z"/><path d="M7 18c4 1.5 10 1.5 15-1"/><circle cx="9" cy="13" r="1"/></svg><span>敲木魚</span></button>
+          <button class="tool" id="tDedi"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 23c-5 0-9-3-9-6 3 0 5 1 6.5 3M14 23c5 0 9-3 9-6-3 0-5 1-6.5 3M14 23c-2.5-2-4-5-4-8.5S12 8 14 5c2 3 4 6 4 9.5S16.5 21 14 23Z"/></svg><span>迴向</span></button>
+          <button class="tool" id="hMemBtn"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M14 4c-2 2.6-2 4.6 0 6 2-1.4 2-3.4 0-6z"/><rect x="10.5" y="12" width="7" height="11" rx="1.5"/><path d="M7 24h14"/></svg><span>追思</span></button>
+          <button class="tool" id="hLog"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M8 5h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8"/><path d="M8 5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2"/><path d="M11 10h8M11 14h8M11 18h5"/></svg><span>修行紀錄</span></button>
+          <button class="tool" id="hDediLog"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M14 6c-2.4 2.8-2.9 7-.2 12.2C16.9 13 16.4 8.8 14 6z"/><path d="M13.6 18.2C10 16.2 7.2 12.8 6.7 9.6c3.2.5 5.8 2.8 6.9 8.6z"/><path d="M14.4 18.2c3.6-2 6.4-5.4 6.9-8.6-3.2.5-5.8 2.8-6.9 8.6z"/><path d="M6 21.5c2.6 1.6 5.2 2.2 8 2.2s5.4-.6 8-2.2"/></svg><span>迴向紀錄</span></button>
         </div>
-        <div class="tiles"><button class="btn ghost" id="hMemBtn">追思</button><button class="btn ghost" id="hLog">修行紀錄 ›</button></div>
         <div class="vcard" id="hInstall" hidden></div>
       </div>
     </section>
@@ -654,7 +735,8 @@ header.top .hq{gap:2px;align-items:center}
     <!-- 聽經 -->
     <section class="panel" id="p-listen" hidden aria-label="聽經">
       <div class="listen">
-        <div class="hero hero-listen"><h2>聞法</h2><p class="hint">輕觸即播，再觸暫停；鎖屏亦可續聽，下回自上次處接續。</p></div>
+        <div class="hero hero-listen"><h2>聞法</h2><p class="hint">靜靜聆聽一段唱誦；也可以帶到撥珠頁，邊聽邊撥珠。</p></div>
+        <div class="sect"><span>今日推薦</span></div>
         <div class="todaycard mini" id="hListen"></div>
         <div class="nowcard" id="lsNow" hidden>
           <div class="hint">播放中</div>
@@ -662,23 +744,28 @@ header.top .hq{gap:2px;align-items:center}
           <div class="hint" id="lsNowW"></div>
           <div class="hbar"><i id="lsBar"></i></div>
           <div class="nowtime" id="lsTime"></div>
-          <div class="nowctl"><button class="btn ghost" id="lsBack" aria-label="倒退 15 秒">⟲ 15秒</button><button class="btn main" id="lsPlay">❚❚ 暫停</button><button class="btn ghost" id="lsNext">下一集 ›</button></div>
+          <div class="nowctl"><button class="btn ghost" id="lsBack" aria-label="倒退 15 秒">⟲ 15 秒</button><button class="btn main" id="lsPlay">❚❚ 暫停</button><button class="btn ghost" id="lsNext">下一首 ›</button></div>
           <div class="lab">定時止播</div>
           <div class="seg" role="group" aria-label="自動停止"><button data-sleep="0">不限</button><button data-sleep="15">15分</button><button data-sleep="30">30分</button><button data-sleep="60">60分</button></div>
           <div class="hint" id="lsSleepLeft" hidden></div>
         </div>
         <p class="hint" id="lsMsg" hidden style="color:var(--warn)"></p>
         <div id="lsGroups"></div>
-        <p class="hint">音源出處：法鼓山《聖嚴法師經典學院》《聖嚴法師答客問》、見輝法師讀誦經典、虛空念佛機等公開 Podcast，直接連到原發布平台播放。僅供內部測試 demo，正式上架前需向各道場取得授權。</p>
+        <p class="hint lsnote">所有音源皆為雲禪自製：AI 唱誦以開源模型 ACE-Step 生成（經文校對中），配樂以程式生成。</p>
       </div>
     </section>
 
     <!-- 問道 -->
     <section class="panel" id="p-ask" hidden aria-label="問道">
+      <div class="askhead">
+        <img src="assets/img/lotus-dedication.webp" alt="" aria-hidden="true">
+        <div><h2>問道</h2><p>心燈以經文相伴，說說心裡的事</p></div>
+      </div>
+      <p class="asknote" id="askNote" hidden>心燈的 AI 問答目前只能在 Claude App 中使用；這裡可以先看看常見的問題。</p>
       <div class="chat" id="chat" aria-live="polite">
         <div class="msg ai"><span class="who">心燈</span><span>阿彌陀佛。心中若有疑惑、煩憂，或遇可疑來電、要求匯款之事，皆可在此相問。</span></div>
         <div class="sugg" id="sugg">
-          <div class="lab">常見問題</div>
+          <div class="lab">可以這樣問</div>
           <button>有人來電說我中獎，要先匯手續費</button>
           <button>近來夜裡難眠，心中煩亂</button>
           <button>迴向是什麼意思？</button>
@@ -688,8 +775,8 @@ header.top .hq{gap:2px;align-items:center}
       </div>
       <form class="composer" id="composer">
         <button type="button" class="mic" id="micBtn" aria-label="用說的" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
-        <input id="askInput" type="text" placeholder="寫下疑問" autocomplete="off" aria-label="輸入問題">
-        <button class="btn" id="askBtn" type="submit">請問</button>
+        <input id="askInput" type="text" placeholder="寫下心裡的疑問……" autocomplete="off" aria-label="輸入問題">
+        <button class="send" id="askBtn" type="submit" aria-label="請問"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
       </form>
     </section>
 
@@ -1777,6 +1864,8 @@ $("hChange").onclick = openPick;
 $("tFish").onclick = () => showTab("fish");
 $("hLog").onclick = () => showTab("log");
 $("logBack").onclick = () => showTab("home");
+$("hDediLog").onclick = () => { dlFrom = "home"; showTab("dedilog"); };
+$("askNote").hidden = !!(window.claude && window.claude.use);
 $("tDedi").onclick = () => { setDediVerse("normal"); openDedi(); };
 
 /* ---- 計時念佛：坐著念，不撥珠（印光大師的建議） ---- */
@@ -2779,8 +2868,12 @@ function renderListen(){
     LISTEN[k].forEach(sr => {
       const wrap = document.createElement("div");
       const b = document.createElement("button"); b.className = "lsitem"; b.dataset.id = sr.id;
-      b.innerHTML = '<span class="lsic" aria-hidden="true">▶</span><span class="lstx"><b></b><span class="lswho"></span><span class="lsst"></span></span>';
-      b.querySelector("b").textContent = sr.title + (sr.tags ? `（${sr.tags}）` : "");
+      b.innerHTML = '<span class="lscover"><span class="lsic" aria-hidden="true">▶</span></span><span class="lstx"><b></b><span class="lswho"></span><span class="lsabout"></span><span class="lsst"></span></span>';
+      // our own tracks carry a cover from the Pure Land series and the short introduction from the library
+      b.querySelector(".lscover").style.backgroundImage = `url(assets/img/${isSong(sr.id) ? "bg-lotus-pond" : "bg-cloud-temple"}.webp)`;
+      b.querySelector("b").textContent = sr.title;
+      if (sr.tags){ const t = document.createElement("span"); t.className = "lsbadge"; t.textContent = sr.tags; b.querySelector("b").appendChild(t); }
+      const ab = (LIB.about || {})[sr.id]; b.querySelector(".lsabout").textContent = ab ? ab.intro : "";
       b.querySelector(".lswho").textContent = sr.who;
       b.querySelector(".lsst").textContent = b.querySelector(".lsst").dataset.base = lsStatus(k, sr);
       b.onclick = () => { ac(); playSeries(sr.id); };

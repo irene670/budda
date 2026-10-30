@@ -422,6 +422,32 @@ button,a,summary,.lsitem{touch-action:manipulation}
 .hsong span{white-space:nowrap}
 .lsbead{margin-left:0}
 @media (prefers-reduced-motion:reduce){.btn,.lsitem{transition:none}.btn:active,.lsitem:active{transform:none}}
+/* ---- v5 撥珠頁（2026-10-31 使用者指定）：上方經文列＋橫向字幕；下方不放按鈕；圓滿只讓背景亮起來，不跳任何確認 ---- */
+#p-beads .beadbar,#p-beads .hname,#p-beads .hgoal,#p-beads .htext,#p-beads .hsong,#p-beads .hgong,#p-beads .hl,#p-beads .slink,#p-beads .scred,#p-beads .stepdone{display:none!important}
+.sbar{position:absolute;z-index:3;top:var(--g);left:var(--g);right:var(--g);display:flex;align-items:center;gap:12px}
+.splay{flex:0 0 auto;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--brass);background:#140d0999;color:var(--brass);display:grid;place-items:center;cursor:pointer;padding:0}
+.splay svg{width:20px;height:20px}
+.spick{flex:1;min-width:0;min-height:48px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;background:none;border:0;padding:0;color:var(--paper);font:inherit;text-align:left;cursor:pointer;text-shadow:0 1px 8px #000,0 0 18px #000a}
+.spick b{font-family:var(--display);font-size:1.15rem;font-weight:900;color:#ffe2a8;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spick span{font-size:.85rem;color:var(--muted)}
+.splay:focus-visible,.spick:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:12px}
+.ticker{position:absolute;z-index:3;top:calc(var(--g) + 58px);left:0;right:0;height:3.4rem;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.ticker span{position:absolute;left:0;top:50%;transform:translate(0,-50%);white-space:nowrap;font-family:var(--display);font-weight:900;font-size:1.65rem;letter-spacing:.12em;color:#ffe2a8;text-shadow:0 2px 16px #000,0 0 30px #000b;will-change:transform}
+#p-beads .hud{z-index:3;top:calc(var(--g) + 58px + 3.8rem)}
+.glow{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 4s ease;background:radial-gradient(85% 60% at 55% 48%,#ffd88a5c,transparent 70%)}
+#p-beads.complete .glow{opacity:1}
+.scard{border-bottom:1px solid var(--line);padding:.7rem 0}
+.scard .shead{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;min-height:48px;background:none;border:0;padding:0;color:var(--paper);font:inherit;text-align:left;cursor:pointer}
+.scard .shead b{font-family:var(--display);font-size:1.15rem;font-weight:900}
+.scard .shead span{font-size:.85rem;color:var(--muted)}
+.scard.on .shead b{color:var(--brass)}
+.scard.on .shead b::after{content:"　播放中";font-family:var(--body);font-size:.8rem;font-weight:400}
+.scard p{margin:.35rem 0 0;font-size:.95rem;line-height:1.6;color:var(--paper)}
+.scard p.suse{color:var(--muted)}
+.svers{display:flex;gap:8px;margin-top:.5rem}
+.svers button{min-height:44px;padding:0 1rem;border-radius:999px;border:1px solid var(--line);background:none;color:var(--paper);font:inherit;font-size:.95rem;cursor:pointer}
+.svers button.on{border-color:var(--brass);color:var(--brass)}
+@media (prefers-reduced-motion:reduce){.glow{transition:none}}
 @media (prefers-reduced-motion:reduce){.rays{animation:none}.lotus .petal,.lotus .seed,.dverse span,.dto,.dfin,.merit{animation-duration:.01s;animation-delay:0s}.finger{animation:none}}
 </style>
 
@@ -462,6 +488,12 @@ button,a,summary,.lsitem{touch-action:manipulation}
     <!-- 撥珠 -->
     <section class="panel altar" id="p-beads" aria-label="撥佛珠">
       <div id="beadStage" aria-label="念珠，下撥一顆"></div>
+      <div class="glow" aria-hidden="true"></div>
+      <div class="sbar" id="sBar">
+        <button class="splay" id="sPlay" aria-label="播放經文"></button>
+        <button class="spick" id="sPick" aria-haspopup="dialog"><b id="sName"></b><span id="sSub"></span></button>
+      </div>
+      <div class="ticker" id="ticker" aria-hidden="true"><span id="tickTxt"></span></div>
       <div class="hud" id="hud">
         <div class="hname" id="bName"></div>
         <div class="hrow">
@@ -603,7 +635,7 @@ button,a,summary,.lsitem{touch-action:manipulation}
 
 <!-- sheets -->
 <div class="scrim" id="scrim" hidden></div>
-<div class="sheet" id="musicSheet" hidden role="dialog" aria-label="經文音樂"><h3>經文音樂</h3><p class="hint">撥珠時播放；念珠一樣由您親手撥。</p><div id="musicBody"></div><button class="btn ghost" id="musicClose">關閉</button></div>
+<div class="sheet" id="musicSheet" hidden role="dialog" aria-label="選擇經文"><h3>選擇經文</h3><p class="hint">點經名就開始播放；念珠一樣由您親手撥。</p><div id="musicBody"></div><button class="btn ghost" id="musicClose">關閉</button></div>
 <div class="sheet" id="pickSheet" hidden role="dialog" aria-label="選功課"><div id="pickBody"></div><button class="btn ghost" id="pickClose">關閉</button></div>
 <div class="sheet" id="recSheet" hidden role="dialog" aria-label="真人唱誦">
   <h3 id="recTitle">真人唱誦</h3>
@@ -637,12 +669,12 @@ button,a,summary,.lsitem{touch-action:manipulation}
 <div class="sheet" id="setSheet" hidden role="dialog" aria-label="設定">
   <h3>設定</h3>
   <div class="lab">字體大小</div><div class="seg" data-set="big"><button data-v="0">大</button><button data-v="1">特大</button></div>
+  <div class="lab">撥珠的手</div><div class="seg" data-set="hand"><button data-v="L">左手</button><button data-v="R">右手</button></div>
   <div class="lab">畫面顏色</div><div class="seg" data-set="mode"><button data-v="night">夜間</button><button data-v="day">白天</button></div>
   <div class="lab">聲音／震動</div><div class="row"><div class="seg" data-set="sound"><button data-v="1">聲音開</button><button data-v="0">關</button></div><div class="seg" data-set="haptic"><button data-v="1">震動開</button><button data-v="0">關</button></div></div>
   <div class="lab">每日提醒</div><div class="row" id="remindRow"><button class="chip" data-rem="am">早課 7:00</button><button class="chip" data-rem="pm">晚課 20:00</button></div>
   <button class="btn ghost" id="icsBtn" style="width:100%">加入手機行事曆・每日響鈴</button><p class="hint" id="icsNote" hidden></p>
   <details class="more"><summary>進階設定</summary><div class="more-in">
-  <div class="lab">撥珠的手</div><div class="seg" data-set="hand"><button data-v="L">左手</button><button data-v="R">右手</button></div>
   <div class="lab">領誦聲音</div><div class="seg" data-set="src"><button data-v="tts">語音領誦</button><button data-v="beat">木魚節拍</button><button data-v="file">錄音檔</button></div>
   <div id="fileRow" class="row" hidden><label class="btn ghost" for="audioFile">選擇錄音檔</label><input id="audioFile" type="file" accept="audio/*" hidden><span class="hint" id="fileName">還沒選檔案</span></div>
   <div class="lab">念誦速度</div><div class="seg" data-set="speed"><button data-v="slow">慢</button><button data-v="mid">中</button><button data-v="fast">快</button></div>
@@ -692,7 +724,7 @@ button,a,summary,.lsitem{touch-action:manipulation}
 <div class="onb" id="onb" hidden role="dialog" aria-label="開始使用"><div class="onb-in" id="onbBody"></div></div>
 
 <script id="songs" type="application/json">{"songs":[{"id":"s-yaoshi","text_id":"t-yaoshi","item":"藥師灌頂真言","versions":[{"style":"temple","label":"寺院","u":"audio/ai/t-yaoshi_temple_247706401.mp3","d":170.0,"cues":[[62.88,66.96,0],[66.96,70.96,1],[70.96,74.8,2],[74.8,78.96,3],[78.96,82.8,4],[82.8,90.24,5],[90.24,94.32,0],[94.32,98.32,1],[98.32,102.16,2],[102.16,106.32,3],[106.32,110.16,4],[110.16,117.6,5],[117.6,121.68,0],[121.68,125.68,1],[125.68,129.52,2],[129.52,133.68,3],[133.68,137.52,4],[137.52,144.96,5],[144.96,150.0,0],[150.0,153.68,1],[153.68,157.52,2],[157.52,161.6,3],[161.6,163.52,4],[163.52,170.0,5]],"timed":true,"review":"未聽校"},{"style":"modern","label":"現代","u":"audio/ai/t-yaoshi_modern_674351299.mp3","d":159.0,"cues":[[10.88,16.56,0],[16.56,20.32,1],[20.32,24.63,2],[24.63,28.95,3],[28.95,31.91,4],[31.91,37.51,5],[37.51,43.19,0],[43.19,46.95,1],[46.95,51.67,2],[51.67,55.75,3],[55.75,58.62,4],[58.62,66.22,5],[66.22,69.34,0],[69.34,73.66,1],[73.66,77.9,2],[77.9,82.3,3],[82.3,85.26,4],[85.26,93.88,5],[118.69,123.01,0],[123.01,126.69,1],[126.69,131.25,2],[131.25,135.41,3],[135.41,138.44,4],[138.44,147.06,5]],"timed":true,"review":"未聽校"},{"style":"sleep","label":"睡前","u":"audio/ai/t-yaoshi_sleep_2062747533.mp3","d":176.0,"cues":[[17.6,23.36,0],[23.36,31.04,1],[31.04,36.8,2],[36.8,42.56,3],[42.56,47.04,4],[47.04,52.8,5],[52.8,58.56,0],[58.56,66.24,1],[66.24,72.0,2],[72.0,77.76,3],[77.76,82.24,4],[82.24,88.0,5],[88.0,93.76,0],[93.76,101.44,1],[101.44,107.2,2],[107.2,112.96,3],[112.96,117.44,4],[117.44,123.2,5],[123.2,128.96,0],[128.96,136.64,1],[136.64,142.4,2],[142.4,148.16,3],[148.16,152.64,4],[152.64,164.16,5]],"timed":true,"review":"未聽校"}]}]}</script>
-<script id="library" type="application/json">{"version":"0.1.0","updated":"2026-10-30","about":"雲禪經文庫：APP 功課、心燈引用、每日圖卡、短影片與 LINE 推播的單一資料來源。review.status：draft＝未校對；checked＝一人對照 CBETA 校對過；verified＝兩人校對過，可以發布。只有 verified 能上線或發布。","texts":[{"id":"t-heart","title":"般若波羅蜜多心經","kind":"經","unit":"遍","source":{"sutra":"般若波羅蜜多心經","translator":"唐．玄奘譯","cbeta":"T08n0251","section":"全文"},"lines":["觀自在菩薩，行深般若波羅蜜多時，","照見五蘊皆空，度一切苦厄。","舍利子，色不異空，空不異色，","色即是空，空即是色，","受想行識，亦復如是。","舍利子，是諸法空相，","不生不滅，不垢不淨，不增不減。","是故空中無色，無受想行識，","無眼耳鼻舌身意，無色聲香味觸法，","無眼界，乃至無意識界，","無無明，亦無無明盡，","乃至無老死，亦無老死盡。","無苦集滅道，無智亦無得。","以無所得故，菩提薩埵，","依般若波羅蜜多故，心無罣礙，","無罣礙故，無有恐怖，","遠離顛倒夢想，究竟涅槃。","三世諸佛，依般若波羅蜜多故，","得阿耨多羅三藐三菩提。","故知般若波羅蜜多，是大神咒，是大明咒，","是無上咒，是無等等咒，","能除一切苦，真實不虛。","故說般若波羅蜜多咒，即說咒曰：","揭諦揭諦，波羅揭諦，","波羅僧揭諦，菩提薩婆訶。"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字。課誦本常見「遠離顛倒夢想」，部分版本作「遠離一切顛倒夢想」，請對照 CBETA 決定採用哪個版本並註明。"}},{"id":"t-kaijing","title":"開經偈","kind":"偈","unit":"遍","source":{"sutra":"開經偈","translator":"傳為唐．武則天作","cbeta":null,"section":"待查"},"lines":["無上甚深微妙法，","百千萬劫難遭遇，","我今見聞得受持，","願解如來真實義。"],"review":{"status":"draft","by":[],"date":null,"note":"作者為傳說，出處待查；標示時寫「傳統課誦」即可。"}},{"id":"t-zanfo","title":"讚佛偈","kind":"偈","unit":"遍","source":{"sutra":"讚佛偈","translator":"待查","cbeta":null,"section":"淨土課誦"},"lines":["阿彌陀佛身金色，","相好光明無等倫，","白毫宛轉五須彌，","紺目澄清四大海，","光中化佛無數億，","化菩薩眾亦無邊，","四十八願度眾生，","九品咸令登彼岸。","南無西方極樂世界大慈大悲阿彌陀佛"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字；作者出處待查。"}},{"id":"t-pusa","title":"菩薩聖號","kind":"聖號","unit":"稱","source":{"sutra":"淨土課誦","translator":null,"cbeta":null,"section":"念佛後三稱"},"lines":["南無觀世音菩薩（三稱）","南無大勢至菩薩（三稱）","南無清淨大海眾菩薩（三稱）"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"t-huixiang","title":"迴向偈","kind":"偈","unit":"遍","source":{"sutra":"妙法蓮華經．化城喻品","translator":"姚秦．鳩摩羅什譯","cbeta":"T09n0262","section":"卷三"},"lines":["願以此功德，","普及於一切，","我等與眾生，","皆共成佛道。"],"review":{"status":"draft","by":[],"date":null,"note":"請核對原經文句。"}},{"id":"t-jingtu-huixiang","title":"淨土迴向偈","kind":"偈","unit":"遍","source":{"sutra":"淨土迴向偈","translator":"待查","cbeta":null,"section":"淨土課誦"},"lines":["願以此功德，莊嚴佛淨土，","上報四重恩，下濟三途苦，","若有見聞者，悉發菩提心，","盡此一報身，同生極樂國。"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字；出處待查。"}},{"id":"t-yaoshi","title":"藥師灌頂真言","kind":"咒","unit":"遍","source":{"sutra":"藥師琉璃光如來本願功德經","translator":"唐．玄奘譯","cbeta":"T14n0450","section":"待查（課誦本用字與經本可能不同）"},"lines":["南無薄伽伐帝，鞞殺社，","窶嚕薜琉璃，缽喇婆，喝囉闍也，","怛他揭多耶，阿囉喝帝，","三藐三勃陀耶，怛姪他，","唵，鞞殺逝，鞞殺逝，","鞞殺社，三沒揭帝莎訶。"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字。"}},{"id":"t-wangsheng","title":"往生咒","kind":"咒","unit":"遍","source":{"sutra":"拔一切業障根本得生淨土陀羅尼","translator":"劉宋．求那跋陀羅譯","cbeta":"T12n0368","section":"課誦本用字與經本略有不同"},"lines":["南無阿彌多婆夜，哆他伽多夜，","哆地夜他，阿彌利都婆毗，","阿彌利哆，悉耽婆毗，","阿彌唎哆，毗迦蘭帝，","阿彌唎哆，毗迦蘭多，","伽彌膩，伽伽那，","枳多迦隸，娑婆訶。"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字。"}},{"id":"t-liuzi","title":"六字大明咒","kind":"咒","unit":"遍","source":{"sutra":"佛說大乘莊嚴寶王經","translator":"宋．天息災譯","cbeta":"T20n1050","section":"待查"},"lines":["唵嘛呢叭咪吽"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"t-wenshu","title":"文殊心咒","kind":"咒","unit":"遍","source":{"sutra":"文殊五字心咒（藏傳音譯）","translator":null,"cbeta":null,"section":"漢傳經本作「阿囉跛者曩」，待決定採用哪一種"},"lines":["嗡阿惹巴扎那諦"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字。"}},{"id":"n-amituo","title":"阿彌陀佛聖號","kind":"聖號","unit":"聲","source":{"sutra":"佛說阿彌陀經","translator":"姚秦．鳩摩羅什譯","cbeta":"T12n0366","section":"聖號"},"lines":["南無阿彌陀佛"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"n-yaoshi","title":"藥師佛聖號","kind":"聖號","unit":"聲","source":{"sutra":"藥師琉璃光如來本願功德經","translator":"唐．玄奘譯","cbeta":"T14n0450","section":"聖號"},"lines":["南無藥師琉璃光如來"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"n-guanyin","title":"觀音聖號","kind":"聖號","unit":"聲","source":{"sutra":"妙法蓮華經．觀世音菩薩普門品","translator":"姚秦．鳩摩羅什譯","cbeta":"T09n0262","section":"卷七"},"lines":["南無觀世音菩薩"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"n-wenshu","title":"文殊菩薩聖號","kind":"聖號","unit":"聲","source":{"sutra":"傳統課誦","translator":null,"cbeta":null,"section":"聖號"},"lines":["南無大智文殊師利菩薩"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"n-fude","title":"福德正神聖號","kind":"聖號","unit":"聲","source":{"sutra":"民間信仰","translator":null,"cbeta":null,"section":"非佛經，標示為民間信仰"},"lines":["福德正神"],"review":{"status":"draft","by":[],"date":null,"note":""}}],"quotes":[{"id":"q001","text":"心無罣礙，無罣礙故，無有恐怖，遠離顛倒夢想。","plain":"心裡沒有牽掛，就不會害怕，也就遠離那些顛倒的念頭。","source":{"sutra":"般若波羅蜜多心經","translator":"唐．玄奘譯","cbeta":"T08n0251","section":"全文"},"tags":["放下","安心"],"slot":"晚","wishes":["calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q002","text":"觀自在菩薩，行深般若波羅蜜多時，照見五蘊皆空，度一切苦厄。","plain":"觀世音菩薩用深刻的智慧看清：身心的一切都在變化，沒有固定不變的實體，因此度過了一切苦。","source":{"sutra":"般若波羅蜜多心經","translator":"唐．玄奘譯","cbeta":"T08n0251","section":"全文"},"tags":["智慧"],"slot":"皆可","wishes":["calm","peace"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q003","text":"一切有為法，如夢幻泡影，如露亦如電，應作如是觀。","plain":"一切因緣聚合的事物，都像夢、幻影、水泡、影子、露水和閃電，應當這樣看待。","source":{"sutra":"金剛般若波羅蜜經","translator":"姚秦．鳩摩羅什譯","cbeta":"T08n0235","section":"應化非真分（第三十二）"},"tags":["放下","無常"],"slot":"晚","wishes":["calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。分品名稱為後人所加。"}},{"id":"q004","text":"應無所住而生其心。","plain":"心不黏在任何事物上，清清楚楚地去做眼前的事。","source":{"sutra":"金剛般若波羅蜜經","translator":"姚秦．鳩摩羅什譯","cbeta":"T08n0235","section":"莊嚴淨土分（第十）"},"tags":["專注","放下"],"slot":"早","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q005","text":"過去心不可得，現在心不可得，未來心不可得。","plain":"過去的已經過去，未來的還沒來，現在的念頭也一直在變，都抓不住。","source":{"sutra":"金剛般若波羅蜜經","translator":"姚秦．鳩摩羅什譯","cbeta":"T08n0235","section":"一體同觀分（第十八）"},"tags":["放下","無常"],"slot":"晚","wishes":["calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q006","text":"凡所有相，皆是虛妄。若見諸相非相，則見如來。","plain":"看得見的樣貌都會變化，不是永遠不變的；看清這一點，就見到了如來。","source":{"sutra":"金剛般若波羅蜜經","translator":"姚秦．鳩摩羅什譯","cbeta":"T08n0235","section":"如理實見分（第五）"},"tags":["智慧"],"slot":"皆可","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q007","text":"從是西方，過十萬億佛土，有世界名曰極樂。","plain":"從這裡往西，經過十萬億個佛國，有一個世界叫做極樂。","source":{"sutra":"佛說阿彌陀經","translator":"姚秦．鳩摩羅什譯","cbeta":"T12n0366","section":"經文開頭"},"tags":["淨土"],"slot":"晚","wishes":["family"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q008","text":"是心作佛，是心是佛。","plain":"用這顆心念佛，這顆心就能成佛；這顆心本來就是佛。","source":{"sutra":"佛說觀無量壽佛經","translator":"劉宋．畺良耶舍譯","cbeta":"T12n0365","section":"第八觀"},"tags":["淨土","念佛"],"slot":"早","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q009","text":"都攝六根，淨念相繼，得三摩地，斯為第一。","plain":"把眼耳鼻舌身意都收回來，清淨的佛號一句接一句，心就能安定下來，這是最好的方法。","source":{"sutra":"大佛頂首楞嚴經","translator":"唐．般剌蜜帝譯","cbeta":"T19n0945","section":"卷五．大勢至菩薩念佛圓通章"},"tags":["念佛","專注"],"slot":"晚","wishes":["daily","calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q010","text":"憶佛念佛，現前當來，必定見佛，去佛不遠，不假方便，自得心開。","plain":"常常想著佛、念著佛，現在或將來一定能見到佛；不需要別的方法，心自然就開朗了。","source":{"sutra":"大佛頂首楞嚴經","translator":"唐．般剌蜜帝譯","cbeta":"T19n0945","section":"卷五．大勢至菩薩念佛圓通章"},"tags":["念佛"],"slot":"早","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q011","text":"慈眼視眾生，福聚海無量，是故應頂禮。","plain":"觀世音菩薩用慈悲的眼睛看著每一個人，福德像大海一樣多，所以我們恭敬禮拜。","source":{"sutra":"妙法蓮華經．觀世音菩薩普門品","translator":"姚秦．鳩摩羅什譯","cbeta":"T09n0262","section":"卷七"},"tags":["觀音","慈悲"],"slot":"早","wishes":["peace"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q012","text":"若人欲了知，三世一切佛，應觀法界性，一切唯心造。","plain":"想了解過去、現在、未來的一切佛，就要看清楚：一切都是由心造出來的。","source":{"sutra":"大方廣佛華嚴經（八十卷）","translator":"唐．實叉難陀譯","cbeta":"T10n0279","section":"卷十九．夜摩宮中偈讚品"},"tags":["智慧"],"slot":"早","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q013","text":"制心一處，無事不辦。","plain":"把心專注在一件事上，就沒有做不成的事。","source":{"sutra":"佛垂般涅槃略說教誡經（遺教經）","translator":"姚秦．鳩摩羅什譯","cbeta":"T12n0389","section":"全文"},"tags":["專注"],"slot":"早","wishes":["wisdom","wealth"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q014","text":"知足之人，雖臥地上，猶為安樂；不知足者，雖處天堂，亦不稱意。","plain":"知足的人，就算睡在地上也覺得安樂；不知足的人，就算住在天上也不滿意。","source":{"sutra":"佛垂般涅槃略說教誡經（遺教經）","translator":"姚秦．鳩摩羅什譯","cbeta":"T12n0389","section":"全文"},"tags":["知足"],"slot":"晚","wishes":["calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q015","text":"多欲為苦，生死疲勞，從貪欲起；少欲無為，身心自在。","plain":"想要的太多就辛苦，種種疲累都從貪心來；想要的少、不強求，身心就自在。","source":{"sutra":"佛說八大人覺經","translator":"後漢．安世高譯","cbeta":"T17n0779","section":"第二覺"},"tags":["知足","放下"],"slot":"晚","wishes":["calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q016","text":"隨其心淨，則佛土淨。","plain":"心清淨了，身邊的世界也跟著清淨。","source":{"sutra":"維摩詰所說經","translator":"姚秦．鳩摩羅什譯","cbeta":"T14n0475","section":"佛國品"},"tags":["安心"],"slot":"早","wishes":["daily","peace"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q017","text":"菩提本無樹，明鏡亦非臺；本來無一物，何處惹塵埃。","plain":"覺悟不靠任何外在的形體；本來就沒有一物，塵埃又能落在哪裡？","source":{"sutra":"六祖大師法寶壇經","translator":"元．宗寶編","cbeta":"T48n2008","section":"行由品"},"tags":["放下","智慧"],"slot":"皆可","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。敦煌本文句不同，標示時註明宗寶本。"}},{"id":"q018","text":"願我臨欲命終時，盡除一切諸障礙，面見彼佛阿彌陀，即得往生安樂剎。","plain":"願我在生命將盡的時候，一切障礙都消除，親眼見到阿彌陀佛，往生到安樂的國土。","source":{"sutra":"大方廣佛華嚴經（四十卷）．普賢行願品","translator":"唐．般若譯","cbeta":"T10n0293","section":"卷四十"},"tags":["淨土","追思"],"slot":"晚","wishes":["family"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q019","text":"諸惡莫作，眾善奉行，自淨其意，是諸佛教。","plain":"不做壞事，多做好事，把自己的心念淨化，這就是諸佛的教導。","source":{"sutra":"法句經．述佛品","translator":"吳．維祇難等譯","cbeta":"T04n0210","section":"述佛品（七佛通誡偈）"},"tags":["行善"],"slot":"早","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。法句經原文作「諸善奉行」，「眾善奉行」是常見寫法，請決定採用哪個並註明。"}},{"id":"q020","text":"莫輕小惡，以為無殃；水滴雖微，漸盈大器。","plain":"不要以為小小的壞事沒關係；水滴雖小，也會慢慢裝滿大缸。","source":{"sutra":"法句經","translator":"吳．維祇難等譯","cbeta":"T04n0210","section":"待查"},"tags":["行善"],"slot":"早","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。品名待查。"}},{"id":"q021","text":"若人欲識佛境界，當淨其意如虛空。","plain":"想要了解佛的境界，先讓自己的心像天空一樣清淨開闊。","source":{"sutra":"大方廣佛華嚴經（八十卷）","translator":"唐．實叉難陀譯","cbeta":"T10n0279","section":"待查（如來出現品）"},"tags":["安心"],"slot":"早","wishes":["calm","wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。卷品待查。"}},{"id":"q022","text":"但願眾生得離苦，不為自己求安樂。","plain":"只希望大家都能離開痛苦，不只為自己求安樂。","source":{"sutra":"大方廣佛華嚴經","translator":"待查","cbeta":null,"section":"待查"},"tags":["慈悲"],"slot":"晚","wishes":["peace","family"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。原經文句順序為「不為自己求安樂，但願眾生得離苦」，常見倒置引用；請查出處後修正。"}},{"id":"q023","text":"是法平等，無有高下。","plain":"佛法看待一切平等，沒有高低之分。","source":{"sutra":"金剛般若波羅蜜經","translator":"姚秦．鳩摩羅什譯","cbeta":"T08n0235","section":"淨心行善分（第二十三）"},"tags":["平等"],"slot":"皆可","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}},{"id":"q024","text":"若能轉物，即同如來。","plain":"心不被外境牽著走，反而能主導外境，就和如來一樣。","source":{"sutra":"大佛頂首楞嚴經","translator":"唐．般剌蜜帝譯","cbeta":"T19n0945","section":"卷二"},"tags":["自在"],"slot":"皆可","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}},{"id":"q025","text":"上善若水，水善利萬物而不爭。","plain":"最好的品德像水一樣，幫助萬物卻不和誰爭。","source":{"sutra":"道德經","translator":"春秋．老子","cbeta":null,"section":"第八章"},"tags":["道家","謙和"],"slot":"早","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。道德經非佛經，請對照通行本（王弼本）。"}},{"id":"q026","text":"知足不辱，知止不殆。","plain":"懂得知足就不會受辱，懂得適可而止就不會遇到危險。","source":{"sutra":"道德經","translator":"春秋．老子","cbeta":null,"section":"第四十四章"},"tags":["道家","知足"],"slot":"晚","wishes":["calm","wealth"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}},{"id":"q027","text":"天下難事，必作於易；天下大事，必作於細。","plain":"難的事要從容易處下手，大的事要從細節做起。","source":{"sutra":"道德經","translator":"春秋．老子","cbeta":null,"section":"第六十三章"},"tags":["道家","專注"],"slot":"早","wishes":["wealth","wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}},{"id":"q028","text":"知人者智，自知者明。","plain":"能看懂別人是聰明，能看清自己才是真正的明白。","source":{"sutra":"道德經","translator":"春秋．老子","cbeta":null,"section":"第三十三章"},"tags":["道家","智慧"],"slot":"早","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}},{"id":"q029","text":"千里之行，始於足下。","plain":"再遠的路，也是從腳下這一步開始。","source":{"sutra":"道德經","translator":"春秋．老子","cbeta":null,"section":"第六十四章"},"tags":["道家","精進"],"slot":"早","wishes":["daily","wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}}]}</script>
+<script id="library" type="application/json">{"version":"0.1.0","updated":"2026-10-30","about":{"_note":"撥珠頁「選擇經文」用的介紹。鍵是聞法音軌的 id（n-* 代表所有念佛音軌）。item：撥珠時計數的功課項目，null 表示自由持名；text：橫向字幕用的經文庫 id，null 表示只顯示經名。文字為 Claude 草擬，待校對。","s-yaoshi":{"intro":"出自《藥師琉璃光如來本願功德經》。藥師佛又稱「大醫王」，經中記載他發了十二大願，願眾生身心安樂、遠離憂苦。","use":"為自己或家人祈求平安健康時持誦。身體不適請就醫。","item":"藥師灌頂真言","text":"t-yaoshi"},"b-bed":{"intro":"雲禪自製的配樂：頌缽、長音，加上每分鐘 56 下的木魚，沒有人聲。","use":"睡前靜坐、安靜撥珠時當作背景。","item":null,"text":null},"c-heart":{"intro":"唐．玄奘譯，二百六十字，講「照見五蘊皆空，度一切苦厄」，是最常被讀誦的經典之一。","use":"心裡煩亂、放不下的時候讀誦，讓心安靜下來。","item":"般若波羅蜜多心經","text":"t-heart"},"c-pumen":{"intro":"《妙法蓮華經》第二十五品，講觀世音菩薩聞聲救苦、慈悲護念眾生。","use":"祈求平安、為家人祈福時讀誦。","item":null,"text":null},"c-jingang":{"intro":"姚秦．鳩摩羅什譯，講「應無所住而生其心」，教人看清一切無常、不執著。","use":"遇到事情想不開時，學習放下。","item":null,"text":null},"c-puxian":{"intro":"《華嚴經》最後一卷，講普賢菩薩的十大願，最後發願往生極樂。","use":"發願、迴向；淨土行者常在晚課讀誦。","item":null,"text":null},"c-yijiao":{"intro":"佛陀入滅前最後的教誨，講持戒、知足、少欲、精進。","use":"自我勉勵、回頭檢視自己的生活。","item":null,"text":null},"n-*":{"intro":"「南無阿彌陀佛」六字洪名，是淨土法門最主要的修持，一聲佛號撥一顆念珠。","use":"日常持名、追思親人、睡前念佛。","item":null,"text":"n-amituo"}},"texts":[{"id":"t-heart","title":"般若波羅蜜多心經","kind":"經","unit":"遍","source":{"sutra":"般若波羅蜜多心經","translator":"唐．玄奘譯","cbeta":"T08n0251","section":"全文"},"lines":["觀自在菩薩，行深般若波羅蜜多時，","照見五蘊皆空，度一切苦厄。","舍利子，色不異空，空不異色，","色即是空，空即是色，","受想行識，亦復如是。","舍利子，是諸法空相，","不生不滅，不垢不淨，不增不減。","是故空中無色，無受想行識，","無眼耳鼻舌身意，無色聲香味觸法，","無眼界，乃至無意識界，","無無明，亦無無明盡，","乃至無老死，亦無老死盡。","無苦集滅道，無智亦無得。","以無所得故，菩提薩埵，","依般若波羅蜜多故，心無罣礙，","無罣礙故，無有恐怖，","遠離顛倒夢想，究竟涅槃。","三世諸佛，依般若波羅蜜多故，","得阿耨多羅三藐三菩提。","故知般若波羅蜜多，是大神咒，是大明咒，","是無上咒，是無等等咒，","能除一切苦，真實不虛。","故說般若波羅蜜多咒，即說咒曰：","揭諦揭諦，波羅揭諦，","波羅僧揭諦，菩提薩婆訶。"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字。課誦本常見「遠離顛倒夢想」，部分版本作「遠離一切顛倒夢想」，請對照 CBETA 決定採用哪個版本並註明。"}},{"id":"t-kaijing","title":"開經偈","kind":"偈","unit":"遍","source":{"sutra":"開經偈","translator":"傳為唐．武則天作","cbeta":null,"section":"待查"},"lines":["無上甚深微妙法，","百千萬劫難遭遇，","我今見聞得受持，","願解如來真實義。"],"review":{"status":"draft","by":[],"date":null,"note":"作者為傳說，出處待查；標示時寫「傳統課誦」即可。"}},{"id":"t-zanfo","title":"讚佛偈","kind":"偈","unit":"遍","source":{"sutra":"讚佛偈","translator":"待查","cbeta":null,"section":"淨土課誦"},"lines":["阿彌陀佛身金色，","相好光明無等倫，","白毫宛轉五須彌，","紺目澄清四大海，","光中化佛無數億，","化菩薩眾亦無邊，","四十八願度眾生，","九品咸令登彼岸。","南無西方極樂世界大慈大悲阿彌陀佛"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字；作者出處待查。"}},{"id":"t-pusa","title":"菩薩聖號","kind":"聖號","unit":"稱","source":{"sutra":"淨土課誦","translator":null,"cbeta":null,"section":"念佛後三稱"},"lines":["南無觀世音菩薩（三稱）","南無大勢至菩薩（三稱）","南無清淨大海眾菩薩（三稱）"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"t-huixiang","title":"迴向偈","kind":"偈","unit":"遍","source":{"sutra":"妙法蓮華經．化城喻品","translator":"姚秦．鳩摩羅什譯","cbeta":"T09n0262","section":"卷三"},"lines":["願以此功德，","普及於一切，","我等與眾生，","皆共成佛道。"],"review":{"status":"draft","by":[],"date":null,"note":"請核對原經文句。"}},{"id":"t-jingtu-huixiang","title":"淨土迴向偈","kind":"偈","unit":"遍","source":{"sutra":"淨土迴向偈","translator":"待查","cbeta":null,"section":"淨土課誦"},"lines":["願以此功德，莊嚴佛淨土，","上報四重恩，下濟三途苦，","若有見聞者，悉發菩提心，","盡此一報身，同生極樂國。"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字；出處待查。"}},{"id":"t-yaoshi","title":"藥師灌頂真言","kind":"咒","unit":"遍","source":{"sutra":"藥師琉璃光如來本願功德經","translator":"唐．玄奘譯","cbeta":"T14n0450","section":"待查（課誦本用字與經本可能不同）"},"lines":["南無薄伽伐帝，鞞殺社，","窶嚕薜琉璃，缽喇婆，喝囉闍也，","怛他揭多耶，阿囉喝帝，","三藐三勃陀耶，怛姪他，","唵，鞞殺逝，鞞殺逝，","鞞殺社，三沒揭帝莎訶。"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字。"}},{"id":"t-wangsheng","title":"往生咒","kind":"咒","unit":"遍","source":{"sutra":"拔一切業障根本得生淨土陀羅尼","translator":"劉宋．求那跋陀羅譯","cbeta":"T12n0368","section":"課誦本用字與經本略有不同"},"lines":["南無阿彌多婆夜，哆他伽多夜，","哆地夜他，阿彌利都婆毗，","阿彌利哆，悉耽婆毗，","阿彌唎哆，毗迦蘭帝，","阿彌唎哆，毗迦蘭多，","伽彌膩，伽伽那，","枳多迦隸，娑婆訶。"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字。"}},{"id":"t-liuzi","title":"六字大明咒","kind":"咒","unit":"遍","source":{"sutra":"佛說大乘莊嚴寶王經","translator":"宋．天息災譯","cbeta":"T20n1050","section":"待查"},"lines":["唵嘛呢叭咪吽"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"t-wenshu","title":"文殊心咒","kind":"咒","unit":"遍","source":{"sutra":"文殊五字心咒（藏傳音譯）","translator":null,"cbeta":null,"section":"漢傳經本作「阿囉跛者曩」，待決定採用哪一種"},"lines":["嗡阿惹巴扎那諦"],"review":{"status":"draft","by":[],"date":null,"note":"沿用原型 v12 文字。"}},{"id":"n-amituo","title":"阿彌陀佛聖號","kind":"聖號","unit":"聲","source":{"sutra":"佛說阿彌陀經","translator":"姚秦．鳩摩羅什譯","cbeta":"T12n0366","section":"聖號"},"lines":["南無阿彌陀佛"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"n-yaoshi","title":"藥師佛聖號","kind":"聖號","unit":"聲","source":{"sutra":"藥師琉璃光如來本願功德經","translator":"唐．玄奘譯","cbeta":"T14n0450","section":"聖號"},"lines":["南無藥師琉璃光如來"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"n-guanyin","title":"觀音聖號","kind":"聖號","unit":"聲","source":{"sutra":"妙法蓮華經．觀世音菩薩普門品","translator":"姚秦．鳩摩羅什譯","cbeta":"T09n0262","section":"卷七"},"lines":["南無觀世音菩薩"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"n-wenshu","title":"文殊菩薩聖號","kind":"聖號","unit":"聲","source":{"sutra":"傳統課誦","translator":null,"cbeta":null,"section":"聖號"},"lines":["南無大智文殊師利菩薩"],"review":{"status":"draft","by":[],"date":null,"note":""}},{"id":"n-fude","title":"福德正神聖號","kind":"聖號","unit":"聲","source":{"sutra":"民間信仰","translator":null,"cbeta":null,"section":"非佛經，標示為民間信仰"},"lines":["福德正神"],"review":{"status":"draft","by":[],"date":null,"note":""}}],"quotes":[{"id":"q001","text":"心無罣礙，無罣礙故，無有恐怖，遠離顛倒夢想。","plain":"心裡沒有牽掛，就不會害怕，也就遠離那些顛倒的念頭。","source":{"sutra":"般若波羅蜜多心經","translator":"唐．玄奘譯","cbeta":"T08n0251","section":"全文"},"tags":["放下","安心"],"slot":"晚","wishes":["calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q002","text":"觀自在菩薩，行深般若波羅蜜多時，照見五蘊皆空，度一切苦厄。","plain":"觀世音菩薩用深刻的智慧看清：身心的一切都在變化，沒有固定不變的實體，因此度過了一切苦。","source":{"sutra":"般若波羅蜜多心經","translator":"唐．玄奘譯","cbeta":"T08n0251","section":"全文"},"tags":["智慧"],"slot":"皆可","wishes":["calm","peace"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q003","text":"一切有為法，如夢幻泡影，如露亦如電，應作如是觀。","plain":"一切因緣聚合的事物，都像夢、幻影、水泡、影子、露水和閃電，應當這樣看待。","source":{"sutra":"金剛般若波羅蜜經","translator":"姚秦．鳩摩羅什譯","cbeta":"T08n0235","section":"應化非真分（第三十二）"},"tags":["放下","無常"],"slot":"晚","wishes":["calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。分品名稱為後人所加。"}},{"id":"q004","text":"應無所住而生其心。","plain":"心不黏在任何事物上，清清楚楚地去做眼前的事。","source":{"sutra":"金剛般若波羅蜜經","translator":"姚秦．鳩摩羅什譯","cbeta":"T08n0235","section":"莊嚴淨土分（第十）"},"tags":["專注","放下"],"slot":"早","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q005","text":"過去心不可得，現在心不可得，未來心不可得。","plain":"過去的已經過去，未來的還沒來，現在的念頭也一直在變，都抓不住。","source":{"sutra":"金剛般若波羅蜜經","translator":"姚秦．鳩摩羅什譯","cbeta":"T08n0235","section":"一體同觀分（第十八）"},"tags":["放下","無常"],"slot":"晚","wishes":["calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q006","text":"凡所有相，皆是虛妄。若見諸相非相，則見如來。","plain":"看得見的樣貌都會變化，不是永遠不變的；看清這一點，就見到了如來。","source":{"sutra":"金剛般若波羅蜜經","translator":"姚秦．鳩摩羅什譯","cbeta":"T08n0235","section":"如理實見分（第五）"},"tags":["智慧"],"slot":"皆可","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q007","text":"從是西方，過十萬億佛土，有世界名曰極樂。","plain":"從這裡往西，經過十萬億個佛國，有一個世界叫做極樂。","source":{"sutra":"佛說阿彌陀經","translator":"姚秦．鳩摩羅什譯","cbeta":"T12n0366","section":"經文開頭"},"tags":["淨土"],"slot":"晚","wishes":["family"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q008","text":"是心作佛，是心是佛。","plain":"用這顆心念佛，這顆心就能成佛；這顆心本來就是佛。","source":{"sutra":"佛說觀無量壽佛經","translator":"劉宋．畺良耶舍譯","cbeta":"T12n0365","section":"第八觀"},"tags":["淨土","念佛"],"slot":"早","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q009","text":"都攝六根，淨念相繼，得三摩地，斯為第一。","plain":"把眼耳鼻舌身意都收回來，清淨的佛號一句接一句，心就能安定下來，這是最好的方法。","source":{"sutra":"大佛頂首楞嚴經","translator":"唐．般剌蜜帝譯","cbeta":"T19n0945","section":"卷五．大勢至菩薩念佛圓通章"},"tags":["念佛","專注"],"slot":"晚","wishes":["daily","calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q010","text":"憶佛念佛，現前當來，必定見佛，去佛不遠，不假方便，自得心開。","plain":"常常想著佛、念著佛，現在或將來一定能見到佛；不需要別的方法，心自然就開朗了。","source":{"sutra":"大佛頂首楞嚴經","translator":"唐．般剌蜜帝譯","cbeta":"T19n0945","section":"卷五．大勢至菩薩念佛圓通章"},"tags":["念佛"],"slot":"早","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q011","text":"慈眼視眾生，福聚海無量，是故應頂禮。","plain":"觀世音菩薩用慈悲的眼睛看著每一個人，福德像大海一樣多，所以我們恭敬禮拜。","source":{"sutra":"妙法蓮華經．觀世音菩薩普門品","translator":"姚秦．鳩摩羅什譯","cbeta":"T09n0262","section":"卷七"},"tags":["觀音","慈悲"],"slot":"早","wishes":["peace"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q012","text":"若人欲了知，三世一切佛，應觀法界性，一切唯心造。","plain":"想了解過去、現在、未來的一切佛，就要看清楚：一切都是由心造出來的。","source":{"sutra":"大方廣佛華嚴經（八十卷）","translator":"唐．實叉難陀譯","cbeta":"T10n0279","section":"卷十九．夜摩宮中偈讚品"},"tags":["智慧"],"slot":"早","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q013","text":"制心一處，無事不辦。","plain":"把心專注在一件事上，就沒有做不成的事。","source":{"sutra":"佛垂般涅槃略說教誡經（遺教經）","translator":"姚秦．鳩摩羅什譯","cbeta":"T12n0389","section":"全文"},"tags":["專注"],"slot":"早","wishes":["wisdom","wealth"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q014","text":"知足之人，雖臥地上，猶為安樂；不知足者，雖處天堂，亦不稱意。","plain":"知足的人，就算睡在地上也覺得安樂；不知足的人，就算住在天上也不滿意。","source":{"sutra":"佛垂般涅槃略說教誡經（遺教經）","translator":"姚秦．鳩摩羅什譯","cbeta":"T12n0389","section":"全文"},"tags":["知足"],"slot":"晚","wishes":["calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q015","text":"多欲為苦，生死疲勞，從貪欲起；少欲無為，身心自在。","plain":"想要的太多就辛苦，種種疲累都從貪心來；想要的少、不強求，身心就自在。","source":{"sutra":"佛說八大人覺經","translator":"後漢．安世高譯","cbeta":"T17n0779","section":"第二覺"},"tags":["知足","放下"],"slot":"晚","wishes":["calm"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q016","text":"隨其心淨，則佛土淨。","plain":"心清淨了，身邊的世界也跟著清淨。","source":{"sutra":"維摩詰所說經","translator":"姚秦．鳩摩羅什譯","cbeta":"T14n0475","section":"佛國品"},"tags":["安心"],"slot":"早","wishes":["daily","peace"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q017","text":"菩提本無樹，明鏡亦非臺；本來無一物，何處惹塵埃。","plain":"覺悟不靠任何外在的形體；本來就沒有一物，塵埃又能落在哪裡？","source":{"sutra":"六祖大師法寶壇經","translator":"元．宗寶編","cbeta":"T48n2008","section":"行由品"},"tags":["放下","智慧"],"slot":"皆可","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。敦煌本文句不同，標示時註明宗寶本。"}},{"id":"q018","text":"願我臨欲命終時，盡除一切諸障礙，面見彼佛阿彌陀，即得往生安樂剎。","plain":"願我在生命將盡的時候，一切障礙都消除，親眼見到阿彌陀佛，往生到安樂的國土。","source":{"sutra":"大方廣佛華嚴經（四十卷）．普賢行願品","translator":"唐．般若譯","cbeta":"T10n0293","section":"卷四十"},"tags":["淨土","追思"],"slot":"晚","wishes":["family"],"review":{"status":"draft","by":[],"date":null,"note":"Claude 依記憶草擬，請對照 CBETA 逐字核對。"}},{"id":"q019","text":"諸惡莫作，眾善奉行，自淨其意，是諸佛教。","plain":"不做壞事，多做好事，把自己的心念淨化，這就是諸佛的教導。","source":{"sutra":"法句經．述佛品","translator":"吳．維祇難等譯","cbeta":"T04n0210","section":"述佛品（七佛通誡偈）"},"tags":["行善"],"slot":"早","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。法句經原文作「諸善奉行」，「眾善奉行」是常見寫法，請決定採用哪個並註明。"}},{"id":"q020","text":"莫輕小惡，以為無殃；水滴雖微，漸盈大器。","plain":"不要以為小小的壞事沒關係；水滴雖小，也會慢慢裝滿大缸。","source":{"sutra":"法句經","translator":"吳．維祇難等譯","cbeta":"T04n0210","section":"待查"},"tags":["行善"],"slot":"早","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。品名待查。"}},{"id":"q021","text":"若人欲識佛境界，當淨其意如虛空。","plain":"想要了解佛的境界，先讓自己的心像天空一樣清淨開闊。","source":{"sutra":"大方廣佛華嚴經（八十卷）","translator":"唐．實叉難陀譯","cbeta":"T10n0279","section":"待查（如來出現品）"},"tags":["安心"],"slot":"早","wishes":["calm","wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。卷品待查。"}},{"id":"q022","text":"但願眾生得離苦，不為自己求安樂。","plain":"只希望大家都能離開痛苦，不只為自己求安樂。","source":{"sutra":"大方廣佛華嚴經","translator":"待查","cbeta":null,"section":"待查"},"tags":["慈悲"],"slot":"晚","wishes":["peace","family"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。原經文句順序為「不為自己求安樂，但願眾生得離苦」，常見倒置引用；請查出處後修正。"}},{"id":"q023","text":"是法平等，無有高下。","plain":"佛法看待一切平等，沒有高低之分。","source":{"sutra":"金剛般若波羅蜜經","translator":"姚秦．鳩摩羅什譯","cbeta":"T08n0235","section":"淨心行善分（第二十三）"},"tags":["平等"],"slot":"皆可","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}},{"id":"q024","text":"若能轉物，即同如來。","plain":"心不被外境牽著走，反而能主導外境，就和如來一樣。","source":{"sutra":"大佛頂首楞嚴經","translator":"唐．般剌蜜帝譯","cbeta":"T19n0945","section":"卷二"},"tags":["自在"],"slot":"皆可","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}},{"id":"q025","text":"上善若水，水善利萬物而不爭。","plain":"最好的品德像水一樣，幫助萬物卻不和誰爭。","source":{"sutra":"道德經","translator":"春秋．老子","cbeta":null,"section":"第八章"},"tags":["道家","謙和"],"slot":"早","wishes":["daily"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。道德經非佛經，請對照通行本（王弼本）。"}},{"id":"q026","text":"知足不辱，知止不殆。","plain":"懂得知足就不會受辱，懂得適可而止就不會遇到危險。","source":{"sutra":"道德經","translator":"春秋．老子","cbeta":null,"section":"第四十四章"},"tags":["道家","知足"],"slot":"晚","wishes":["calm","wealth"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}},{"id":"q027","text":"天下難事，必作於易；天下大事，必作於細。","plain":"難的事要從容易處下手，大的事要從細節做起。","source":{"sutra":"道德經","translator":"春秋．老子","cbeta":null,"section":"第六十三章"},"tags":["道家","專注"],"slot":"早","wishes":["wealth","wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}},{"id":"q028","text":"知人者智，自知者明。","plain":"能看懂別人是聰明，能看清自己才是真正的明白。","source":{"sutra":"道德經","translator":"春秋．老子","cbeta":null,"section":"第三十三章"},"tags":["道家","智慧"],"slot":"早","wishes":["wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}},{"id":"q029","text":"千里之行，始於足下。","plain":"再遠的路，也是從腳下這一步開始。","source":{"sutra":"道德經","translator":"春秋．老子","cbeta":null,"section":"第六十四章"},"tags":["道家","精進"],"slot":"早","wishes":["daily","wisdom"],"review":{"status":"draft","by":[],"date":null,"note":"來自禪道 v13「每日法語」。"}}]}</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (() => {
@@ -1389,6 +1421,7 @@ function readVerse(st, box, btn){
 
 /* ---- a counting step (beads) ---- */
 function startSession(w, it, fresh){
+  $("p-beads").classList.remove("complete");
   const g = goalOf(it);
   let done = fresh ? 0 : Math.min(itemDoneToday(it), g);
   if (done >= g) done = 0;
@@ -1399,15 +1432,10 @@ function startSession(w, it, fresh){
   S.sess = { w:w.id, it:it.name, start:base, day:dkey(new Date()) };
   save(); renderHud(); paintPlay(); redraw();
 }
-function endSession(){ sess = null; S.sess = null; save(); renderHud(); paintPlay(); }
+function endSession(){ $("p-beads").classList.remove("complete"); sess = null; S.sess = null; save(); renderHud(); paintPlay(); }
 function onGoalReached(){
-  // reaching the goal is silent and the music keeps playing; only a routine shows its quiet "next step" card
-  const it = sess.item;
-  if (!routine) return;
-  const nxt = routine && routine.steps[S.run.idx + 1];
-  $("sdText").textContent = `✓ ${it.name}${goalWords(it).replace("念 ","")}圓滿`;
-  $("sdNext").textContent = nxt ? `接續・${nxt.name}` : "迴向";
-  $("stepDone").hidden = false;
+  // reaching the goal only warms the light behind the beads: nothing pops up, nothing is said, the music keeps playing
+  $("p-beads").classList.add("complete"); paintSBar();
 }
 $("sdNext").onclick = () => { $("stepDone").hidden = true; if (routine) nextStep(); else openEnd(true); };
 $("sdMore").onclick = () => { $("stepDone").hidden = true; flash("續念，數目接續"); };
@@ -1462,6 +1490,7 @@ function renderHud(){
   const nowName = lsCur ? `${lsCur.s.title}${lsCur.s.eps.length > 1 ? "・" + lsCur.ep.t : ""}` : "";
   sb.replaceChildren(ph("經文音樂："), ph(on ? `${nowName} ›` : lsCur ? `${nowName}（已暫停） ›` : "選一首 ›"));
   sb.setAttribute("aria-label", on ? `正在播放${lsCur.s.title}，點一下更換經文音樂` : "選擇撥珠時播放的經文音樂");
+  paintSBar(); paintTicker();
   const meta = sess && S.rec[it.name], lk = sess && linkFor(it), a = $("sLink");
   const inl = sess && !meta && INLINE[it.name] ? LS_ALL[INLINE[it.name]] : null;
   a.hidden = !lk || !!meta || !!inl;
@@ -2415,6 +2444,7 @@ function songSync(){
   const t = talk.currentTime, c = ep.cues.find(x => t >= x[0] && t < x[1]);
   if (!c || c[0] === songLast) return;
   songLast = c[0]; sess.lineIdx = c[2];
+  tick(sess.item.lines[c[2]].replace(/[，。]$/, ""), (c[1] - c[0]) * 1000, "cue:" + c[0]);
   renderSess();
 }
 talk.addEventListener("ended", () => {
@@ -2498,16 +2528,7 @@ function renderListen(){
   });
   paintListen();
 }
-function beadWithSong(sr, idx = null){
-  const item = Object.keys(INLINE).find(k => INLINE[k] === sr.id);
-  const w = WISHES.find(x => x.items.some(i => i.name === item)), it = w && w.items.find(i => i.name === item);
-  if (!it) return;
-  ac(); routine = null; $("stepCard").hidden = true; $("stepDone").hidden = true;
-  showTab("beads", true);   // show the stage first: drawing beads on a hidden (zero-size) stage throws
-  startSession(w, it, true);
-  if (!(lsCur && lsCur.s.id === sr.id && !talk.paused && (idx == null || lsCur.i === idx))) playSeries(sr.id, idx, { loop:true });
-  renderHud(); paintPlay();
-}
+function beadWithSong(sr, idx = null){ ac(); selectTrack(sr, idx); }
 $("lsPlay").onclick = () => { if (lsCur) talk.paused ? talkPlay() : talk.pause(); };
 $("lsBack").onclick = () => { talk.currentTime = Math.max(0, talk.currentTime - 15); };
 $("lsNext").onclick = () => { if (lsCur && lsCur.i + 1 < lsCur.s.eps.length) playSeries(lsCur.s.id, lsCur.i + 1); };
@@ -2781,36 +2802,94 @@ function showTab(t, force){
   if (t === "listen") renderListen();
   if (t !== "fish") setAuto(0);
   keepAwake(t === "beads");
-  document.body.classList.toggle("onbeads", t === "beads"); $("qBig").hidden = $("qHand").hidden = t !== "beads"; paintQuick();
+  document.body.classList.toggle("onbeads", t === "beads"); $("qBig").hidden = $("qHand").hidden = true;   // 大字 and 撥珠的手 live in 設定
   paintPlay(); paintListen();
 }
 document.querySelectorAll("nav.tabs button").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
 $("fishBack").onclick = () => showTab("home");
-$("bSong").onclick = () => { renderMusic(); openSheetEl($("musicSheet")); };
+/* ---- v5 撥珠頁：上方經文列（播放鍵＋經名）與橫向字幕 ---- */
+const ABOUT = LIB.about || {};
+const aboutOf = id => ABOUT[id] || ABOUT[id.slice(0, 2) + "*"] || {};
+const PLAY_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+const PAUSE_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+function paintSBar(){
+  const on = lsCur && !talk.paused, it = curItem(), done = $("p-beads").classList.contains("complete");
+  $("sPlay").innerHTML = on ? PAUSE_SVG : PLAY_SVG; $("sPlay").setAttribute("aria-label", on ? "暫停經文" : "播放經文");
+  $("sName").textContent = lsCur ? `${lsCur.s.title}${lsCur.s.eps.length > 1 ? "・" + lsCur.ep.t : ""}` : (sess ? it.name : "安靜撥珠");
+  $("sSub").textContent = done && routine ? "已圓滿・輕觸進入下一步" : "選擇經文 ⌄";
+}
+// one line per cue slides in from the right, rests, and leaves to the left; without cues the whole text scrolls on
+let tickAnim = null, tickKey = "";
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+function tick(text, ms, key){
+  if (key === tickKey) return;
+  tickKey = key;
+  const box = $("ticker"), el = $("tickTxt");
+  if (tickAnim){ tickAnim.cancel(); tickAnim = null; }
+  el.textContent = text || "";
+  if (!text) return;
+  const W = box.clientWidth, w = el.scrollWidth, mid = Math.max(16, (W - w) / 2);
+  if (ms < 0 || reduceMotion.matches){ el.style.transform = `translate(${mid}px,-50%)`; return; }
+  if (ms > 0){
+    const a = w <= W - 32 ? mid : 16, b = w <= W - 32 ? mid : W - w - 16;
+    tickAnim = el.animate([{ transform:`translate(${W}px,-50%)` }, { transform:`translate(${a}px,-50%)`, offset:.15 },
+      { transform:`translate(${b}px,-50%)`, offset:.85 }, { transform:`translate(${-w}px,-50%)` }], { duration:ms, easing:"ease-in-out", fill:"forwards" });
+  } else {
+    tickAnim = el.animate([{ transform:`translate(${W}px,-50%)` }, { transform:`translate(${-w}px,-50%)` }], { duration:(W + w) / 55 * 1000, iterations:Infinity });
+  }
+}
+function paintTicker(){
+  const it = curItem(), sr = lsCur && lsCur.s, on = sr && !talk.paused;
+  if (on && lsCur.ep.cues) return;   // chant tracks: songSync moves the line with the singing
+  if (on){
+    const ab = aboutOf(sr.id), lines = ab.text ? T(ab.text) : [];
+    if (lines.length){ tick((lines.length === 1 ? Array(6).fill(lines[0]) : lines.map(l => l.replace(/[，。]$/, ""))).join("　　"), 0, "loop:" + sr.id); return; }
+  }
+  const still = it.lines ? it.lines[sess ? sess.lineIdx : 0].replace(/[，。]$/, "") : it.text;
+  tick(still, -1, "still:" + still);
+}
+function openSutras(){ renderSutras(); openSheetEl($("musicSheet")); }
+$("sPlay").onclick = () => { ac(); if (lsCur) talk.paused ? talkPlay() : talk.pause(); else openSutras(); };
+$("sPick").onclick = () => { if (routine && $("p-beads").classList.contains("complete")) nextStep(); else openSutras(); };
 $("musicClose").onclick = closeSheets;
-// tracks fit for beading: chants with subtitles, bedtime music, sutra recitation and holy names (not lectures or Q&A)
-function renderMusic(){
+// what can play while beading, each with what it is and when it suits: chants, bedtime music, sutras, holy names
+function renderSutras(){
   const box = $("musicBody"); box.innerHTML = "";
-  const row = (label, sub, isOn, act) => {
-    const b = document.createElement("button"); b.className = "mrow" + (isOn ? " on" : "");
-    b.setAttribute("aria-pressed", isOn);
-    const t = document.createElement("b"); t.textContent = label; b.appendChild(t);
-    if (sub){ const s2 = document.createElement("span"); s2.textContent = sub; b.appendChild(s2); }
-    b.onclick = () => { ac(); act(); closeSheets(); renderHud(); paintPlay(); };
-    box.appendChild(b);
-  };
   const playingId = lsCur && !talk.paused ? lsCur.s.id : null;
-  row("不播放", "安靜撥珠", !playingId, () => { talk.pause(); stopListen(); lsCur = null; paintListen(); });
-  LS_GROUPS.filter(([k]) => ["song", "bed", "chant", "name"].includes(k)).forEach(([k, h]) => {
-    const lab = document.createElement("div"); lab.className = "lab"; lab.textContent = h; box.appendChild(lab);
-    LISTEN[k].forEach(sr => {
-      if (k === "song") sr.eps.forEach((e, i) => row(`${sr.title}・${e.t}`, "有經文字幕", playingId === sr.id && lsCur.i === i, () => beadWithSong(sr, i)));
-      else row(sr.title, sr.who, playingId === sr.id, () => {
-        if (sess && !routine && isSong(INLINE[sess.item.name])) endSession();   // leaving a chant: back to free beading
-        playSeries(sr.id, null, { loop:true });
-      });
-    });
-  });
+  const card = (title, who, ab, isOn, play, versions) => {
+    const c = document.createElement("div"); c.className = "scard" + (isOn ? " on" : "");
+    const h = document.createElement("button"); h.className = "shead"; h.setAttribute("aria-pressed", isOn);
+    const t = document.createElement("b"); t.textContent = title; h.appendChild(t);
+    if (who){ const w = document.createElement("span"); w.textContent = who; h.appendChild(w); }
+    h.onclick = () => { ac(); play(null); closeSheets(); renderHud(); };
+    c.appendChild(h);
+    if (ab.intro){ const p1 = document.createElement("p"); p1.textContent = ab.intro; c.appendChild(p1); }
+    if (ab.use){ const p2 = document.createElement("p"); p2.className = "suse"; p2.textContent = "適合：" + ab.use; c.appendChild(p2); }
+    if (versions){
+      const row = document.createElement("div"); row.className = "svers";
+      versions.forEach((v, i) => { const x = document.createElement("button"); x.textContent = v.label; x.className = v.on ? "on" : "";
+        x.setAttribute("aria-pressed", v.on); x.onclick = () => { ac(); play(i); closeSheets(); renderHud(); }; row.appendChild(x); });
+      c.appendChild(row);
+    }
+    box.appendChild(c);
+  };
+  card("安靜撥珠", "不播放，只聽撥珠聲", {}, !playingId, () => { talk.pause(); lsCur = null; paintListen(); if (sess && !routine) endSession(); });
+  LS_GROUPS.filter(([k]) => ["song", "bed", "chant", "name"].includes(k)).forEach(([k]) => LISTEN[k].forEach(sr => {
+    const versions = k === "song" && sr.eps.length > 1 ? sr.eps.map((e, i) => ({ label:e.t.replace("版", ""), on:playingId === sr.id && lsCur.i === i })) : null;
+    card(sr.title, k === "song" ? "雲禪 AI 唱誦・有經文字幕" : sr.who, aboutOf(sr.id), playingId === sr.id, i => selectTrack(sr, i), versions);
+  }));
+}
+// choosing a track also chooses what the beads count: its own chant (in 遍) or free holy-name beading
+function selectTrack(sr, idx = null){
+  const ab = aboutOf(sr.id), name = ab.item || (isSong(sr.id) ? Object.keys(INLINE).find(k => INLINE[k] === sr.id) : null);
+  showTab("beads", true);   // show the stage first: drawing beads on a hidden (zero-size) stage throws
+  if (!routine){
+    const w = name && WISHES.find(x => x.items.some(i => i.name === name)), it = w && w.items.find(i => i.name === name);
+    if (it){ if (!sess || sess.item.name !== it.name) startSession(w, it, true); }
+    else if (sess) endSession();
+  }
+  if (!(lsCur && lsCur.s.id === sr.id && !talk.paused && (idx == null || lsCur.i === idx))) playSeries(sr.id, idx, { loop:true });
+  renderHud();
 }
 // music picked from 經文音樂 that is not this item's own lead voice: the big button pauses / resumes it
 const pickedMusic = () => !!(lsCur && INLINE[curItem().name] !== lsCur.s.id && !lsCur.s.id.startsWith("q-") && !lsCur.s.id.startsWith("t-"));

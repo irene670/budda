@@ -123,10 +123,13 @@ nav.tabs.locked{opacity:.45}
    the sung line is the usual vertical text, and the end of a pass is a single glow on the ring */
 .hsong{pointer-events:auto;font:inherit;font-size:.9rem;color:var(--brass);background:none;border:0;padding:0;min-height:var(--ctl,44px);text-align:left;cursor:pointer;text-shadow:0 1px 8px #000,0 0 18px #000a}
 .hsong:focus-visible{outline:2px solid var(--brass);outline-offset:4px;border-radius:6px}
-.ringbox.nudge{animation:nudge 1.6s ease-out}
-@keyframes nudge{0%{filter:drop-shadow(0 0 0 #e2b36300)}30%{filter:drop-shadow(0 0 14px #e2b363)}100%{filter:drop-shadow(0 0 0 #e2b36300)}}
-@media (prefers-reduced-motion:reduce){.ringbox.nudge{animation:none;outline:2px solid var(--brass);border-radius:50%}}
 .lsbead{margin:.35rem 0 0 2.6rem;min-height:44px}
+#musicSheet{max-height:80vh;overflow-y:auto}
+.mrow{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;min-height:56px;padding:.6rem .2rem;background:none;border:0;border-bottom:1px solid var(--line);color:var(--paper);font:inherit;text-align:left;cursor:pointer}
+.mrow b{font-weight:700;font-size:1.05rem}
+.mrow span{font-size:.9rem;color:var(--muted)}
+.mrow.on b{color:var(--brass)}
+.mrow.on b::after{content:"　目前";font-size:.85rem;font-weight:400}
 .scred{font-size:.85rem;color:var(--muted);text-shadow:0 1px 6px #000}
 .toast{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);background:#000c;border:1.5px solid var(--brass);color:var(--brass);font-family:var(--display);font-weight:900;font-size:1.6rem;padding:.6rem 1.3rem;border-radius:16px;pointer-events:none;opacity:0;transition:opacity .4s;white-space:nowrap}
 .toast.show{opacity:1}
@@ -600,6 +603,7 @@ button,a,summary,.lsitem{touch-action:manipulation}
 
 <!-- sheets -->
 <div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="musicSheet" hidden role="dialog" aria-label="經文音樂"><h3>經文音樂</h3><p class="hint">撥珠時播放；念珠一樣由您親手撥。</p><div id="musicBody"></div><button class="btn ghost" id="musicClose">關閉</button></div>
 <div class="sheet" id="pickSheet" hidden role="dialog" aria-label="選功課"><div id="pickBody"></div><button class="btn ghost" id="pickClose">關閉</button></div>
 <div class="sheet" id="recSheet" hidden role="dialog" aria-label="真人唱誦">
   <h3 id="recTitle">真人唱誦</h3>
@@ -639,7 +643,6 @@ button,a,summary,.lsitem{touch-action:manipulation}
   <button class="btn ghost" id="icsBtn" style="width:100%">加入手機行事曆・每日響鈴</button><p class="hint" id="icsNote" hidden></p>
   <details class="more"><summary>進階設定</summary><div class="more-in">
   <div class="lab">撥珠的手</div><div class="seg" data-set="hand"><button data-v="L">左手</button><button data-v="R">右手</button></div>
-  <div class="lab">圓滿一圈時語音報數</div><div class="seg" data-set="voiceCue"><button data-v="1">要</button><button data-v="0">不要</button></div>
   <div class="lab">領誦聲音</div><div class="seg" data-set="src"><button data-v="tts">語音領誦</button><button data-v="beat">木魚節拍</button><button data-v="file">錄音檔</button></div>
   <div id="fileRow" class="row" hidden><label class="btn ghost" for="audioFile">選擇錄音檔</label><input id="audioFile" type="file" accept="audio/*" hidden><span class="hint" id="fileName">還沒選檔案</span></div>
   <div class="lab">念誦速度</div><div class="seg" data-set="speed"><button data-v="slow">慢</button><button data-v="mid">中</button><button data-v="fast">快</button></div>
@@ -754,6 +757,8 @@ function noise(dur, gain, f, q){
   s.buffer = buf; s.connect(bp).connect(g).connect(a.destination); s.start(t);
 }
 // two hardwood beads knocking: a short broadband tick plus the damped ring of the bead body
+// the mother bead (end of a round) is the only marker: a lower, rounder click, nothing spoken or shown
+function motherClick(){ if(!S.sound) return; noise(0.03, 0.8, 1500, 1.0); tone(760, 0.12, 0.2); tone(1500, 0.06, 0.08); tone(300, 0.09, 0.09, "triangle"); }
 function beadClick(){ if(!S.sound) return; noise(0.018, 0.75, 2600, 1.2); tone(1350, 0.05, 0.16); tone(2950, 0.03, 0.07); tone(420, 0.04, 0.05, "triangle"); }
 // 引磬: a small bowl bell — inharmonic partials with a long, clean tail
 function bell(){ if(!S.sound) return; const f = 1180; [[1, 0.22, 3.4], [2.32, 0.09, 2.3], [4.25, 0.05, 1.5], [6.63, 0.025, 0.9]].forEach(([r, g, d]) => tone(f*r, d, g)); noise(0.012, 0.35, 5200, 2); }
@@ -1110,10 +1115,10 @@ function checkCross(){
     for (let j=counted+1;j<=f;j++) if (j % PER_LOOP === 0) mother = true;
     const n = f - counted; counted = f;
     addBeads(n, mother);
-    const loopsNow = sess ? Math.floor(sessDone()/PER_LOOP) : today().loops, inR = sess ? sessDone() % PER_LOOP : ((counted % PER_LOOP) + PER_LOOP) % PER_LOOP;
-    if (mother){ bell(); buzz([60,80,60,80,120]); flash(`第 ${loopsNow} 圈圓滿`); setTimeout(() => cue(`第${loopsNow}圈圓滿`), 700); }
-    else { beadClick(); buzz([28]); if (inR === PER_LOOP - 10) flash("尚餘十珠"); }
-    if (!S.tutDone){ S.tutDone = true; save(); $("tut").hidden = true; paintPlay(); if (!mother) flash("善哉"); }
+    // beading is immersive (docs/設計標準.md): no round counts, countdowns, chimes or voice, only the bead's own sound
+    if (mother){ motherClick(); buzz([45]); }
+    else { beadClick(); buzz([28]); }
+    if (!S.tutDone){ S.tutDone = true; save(); $("tut").hidden = true; paintPlay(); }
   }
 }
 let toastT;
@@ -1396,9 +1401,9 @@ function startSession(w, it, fresh){
 }
 function endSession(){ sess = null; S.sess = null; save(); renderHud(); paintPlay(); }
 function onGoalReached(){
+  // reaching the goal is silent and the music keeps playing; only a routine shows its quiet "next step" card
   const it = sess.item;
-  stopListen(); bell(); flash(`${it.name}圓滿`);
-  setTimeout(() => cue(`${it.name}，${goalWords(it)}，圓滿`), 800);
+  if (!routine) return;
   const nxt = routine && routine.steps[S.run.idx + 1];
   $("sdText").textContent = `✓ ${it.name}${goalWords(it).replace("念 ","")}圓滿`;
   $("sdNext").textContent = nxt ? `接續・${nxt.name}` : "迴向";
@@ -1451,21 +1456,12 @@ function renderHud(){
     const full = parseFloat(getComputedStyle(tx).fontSize), need = tx.textContent.length * full * 1.4;
     if (need > room && room > 0) tx.style.fontSize = `${Math.max(14, full * room / need)}px`;
   }
-  // free practice: the same brass line offers the chant tracks, so they can be found from the bead screen itself
-  const sb = $("bSong"), firstSong = SONGS.length && LS_ALL[SONGS[0].id];
-  sb.hidden = !sg && !(firstSong && !sess && !routine);
-  if (!sg && !sb.hidden){
-    const nm = document.createElement("span"); nm.textContent = `${SONGS[0].item} ›`;   // keep the name on one line
-    sb.replaceChildren("跟著 AI 唱誦撥珠：", nm);
-    sb.setAttribute("aria-label", `開始跟著 AI 唱誦撥珠，${SONGS[0].item}`);
-  }
-  if (sg){
-    const cur = lsCur && lsCur.s.id === sg.id ? lsCur.i : lsResumeIdx(sg);
-    // two unbreakable phrases, so large text wraps between them instead of inside 「換一版」
-    const ph = t => { const e = document.createElement("span"); e.textContent = t; return e; };
-    sb.replaceChildren(ph(`AI 唱誦・${sg.eps[cur].t}`), "　", ph("換一版 ›"));
-    sb.setAttribute("aria-label", `目前是${sg.eps[cur].t}，點一下換下一個版本`);
-  }
+  // the brass line names the music playing and opens the list to change it (musicSheet)
+  const sb = $("bSong"), on = lsCur && !talk.paused, ph = t => { const e = document.createElement("span"); e.textContent = t; return e; };
+  sb.hidden = false;
+  const nowName = lsCur ? `${lsCur.s.title}${lsCur.s.eps.length > 1 ? "・" + lsCur.ep.t : ""}` : "";
+  sb.replaceChildren(ph("經文音樂："), ph(on ? `${nowName} ›` : lsCur ? `${nowName}（已暫停） ›` : "選一首 ›"));
+  sb.setAttribute("aria-label", on ? `正在播放${lsCur.s.title}，點一下更換經文音樂` : "選擇撥珠時播放的經文音樂");
   const meta = sess && S.rec[it.name], lk = sess && linkFor(it), a = $("sLink");
   const inl = sess && !meta && INLINE[it.name] ? LS_ALL[INLINE[it.name]] : null;
   a.hidden = !lk || !!meta || !!inl;
@@ -1477,8 +1473,8 @@ function paintPlay(){
   const b = $("playBtn");
   const real = realChantOn();
   b.setAttribute("aria-pressed", playing || real);
-  const songItem = isSong(INLINE[curItem().name]) && !S.rec[curItem().name];
-  b.textContent = playing || real ? "❚❚ 暫停" : songItem ? "▶ 播放唱誦" : (sess && sessDone() > 0 ? "▶ 繼續持誦" : !S.rec[curItem().name] && L.src !== "beat" && INLINE[curItem().name] ? (isSong(INLINE[curItem().name]) ? "▶ 跟著唱誦" : "▶ 隨法師念佛") : "▶ 開始持誦");
+  const songItem = isSong(INLINE[curItem().name]) && !S.rec[curItem().name], picked = pickedMusic();
+  b.textContent = playing || real || (picked && !talk.paused) ? "❚❚ 暫停" : picked ? "▶ 播放經文音樂" : songItem ? "▶ 播放唱誦" : (sess && sessDone() > 0 ? "▶ 繼續持誦" : !S.rec[curItem().name] && L.src !== "beat" && INLINE[curItem().name] ? (isSong(INLINE[curItem().name]) ? "▶ 跟著唱誦" : "▶ 隨法師念佛") : "▶ 開始持誦");
   applyFocus();
   const src = playMode==="rec" ? "真人錄音" : L.src==="tts" ? "語音帶念" : L.src==="beat" ? "木魚節拍" : "錄音檔";
   const lead = real && LS_ALL[INLINE[curItem().name]];
@@ -2403,6 +2399,7 @@ function checkSleep(){
 }
 setInterval(() => { if (!talk.paused) checkSleep(); }, 1000);
 talk.addEventListener("play", paintListen);
+["play", "pause"].forEach(ev => talk.addEventListener(ev, () => { if (activeTab === "beads") renderHud(); }));
 talk.addEventListener("pause", () => { if (lsCur) S.lpos[lsCur.ep.u] = talk.currentTime; save(); paintListen(); });
 talk.addEventListener("timeupdate", () => {
   if (!lsCur) return;
@@ -2418,8 +2415,6 @@ function songSync(){
   const t = talk.currentTime, c = ep.cues.find(x => t >= x[0] && t < x[1]);
   if (!c || c[0] === songLast) return;
   songLast = c[0]; sess.lineIdx = c[2];
-  // one pass ends on the mantra's last line (e.g. 莎訶): remind the hand with a glow; the bead is always the user's own
-  if (c[2] === sess.item.lines.length - 1){ const rb = $("hud").querySelector(".ringbox"); rb.classList.remove("nudge"); void rb.offsetWidth; rb.classList.add("nudge"); }
   renderSess();
 }
 talk.addEventListener("ended", () => {
@@ -2503,14 +2498,15 @@ function renderListen(){
   });
   paintListen();
 }
-function beadWithSong(sr){
+function beadWithSong(sr, idx = null){
   const item = Object.keys(INLINE).find(k => INLINE[k] === sr.id);
   const w = WISHES.find(x => x.items.some(i => i.name === item)), it = w && w.items.find(i => i.name === item);
   if (!it) return;
   ac(); routine = null; $("stepCard").hidden = true; $("stepDone").hidden = true;
   showTab("beads", true);   // show the stage first: drawing beads on a hidden (zero-size) stage throws
   startSession(w, it, true);
-  playSeries(sr.id, null, { loop:true }); renderHud(); paintPlay();
+  if (!(lsCur && lsCur.s.id === sr.id && !talk.paused && (idx == null || lsCur.i === idx))) playSeries(sr.id, idx, { loop:true });
+  renderHud(); paintPlay();
 }
 $("lsPlay").onclick = () => { if (lsCur) talk.paused ? talkPlay() : talk.pause(); };
 $("lsBack").onclick = () => { talk.currentTime = Math.max(0, talk.currentTime - 15); };
@@ -2790,13 +2786,35 @@ function showTab(t, force){
 }
 document.querySelectorAll("nav.tabs button").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
 $("fishBack").onclick = () => showTab("home");
-$("bSong").onclick = () => {   // free practice: start the first chant; in a chant: cycle 寺院 → 現代 → 睡前
-  if (!sess){ if (SONGS.length) beadWithSong(LS_ALL[SONGS[0].id]); return; }
-  const sg = LS_ALL[INLINE[curItem().name]]; if (!sg) return;
-  const cur = lsCur && lsCur.s.id === sg.id ? lsCur.i : lsResumeIdx(sg), next = (cur + 1) % sg.eps.length;
-  ac(); playSeries(sg.id, next, { loop:true }); flash(sg.eps[next].t); renderHud(); paintPlay();
-};
-$("playBtn").onclick = () => playing ? stopListen() : realChantOn() ? talk.pause() : startListen();
+$("bSong").onclick = () => { renderMusic(); openSheetEl($("musicSheet")); };
+$("musicClose").onclick = closeSheets;
+// tracks fit for beading: chants with subtitles, bedtime music, sutra recitation and holy names (not lectures or Q&A)
+function renderMusic(){
+  const box = $("musicBody"); box.innerHTML = "";
+  const row = (label, sub, isOn, act) => {
+    const b = document.createElement("button"); b.className = "mrow" + (isOn ? " on" : "");
+    b.setAttribute("aria-pressed", isOn);
+    const t = document.createElement("b"); t.textContent = label; b.appendChild(t);
+    if (sub){ const s2 = document.createElement("span"); s2.textContent = sub; b.appendChild(s2); }
+    b.onclick = () => { ac(); act(); closeSheets(); renderHud(); paintPlay(); };
+    box.appendChild(b);
+  };
+  const playingId = lsCur && !talk.paused ? lsCur.s.id : null;
+  row("不播放", "安靜撥珠", !playingId, () => { talk.pause(); stopListen(); lsCur = null; paintListen(); });
+  LS_GROUPS.filter(([k]) => ["song", "bed", "chant", "name"].includes(k)).forEach(([k, h]) => {
+    const lab = document.createElement("div"); lab.className = "lab"; lab.textContent = h; box.appendChild(lab);
+    LISTEN[k].forEach(sr => {
+      if (k === "song") sr.eps.forEach((e, i) => row(`${sr.title}・${e.t}`, "有經文字幕", playingId === sr.id && lsCur.i === i, () => beadWithSong(sr, i)));
+      else row(sr.title, sr.who, playingId === sr.id, () => {
+        if (sess && !routine && isSong(INLINE[sess.item.name])) endSession();   // leaving a chant: back to free beading
+        playSeries(sr.id, null, { loop:true });
+      });
+    });
+  });
+}
+// music picked from 經文音樂 that is not this item's own lead voice: the big button pauses / resumes it
+const pickedMusic = () => !!(lsCur && INLINE[curItem().name] !== lsCur.s.id && !lsCur.s.id.startsWith("q-") && !lsCur.s.id.startsWith("t-"));
+$("playBtn").onclick = () => playing ? stopListen() : (realChantOn() || (pickedMusic() && !talk.paused)) ? talk.pause() : pickedMusic() ? talkPlay() : startListen();
 $("endBtn").onclick = () => openEnd(false);
 document.getElementById("sLink").addEventListener("click", e => {
   const a = $("sLink");

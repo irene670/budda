@@ -611,6 +611,61 @@ header.top .hq{gap:2px;align-items:center}
 .composer .send svg{width:22px;height:22px}
 .composer .send:disabled{opacity:.5}
 .mic{border-radius:50%;width:48px;height:48px}
+/* ---- v2「今日」（2026-10-31 對焦定案）：全幅晨光意境、無框排版、三個每日任務、蓮花月曆 ---- */
+.today{max-width:34rem;margin:0 auto;padding:0 20px 56px;display:flex;flex-direction:column}
+.tday{position:relative;margin:0 -20px;padding:96px 24px 30px;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;background:url(assets/img/hero-home.webp) center 35%/cover no-repeat}
+.tday::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0e080522 0%,#0e080533 45%,#140d09 100%),linear-gradient(90deg,#0e0805aa,transparent 70%)}
+.tday>*{position:relative;margin:0}
+.tdate{font-size:.8rem;letter-spacing:.14em;color:#f3d9a0;text-shadow:0 1px 8px #000}
+.thello{font-family:var(--display);font-weight:900;font-size:2.6rem;letter-spacing:.12em;color:#fff4dc;margin-top:6px!important;text-shadow:0 2px 18px #000a}
+.tfeast{margin-top:10px!important;font-size:.9rem;color:#f3e6c8;letter-spacing:.08em}
+.tfeast::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--brass);margin-right:8px;vertical-align:2px}
+.tquote{text-align:center;padding:30px 4px 10px}
+.tquote .q{font-family:var(--display);font-weight:600;font-size:1.28rem;line-height:1.9;letter-spacing:.1em;color:#fff1cf;text-wrap:balance;margin:0}
+.tquote .src{margin:12px 0 0;font-size:.82rem;letter-spacing:.08em;color:var(--brass)}
+.tquote .plain{margin:8px auto 0;max-width:24em;font-size:.95rem;line-height:1.75;color:var(--muted)}
+.tquote .acts{display:flex;justify-content:center;gap:22px;margin-top:14px}
+.tquote .acts button{background:none;border:0;color:var(--brass);font:inherit;font-size:.92rem;letter-spacing:.12em;min-height:44px;padding:0 4px;cursor:pointer}
+.tsect{display:flex;align-items:center;gap:12px;margin:30px 0 6px;font-family:var(--display);font-size:.92rem;font-weight:700;letter-spacing:.35em;color:var(--brass)}
+.tsect::after{content:"";order:2;flex:1;height:1px;background:linear-gradient(90deg,#e2b36355,transparent)}
+.tsect em,.tsect .tnav{order:3;font-style:normal;font-family:var(--body);font-size:.85rem;letter-spacing:.05em;color:var(--muted);font-weight:400}
+#tMonth{letter-spacing:.12em}
+.tnav{display:flex;gap:4px}.tnav button{width:44px;height:44px;border:0;background:none;color:var(--brass);font-size:1.4rem;cursor:pointer}
+.ttasks{display:flex;flex-direction:column}
+.ttask{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid #e2b3631f}
+.ttask:last-child{border-bottom:0}
+.ttask svg{width:36px;height:36px}
+.ttask b{display:block;font-family:var(--display);font-size:1.18rem;letter-spacing:.18em;color:var(--paper)}
+.ttask .d{display:block;margin-top:3px;font-size:.86rem;line-height:1.6;color:var(--muted);white-space:pre-line}
+.ttask .adj{background:none;border:0;padding:4px 0 0;color:var(--brass);font:inherit;font-size:.82rem;letter-spacing:.08em;cursor:pointer;min-height:32px}
+.ttask .go{min-height:42px;padding:0 20px;border:0;border-radius:999px;background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c;font:inherit;font-weight:700;letter-spacing:.2em;padding-left:calc(20px + .2em);cursor:pointer;box-shadow:inset 0 1px 0 #fff6}
+.ttask .ok{font-family:var(--display);font-size:.9rem;letter-spacing:.2em;color:var(--brass)}
+svg use{fill:none;stroke:currentColor;stroke-width:1.3}
+.l0{color:#f7eedd40}.l1{color:var(--brass)}.l1 svg{fill:#e2b36333}.l2{color:#ffd88a}.l2 svg{fill:#e2b363;filter:drop-shadow(0 0 6px #e2b36399)}
+.l1 use,.l2 use{fill:inherit}
+.tstreak{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:16px 18px;border-radius:18px;background:linear-gradient(90deg,#e2b36314,transparent)}
+.tstreak .n{font-family:var(--display);color:#fff1cf;font-size:.95rem;letter-spacing:.12em;white-space:nowrap}
+.tstreak .n b{font-size:1.9rem;color:#ffe2a8;margin:0 4px;font-variant-numeric:tabular-nums}
+.seals{display:flex;gap:6px}
+.seal{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:.68rem;font-family:var(--display);border:1px solid #e2b36333;color:#f7eedd55}
+.seal.on{border-color:var(--brass);color:#2a1a0c;background:radial-gradient(circle at 35% 30%,#f7d995,#c58a35);box-shadow:0 0 12px #e2b36355}
+.tcal{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-top:4px}
+.tcal .wk{text-align:center;font-size:.75rem;color:var(--muted);letter-spacing:.1em;padding:6px 0}
+.tcal button{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 0 8px;min-height:56px;border:0;border-radius:12px;background:none;color:var(--paper);font:inherit;cursor:pointer}
+.tcal button .dn{font-size:.78rem;font-variant-numeric:tabular-nums;opacity:.85}
+.tcal button svg{width:24px;height:24px}
+.tcal button.now{background:#e2b36314;box-shadow:inset 0 0 0 1px #e2b36366}
+.tcal button.fut{opacity:.35}
+.tcal button i,.lg i{position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--brass)}
+.tlegend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin:14px 0 0;font-size:.78rem;color:var(--muted)}
+.lg{display:inline-flex;align-items:center;gap:4px;position:relative}.lg svg{width:16px;height:16px}.lg i{position:static;display:inline-block}
+.plist{display:flex;flex-direction:column;margin-bottom:6px}
+.plist button{display:flex;justify-content:space-between;align-items:center;min-height:50px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--paper);font:inherit;font-size:1rem;text-align:left;cursor:pointer}
+.plist button[aria-pressed="true"]{color:var(--brass)}
+.plist button[aria-pressed="true"]::after{content:"✓"}
+#planSheet,#daySheet{max-height:86vh;overflow-y:auto}
+.dsrow{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:1rem}
+.dsrow b{font-family:var(--display);color:var(--brass);font-weight:700}
 @media (prefers-reduced-motion:reduce){.rays{animation:none}.lotus .petal,.lotus .seed,.dverse span,.dto,.dfin,.merit{animation-duration:.01s;animation-delay:0s}.finger{animation:none}}
 </style>
 
@@ -621,7 +676,7 @@ header.top .hq{gap:2px;align-items:center}
     <div class="hq">
       <nav class="tabs" role="tablist" id="tabs">
         <button role="tab" data-tab="beads" aria-selected="true" aria-label="撥珠" title="撥珠"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="14" cy="4.5" r="2.6"/><circle cx="21.5" cy="8" r="2.6"/><circle cx="23.5" cy="15.5" r="2.6"/><circle cx="6.5" cy="8" r="2.6"/><circle cx="4.5" cy="15.5" r="2.6"/><path d="M14 18v4m-2 5 2-5 2 5"/></svg><span>撥珠</span></button>
-        <button role="tab" data-tab="home" aria-selected="false" aria-label="功課" title="功課"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8c-2-2-5-2.5-9-2.5V21c4 0 7 .5 9 2.5 2-2 5-2.5 9-2.5V5.5c-4 0-7 .5-9 2.5Z"/><path d="M14 8v15.5"/></svg><span>功課</span></button>
+        <button role="tab" data-tab="home" aria-selected="false" aria-label="今日" title="今日"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 19h18M8.5 19a5.5 5.5 0 0 1 11 0"/><path d="M14 6.5v3M7.3 9.3l2 2M20.7 9.3l-2 2M4 23h20"/></svg><span>今日</span></button>
         <button role="tab" data-tab="listen" aria-selected="false" aria-label="聞法" title="聞法"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 18v-4a9 9 0 0 1 18 0v4"/><rect x="4" y="16" width="5" height="8" rx="2"/><rect x="19" y="16" width="5" height="8" rx="2"/></svg><span>聞法</span></button>
         <button role="tab" data-tab="ask" aria-selected="false" aria-label="問道" title="問道"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 6h18v12H12l-5 4v-4H5z"/><path d="M10 12h8"/></svg><span>問道</span></button>
       </nav>
@@ -633,29 +688,22 @@ header.top .hq{gap:2px;align-items:center}
 
   <main>
     <!-- 今日 -->
-    <section class="panel" id="p-home" hidden aria-label="功課">
-      <div class="home">
-        <div class="hello hero">
-          <h2 id="hHello">您好</h2><p id="hDate"></p>
-          <div class="hstreak"><div class="snum"><b id="hStreak">0</b><span>天</span></div><div><div class="slab" id="hStreakLab">連續精進</div><div class="week" id="hWeek"></div></div></div>
-        </div>
-        <div class="feast" id="hFeast" hidden></div>
-        <div id="hMem"></div>
-        <div class="sect"><span>今日功課</span><button class="link" id="hChange">更換功課 ›</button></div>
-        <div class="plans" id="hPlans"></div>
-        <div id="hOther"></div>
-        <div class="sect"><span>每日法語</span></div>
-        <div class="vcard verse" id="hVerse"></div>
-        <div class="sect"><span>修持</span></div>
-        <div class="tools">
-          <button class="tool" id="tFish"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 17c0-6 4.5-9 10-9s10 3 10 8.5S19 23 14 23 4 22 4 17Z"/><path d="M7 18c4 1.5 10 1.5 15-1"/><circle cx="9" cy="13" r="1"/></svg><span>敲木魚</span></button>
-          <button class="tool" id="tDedi"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 23c-5 0-9-3-9-6 3 0 5 1 6.5 3M14 23c5 0 9-3 9-6-3 0-5 1-6.5 3M14 23c-2.5-2-4-5-4-8.5S12 8 14 5c2 3 4 6 4 9.5S16.5 21 14 23Z"/></svg><span>迴向</span></button>
-          <button class="tool" id="hMemBtn"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M14 4c-2 2.6-2 4.6 0 6 2-1.4 2-3.4 0-6z"/><rect x="10.5" y="12" width="7" height="11" rx="1.5"/><path d="M7 24h14"/></svg><span>追思</span></button>
-          <button class="tool" id="hLog"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M8 5h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8"/><path d="M8 5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2"/><path d="M11 10h8M11 14h8M11 18h5"/></svg><span>修行紀錄</span></button>
-          <button class="tool" id="hDediLog"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M14 6c-2.4 2.8-2.9 7-.2 12.2C16.9 13 16.4 8.8 14 6z"/><path d="M13.6 18.2C10 16.2 7.2 12.8 6.7 9.6c3.2.5 5.8 2.8 6.9 8.6z"/><path d="M14.4 18.2c3.6-2 6.4-5.4 6.9-8.6-3.2.5-5.8 2.8-6.9 8.6z"/><path d="M6 21.5c2.6 1.6 5.2 2.2 8 2.2s5.4-.6 8-2.2"/></svg><span>迴向紀錄</span></button>
-        </div>
-        <div class="vcard" id="hInstall" hidden></div>
+    <section class="panel" id="p-home" hidden aria-label="今日">
+      <div class="today">
+        <header class="tday">
+          <p class="tdate" id="tDate"></p>
+          <h2 class="thello" id="tHello">早安</h2>
+          <p class="tfeast" id="tFeast" hidden></p>
+        </header>
+        <section class="tquote" id="tQuote" aria-label="每日法語"></section>
+        <div class="tsect"><span>今日修持</span><em id="tProg"></em></div>
+        <div class="ttasks" id="tTasks"></div>
+        <div class="tstreak" id="tStreak"></div>
+        <div class="tsect"><span id="tMonth"></span><span class="tnav"><button id="calPrev" aria-label="上個月">‹</button><button id="calNext" aria-label="下個月">›</button></span></div>
+        <div class="tcal" id="tCal" role="grid"></div>
+        <p class="tlegend"><span class="lg l0"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#lotusMark"/></svg>未修持</span><span class="lg l1"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#lotusMark"/></svg>已修持</span><span class="lg l2"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#lotusMark"/></svg>今日圓滿</span><span class="lg"><i></i>齋日・聖誕</span></p>
       </div>
+      <div hidden aria-hidden="true"><div id="hHello"></div><div id="hDate"></div><div id="hStreak"></div><div id="hStreakLab"></div><div id="hWeek"></div><div id="hFeast"></div><div id="hMem"></div><div id="hChange"></div><div id="hPlans"></div><div id="hOther"></div><div id="hVerse"></div><div id="tFish"></div><div id="tDedi"></div><div id="hMemBtn"></div><div id="hLog"></div><div id="hDediLog"></div><div id="hInstall"></div></div>
     </section>
 
     <!-- 撥珠 -->
@@ -820,6 +868,16 @@ header.top .hq{gap:2px;align-items:center}
 
 <!-- sheets -->
 <div class="scrim" id="scrim" hidden></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="lotusMark" viewBox="0 0 32 32"><path d="M16 5c-3 3.6-3.6 9-.2 15.6C19.6 14 19 8.6 16 5z"/><path d="M15.6 20.6C11 18 7.4 13.6 6.8 9.6c4 .6 7.3 3.6 8.8 11z"/><path d="M16.4 20.6c4.6-2.6 8.2-7 8.8-11-4 .6-7.3 3.6-8.8 11z"/><path d="M5 23.5c3.4 2.4 7.1 3.1 11 3.1s7.6-.7 11-3.1"/></symbol></svg>
+<div class="sheet" id="planSheet" hidden role="dialog" aria-label="早晚課設定">
+  <h3 id="plTitle">早課設定</h3>
+  <div class="lab">經文</div><div class="plist" id="plTrack"></div>
+  <div class="lab">發願</div><div class="seg" id="plRounds"><button data-v="1">1 輪</button><button data-v="3">3 輪</button><button data-v="7">7 輪</button></div>
+  <label class="fld" for="plTime">每天提醒時間</label><input class="inp" id="plTime" type="time">
+  <button class="btn ghost" id="plIcs">加入手機行事曆（早課與晚課）</button><p class="hint" id="plIcsNote" hidden></p>
+  <button class="btn" id="plDone">完成</button>
+</div>
+<div class="sheet" id="daySheet" hidden role="dialog" aria-label="當日紀錄"><h3 id="dsTitle"></h3><p class="hint" id="dsLunar"></p><div id="dsBody"></div><button class="btn ghost" id="dsClose">關閉</button></div>
 <div class="sheet" id="dediSheet" hidden role="dialog" aria-label="迴向">
   <div class="shead2"><h3>迴向</h3><button class="link" id="dLog">迴向紀錄 ›</button></div>
   <p class="dmerit" id="dMerit"></p>
@@ -874,7 +932,6 @@ header.top .hq{gap:2px;align-items:center}
   <div class="lab">字體大小</div><div class="seg" data-set="big"><button data-v="0">大</button><button data-v="1">特大</button></div>
   <div class="lab">撥珠的手</div><div class="seg" data-set="hand"><button data-v="L">左手</button><button data-v="R">右手</button></div>
   <div class="lab">撥珠背景</div><div class="bdgrid" id="bdGrid"></div>
-  <div class="lab">畫面顏色</div><div class="seg" data-set="mode"><button data-v="night">夜間</button><button data-v="day">白天</button></div>
   <div class="lab">聲音／震動</div><div class="row"><div class="seg" data-set="sound"><button data-v="1">聲音開</button><button data-v="0">關</button></div><div class="seg" data-set="haptic"><button data-v="1">震動開</button><button data-v="0">關</button></div></div>
   <div class="lab">每日提醒</div><div class="row" id="remindRow"><button class="chip" data-rem="am">早課 7:00</button><button class="chip" data-rem="pm">晚課 20:00</button></div>
   <button class="btn ghost" id="icsBtn" style="width:100%">加入手機行事曆・每日響鈴</button><p class="hint" id="icsNote" hidden></p>
@@ -944,9 +1001,9 @@ const dkey = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"
 function today(){ const k = dkey(new Date()); const d = S.days[k] || (S.days[k] = {beads:0, loops:0, fish:0}); d.items = d.items || {}; return d; }
 const fmt = n => Number(n||0).toLocaleString("zh-TW");
 const $ = id => document.getElementById(id);
-function applyLook(){ document.documentElement.classList.toggle("big", !!S.big); document.documentElement.dataset.mode = S.mode==="day" ? "day" : "night"; }
+function applyLook(){ document.documentElement.classList.toggle("big", !!S.big); document.documentElement.dataset.mode = "night"; }   // v2: dark only
 // any practice counts: beads, wooden fish, bows / ten-breath taps, timed chanting, listening ≥ 1 min, or a finished routine
-const dayDone = k => { const r = S.days[k]; return !!r && (!!r.done || (r.beads||0) + (r.fish||0) + (r.bows||0) + (r.breaths||0) + (r.timed||0) > 0 || (r.listen||0) >= 60); };
+const dayDone = k => { const r = S.days[k]; return !!r && ((r.beads || 0) >= 108 || !!(r.tasks && (r.tasks.am || r.tasks.pm))); };
 // one missed day is forgiven, so a single lapse never wipes out a long run of practice
 function streak(){
   const d = new Date(), todayOk = dayDone(dkey(d)); let n = 0, bridged = false;
@@ -1340,6 +1397,7 @@ const redraw = drawFrame;
 function addBeads(n, crossedMother){
   const d = today(); d.beads += n; pend().beads += n; pushGong(); if (crossedMother) d.loops += 1;
   if (sess){ d.items[sess.item.name] = (d.items[sess.item.name]||0) + n; }
+  checkGoalRun();
   renderHud(); save();
   if (sess && !sess.goalHit && sessDone() >= goalOf(sess.item)){ sess.goalHit = true; onGoalReached(); }
 }
@@ -1796,7 +1854,114 @@ function renderItems(x){ if (x && x.routineP) renderRoutine(x.routineP); else re
 $("pickClose").onclick = closeSheets;
 
 /* ---- 今日 ---- */
-function renderHome(){
+/* ---- v2 今日：每日法語、三個每日任務（早課、晚課、迴向）、連續精進與印記、蓮花月曆 ---- */
+const PLAN_DEF = { am:{ track:"s-yaoshi", ver:0, rounds:1, time:"07:00" }, pm:{ track:"b-bed", ver:0, rounds:3, time:"21:00" } };
+const plan2 = () => (S.plan2 = S.plan2 || JSON.parse(JSON.stringify(PLAN_DEF)));
+const SLOT_NAME = { am:"早課", pm:"晚課" };
+const SEALS = [7, 21, 49, 108];
+const dayTasks = k => ((S.days[k] || {}).tasks || {});
+function trackLabel(p){ const sr = LS_ALL[p.track]; if (!sr) return "安靜撥珠"; return sr.eps.length > 1 ? `${sr.title}・${(sr.eps[p.ver] || sr.eps[0]).t}` : sr.title; }
+function dayStage(k){ const t = dayTasks(k), n = (t.am ? 1 : 0) + (t.pm ? 1 : 0) + (t.dedi ? 1 : 0); return n === 3 ? 2 : (n || dayDone(k)) ? 1 : 0; }
+const lotusSvg = () => '<svg viewBox="0 0 32 32" aria-hidden="true"><use href="#lotusMark"/></svg>';
+// a preset: the planned chant with its vow; reaching it marks the task and warms the light, nothing pops up
+function startPreset(slot){
+  const p = plan2()[slot];
+  S.goalRun = { slot, day:dkey(new Date()), start:counted, target:p.rounds * PER_LOOP };
+  if (sess && !routine) endSession();
+  $("p-beads").classList.remove("complete");
+  save(); showTab("beads", true);
+  const sr = LS_ALL[p.track];
+  if (sr) selectTrack(sr, p.ver); else { talk.pause(); lsCur = null; }
+  renderHud();
+}
+function checkGoalRun(){
+  const g = S.goalRun;
+  if (!g || g.day !== dkey(new Date()) || counted - g.start < g.target) return;
+  const d = today(); d.tasks = Object.assign(d.tasks || {}, { [g.slot]:true });
+  S.goalRun = null; save();
+  $("p-beads").classList.add("complete");
+}
+let calY = new Date().getFullYear(), calM = new Date().getMonth();
+function renderToday(){
+  const now = new Date(), h = now.getHours(), l = lunar(now), f = feastOf(now);
+  $("tDate").textContent = `${now.getMonth()+1} 月 ${now.getDate()} 日・星期${"日一二三四五六"[now.getDay()]}${l ? "・農曆" + l.text : ""}`;
+  $("tHello").textContent = h < 11 ? "早安" : h < 18 ? "午安" : "晚安";
+  $("tFeast").hidden = !f; if (f) $("tFeast").textContent = `今逢${f.name}`;
+  // daily quote
+  const q = quoteToday(), qb = $("tQuote"); qb.innerHTML = '<p class="q"></p><p class="src"></p><p class="plain"></p><div class="acts"><button id="tqSay">聆聽</button><button id="tqCard">製成吉祥圖</button></div>';
+  q.text.split(/(?<=[；。！？])/).filter(Boolean).forEach(part => { const sp = document.createElement("span"); sp.style.display = "block"; sp.textContent = part; qb.querySelector(".q").appendChild(sp); }); qb.querySelector(".src").textContent = quoteSrc(q) + (quoteDraft(q) ? "・經文校對中" : "");
+  qb.querySelector(".plain").textContent = q.plain;
+  $("tqSay").onclick = () => { try{ speechSynthesis.cancel(); }catch(e){} speak(`${q.text}。${q.plain}`, () => {}); };
+  $("tqCard").onclick = async () => { const b = $("tqCard"); b.textContent = "製作中……"; const r = await shareGreeting(); b.textContent = r === "shared" ? "已分享" : r === "saved" ? "已存成圖片" : "製成吉祥圖"; };
+  // tasks
+  const t = today().tasks || {}, box = $("tTasks"); box.innerHTML = "";
+  const row = (stage, title, detail, action, adjust) => {
+    const r = document.createElement("div"); r.className = "ttask";
+    r.innerHTML = `<span class="l${stage}">${lotusSvg()}</span><div><b></b><span class="d"></span></div>`;
+    r.querySelector("b").textContent = title; r.querySelector(".d").textContent = detail;
+    if (adjust){ const a = document.createElement("button"); a.className = "adj"; a.textContent = "調整 ›"; a.onclick = adjust; r.children[1].appendChild(a); }
+    r.appendChild(action); box.appendChild(r);
+  };
+  const go = (label, fn) => { const b = document.createElement("button"); b.className = "go"; b.textContent = label; b.onclick = fn; return b; };
+  const ok = txt => { const e = document.createElement("span"); e.className = "ok"; e.textContent = txt; return e; };
+  ["am", "pm"].forEach(k => { const p = plan2()[k];
+    row(t[k] ? 2 : 0, SLOT_NAME[k], `${trackLabel(p)}\n發願 ${p.rounds} 輪・每天 ${p.time}`, t[k] ? ok("已圓滿") : go("開始", () => startPreset(k)), () => openPlan(k)); });
+  row(t.dedi ? 2 : 0, "迴向", t.dedi ? `今日已迴向・目前累計 ${fmt(pend().beads)} 珠` : `累計 ${fmt(pend().beads)} 珠，尚未迴向`, t.dedi && !pend().beads ? ok("已圓滿") : go("迴向", () => { ac(); openDedi(); }));
+  const n = (t.am ? 1 : 0) + (t.pm ? 1 : 0) + (t.dedi ? 1 : 0);
+  $("tProg").textContent = n === 3 ? "今日圓滿" : `${n} / 3`;
+  // streak and seals (earned seals are kept even if a later day is missed)
+  const st = streak(); S.seals = S.seals || {};
+  SEALS.forEach(m => { if (st.n >= m && !S.seals[m]) { S.seals[m] = dkey(now); save(); } });
+  $("tStreak").innerHTML = `<span class="n">連續精進<b>${st.n}</b>天</span><span class="seals">${SEALS.map(m => `<span class="seal${S.seals[m] ? " on" : ""}" title="連續 ${m} 天">${m}</span>`).join("")}</span>`;
+  renderCal();
+}
+function renderCal(){
+  const first = new Date(calY, calM, 1), days = new Date(calY, calM + 1, 0).getDate(), nowK = dkey(new Date()), box = $("tCal");
+  $("tMonth").textContent = `${calY} 年 ${calM + 1} 月`;
+  box.innerHTML = "日一二三四五六".split("").map(w => `<span class="wk">${w}</span>`).join("") + "<span></span>".repeat(first.getDay());
+  for (let d = 1; d <= days; d++){
+    const dt = new Date(calY, calM, d), k = dkey(dt), b = document.createElement("button");
+    b.className = (k === nowK ? "now" : "") + (dt > new Date() ? " fut" : "");
+    b.innerHTML = `<span class="dn">${d}</span><span class="l${dayStage(k)}">${lotusSvg()}</span>${feastOf(dt) ? "<i></i>" : ""}`;
+    b.setAttribute("aria-label", `${calM + 1} 月 ${d} 日`);
+    b.onclick = () => openDay(dt);
+    box.appendChild(b);
+  }
+}
+$("calPrev").onclick = () => { calM--; if (calM < 0){ calM = 11; calY--; } renderCal(); };
+$("calNext").onclick = () => { calM++; if (calM > 11){ calM = 0; calY++; } renderCal(); };
+function openDay(dt){
+  const k = dkey(dt), r = S.days[k] || {}, t = r.tasks || {}, l = lunar(dt), f = feastOf(dt);
+  $("dsTitle").textContent = `${dt.getMonth()+1} 月 ${dt.getDate()} 日`;
+  $("dsLunar").textContent = (l ? "農曆" + l.text : "") + (f ? `・${f.name}` : "");
+  const rows = [["撥珠", `${fmt(r.beads || 0)} 珠`], ["早課", t.am ? "已圓滿" : "—"], ["晚課", t.pm ? "已圓滿" : "—"]];
+  (S.dediLog || []).filter(x => dkey(new Date(x.t)) === k).forEach(x => { const tt = new Date(x.t);
+    rows.push([`迴向 ${String(tt.getHours()).padStart(2,"0")}:${String(tt.getMinutes()).padStart(2,"0")}`, x.who.map(w => w.label).join("、")]); });
+  if (!(S.dediLog || []).some(x => dkey(new Date(x.t)) === k)) rows.push(["迴向", "—"]);
+  $("dsBody").innerHTML = ""; rows.forEach(([a, b]) => { const e = document.createElement("div"); e.className = "dsrow"; e.innerHTML = "<span></span><b></b>"; e.children[0].textContent = a; e.children[1].textContent = b; $("dsBody").appendChild(e); });
+  openSheetEl($("daySheet"));
+}
+$("dsClose").onclick = closeSheets;
+let plSlot = "am";
+function openPlan(slot){
+  plSlot = slot; const p = plan2()[slot];
+  $("plTitle").textContent = `${SLOT_NAME[slot]}設定`;
+  const box = $("plTrack"); box.innerHTML = "";
+  const opts = [];
+  LS_GROUPS.filter(([k]) => k === "song" || k === "bed").forEach(([k]) => LISTEN[k].forEach(sr => sr.eps.forEach((e, i) => opts.push([sr.id, i, sr.eps.length > 1 ? `${sr.title}・${e.t}` : sr.title]))));
+  opts.push(["", 0, "安靜撥珠（不播放）"]);
+  opts.forEach(([id, i, label]) => { const b = document.createElement("button"); b.textContent = label;
+    b.setAttribute("aria-pressed", p.track === id && (p.ver || 0) === i);
+    b.onclick = () => { p.track = id; p.ver = i; save(); openPlan(slot); }; box.appendChild(b); });
+  $("plRounds").querySelectorAll("button").forEach(b => { b.setAttribute("aria-pressed", +b.dataset.v === p.rounds); b.onclick = () => { p.rounds = +b.dataset.v; save(); openPlan(slot); }; });
+  $("plTime").value = p.time; $("plIcsNote").hidden = true;
+  if ($("planSheet").hidden) openSheetEl($("planSheet"));
+}
+$("plTime").addEventListener("change", () => { plan2()[plSlot].time = $("plTime").value || plan2()[plSlot].time; save(); });
+$("plDone").onclick = () => { closeSheets(); renderToday(); };
+$("plIcs").onclick = () => { S.remind = ["am", "pm"]; save(); exportIcs(["am", "pm"], $("plIcsNote")); };
+function renderHome(){ renderToday(); }
+function renderHomeV1(){
   const now = new Date(), h = now.getHours();
   $("hHello").textContent = (h < 11 ? "早安" : h < 18 ? "午安" : "晚安") + "　吉祥如意";
   const l = lunar(now);
@@ -2199,6 +2364,7 @@ $("dStart").onclick = () => {
   (S.dediLog = S.dediLog || []).push({ t:now.getTime(), beads:m.beads, fish:m.fish, sutras:m.sutras.slice(), by:st.by, verse,
     who:who.map(x => ({ id:x.id, label:personLabel(x), wish:x.wish, kind:x.kind })) });
   S.pend = { beads:0, fish:0, sutras:[] };   // dedicated: the count on the bead page starts again from zero
+  const td = today(); td.tasks = Object.assign(td.tasks || {}, { dedi:true });
   save(); renderHud();
   moteBoost = 1; startMotes();
 };
@@ -3096,7 +3262,8 @@ function pushGong(){
 function icsText(slots){
   const p = n => String(n).padStart(2, "0"), t = new Date(); t.setDate(t.getDate() + 1);
   const day = `${t.getFullYear()}${p(t.getMonth()+1)}${p(t.getDate())}`, stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
-  const EV = { am:["070000", "早課", "晨鐘已響，早課時至。"], pm:["200000", "晚課", "暮鼓已鳴，晚課時至。"] };
+  const tm = k => (plan2()[k].time || (k === "am" ? "07:00" : "21:00")).replace(":", "") + "00";
+  const EV = { am:[tm("am"), "早課", "晨鐘已響，早課時至。"], pm:[tm("pm"), "晚課", "暮鼓已鳴，晚課時至。"] };
   const out = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Yunchan//ZH-TW", "CALSCALE:GREGORIAN", "X-WR-CALNAME:雲禪"];
   slots.forEach(k => {
     const [tm, name, msg] = EV[k];
@@ -3106,8 +3273,8 @@ function icsText(slots){
   out.push("END:VCALENDAR");
   return out.join("\r\n") + "\r\n";
 }
-$("icsBtn").onclick = async () => {
-  const slots = (S.remind || []).filter(k => k === "am" || k === "pm"), msg = $("icsNote");
+$("icsBtn").onclick = () => exportIcs((S.remind || []).filter(k => k === "am" || k === "pm"), $("icsNote"));
+async function exportIcs(slots, msg){
   msg.hidden = false;
   if (!slots.length){ msg.textContent = "請先選擇早課或晚課。"; return; }
   const blob = new Blob([icsText(slots)], { type:"text/calendar" }), name = "雲禪_每日提醒.ics";
@@ -3182,7 +3349,8 @@ function paintSBar(){
   const on = lsCur && !talk.paused, it = curItem(), done = $("p-beads").classList.contains("complete");
   $("sPlay").innerHTML = on ? PAUSE_SVG : PLAY_SVG; $("sPlay").setAttribute("aria-label", on ? "暫停經文" : "播放經文");
   $("sName").textContent = lsCur ? lsCur.s.title : (sess ? it.name : "選擇經文");
-  $("sSub").textContent = done && routine ? "已圓滿・輕觸進入下一步" : !lsCur ? "安靜撥珠" :
+  const gr = S.goalRun && S.goalRun.day === dkey(new Date()) ? S.goalRun : null;
+  $("sSub").textContent = gr ? `${SLOT_NAME[gr.slot]}・發願 ${gr.target / PER_LOOP} 輪` : done && routine ? "已圓滿・輕觸進入下一步" : !lsCur ? "安靜撥珠" :
     isSong(lsCur.s.id) ? `雲禪唱誦・${lsCur.ep.t}` : "雲禪配樂";
 }
 // one line per cue slides in from the right, rests, and leaves to the left; without cues the whole text scrolls on

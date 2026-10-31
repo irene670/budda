@@ -14,6 +14,9 @@
 !/audio/ai/
 /audio/ai/*
 !/audio/ai/*.mp3
+!/audio/ai/曲庫擴充_*/
+/audio/ai/曲庫擴充_*/*
+!/audio/ai/曲庫擴充_*/*.mp3
 !/assets/
 /assets/*
 !/assets/img/

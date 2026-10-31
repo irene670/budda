@@ -503,6 +503,11 @@ button,a,summary,.lsitem{touch-action:manipulation}
 #p-beads .dedibtn.right{right:auto;left:calc(var(--g) + 2px)}
 #p-beads .dedibtn svg{background:radial-gradient(circle at 50% 40%,#2a1a0ef2,#120a06f2);box-shadow:0 0 0 4px #0b070566,0 6px 22px #000c,0 0 26px #e2b36322}
 #p-beads .dedibtn span{color:#f0cf8a}
+/* same row and size as the play key opposite: 「迴向 ◯」 mirrors 「◯ 經名」, so both corners sit on one line */
+#p-beads .dedibtn{width:auto;min-height:48px;flex-direction:row-reverse;align-items:center;gap:10px;bottom:calc(var(--g) + 2px + env(safe-area-inset-bottom,0px))}
+#p-beads .dedibtn.right{flex-direction:row}
+#p-beads .dedibtn svg{width:48px;height:48px;padding:10px}
+#p-beads .dedibtn span{font-size:1.05rem;letter-spacing:.24em;padding-left:.24em}
 #p-beads .sbar.right .spick{align-items:flex-end;text-align:right}
 #p-beads .spick b{font-size:1.15rem}
 #p-beads .spick span{font-size:.72rem;letter-spacing:.12em;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

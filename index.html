@@ -864,6 +864,15 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .ldsel{flex:1;min-width:0;font-size:.78rem;color:var(--muted);line-height:1.4}
 .ldsel b{display:block;font-family:var(--display);font-size:.98rem;color:#f6e7c4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ldgo{flex:0 0 auto;min-height:50px;padding:0 24px;border:0;border-radius:999px;background:linear-gradient(#f0c97c,#c9963f);color:#2a1a0c;font:inherit;font-weight:700;font-size:1rem;letter-spacing:.2em;padding-left:calc(24px + .2em);box-shadow:0 6px 20px #e2b36340;cursor:pointer}
+
+/* 按鈕統一（2026-10-31）：全部以「分享普法」的金色細邊膠囊為準。主要按鈕是金邊、暖金字；次要按鈕邊框更淡、字是米白 */
+.btn,.btn.big,.btn.huge,.btn.main,.todaycard .btn,.onb .btn,.ttask .go,.ldgo,.vcard.verse .btn.ghost{border-radius:999px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b3631f,#e2b36308);color:#ffe2a8;font-family:var(--display);font-weight:700;box-shadow:inset 0 1px 0 #ffffff14,0 4px 16px #0005;transition:background .2s,box-shadow .2s,transform .12s ease-out}
+.btn{min-height:48px;letter-spacing:.2em}
+.btn.ghost{border-color:#e2b36347;background:linear-gradient(180deg,#f7eedd0d,#f7eedd03);color:var(--paper);font-weight:600;box-shadow:inset 0 1px 0 #ffffff0d}
+.btn:active,.ttask .go:active,.ldgo:active{background:linear-gradient(180deg,#e2b36340,#e2b36318);box-shadow:inset 0 1px 0 #ffffff14,0 0 18px #e2b36344;filter:none}
+.btn.ghost:active{background:linear-gradient(180deg,#e2b36326,#e2b3630d)}
+.btn.huge,.btn.big{letter-spacing:.4em;padding-left:1.4em}
+.btn:focus-visible,.ttask .go:focus-visible,.ldgo:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 </style>
 
 <div class="app">

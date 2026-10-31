@@ -11,12 +11,10 @@
 !/audio/
 /audio/*
 !/audio/雲禪_程式生成配樂樣本.mp3
-!/audio/ai/
-/audio/ai/*
-!/audio/ai/*.mp3
-!/audio/ai/曲庫擴充_*/
-/audio/ai/曲庫擴充_*/*
-!/audio/ai/曲庫擴充_*/*.mp3
+# AI 唱誦只推審核通過的（tools/export_songs.py 複製到 audio/上架/）
+!/audio/上架/
+/audio/上架/*
+!/audio/上架/*.mp3
 !/assets/
 /assets/*
 !/assets/img/

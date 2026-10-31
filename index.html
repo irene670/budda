@@ -479,17 +479,30 @@ button,a,summary,.lsitem{touch-action:manipulation}
 /* v6 撥珠頁（2026-10-31 使用者指定）：字幕在左上、播放選擇在下方，兩者都讓開佛珠。
    The string arcs in from the thumb side, so the free room is the opposite top corner and the bottom row
    next to 迴向; with the left hand everything mirrors (.right). */
-#p-beads .lyrics{top:var(--g);left:var(--g);right:auto;width:min(54%,15rem);height:11rem;
-  background:radial-gradient(70% 55% at 30% 50%,#0c0705b3,#0c070566 55%,transparent 85%)}
+#p-beads .lyrics{top:var(--g);left:var(--g);right:auto;width:min(54%,15rem);height:11rem;background:none}
 #p-beads .lyrics::before{left:42%;width:100%}
+/* one soft shade for the whole reading side (lyrics, counter, play row): it grows out of the edge and is gone
+   before the string, so no box edge shows and the beads keep their full colour */
+#p-beads .scrim{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(62% 58% at 0% 30%,#0b0705cc 0%,#0b070594 42%,#0b070533 72%,transparent 100%),
+             radial-gradient(70% 24% at 0% 100%,#0b0705c4 0%,#0b070566 55%,transparent 100%)}
+#p-beads .scrim.right{transform:scaleX(-1)}
 #p-beads .lyr-l{text-align:left;padding:.3rem 4px;font-size:1.1rem;letter-spacing:.16em;text-indent:0;transform-origin:left center}
 #p-beads .lyrics.right{left:auto;right:var(--g)}
 #p-beads .lyrics.right::before{left:58%}
 #p-beads .lyrics.right .lyr-l{text-align:right;transform-origin:right center}
 #p-beads .hud{top:calc(var(--g) + 11.6rem)}
-/* play row sits right above the 迴向 lotus, the two round keys in one column */
-#p-beads .sbar{top:auto;bottom:calc(var(--g) + 96px + env(safe-area-inset-bottom,0px));left:calc(var(--g) + 6px);right:auto;max-width:calc(66% - var(--g))}
-#p-beads .sbar.right{left:auto;right:calc(var(--g) + 6px);flex-direction:row-reverse}
+#p-beads .mnum b{text-shadow:0 2px 14px #000,0 0 28px #000c}
+#p-beads .mround{text-shadow:0 1px 4px #000,0 0 16px #000d;color:#f0cf8a}
+#p-beads .mtotal{color:#e9dcc4;text-shadow:0 1px 4px #000,0 0 14px #000c}
+/* play row: bottom corner on the reading side */
+#p-beads .sbar{top:auto;bottom:calc(var(--g) + env(safe-area-inset-bottom,0px));left:var(--g);right:auto;max-width:calc(68% - var(--g))}
+#p-beads .sbar.right{left:auto;right:var(--g);flex-direction:row-reverse}
+/* 迴向 hangs where the string leaves the screen, like the guru bead and tassel that close a mala */
+#p-beads .dedibtn{left:auto;right:calc(var(--g) + 2px);bottom:calc(var(--g) + env(safe-area-inset-bottom,0px))}
+#p-beads .dedibtn.right{right:auto;left:calc(var(--g) + 2px)}
+#p-beads .dedibtn svg{background:radial-gradient(circle at 50% 40%,#2a1a0ef2,#120a06f2);box-shadow:0 0 0 4px #0b070566,0 6px 22px #000c,0 0 26px #e2b36322}
+#p-beads .dedibtn span{color:#f0cf8a}
 #p-beads .sbar.right .spick{align-items:flex-end;text-align:right}
 #p-beads .spick b{font-size:1.15rem}
 #p-beads .spick span{font-size:.72rem;letter-spacing:.12em;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -805,6 +818,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
         <button class="splay" id="sPlay" aria-label="播放經文"></button>
         <button class="spick" id="sPick" aria-haspopup="dialog"><span id="sSub"></span><b id="sName"></b></button>
       </div>
+      <div class="scrim" id="scrim" aria-hidden="true"></div>
       <div class="lyrics" id="lyrics" aria-hidden="true"><div class="lyr-track" id="lyrTrack"></div></div>
       <button class="dedibtn" id="dediBtn" aria-label="迴向"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M16 6c-3 3.5-3.6 9-0.2 15.5C19.6 15 19 9.5 16 6z"/><path d="M15.6 21.5C11 19 7.4 14.6 6.8 10.6c4 .6 7.3 3.6 8.8 10.9z"/><path d="M16.4 21.5c4.6-2.5 8.2-6.9 8.8-10.9-4 .6-7.3 3.6-8.8 10.9z"/><path d="M5 22.5c3.4 2.4 7.1 3.1 11 3.1s7.6-.7 11-3.1"/></svg><span>迴向</span></button>
       <div class="hud" id="hud">
@@ -1631,7 +1645,7 @@ function bindDrag(){
 function paintQuick(){ $("qBig").textContent = S.big ? "標準字" : "大字"; $("qHand").textContent = S.hand === "R" ? "左手持珠" : "右手持珠"; }
 $("qBig").onclick = () => { S.big = !S.big; applyLook(); save(); paintQuick(); setTimeout(resizeStage, 80); };
 $("qHand").onclick = () => { setHand(S.hand === "R" ? "L" : "R"); paintQuick(); flash(S.hand === "L" ? "念珠已移至左手" : "念珠已移至右手"); };
-function setHand(h){ S.hand = h; save(); $("hud").classList.toggle("right", h==="L"); $("dediBtn").classList.toggle("right", h==="L"); $("lyrics").classList.toggle("right", h==="L"); $("sBar").classList.toggle("right", h==="L"); lyrFit(); redraw(); }
+function setHand(h){ S.hand = h; save(); $("hud").classList.toggle("right", h==="L"); $("dediBtn").classList.toggle("right", h==="L"); $("lyrics").classList.toggle("right", h==="L"); $("scrim").classList.toggle("right", h==="L"); $("sBar").classList.toggle("right", h==="L"); lyrFit(); redraw(); }
 // spoken progress for elders who chant with eyes closed; skipped while the phone voice is chanting
 function cue(t){ if (!S.sound || S.voiceCue === false) return; if (playing && playMode === "tts") return; try{ speechSynthesis.cancel(); speak(t, () => {}); }catch(e){} }
 // default goals: 佛號・短咒 = 3 rounds (324); sutras & long mantras keep their 遍

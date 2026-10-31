@@ -670,6 +670,59 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 #planSheet,#daySheet{max-height:86vh;overflow-y:auto}
 .dsrow{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:1rem}
 .dsrow b{font-family:var(--display);color:var(--brass);font-weight:700}
+/* ---- v2「我的」、迴向兩步、問道示範、首次引導（2026-10-31） ---- */
+#setBtn,#setBtn::before{display:none!important}
+.me{max-width:34rem;margin:0 auto;padding:0 20px 56px;display:flex;flex-direction:column}
+.mehead{margin:0 -20px;padding:40px 24px 26px;background:url(assets/img/bg-golden-hall.webp) center 40%/cover;position:relative}
+.mehead::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0e0805aa,#140d09 96%)}
+.mehead>*{position:relative}
+.mekick{margin:0 0 18px;font-size:.8rem;letter-spacing:.35em;color:#f3d9a0}
+.mestats{display:grid;grid-template-columns:repeat(3,1fr);text-align:center}
+.mestats div{display:flex;flex-direction:column;gap:4px}
+.mestats div+div{border-left:1px solid #e2b36333}
+.mestats b{font-family:var(--display);font-size:2rem;font-weight:900;color:#fff1cf;font-variant-numeric:tabular-nums}
+.mestats span{font-size:.8rem;letter-spacing:.15em;color:var(--muted)}
+.meseals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+.meseals div{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.78rem;color:var(--muted)}
+.meseals .seal{width:54px;height:54px;font-size:.95rem}
+.melist{display:flex;flex-direction:column}
+.melist button{display:flex;justify-content:space-between;align-items:center;min-height:58px;border:0;border-bottom:1px solid #e2b3631f;background:none;color:var(--paper);font:inherit;font-size:1.05rem;letter-spacing:.1em;text-align:left;cursor:pointer}
+.melist button em{font-style:normal;font-size:.88rem;color:var(--muted);letter-spacing:.03em}
+.melist button em::after{content:"　›";color:var(--brass)}
+.pmrow{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:62px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--paper);font:inherit;text-align:left;cursor:pointer}
+.pmrow .who{display:flex;flex-direction:column}.pmrow b{font-family:var(--display);font-size:1.1rem}.pmrow .who span{font-size:.85rem;color:var(--muted)}
+.pmrow em{font-style:normal;font-size:.88rem;color:var(--brass)}
+#peopleSheet{max-height:86vh;overflow-y:auto}
+.meset{display:flex;flex-direction:column}
+.mrowset{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:60px;border-bottom:1px solid #e2b3631f;font-size:1.02rem;letter-spacing:.06em}
+.mrowset span small{display:block;font-size:.8rem;color:var(--muted);letter-spacing:.02em;margin-top:2px}
+.mrowset.col{flex-direction:column;align-items:stretch;padding:14px 0;border-bottom:0}
+.mrowset .seg{margin:0}
+.tog{position:relative;flex:none;width:52px;height:32px;border-radius:999px;border:1px solid #e2b36355;background:#0e0805;cursor:pointer}
+.tog::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#f7eedd66;transition:transform .2s,background .2s}
+.tog[aria-pressed="true"]{background:linear-gradient(180deg,#f2cf86,#d39d45);border-color:transparent}
+.tog[aria-pressed="true"]::after{transform:translateX(20px);background:#2a1a0c}
+.mefoot{margin:26px 0 0;text-align:center;font-size:.78rem;color:var(--muted);letter-spacing:.08em}
+.dmore{margin:10px 0}
+.dmore summary{color:var(--muted);font-size:.92rem;letter-spacing:.08em;padding:10px 0;cursor:pointer}
+.dpreview{margin:14px 0 18px;padding:18px 16px;border-radius:18px;border:1px solid #e2b36340;background:linear-gradient(180deg,#e2b36312,transparent);font-family:var(--display);line-height:1.9;letter-spacing:.08em;color:#fff1cf}
+.dpreview p{margin:0}.dpreview .vv{margin-top:10px;color:var(--brass);letter-spacing:.2em}.dpreview .v2{margin-top:0}
+.dconfirm{gap:10px}.dconfirm .btn{flex:1}
+.msg .demo{display:inline-block;margin-left:8px;padding:0 8px;border-radius:999px;border:1px solid #e2b36366;font-family:var(--body);font-size:.72rem;letter-spacing:.1em;color:var(--brass);vertical-align:2px}
+.msg .cite{display:block;margin:10px 0;padding-left:12px;border-left:2px solid #e2b36388;color:#ffe2a8}
+.msg .cite small{display:block;color:var(--brass);font-size:.8rem;margin-top:2px;font-family:var(--body)}
+/* first launch: three full-screen steps over the Pure Land imagery */
+.onb{background:#0e0805 url(assets/img/bg-pureland.webp) center/cover;align-items:flex-end}
+.onb::before{content:"";position:fixed;inset:0;background:linear-gradient(180deg,#0e080533 0%,#0e0805aa 45%,#0e0805f2 75%)}
+.onb-in{position:relative;padding-bottom:calc(32px + env(safe-area-inset-bottom,0px));gap:14px}
+.onb .stepn{font-size:.8rem;letter-spacing:.4em}
+.onb h2{font-size:2.1rem;letter-spacing:.1em;color:#fff4dc}
+.onb p{color:#f3e6c8}
+.onb .dots{display:flex;gap:8px;justify-content:center;margin-top:6px}
+.onb .dots i{width:6px;height:6px;border-radius:50%;background:#f7eedd44}.onb .dots i.on{background:var(--brass);width:18px;border-radius:3px}
+.onb .btn{min-height:54px;font-size:1.1rem;letter-spacing:.3em;background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c}
+.onb .choice{background:#0e0805aa;border:1px solid #e2b36355;border-radius:16px}
+.onb .choice[aria-pressed="true"]{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass)}
 @media (prefers-reduced-motion:reduce){.rays{animation:none}.lotus .petal,.lotus .seed,.dverse span,.dto,.dfin,.merit{animation-duration:.01s;animation-delay:0s}.finger{animation:none}}
 </style>
 
@@ -681,8 +734,9 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
       <nav class="tabs" role="tablist" id="tabs">
         <button role="tab" data-tab="beads" aria-selected="true" aria-label="撥珠" title="撥珠"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="14" cy="4.5" r="2.6"/><circle cx="21.5" cy="8" r="2.6"/><circle cx="23.5" cy="15.5" r="2.6"/><circle cx="6.5" cy="8" r="2.6"/><circle cx="4.5" cy="15.5" r="2.6"/><path d="M14 18v4m-2 5 2-5 2 5"/></svg><span>撥珠</span></button>
         <button role="tab" data-tab="home" aria-selected="false" aria-label="今日" title="今日"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 19h18M8.5 19a5.5 5.5 0 0 1 11 0"/><path d="M14 6.5v3M7.3 9.3l2 2M20.7 9.3l-2 2M4 23h20"/></svg><span>今日</span></button>
-        <button role="tab" data-tab="listen" aria-selected="false" aria-label="聞法" title="聞法"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 18v-4a9 9 0 0 1 18 0v4"/><rect x="4" y="16" width="5" height="8" rx="2"/><rect x="19" y="16" width="5" height="8" rx="2"/></svg><span>聞法</span></button>
+        
         <button role="tab" data-tab="ask" aria-selected="false" aria-label="問道" title="問道"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 6h18v12H12l-5 4v-4H5z"/><path d="M10 12h8"/></svg><span>問道</span></button>
+        <button role="tab" data-tab="me" aria-selected="false" aria-label="我的" title="我的"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="14" cy="10" r="4.5"/><path d="M5.5 23c1.2-4.3 4.5-6.5 8.5-6.5s7.3 2.2 8.5 6.5"/></svg><span>我的</span></button>
       </nav>
       <button class="iconbtn quick" id="qBig" hidden></button>
       <button class="iconbtn quick" id="qHand" hidden></button>
@@ -813,7 +867,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
         <img src="assets/img/lotus-dedication.webp" alt="" aria-hidden="true">
         <div><h2>問道</h2><p>心燈以經文相伴，說說心裡的事</p></div>
       </div>
-      <p class="asknote" id="askNote" hidden>心燈的 AI 問答目前只能在 Claude App 中使用；這裡可以先看看常見的問題。</p>
+      <p class="asknote" id="askNote" hidden>心燈即將開放。現在可以先點下方的問題，看看心燈會怎麼陪你想。</p>
       <div class="chat" id="chat" aria-live="polite">
         <div class="msg ai"><span class="who">心燈</span><span>阿彌陀佛。心中若有疑惑、煩憂，或遇可疑來電、要求匯款之事，皆可在此相問。</span></div>
         <div class="sugg" id="sugg">
@@ -833,6 +887,34 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
     </section>
 
     <!-- 紀錄 -->
+    <section class="panel" id="p-me" hidden aria-label="我的">
+      <div class="me">
+        <header class="mehead">
+          <p class="mekick">雲禪・我的修持</p>
+          <div class="mestats">
+            <div><b id="msStreak">0</b><span>連續天數</span></div>
+            <div><b id="msMonth">0</b><span>本月撥珠</span></div>
+            <div><b id="msDedi">0</b><span>迴向次數</span></div>
+          </div>
+        </header>
+        <div class="tsect"><span>精進印記</span></div>
+        <div class="meseals" id="meSeals"></div>
+        <div class="tsect"><span>迴向</span></div>
+        <div class="melist">
+          <button id="meDediLog"><span>迴向紀錄</span><em id="meDediSum"></em></button>
+          <button id="mePeople"><span>迴向對象</span><em id="mePeopleSum"></em></button>
+        </div>
+        <div class="tsect"><span>設定</span></div>
+        <div class="meset">
+          <div class="mrowset"><span>大字模式<small>字放大，長輩看得更清楚</small></span><button class="tog" id="msBig" aria-label="大字模式"></button></div>
+          <div class="mrowset"><span>撥珠的手</span><div class="seg" id="msHand"><button data-v="L">左手</button><button data-v="R">右手</button></div></div>
+          <div class="mrowset"><span>撥珠聲音</span><button class="tog" id="msSound" aria-label="撥珠聲音"></button></div>
+          <div class="mrowset"><span>震動回饋</span><button class="tog" id="msHaptic" aria-label="震動回饋"></button></div>
+          <div class="mrowset col"><span>撥珠背景</span><div class="bdgrid" id="msBd"></div></div>
+        </div>
+        <p class="mefoot">雲禪 測試版・音源皆為自製・經文校對中</p>
+      </div>
+    </section>
     <section class="panel" id="p-dedilog" hidden aria-label="迴向紀錄">
       <div class="log dlog">
         <button class="btn ghost back" id="dlBack">‹ 返回</button>
@@ -883,11 +965,29 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 </div>
 <div class="sheet" id="daySheet" hidden role="dialog" aria-label="當日紀錄"><h3 id="dsTitle"></h3><p class="hint" id="dsLunar"></p><div id="dsBody"></div><button class="btn ghost" id="dsClose">關閉</button></div>
 <div class="sheet" id="dediSheet" hidden role="dialog" aria-label="迴向">
-  <div class="shead2"><h3>迴向</h3><button class="link" id="dLog">迴向紀錄 ›</button></div>
-  <p class="dmerit" id="dMerit"></p>
-  <div class="lab">迴向給（可多選，會記住）</div>
-  <div id="dPeople" class="dpeople"></div>
-  <button class="link" id="dAdd">＋ 新增迴向對象</button>
+  <div id="dStepA">
+    <div class="shead2"><h3>迴向</h3><button class="link" id="dLog">迴向紀錄 ›</button></div>
+    <p class="dmerit" id="dMerit"></p>
+    <div class="lab">迴向給（可多選，會記住）</div>
+    <div id="dPeople" class="dpeople"></div>
+    <button class="link" id="dManage">管理迴向對象 ›</button>
+    <details class="dmore"><summary>更多選項</summary>
+    <div class="lab">迴向偈</div><div class="seg" id="dVerseSeg"><button data-v="normal">普迴向</button><button data-v="jingtu">淨土迴向</button></div>
+    <label class="fld" for="dBy">迴向人（可不填，會記住）</label><input class="inp" id="dBy" type="text" placeholder="例：弟子 王小明" autocomplete="off">
+    </details>
+    <button class="btn big" id="dNext">下一步</button>
+    <button class="link" id="dClose">稍後</button>
+  </div>
+  <div id="dStepB" hidden>
+    <h3>確認迴向</h3>
+    <div class="dpreview" id="dPreview"></div>
+    <div class="row dconfirm"><button class="btn ghost" id="dBack">返回修改</button><button class="btn" id="dStart">合掌迴向</button></div>
+  </div>
+</div>
+<div class="sheet" id="peopleSheet" hidden role="dialog" aria-label="迴向對象">
+  <h3>迴向對象</h3>
+  <div id="pmList" class="dpeople"></div>
+  <button class="link" id="pmAdd">＋ 新增迴向對象</button>
   <div class="dform" id="dForm" hidden>
     <label class="fld" for="dCall">稱呼</label><input class="inp" id="dCall" type="text" placeholder="例：媽媽、外婆、往生的阿公" autocomplete="off">
     <label class="fld" for="dName">名字（可不填）</label><input class="inp" id="dName" type="text" placeholder="例：王秀英" autocomplete="off">
@@ -895,10 +995,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
     <div class="lab">祈願</div><div class="row dwish" id="dWish"></div>
     <div class="row"><button class="btn" id="dSave">儲存</button><button class="btn ghost" id="dCancel">取消</button><button class="link" id="dDel" hidden>刪除</button></div>
   </div>
-  <div class="lab">迴向偈</div><div class="seg" id="dVerseSeg"><button data-v="normal">普迴向</button><button data-v="jingtu">淨土迴向</button></div>
-  <label class="fld" for="dBy">迴向人（可不填，會記住）</label><input class="inp" id="dBy" type="text" placeholder="例：弟子 王小明" autocomplete="off">
-  <button class="btn big" id="dStart">合掌迴向</button>
-  <button class="link" id="dClose">稍後</button>
+  <button class="btn ghost" id="pmClose">完成</button>
 </div>
 <div class="sheet" id="musicSheet" hidden role="dialog" aria-label="選擇經文"><h3>選擇經文</h3><p class="hint">點經名就開始播放；念珠一樣由您親手撥。</p><div id="musicBody"></div><button class="btn ghost" id="musicClose">關閉</button></div>
 <div class="sheet" id="pickSheet" hidden role="dialog" aria-label="選功課"><div id="pickBody"></div><button class="btn ghost" id="pickClose">關閉</button></div>
@@ -2255,6 +2352,7 @@ function meritText(){
 let dEdit = null;   // the person being edited in the form, or {} for a new one
 function openDedi(){
   const st = dediState();
+  $("dStepA").hidden = false; $("dStepB").hidden = true;
   $("dMerit").textContent = meritText();
   $("dBy").value = st.by || "";
   $("dForm").hidden = true; dEdit = null;
@@ -2268,21 +2366,20 @@ function paintDedi(){
     pick.innerHTML = '<span class="box" aria-hidden="true"></span><span class="who"><b></b><span></span></span>';
     pick.querySelector("b").textContent = personLabel(x); pick.querySelector(".who span").textContent = `祈願${x.wish}`;
     pick.onclick = () => { st.sel = st.sel.includes(x.id) ? st.sel.filter(i => i !== x.id) : st.sel.concat(x.id); save(); paintDedi(); };
-    const ed = document.createElement("button"); ed.className = "edit"; ed.textContent = "編輯"; ed.setAttribute("aria-label", `編輯${personLabel(x)}`);
-    ed.onclick = () => openDediForm(x);
-    row.append(pick, ed); box.appendChild(row);
+    row.append(pick); box.appendChild(row);
   });
   // anyone who has passed away suggests the Pure Land verse, unless the user picked one
   const passed = st.people.some(x => st.sel.includes(x.id) && x.kind === "passed");
   const verse = st.verseSet ? st.verse : (passed ? "jingtu" : "normal");
   $("dVerseSeg").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === verse));
-  $("dStart").disabled = !st.sel.length;
+  $("dNext").disabled = !st.sel.length;
 }
 function openDediForm(x){
   dEdit = x || {};
   $("dCall").value = x ? x.call : ""; $("dName").value = x ? x.name : "";
   setDediKind(x ? x.kind : "alive", x ? x.wish : null);
   $("dDel").hidden = !x; $("dForm").hidden = false; $("dCall").focus();
+  $("dForm").scrollIntoView({ block:"nearest" });
 }
 function setDediKind(kind, wish){
   dEdit.kindNow = kind;
@@ -2293,7 +2390,6 @@ function setDediKind(kind, wish){
     c.onclick = () => { dEdit.wishNow = w; box.querySelectorAll(".chip").forEach(k => k.setAttribute("aria-pressed", k === c)); }; box.appendChild(c); });
 }
 $("dKind").querySelectorAll("button").forEach(b => b.onclick = () => setDediKind(b.dataset.v, dEdit.wishNow));
-$("dAdd").onclick = () => openDediForm(null);
 $("dCancel").onclick = () => { $("dForm").hidden = true; dEdit = null; };
 $("dSave").onclick = () => {
   const st = dediState(), call = $("dCall").value.trim();
@@ -2301,15 +2397,29 @@ $("dSave").onclick = () => {
   const data = { call, name:$("dName").value.trim(), kind:dEdit.kindNow, wish:dEdit.wishNow };
   if (dEdit.id) Object.assign(dEdit, data);
   else { const x = Object.assign({ id:"p" + (st.next++) }, data); st.people.push(x); st.sel.push(x.id); }
-  save(); $("dForm").hidden = true; dEdit = null; paintDedi();
+  save(); $("dForm").hidden = true; dEdit = null; paintDedi(); paintPeople();
 };
 $("dDel").onclick = () => {
   const st = dediState(); st.people = st.people.filter(x => x !== dEdit); st.sel = st.sel.filter(i => i !== dEdit.id);
-  save(); $("dForm").hidden = true; dEdit = null; paintDedi();
+  save(); $("dForm").hidden = true; dEdit = null; paintDedi(); paintPeople();
 };
 $("dVerseSeg").querySelectorAll("button").forEach(b => b.onclick = () => { const st = dediState(); st.verse = b.dataset.v; st.verseSet = true; save(); paintDedi(); });
 $("dBy").addEventListener("change", () => { dediState().by = $("dBy").value.trim(); save(); });
 $("dClose").onclick = closeSheets;
+$("dManage").onclick = () => { peopleFrom = "dedi"; closeSheets(); openPeople(); };
+// step 2: the whole dedication is read once before it is offered
+$("dNext").onclick = () => {
+  const st = dediState(); st.by = $("dBy").value.trim(); save();
+  const who = st.people.filter(x => st.sel.includes(x.id)); if (!who.length) return;
+  const verse = $("dVerseSeg").querySelector('[aria-pressed="true"]').dataset.v, pv = $("dPreview"); pv.innerHTML = "";
+  const add = (t, c) => { const e = document.createElement("p"); if (c) e.className = c; e.textContent = t; pv.appendChild(e); };
+  if (st.by) add(st.by);
+  add(meritText() + "，以此功德，迴向給");
+  who.forEach(x => add(`${personLabel(x)}　祈願${x.wish}`));
+  (VERSE[verse] || VERSE.normal).forEach((l, i) => add(l, i ? "vv v2" : "vv"));
+  $("dStepA").hidden = true; $("dStepB").hidden = false; $("dediSheet").scrollTop = 0;
+};
+$("dBack").onclick = () => { $("dStepA").hidden = false; $("dStepB").hidden = true; };
 let dlFrom = "beads";
 $("dLog").onclick = () => { dlFrom = activeTab; closeSheets(); showTab("dedilog"); };
 $("dlBack").onclick = () => showTab(dlFrom === "dedilog" ? "beads" : dlFrom);
@@ -2603,7 +2713,7 @@ async function ask(q){
   const b = bubble("ai", "思惟中……");
   const sample = await getSample();
   if (!sample){
-    b._t.textContent = "AI 問答要在 Claude App 裡打開這個頁面才能使用。";
+    b._t.textContent = "心燈即將開放。正式上線後，心燈會依經文陪你想這件事；現在可以先點上方的問題，看看示範。";
     turns.pop(); busy = false; askBtn.disabled = false; return;
   }
   try {
@@ -2621,7 +2731,25 @@ async function ask(q){
   busy = false; askBtn.disabled = false; chat.scrollTop = chat.scrollHeight;
 }
 document.getElementById("composer").addEventListener("submit", e => { e.preventDefault(); ask(askInput.value); });
-document.querySelectorAll("#sugg button").forEach(b => b.onclick = () => ask(b.textContent));
+// until the AI is connected, the suggested questions show prepared answers in 心燈's form: feeling, scripture with source, plain words, a question back
+const DEMO = {
+  "有人來電說我中獎，要先匯手續費":["這很可能是詐騙。請先不要匯款，也不要給任何資料，撥 165 反詐騙專線問清楚，再跟家人說一聲。", "知足之人，雖臥地上，猶為安樂。", "《佛垂般涅槃略說教誡經》", "天上不會掉下要先付錢的獎。心安住在已經有的，就不容易被人牽著走。", "這通電話是什麼時候打來的？要不要先和家人一起看看？"],
+  "近來夜裡難眠，心中煩亂":["夜裡睡不好，心又亂，真的很辛苦。", "心無罣礙，無罣礙故，無有恐怖，遠離顛倒夢想。", "《般若波羅蜜多心經》", "讓人睡不著的，常常是放不下的念頭。睡前撥一輪珠、聽一段配樂，讓心有個地方安放。若長期難以入睡，也請找醫師聊聊。", "最近夜裡，最常浮上來的是哪一件事？"],
+  "迴向是什麼意思？":["你會想問這個，很好。", "願以此功德，普及於一切，我等與眾生，皆共成佛道。", "《妙法蓮華經．化城喻品》", "迴向就是把修持的心意，轉送給想祝福的人，也送給一切眾生。不是交換，而是把好的心念擴大出去。", "今天撥完珠，你最想把這份心意送給誰？"],
+  "與家人意見不合，該如何自處？":["和最親的人意見不合，心裡最難受。", "隨其心淨，則佛土淨。", "《維摩詰所說經》", "先把自己的心安靜下來，再開口說話，同一句話聽起來就會不一樣。不用急著分對錯。", "如果先不談誰對，你最希望對方明白的是什麼？"],
+  "《心經》講的是什麼？":["很多人一輩子都在讀這兩百多字。", "觀自在菩薩，行深般若波羅蜜多時，照見五蘊皆空，度一切苦厄。", "《般若波羅蜜多心經》", "心經講的是用智慧看清：身心的一切都在變化，沒有固定不變的東西。看清了，就不會被苦緊緊抓住。", "最近有什麼事，是你很想放下卻放不下的？"]
+};
+function demoAnswer(q){
+  const d = DEMO[q]; if (!d) return ask(q);
+  const sg = document.getElementById("sugg"); bubble("me", q);
+  const b = bubble("ai", ""); b._t.textContent = d[0];
+  const tag = document.createElement("span"); tag.className = "demo"; tag.textContent = "示範"; b.querySelector(".who").appendChild(tag);
+  const c = document.createElement("span"); c.className = "cite"; c.textContent = d[1]; const src = document.createElement("small"); src.textContent = d[2]; c.appendChild(src);
+  const rest = document.createElement("span"); rest.textContent = `${d[3]}\n\n${d[4]}`;
+  b.append(c, rest);
+  chat.appendChild(sg); chat.scrollTop = chat.scrollHeight;   // keep the other questions within reach
+}
+document.querySelectorAll("#sugg button").forEach(b => b.onclick = () => demoAnswer(b.textContent));
 /* ================= 功課 ================= */
 const MON = ["正","二","三","四","五","六","七","八","九","十","冬","臘"];
 const DAYN = ["初一","初二","初三","初四","初五","初六","初七","初八","初九","初十","十一","十二","十三","十四","十五","十六","十七","十八","十九","二十","廿一","廿二","廿三","廿四","廿五","廿六","廿七","廿八","廿九","三十"];
@@ -2713,7 +2841,7 @@ function applyFocus(){ $("tabs").hidden = false; }   // the small header icons s
 // after the dedication animation: a routine is finished; a stand-alone dedication just closes
 function afterDedicate(went){
   if (routine && routine.steps[S.run.idx] && routine.steps[S.run.idx].type === "dedicate"){ if (went) finishRoutine(); else { $("stepCard").hidden = true; leaveRoutine(); } return; }
-  if (went){ if (routine) finishRoutine(); else { endSession(); if (activeTab === "beads") showTab("home", true); } }
+  if (went){ if (routine) finishRoutine(); else { if (sess) endSession(); showTab("beads", true); } }
 }
 
 /* ================= 紀錄 ================= */
@@ -2829,42 +2957,23 @@ function choice(label, sub, pressed, onClick, wide){
 }
 function renderOnb(){
   onbBody.innerHTML = "";
-  const head = (n, h, p) => { const a = document.createElement("div"); a.className = "stepn"; a.textContent = n; const b = document.createElement("h2"); b.textContent = h; onbBody.append(a, b); if (p){ const c = document.createElement("p"); c.textContent = p; onbBody.appendChild(c); } };
-  const grid = () => { const g = document.createElement("div"); g.className = "choices"; onbBody.appendChild(g); return g; };
-  const nav = (nextLabel, onNext) => {
-    const r = document.createElement("div"); r.className = "row";
-    if (onbStep > 0){ const bk = document.createElement("button"); bk.className = "btn ghost"; bk.textContent = "上一步"; bk.onclick = () => { onbStep--; renderOnb(); }; r.appendChild(bk); }
-    const nx = document.createElement("button"); nx.className = "btn"; nx.style.flex = "1"; nx.textContent = nextLabel; nx.onclick = onNext; r.appendChild(nx);
-    onbBody.appendChild(r);
-  };
+  const dots = () => { const d = document.createElement("div"); d.className = "dots"; d.innerHTML = [0, 1, 2].map(i => `<i class="${i === onbStep ? "on" : ""}"></i>`).join(""); return d; };
+  const head = (n, h, p) => { const a = document.createElement("div"); a.className = "stepn"; a.textContent = n; const b = document.createElement("h2"); b.textContent = h; onbBody.append(a, b);
+    if (p){ const c = document.createElement("p"); c.textContent = p; onbBody.appendChild(c); } };
+  const go = (label, fn) => { const b = document.createElement("button"); b.className = "btn"; b.textContent = label; b.onclick = fn; onbBody.append(b, dots()); };
   if (onbStep === 0){
-    head("歡迎", "歡迎使用雲禪", "每天撥珠念佛、敲木魚，心裡有事也可以問問看。先回答三個小問題，幫您設定好。");
-    const pv = document.createElement("div"); pv.className = "preview"; pv.textContent = "南無阿彌陀佛　這樣的字看得清楚嗎？"; onbBody.appendChild(pv);
-    const g = grid();
-    g.append(choice("字這樣就好", "", !S.big, () => { S.big = false; applyLook(); save(); renderOnb(); }),
-             choice("字再大一點", "", S.big, () => { S.big = true; applyLook(); save(); renderOnb(); }),
-             choice("夜間", "深色底，比較不刺眼", S.mode!=="day", () => { S.mode = "night"; applyLook(); save(); renderOnb(); }),
-             choice("白天", "淺色底，字更清楚", S.mode==="day", () => { S.mode = "day"; applyLook(); save(); renderOnb(); }));
-    nav("下一步", () => { onbStep = 1; renderOnb(); });
+    head("歡迎", "雲禪", "每天撥一段珠，聽一段經，把平安迴向給家人。不必懂很多，從撥一顆珠開始。");
+    go("開始", () => { onbStep = 1; renderOnb(); });
   } else if (onbStep === 1){
-    head("歡迎使用雲禪・第一題", "您習慣用哪一隻手撥佛珠？", "佛珠會靠在那一邊，大拇指比較好撥。字太小的話，之後可以在「設定」調大。");
-    const g = grid();
-    g.append(choice("左手", "", S.hand==="L", () => { S.hand = "L"; save(); renderOnb(); }), choice("右手", "", S.hand==="R", () => { S.hand = "R"; save(); renderOnb(); }));
-    nav("下一步", () => { onbStep = 2; renderOnb(); });
-  } else if (onbStep === 2){
-    head("第二題", "最近最想為什麼祈願？", "會幫您排好每天的功課，之後隨時可以換。");
-    const g = grid(), cur = S.plan && S.plan.w;
-    const pk = w => w.id === "daily" ? { kind:"jingtu" } : { kind:"wish", w:w.id };
-    const curK = planObj(), isCur = w => (w.id === "daily" && curK.kind === "jingtu") || (curK.kind === "wish" && curK.w === w.id);
-    WISHES.forEach((w,i) => g.appendChild(choice(w.id === "daily" ? "日常念佛" : w.title, w.id === "daily" ? "淨土念佛功課" : w.who, S.plan && isCur(w), () => { S.plan = pk(w); save(); renderOnb(); }, i===0)));
-    nav("下一步", () => { if (!S.plan){ S.plan = { kind:"jingtu" }; } plans().pm = planObj(); save(); onbStep = 3; renderOnb(); });
+    head("一・撥珠背景", "選一處讓你安靜的地方", "之後隨時可以在「我的」裡更換。");
+    const g = document.createElement("div"); g.className = "bdgrid"; g.id = "onbBd"; onbBody.appendChild(g); renderBackdrops("onbBd");
+    go("下一步", () => { onbStep = 2; renderOnb(); });
   } else {
-    head("第三題", "要每天提醒您做功課嗎？", "可以選早上、晚上，或兩個都要。");
-    const g = grid(), r = new Set(S.remind||[]);
-    const tog = k => () => { r.has(k) ? r.delete(k) : r.add(k); S.remind = [...r]; save(); renderOnb(); };
-    g.append(choice("早課", "每天 7:00", r.has("am"), tog("am")), choice("晚課", "每天 20:00", r.has("pm"), tog("pm")),
-             choice("不用提醒", "", r.size===0, () => { S.remind = []; save(); renderOnb(); }, true));
-    nav("完成，開始使用", () => { S.onboarded = true; save(); onb.hidden = true; setHand(S.hand); renderHome(); showTab("home", true); });
+    head("二・撥珠", "往下撥，或輕觸念珠", "撥一下是一珠，一百零八珠是一輪。撥過大顆的母珠時，聲音會不一樣。");
+    const g = document.createElement("div"); g.className = "choices"; onbBody.appendChild(g);
+    g.append(choice("左手持珠", "", S.hand === "L", () => { S.hand = "L"; save(); renderOnb(); }), choice("右手持珠", "", S.hand !== "L", () => { S.hand = "R"; save(); renderOnb(); }),
+             choice("大字模式", "字放大，長輩看得清楚", !!S.big, () => { S.big = !S.big; applyLook(); save(); renderOnb(); }, true));
+    go("開始撥珠", () => { S.onb2 = true; S.onboarded = true; S.tutDone = false; save(); onb.hidden = true; setHand(S.hand || "R"); showTab("beads", true); });
   }
 }
 
@@ -3067,7 +3176,7 @@ $("lsBack").onclick = () => { talk.currentTime = Math.max(0, talk.currentTime - 
 $("lsNext").onclick = () => { if (lsCur && lsCur.i + 1 < lsCur.s.eps.length) playSeries(lsCur.s.id, lsCur.i + 1); };
 document.querySelectorAll("[data-sleep]").forEach(b => b.onclick = () => { setSleep(Number(b.dataset.sleep)); if (lsSleepMin && lsCur && talk.paused) talkPlay(); });
 $("miniPlay").onclick = () => { if (lsCur) talk.paused ? talkPlay() : talk.pause(); };
-$("miniOpen").onclick = () => showTab("listen");
+$("miniOpen").onclick = () => showTab("beads");
 
 /* ---- 首頁：今日一聽 ---- */
 const dayNo = () => { const d = new Date(); return Math.floor((d - d.getTimezoneOffset()*60000) / 864e5); };
@@ -3316,13 +3425,14 @@ function renderInstall(){
 
 /* ================= tabs ================= */
 setTimeout(applyBackdrop, 0);   // the photo backdrop is CSS, so it shows even before the beads are drawn
-const panels = { home:"p-home", beads:"p-beads", listen:"p-listen", fish:"p-fish", ask:"p-ask", log:"p-log", dedilog:"p-dedilog" };
+const panels = { home:"p-home", beads:"p-beads", listen:"p-listen", fish:"p-fish", ask:"p-ask", log:"p-log", dedilog:"p-dedilog", me:"p-me" };
 let activeTab = "beads";
 function showTab(t, force){
   if (t !== "beads" && playing && playMode !== "file" && playMode !== "rec") stopListen();
   activeTab = t;
-  const navT = t === "fish" || t === "log" ? "home" : t === "dedilog" ? "" : t;
+  const navT = t === "fish" || t === "log" ? "home" : t === "dedilog" ? "me" : t;
   if (t === "dedilog") renderDediLog();
+  if (t === "me") renderMe();
   document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab===navT));
   for (const k in panels) $(panels[k]).hidden = (k !== t);
   if (t === "beads"){
@@ -3416,16 +3526,52 @@ function applyBackdrop(){
   if (typeof table !== "undefined" && table && table.userData.cloth) table.material = id === "cloth" ? table.userData.cloth : table.userData.shadow;
   if (stageReady) drawFrame();
 }
-function renderBackdrops(){
-  const box = $("bdGrid"); box.innerHTML = "";
+function renderBackdrops(boxId = "bdGrid"){
+  const box = $(boxId); box.innerHTML = "";
   BACKDROPS.forEach(([id, name]) => {
     const b = document.createElement("button"); b.setAttribute("aria-pressed", (S.backdrop || "cloth") === id); b.setAttribute("aria-label", `撥珠背景：${name}`);
     b.style.backgroundImage = id === "cloth" ? "radial-gradient(circle at 50% 45%,#c9963f,#5a3a14)" : `url(assets/img/${id}.webp)`;
     const t = document.createElement("span"); t.textContent = name; b.appendChild(t);
-    b.onclick = () => { S.backdrop = id; save(); applyBackdrop(); renderBackdrops(); };
+    b.onclick = () => { S.backdrop = id; save(); applyBackdrop(); renderBackdrops(boxId); };
     box.appendChild(b);
   });
 }
+function renderMe(){
+  const now = new Date(), ym = dkey(now).slice(0, 7);
+  $("msStreak").textContent = streak().n;
+  $("msMonth").textContent = fmt(Object.keys(S.days).filter(k => k.startsWith(ym)).reduce((a, k) => a + (S.days[k].beads || 0), 0));
+  $("msDedi").textContent = (S.dediLog || []).length;
+  S.seals = S.seals || {};
+  $("meSeals").innerHTML = SEALS.map(m => `<div><span class="seal${S.seals[m] ? " on" : ""}">${m}</span>${S.seals[m] ? S.seals[m].slice(5).replace("-", "/") + " 達成" : `連續 ${m} 天`}</div>`).join("");
+  const log = S.dediLog || [];
+  $("meDediSum").textContent = log.length ? `${log.length} 次・${fmt(log.reduce((a, r) => a + r.beads, 0))} 珠` : "尚無紀錄";
+  $("mePeopleSum").textContent = `${dediState().people.length} 位`;
+  $("msBig").setAttribute("aria-pressed", !!S.big);
+  $("msSound").setAttribute("aria-pressed", S.sound !== false);
+  $("msHaptic").setAttribute("aria-pressed", !!S.haptic);
+  $("msHand").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === S.hand));
+  renderBackdrops("msBd");
+}
+$("msBig").onclick = () => { S.big = !S.big; applyLook(); save(); renderMe(); setTimeout(resizeStage, 80); };
+$("msSound").onclick = () => { S.sound = S.sound === false; save(); renderMe(); };
+$("msHaptic").onclick = () => { S.haptic = !S.haptic; save(); if (S.haptic) buzz([40]); renderMe(); };
+$("msHand").querySelectorAll("button").forEach(b => b.onclick = () => { setHand(b.dataset.v); renderMe(); });
+$("meDediLog").onclick = () => { dlFrom = "me"; showTab("dedilog"); };
+let peopleFrom = null;
+$("mePeople").onclick = () => { peopleFrom = null; openPeople(); };
+function openPeople(){ $("dForm").hidden = true; paintPeople(); openSheetEl($("peopleSheet")); }
+function paintPeople(){
+  const box = $("pmList"); box.innerHTML = "";
+  const KIND = { alive:"在世", passed:"已往生", all:"眾生" };
+  dediState().people.forEach(x => {
+    const r = document.createElement("button"); r.className = "pmrow";
+    r.innerHTML = '<span class="who"><b></b><span></span></span><em>編輯 ›</em>';
+    r.querySelector("b").textContent = personLabel(x); r.querySelector(".who span").textContent = `${KIND[x.kind] || ""}・祈願${x.wish}`;
+    r.onclick = () => openDediForm(x); box.appendChild(r);
+  });
+}
+$("pmAdd").onclick = () => openDediForm(null);
+$("pmClose").onclick = () => { closeSheets(); if (peopleFrom === "dedi") openDedi(); else if (activeTab === "me") renderMe(); };
 function openSutras(){ renderSutras(); openSheetEl($("musicSheet")); }
 $("sPlay").onclick = () => { ac(); if (lsCur) talk.paused ? talkPlay() : talk.pause(); else openSutras(); };
 $("sPick").onclick = () => { if (routine && $("p-beads").classList.contains("complete")) nextStep(); else openSutras(); };
@@ -3491,6 +3637,7 @@ setHand(S.hand); bindDrag();
 $("fCount").textContent = fmt(today().fish);
 renderHud(); paintPlay(); renderHome();
 S.onboarded = true; showTab("beads", true);
+if (!S.onb2) startOnboarding();   // v2 first launch: welcome, backdrop, how to bead
 document.addEventListener("visibilitychange", () => { if (document.hidden) save(); else if (activeTab === "beads") keepAwake(true); });
 
 })();

@@ -427,6 +427,10 @@ button,a,summary,.lsitem{touch-action:manipulation}
 .sbar{position:absolute;z-index:3;top:var(--g);left:var(--g);right:var(--g);display:flex;align-items:center;gap:12px}
 .splay{flex:0 0 auto;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--brass);background:#140d0999;color:var(--brass);display:grid;place-items:center;cursor:pointer;padding:0}
 .splay svg{width:20px;height:20px}
+.splay{position:relative}
+.splay.loading::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1.5px solid transparent;border-top-color:var(--brass);animation:splaySpin 1s linear infinite}
+@keyframes splaySpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.splay.loading::after{animation:none;border-color:var(--brass);opacity:.4}}
 .spick{flex:1;min-width:0;min-height:48px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;background:none;border:0;padding:0;color:var(--paper);font:inherit;text-align:left;cursor:pointer;text-shadow:0 1px 8px #000,0 0 18px #000a}
 .spick span{font-size:.78rem;color:var(--brass);letter-spacing:.22em;opacity:.9}
 .spick b{font-family:var(--display);font-size:1.25rem;font-weight:900;letter-spacing:.08em;color:#fff1cf;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -726,7 +730,6 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 @media (prefers-reduced-motion:reduce){.rays{animation:none}.lotus .petal,.lotus .seed,.dverse span,.dto,.dfin,.merit{animation-duration:.01s;animation-delay:0s}.finger{animation:none}}
 </style>
 
-<label id="hapLabel" aria-hidden="true" style="position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden;opacity:0"><input type="checkbox" switch tabindex="-1"></label>
 <div class="app">
   <header class="top">
     <div class="brand"><h1>雲禪</h1></div>
@@ -1126,7 +1129,7 @@ scrim.onclick = closeSheets;
 let AC = null;
 // iPhone: let sound play even with the ring/silent switch on (Safari 17+).
 try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch(e){}
-function ac(){ if(!AC){ try{ AC = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } if(AC && AC.state!=="running") { try{ AC.resume(); }catch(e){} } return AC; }
+function ac(){ if(AC && AC.state === "closed") AC = null; if(!AC){ try{ AC = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } if(AC && AC.state!=="running") { try{ AC.resume(); }catch(e){} } return AC; }
 // Phones only unlock audio on a finished tap (touchend / click), not on touch-down, so unlock on those and play a silent blip.
 let audioReady = false;
 function unlockAudio(){
@@ -1159,7 +1162,13 @@ function beadClick(){ if(!S.sound) return; noise(0.018, 0.75, 2600, 1.2); tone(1
 function bell(){ if(!S.sound) return; const f = 1180; [[1, 0.22, 3.4], [2.32, 0.09, 2.3], [4.25, 0.05, 1.5], [6.63, 0.025, 0.9]].forEach(([r, g, d]) => tone(f*r, d, g)); noise(0.012, 0.35, 5200, 2); }
 function woodblock(){ if(!S.sound) return; tone(560, 0.28, 0.55); tone(1220, 0.12, 0.25); noise(0.04, 0.5, 1800, 1.5); }
 // Haptics: Android uses the Vibration API; iPhone (iOS 18+) gets a light tap by toggling a hidden system switch.
-const hapLabel = document.getElementById("hapLabel");
+// iPhone only allows that tap inside a finished touch (pointerup / click), so a tapped bead buzzes on release.
+function hapTap(){
+  const l = document.createElement("label"), i = document.createElement("input");
+  l.setAttribute("aria-hidden", "true"); l.style.display = "none";
+  i.type = "checkbox"; i.setAttribute("switch", ""); l.appendChild(i);
+  document.head.appendChild(l); l.click(); l.remove();
+}
 let canVibrate = false;
 try { canVibrate = typeof navigator.vibrate === "function" && navigator.vibrate(0) !== false; } catch(e){}
 let jolt = 0;   // visual "kick" so the click is felt by the eye even where the phone can't vibrate
@@ -1169,8 +1178,8 @@ function buzz(pattern){
   if (canVibrate){ try{ navigator.vibrate(pattern); return; }catch(e){} }
   try{
     const taps = Array.isArray(pattern) ? Math.ceil(pattern.length/2) : 1;
-    hapLabel.click();
-    for (let i=1;i<taps;i++) setTimeout(()=>hapLabel.click(), i*90);
+    hapTap();
+    for (let i=1;i<taps;i++) setTimeout(hapTap, i*90);
   }catch(e){}
 }
 /* ================= 3D beads ================= */
@@ -1525,8 +1534,9 @@ function checkCross(){
     const n = f - counted; counted = f;
     addBeads(n, mother);
     // beading is immersive (docs/設計標準.md): no round counts, countdowns, chimes or voice, only the bead's own sound
-    if (mother){ motherClick(); buzz([45]); }
-    else { beadClick(); buzz([28]); }
+    const felt = f <= hapAhead;   // a tapped bead already buzzed when the finger lifted
+    if (mother){ motherClick(); if (!felt) buzz([45]); }
+    else { beadClick(); if (!felt) buzz([28]); }
     if (!S.tutDone){ S.tutDone = true; save(); $("tut").hidden = true; paintPlay(); }
   }
 }
@@ -1555,6 +1565,7 @@ function loop(){
 }
 // a tap pulls the string down one whole bead: it glides there (step() eases toward target) and is counted as it
 // passes the halfway point, like a thumb drawing a real bead; quick taps queue up to three beads ahead
+let hapAhead = -1;
 function advanceBead(){
   const from = target !== null ? target : Math.round(pos);
   target = Math.min(from + 1, Math.round(pos) + 3);
@@ -1577,7 +1588,8 @@ function bindDrag(){
   });
   const up = () => {
     if (!down) return; down = pressing = false;
-    if (moved < 6){ advanceBead(); return; }   // tap = one bead
+    ac();   // a finished touch may wake the sound after the phone was locked or switched apps
+    if (moved < 6){ advanceBead(); if (target > hapAhead){ hapAhead = target; buzz(target % PER_LOOP === 0 ? [45] : [28]); } return; }   // tap = one bead
     target = Math.round(pos + Math.max(-2, Math.min(2, vel*4)));
   };
   stage.addEventListener("pointerup", up); stage.addEventListener("pointercancel", up);
@@ -3047,7 +3059,13 @@ function playSeries(id, idx, opts){
 function talkPlay(){
   if (!lsCur) return;
   stopListen();
-  talk.play().catch(err => { if (err && err.name === "NotAllowedError") lsMsg("請再輕觸播放。"); paintListen(); });
+  $("sPlay").classList.add("loading");
+  talk.play().catch(err => {
+    $("sPlay").classList.remove("loading");
+    if (err && err.name === "NotAllowedError"){ lsMsg("請再輕觸播放。"); note("請再輕觸一次播放鍵"); }
+    else if (err && err.name !== "AbortError") note("念誦沒有載入，請確認網路後再按一次播放");
+    paintListen(); paintSBar();
+  });
 }
 function setSleep(m){ lsSleepMin = m; lsSleepAt = m ? Date.now() + m*60000 : 0; talk.volume = 1; paintListen(); }
 function checkSleep(){
@@ -3058,6 +3076,10 @@ function checkSleep(){
 }
 setInterval(() => { if (!talk.paused) checkSleep(); }, 1000);
 talk.addEventListener("play", paintListen);
+// a slow network leaves the first press silent for a few seconds: show a quiet ring on the play key until sound starts
+talk.addEventListener("waiting", () => { if (!talk.paused) $("sPlay").classList.add("loading"); });
+["playing", "pause"].forEach(ev => talk.addEventListener(ev, () => $("sPlay").classList.remove("loading")));
+talk.addEventListener("error", () => { if (!lsCur) return; $("sPlay").classList.remove("loading"); note("念誦沒有載入，請確認網路後再按一次播放"); paintSBar(); });
 ["play", "pause"].forEach(ev => talk.addEventListener(ev, () => { if (activeTab === "beads") renderHud(); }));
 talk.addEventListener("pause", () => { if (lsCur) S.lpos[lsCur.ep.u] = talk.currentTime; save(); paintListen(); });
 talk.addEventListener("timeupdate", () => {

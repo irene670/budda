@@ -1,6 +1,6 @@
 // 雲禪 — offline shell. The page, icons and 3D library are cached so the app opens and beads
 // can be counted without a network; the chanting and lectures still stream from their publishers.
-const CACHE = "yunchan-v12";
+const CACHE = "yunchan-v13";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png",
   "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"];
 

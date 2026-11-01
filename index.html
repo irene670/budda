@@ -807,7 +807,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 @media (prefers-reduced-motion:reduce){.rays{animation:none}.lotus .petal,.lotus .seed,.dverse span,.dto,.dfin,.merit{animation-duration:.01s;animation-delay:0s}.finger{animation:none}}
 /* ---- 經文庫（v7，2026-10-31）：全螢幕兩層。首頁＝搜尋＋依心願／為誰迴向篩選＋分類清單；詳情＝預覽經文、介紹、
    典籍由來、故事、選編曲，再按「開始撥珠」。上方固定返回鍵，不必捲到底。設計成可容納上百部經。 ---- */
-.lib{position:fixed;inset:0;z-index:60;background:radial-gradient(120% 60% at 50% 0%,#2a1c12 0%,#170f0a 55%,#120b07 100%);color:var(--paper);overflow:hidden}
+.lib{position:fixed;inset:0;z-index:60;background:radial-gradient(120% 60% at 50% 0%,#2a1c12 0%,#170f0a 55%,#120b07 100%);color:var(--paper);overflow:hidden;overflow:clip}
 .lib[hidden]{display:none}
 .libview{position:absolute;inset:0;display:flex;flex-direction:column;max-width:34rem;margin:0 auto;transition:transform .32s cubic-bezier(.22,.61,.36,1),opacity .32s ease}
 .libview.detail{background:inherit;transform:translateX(100%);opacity:0}
@@ -819,43 +819,17 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .libbar h2{margin:0;text-align:center;font-family:var(--display);font-size:1.08rem;font-weight:700;letter-spacing:.24em;padding-left:.24em;color:#f6e7c4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .libback{width:44px;height:44px;border-radius:50%;border:1px solid #e2b36355;background:#140d0999;color:var(--brass);display:grid;place-items:center;cursor:pointer;padding:0}
 .libback svg{width:22px;height:22px}
-.libback:focus-visible,.libtile:focus-visible,.librow:focus-visible,.ldver:focus-visible,.ldgo:focus-visible,.libseg button:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.libback:focus-visible,.libseg button:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .libscroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px calc(28px + env(safe-area-inset-bottom,0px))}
 .libsearch{display:flex;align-items:center;gap:10px;height:48px;padding:0 14px;border-radius:14px;background:#ffffff0d;border:1px solid #e2b36333}
 .libsearch svg{width:20px;height:20px;color:var(--brass);flex:0 0 auto}
 .libsearch input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--paper);font:inherit;font-size:1rem}
 .libsearch input::placeholder{color:#d6c6aa99}
-.libseg{display:grid;grid-template-columns:1fr 1fr;margin:18px 0 12px;padding:4px;border-radius:14px;background:#ffffff0a;border:1px solid #e2b36322}
-.libseg button{min-height:40px;border:0;border-radius:10px;background:none;color:var(--muted);font:inherit;font-size:.92rem;letter-spacing:.12em;cursor:pointer}
-.libseg button.on{background:linear-gradient(#3a2817,#2a1c10);color:#f6e7c4;box-shadow:0 0 0 1px #e2b36355 inset,0 2px 10px #0006}
-.libgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.libtile{min-height:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px 2px;border-radius:16px;
-  border:1px solid #e2b36326;background:linear-gradient(160deg,#ffffff0c,#ffffff04);color:#f1e2c3;font:inherit;font-size:.8rem;letter-spacing:.06em;cursor:pointer;line-height:1.2;text-align:center}
-.libtile svg{width:24px;height:24px;color:var(--brass)}
-.libtile.txt{min-height:56px;font-size:.86rem}
-.libtile.on{border-color:var(--brass);background:linear-gradient(160deg,#e2b3632e,#e2b3630d);color:#fff4dc;box-shadow:0 0 18px #e2b36322}
-.libtile:active,.librow:active,.ldver:active{transform:scale(.98)}
-.libnow{display:flex;align-items:center;gap:12px;margin-top:18px;padding:12px 14px;border-radius:16px;border:1px solid #e2b36344;background:linear-gradient(120deg,#e2b3631c,#ffffff05);color:var(--paper);font:inherit;text-align:left;width:100%;cursor:pointer}
-.libnow i{width:8px;height:8px;border-radius:50%;background:var(--brass);box-shadow:0 0 10px var(--brass);flex:0 0 auto}
-.libnow span{flex:1;min-width:0}.libnow small{display:block;font-size:.72rem;color:var(--brass);letter-spacing:.16em}
-.libnow b{font-family:var(--display);font-size:1.02rem}
 .libhead{display:flex;align-items:baseline;justify-content:space-between;margin:26px 2px 6px}
 .libhead h3{margin:0;font-family:var(--display);font-size:1.05rem;letter-spacing:.2em;color:#f6e7c4}
 .libhead h3 small{font-family:var(--body);font-size:.75rem;color:var(--muted);letter-spacing:.06em;margin-left:.5em}
 .libclear{border:0;background:none;color:var(--brass);font:inherit;font-size:.85rem;min-height:44px;padding:0 4px;cursor:pointer}
 .libdesc{margin:0 2px 8px;font-size:.84rem;color:var(--muted);line-height:1.55}
-.libgroup{margin:16px 2px 4px;font-size:.74rem;letter-spacing:.32em;color:var(--brass);display:flex;align-items:center;gap:10px}
-.libgroup::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#e2b36344,transparent)}
-.librow{display:flex;align-items:center;gap:14px;width:100%;min-height:68px;padding:10px 4px;border:0;border-bottom:1px solid #ffffff0f;background:none;color:var(--paper);font:inherit;text-align:left;cursor:pointer}
-.libseal{flex:0 0 auto;width:40px;height:40px;border-radius:10px;border:1px solid #e2b36366;display:grid;place-items:center;font-family:var(--display);font-weight:700;color:var(--brass);font-size:1rem;background:#e2b3630d}
-.librow .t{flex:1;min-width:0}
-.librow b{display:block;font-family:var(--display);font-size:1.06rem;font-weight:700;color:#f8ecd0;letter-spacing:.04em}
-.librow .t span{display:block;font-size:.8rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
-.librow em{flex:0 0 auto;font-style:normal;font-size:.72rem;color:var(--brass);border:1px solid #e2b36344;border-radius:999px;padding:3px 8px;white-space:nowrap}
-.librow em.plain{color:var(--muted);border-color:#ffffff1a}
-.librow .chev{flex:0 0 auto;color:#e2b36399;font-size:1.2rem}
-.libempty{padding:28px 8px;text-align:center;color:var(--muted);font-size:.9rem;line-height:1.7}
-.libquiet{display:block;margin:26px auto 0;min-height:44px;border:0;background:none;color:var(--muted);font:inherit;font-size:.88rem;letter-spacing:.12em;text-decoration:underline;text-underline-offset:5px;text-decoration-color:#e2b36355;cursor:pointer}
 /* detail */
 .ldhero{padding:10px 2px 6px;text-align:center}
 .ldkind{display:inline-block;font-size:.74rem;letter-spacing:.32em;padding-left:.32em;color:var(--brass)}
@@ -869,27 +843,6 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .ldsec h4{margin:0 0 10px;font-size:.76rem;font-weight:500;letter-spacing:.36em;color:var(--brass);display:flex;align-items:center;gap:10px}
 .ldsec h4::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#e2b36344,transparent)}
 .ldsec p{margin:0;font-size:.95rem;line-height:1.85;color:#efe3cb}
-.ldvers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.ldver{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:96px;padding:12px 12px 12px 14px;border-radius:16px;border:1px solid #ffffff17;
-  background:linear-gradient(160deg,#ffffff0d,#ffffff03);color:var(--paper);font:inherit;text-align:left;cursor:pointer}
-.ldver b{font-family:var(--display);font-size:1rem;letter-spacing:.08em;color:#f8ecd0;padding-right:40px}
-.ldver span{font-size:.74rem;color:var(--muted);line-height:1.45}
-.ldver small{margin-top:auto;font-size:.7rem;color:#e2b363cc;letter-spacing:.06em}
-.ldver.on{border-color:var(--brass);background:linear-gradient(160deg,#e2b3632b,#e2b3630a);box-shadow:0 0 20px #e2b36320}
-.ldver.on::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--brass)}
-.ldprev{position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:50%;border:1px solid #e2b36366;background:#140d09cc;color:var(--brass);display:grid;place-items:center;cursor:pointer;padding:0}
-.ldprev::before{content:"";position:absolute;inset:-4px}
-.ldprev svg{width:14px;height:14px}
-.ldprev.on{background:var(--brass);color:#1a120d}
-.ldlyrics{padding:16px;border-radius:16px;background:linear-gradient(160deg,#e2b36314,#0000002b);border:1px solid #e2b36333}
-.ldlyrics-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.ldlyrics-meta span{font-size:.7rem;line-height:1.35;padding:4px 8px;border-radius:999px;border:1px solid #e2b36335;background:#0003;color:#e9d8b7;letter-spacing:.04em}
-.ldlyrics-meta span.pending{color:#f0c987;border-color:#f0b25755}
-.ldlyrics-note{margin:0 0 10px!important;font-size:.78rem!important;line-height:1.65!important;color:var(--muted)!important}
-.ldlyrics ol{margin:0;padding:0;list-style:none;display:grid;gap:7px}
-.ldlyrics li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-family:var(--display);font-size:.98rem;line-height:1.75;color:#f6ead2;letter-spacing:.08em}
-.ldlyrics li time{min-width:3.2em;padding-top:.24em;font-family:var(--body);font-size:.68rem;line-height:1.6;color:#e2b36399;letter-spacing:0;font-variant-numeric:tabular-nums}
-.ldlyrics li.ldlyrics-empty{display:block;margin:0!important;color:var(--muted)!important;font-family:var(--body);font-size:.86rem!important;letter-spacing:.02em}
 .ldtext{position:relative;padding:16px 16px 14px;border-radius:16px;background:#00000033;border:1px solid #e2b36322}
 .ldtext ol{margin:0;padding:0;list-style:none;counter-reset:l}
 .ldtext li{counter-increment:l;display:flex;gap:12px;font-family:var(--display);font-size:1.06rem;line-height:1.9;color:#f6ead2;letter-spacing:.1em}
@@ -897,17 +850,103 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .ldtext.fold ol{max-height:13.5em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
 .ldmore{display:block;margin:6px auto 0;min-height:40px;border:0;background:none;color:var(--brass);font:inherit;font-size:.85rem;cursor:pointer}
 .ldfoot{margin-top:22px;font-size:.72rem;color:#d6c6aa88;line-height:1.6;text-align:center}
-.ldcta{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));
-  background:linear-gradient(#170f0ae6,#120b07);border-top:1px solid #e2b36326;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-.ldsel{flex:1;min-width:0;font-size:.78rem;color:var(--muted);line-height:1.4}
-.ldsel b{display:block;font-family:var(--display);font-size:.98rem;color:#f6e7c4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ldgo{flex:0 0 auto;min-height:50px;padding:0 24px;border:0;border-radius:999px;background:linear-gradient(#f0c97c,#c9963f);color:#2a1a0c;font:inherit;font-weight:700;font-size:1rem;letter-spacing:.2em;padding-left:calc(24px + .2em);box-shadow:0 6px 20px #e2b36340;cursor:pointer}
+.libseg{flex:0 0 auto;display:grid;grid-template-columns:1fr 1fr;margin:10px 16px 0;padding:4px;border-radius:14px;background:#ffffff0a;border:1px solid #e2b36322}
+.libseg button{min-height:44px;border:0;border-radius:10px;background:none;color:var(--muted);font:inherit;font-size:.98rem;letter-spacing:.16em;cursor:pointer}
+.libseg button.on{background:linear-gradient(#3a2817,#2a1c10);color:#f6e7c4;box-shadow:0 0 0 1px #e2b36355 inset,0 2px 10px #0006}
+/* ---- 經文音樂（v8，2026-11-01）：像音樂 App。探索＝搜尋＋心願標籤＋經文封面＋所有曲目；每部經是一張專輯；
+   我的專輯＝使用者自己排的播放清單。點曲目就在這裡播放，底部播放列按「去撥珠」回撥珠頁。 ---- */
+.libchips{display:flex;gap:8px;overflow-x:auto;margin:14px -16px 0;padding:2px 16px 4px;scrollbar-width:none}
+.libchips::-webkit-scrollbar{display:none}
+.libchips button{flex:0 0 auto;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid #e2b36333;background:#ffffff08;color:#efdfc0;font:inherit;font-size:.9rem;letter-spacing:.06em;cursor:pointer}
+.libchips button.on{background:#e2b363;border-color:#e2b363;color:#2a1a0c;font-weight:700}
+.libcovers{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px}
+.acard{display:flex;flex-direction:column;gap:6px;min-width:0;padding:0;border:0;background:none;color:var(--paper);font:inherit;text-align:left;cursor:pointer}
+.cov{position:relative;display:block;aspect-ratio:1;border-radius:14px;overflow:hidden;background:#2a1c12;box-shadow:0 8px 24px #0007}
+.cov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cov::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 1px #e2b36333 inset;background:linear-gradient(90deg,#120b0700 45%,#120b07aa),linear-gradient(#120b0700 55%,#120b07cc)}
+.cov b{position:absolute;z-index:1;top:9%;right:8%;max-height:84%;overflow:hidden;writing-mode:vertical-rl;font-family:var(--display);font-weight:900;font-size:clamp(1.05rem,5vw,1.45rem);line-height:1.15;letter-spacing:.12em;color:#fff4dc;text-shadow:0 2px 12px #000d}
+.cov i{position:absolute;z-index:1;left:8px;bottom:8px;font-style:normal;font-size:.7rem;letter-spacing:.1em;padding:3px 8px;border-radius:999px;background:#e2b363;color:#2a1a0c;font-weight:700}
+.acard .an{font-family:var(--display);font-weight:700;font-size:1.02rem;color:#f8ecd0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acard .as{margin-top:-5px;font-size:.78rem;color:var(--muted)}
+.acard:active,.tmain:active,.newpl:active{transform:scale(.98)}
+.trow{display:flex;align-items:center;gap:2px;border-bottom:1px solid #ffffff0f}
+.tmain,.newpl{flex:1;min-width:0;display:flex;align-items:center;gap:12px;min-height:72px;padding:8px 0;border:0;background:none;color:var(--paper);font:inherit;text-align:left;cursor:pointer}
+.newpl{width:100%;border-bottom:1px solid #ffffff0f}
+.tthumb{position:relative;flex:0 0 auto;width:52px;height:52px;border-radius:10px;overflow:hidden;background:#2a1c12;display:grid;grid-template-columns:1fr 1fr}
+.tthumb img{width:100%;height:100%;object-fit:cover;grid-column:1/-1;grid-row:1/-1}
+.tthumb.mos{grid-template-rows:1fr 1fr}
+.tthumb.mos img{grid-column:auto;grid-row:auto;min-height:0}
+.tthumb.plus{border:1.5px dashed #e2b36377;background:#e2b3630d;color:var(--brass);display:grid;place-items:center}
+.tthumb.plus svg{width:22px;height:22px}
+.tthumb .st{position:absolute;inset:0;display:grid;place-items:center;background:#00000070;color:#fff4dc}
+.tthumb .st svg{width:18px;height:18px}
+.tno{flex:0 0 26px;text-align:center;color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.tmain .t,.newpl .t,.lpmain .t{flex:1;min-width:0}
+.tmain b,.newpl b{display:block;font-family:var(--display);font-size:1.04rem;font-weight:700;color:#f8ecd0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tmain .t span,.newpl .t span{display:block;margin-top:2px;font-size:.8rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trow.cur b,.trow.cur .tno{color:var(--brass)}
+.eq{display:inline-flex;align-items:flex-end;gap:2px;height:14px}
+.eq i{width:3px;height:100%;background:var(--brass);border-radius:1px;animation:eq 1s ease-in-out infinite;transform-origin:bottom}
+.eq i:nth-child(2){animation-delay:-.4s}.eq i:nth-child(3){animation-delay:-.7s}
+.eq.still i{animation:none;transform:scaleY(.4)}
+@keyframes eq{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+.tmore{flex:0 0 auto;width:48px;height:48px;border-radius:50%;border:0;background:none;color:#e2b363cc;display:grid;place-items:center;cursor:pointer;padding:0}
+.tmore svg{width:22px;height:22px}
+.tmore:focus-visible,.tmain:focus-visible,.acard:focus-visible,.newpl:focus-visible,.libchips button:focus-visible,.lpmain:focus-visible,.lpplay:focus-visible,.lpgo:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.ahero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:4px 0 2px}
+.ahero .cov{width:min(58vw,240px)}
+.ahero .tthumb{width:min(58vw,240px);height:auto;aspect-ratio:1;border-radius:14px;box-shadow:0 8px 24px #0007}
+.ahero .tthumb.plus svg{width:48px;height:48px}
+.ahero h1{margin:14px 0 4px;font-family:var(--display);font-size:1.7rem;font-weight:900;letter-spacing:.1em;color:#fff1cf;text-shadow:0 0 30px #e2b36333}
+.ahero .ldkind{margin-top:14px}
+.ahero .ldkind+h1{margin-top:6px}
+.renin{margin:14px 0 4px;width:min(80vw,300px);height:48px;border-radius:12px;border:1px solid var(--brass);background:#ffffff0d;color:#fff1cf;font:inherit;font-family:var(--display);font-size:1.3rem;text-align:center}
+.aacts{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:16px 0 0}
+.abig,.aghost,.lpgo{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font:inherit;font-family:var(--display);cursor:pointer;white-space:nowrap}
+.abig{min-height:52px;padding:0 26px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b36333,#e2b3630d);color:#ffe2a8;font-weight:700;font-size:1.05rem;letter-spacing:.16em;box-shadow:inset 0 1px 0 #ffffff14,0 4px 18px #e2b36322}
+.abig svg{width:18px;height:18px}
+.aghost{min-height:52px;padding:0 18px;border:1px solid #e2b36347;background:linear-gradient(180deg,#f7eedd0d,#f7eedd03);color:var(--paper);font-weight:600;font-size:.95rem;letter-spacing:.1em}
+.aghost svg{width:18px;height:18px}
+.adel{display:block;margin:22px auto 0;min-height:44px;padding:0 12px;border:0;background:none;color:#f0b257cc;font:inherit;font-size:.86rem;letter-spacing:.12em;text-decoration:underline;text-underline-offset:5px;text-decoration-color:#f0b25755;cursor:pointer}
+.abig:active,.aghost:active,.lpgo:active{background:linear-gradient(180deg,#e2b36340,#e2b36318)}
+.vids{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vcardx{display:flex;flex-direction:column;gap:6px;padding:0;border:0;background:none;color:var(--paper);font:inherit;text-align:left;cursor:pointer}
+.vcardx .cov{aspect-ratio:16/9}
+.vcardx .cov span{position:absolute;z-index:1;inset:0;display:grid;place-items:center;color:#fff4dc}
+.vcardx .cov span svg{width:34px;height:34px;filter:drop-shadow(0 2px 8px #000)}
+.vcardx b{font-size:.88rem;color:#f8ecd0}
+.libempty{padding:28px 8px;text-align:center;color:var(--muted);font-size:.92rem;line-height:1.8}
+.libplayer{position:absolute;z-index:3;left:50%;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:calc(100% - 20px);max-width:33rem;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:6px;border-radius:16px;
+  background:linear-gradient(120deg,#3a2817f5,#21160ef5);border:1px solid #e2b36355;box-shadow:0 10px 30px #000a;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.libplayer[hidden]{display:none}
+.lpmain{flex:1;min-width:0;display:flex;align-items:center;gap:10px;min-height:52px;padding:0;border:0;background:none;color:var(--paper);font:inherit;text-align:left;cursor:pointer}
+.lpmain .tthumb{width:44px;height:44px;border-radius:8px}
+.lpmain b{display:block;font-family:var(--display);font-size:.96rem;color:#f8ecd0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lpmain .t span{display:block;font-size:.74rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lpplay{flex:0 0 auto;width:48px;height:48px;border-radius:50%;border:0;background:#ffffff14;color:#fff4dc;display:grid;place-items:center;cursor:pointer;padding:0}
+.lpplay svg{width:20px;height:20px}
+.lpgo{flex:0 0 auto;min-height:44px;padding:0 14px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b36333,#e2b3630d);color:#ffe2a8;font-weight:700;font-size:.92rem;letter-spacing:.1em}
+.lib.playing .libscroll{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+.libsheet{position:absolute;inset:0;z-index:5;display:flex;align-items:flex-end;justify-content:center;background:#000a}
+.libsheet[hidden]{display:none}
+.lsbox{width:100%;max-width:34rem;max-height:84%;overflow-y:auto;box-sizing:border-box;background:#22170f;border-top:2px solid var(--brass);border-radius:22px 22px 0 0;padding:18px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.lsbox h3{margin:0;font-family:var(--display);font-size:1.12rem;letter-spacing:.2em;color:#f6e7c4}
+.lsbox>p{margin:4px 0 8px;font-size:.86rem;color:var(--muted)}
+.lsbox .tmain{width:100%;border-bottom:1px solid #ffffff0f}
+.lsbox .tmain em{flex:0 0 auto;font-style:normal;font-size:.78rem;color:var(--jade)}
+.addnew{display:flex;gap:8px;margin-top:14px}
+.addnew input{flex:1;min-width:0;height:50px;box-sizing:border-box;padding:0 12px;border-radius:12px;border:1px solid #e2b36344;background:#ffffff0d;color:var(--paper);font:inherit;font-size:1rem}
+.addnew button{flex:0 0 auto;min-height:50px;padding:0 20px;border-radius:12px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b36333,#e2b3630d);color:#ffe2a8;font:inherit;font-weight:700;letter-spacing:.1em;cursor:pointer}
+.addmsg{min-height:1.2em;margin:8px 0 0!important;color:var(--jade)!important}
+.lsclose{display:block;width:100%;margin-top:10px;min-height:48px;border-radius:999px;border:1px solid #e2b36347;background:none;color:var(--paper);font:inherit;letter-spacing:.2em;cursor:pointer}
+.vidbox video{display:block;width:100%;max-height:62dvh;margin-top:12px;border-radius:12px;background:#000}
+@media (prefers-reduced-motion:reduce){.eq i{animation:none;transform:scaleY(.6)}}
 
 /* 按鈕統一（2026-10-31）：全部以「分享普法」的金色細邊膠囊為準。主要按鈕是金邊、暖金字；次要按鈕邊框更淡、字是米白 */
-.btn,.btn.big,.btn.huge,.btn.main,.todaycard .btn,.onb .btn,.ttask .go,.ldgo,.vcard.verse .btn.ghost{border-radius:999px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b3631f,#e2b36308);color:#ffe2a8;font-family:var(--display);font-weight:700;box-shadow:inset 0 1px 0 #ffffff14,0 4px 16px #0005;transition:background .2s,box-shadow .2s,transform .12s ease-out}
+.btn,.btn.big,.btn.huge,.btn.main,.todaycard .btn,.onb .btn,.ttask .go,.vcard.verse .btn.ghost{border-radius:999px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b3631f,#e2b36308);color:#ffe2a8;font-family:var(--display);font-weight:700;box-shadow:inset 0 1px 0 #ffffff14,0 4px 16px #0005;transition:background .2s,box-shadow .2s,transform .12s ease-out}
 .btn{min-height:48px;letter-spacing:.2em}
 .btn.ghost{border-color:#e2b36347;background:linear-gradient(180deg,#f7eedd0d,#f7eedd03);color:var(--paper);font-weight:600;box-shadow:inset 0 1px 0 #ffffff0d}
-.btn:active,.ttask .go:active,.ldgo:active{background:linear-gradient(180deg,#e2b36340,#e2b36318);box-shadow:inset 0 1px 0 #ffffff14,0 0 18px #e2b36344;filter:none}
+.btn:active,.ttask .go:active{background:linear-gradient(180deg,#e2b36340,#e2b36318);box-shadow:inset 0 1px 0 #ffffff14,0 0 18px #e2b36344;filter:none}
 .btn.ghost:active{background:linear-gradient(180deg,#e2b36326,#e2b3630d)}
 .btn.huge,.btn.big{letter-spacing:.4em;padding-left:1.4em}
 .btn:focus-visible,.ttask .go:focus-visible,.ldgo:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
@@ -1185,24 +1224,42 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
   <button class="btn ghost" id="pmClose">完成</button>
 </div>
 <div class="sheet" id="musicSheet" hidden role="dialog" aria-label="選擇經文"><h3>選擇經文</h3><p class="hint">點經名就開始播放；念珠一樣由您親手撥。</p><div id="musicBody"></div><button class="btn ghost" id="musicClose">關閉</button></div>
-<div class="lib" id="lib" hidden role="dialog" aria-modal="true" aria-label="選擇經文">
+<div class="lib" id="lib" hidden role="dialog" aria-modal="true" aria-label="經文音樂">
   <div class="libview" id="libHome">
-    <header class="libbar"><button class="libback" id="libClose" aria-label="返回撥珠"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2>選擇經文</h2><span></span></header>
+    <header class="libbar"><button class="libback" id="libClose" aria-label="返回撥珠"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2>經文音樂</h2><span></span></header>
+    <div class="libseg" role="tablist"><button data-mode="explore" role="tab" class="on" aria-selected="true">探索</button><button data-mode="mine" role="tab" aria-selected="false">我的專輯</button></div>
     <div class="libscroll" id="libScroll">
-      <label class="libsearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg><input id="libQ" type="search" placeholder="搜尋經名或心願，例如：健康" autocomplete="off" aria-label="搜尋經文"></label>
-      <div class="libseg" role="tablist"><button data-mode="themes" role="tab" class="on" aria-selected="true">依心願</button><button data-mode="for" role="tab" aria-selected="false">為誰迴向</button></div>
-      <div class="libgrid" id="libTiles"></div>
-      <div id="libNow"></div>
-      <div class="libhead"><h3 id="libListTitle">全部經文</h3><button class="libclear" id="libClear" hidden>清除篩選</button></div>
-      <p class="libdesc" id="libDesc" hidden></p>
-      <div id="libList"></div>
-      <button class="libquiet" id="libQuiet">不選經文，安靜撥珠</button>
+      <div id="libExplore">
+        <label class="libsearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg><input id="libQ" type="search" placeholder="搜尋經名或心願，例如：平安" autocomplete="off" aria-label="搜尋經文音樂"></label>
+        <div class="libchips" id="libChips" role="group" aria-label="依心願篩選"></div>
+        <div class="libhead"><h3 id="libListTitle">經文</h3></div>
+        <div class="libcovers" id="libCovers"></div>
+        <div class="libhead"><h3 id="libTrackTitle">所有曲目</h3></div>
+        <div id="libTracks"></div>
+      </div>
+      <div id="libMine" hidden>
+        <button class="newpl" id="plNew"><span class="tthumb plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><span class="t"><b>新增專輯</b><span>把喜歡的曲目放在一起，連續播放</span></span></button>
+        <div id="libPls"></div>
+      </div>
     </div>
   </div>
   <div class="libview detail" id="libDetail" aria-hidden="true">
-    <header class="libbar"><button class="libback" id="libBack" aria-label="回經文列表"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="ldBar"></h2><span></span></header>
+    <header class="libbar"><button class="libback" id="libBack" aria-label="返回"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="ldBar"></h2><span></span></header>
     <div class="libscroll" id="ldBody"></div>
-    <div class="ldcta"><div class="ldsel" id="ldSel"></div><button class="ldgo" id="ldGo">開始撥珠</button></div>
+  </div>
+  <div class="libplayer" id="libPlayer" hidden>
+    <button class="lpmain" id="lpOpen"><span class="tthumb" id="lpCov" aria-hidden="true"></span><span class="t"><b id="lpT"></b><span id="lpS"></span></span></button>
+    <button class="lpplay" id="lpPlay" aria-label="暫停"></button>
+    <button class="lpgo" id="lpGo">去撥珠</button>
+  </div>
+  <div class="libsheet" id="addSheet" hidden role="dialog" aria-modal="true" aria-labelledby="addTitle">
+    <div class="lsbox"><h3 id="addTitle">加入專輯</h3><p id="addWhat"></p><div id="addList"></div>
+      <div class="addnew"><input id="addName" type="text" maxlength="16" placeholder="新專輯名稱，例如：睡前聽" autocomplete="off" aria-label="新專輯名稱"><button id="addMake">建立</button></div>
+      <p class="addmsg" id="addMsg" role="status"></p>
+      <button class="lsclose" id="addClose">關閉</button></div>
+  </div>
+  <div class="libsheet" id="vidSheet" hidden role="dialog" aria-modal="true" aria-label="影片">
+    <div class="lsbox vidbox"><h3 id="vidTitle"></h3><video id="vidEl" controls playsinline preload="none"></video><button class="lsclose" id="vidClose">關閉</button></div>
   </div>
 </div>
 <div class="sheet" id="pickSheet" hidden role="dialog" aria-label="選功課"><div id="pickBody"></div><button class="btn ghost" id="pickClose">關閉</button></div>
@@ -2213,12 +2270,14 @@ $("pickClose").onclick = closeSheets;
 
 /* ---- 今日 ---- */
 /* ---- v2 今日：每日法語、三個每日任務（早課、晚課、迴向）、連續精進與印記、蓮花月曆 ---- */
-const PLAN_DEF = { am:{ track:"s-yaoshi", ver:0, rounds:1, time:"07:00" }, pm:{ track:"b-bed", ver:0, rounds:3, time:"21:00" } };
+const PLAN_DEF = { am:{ track:"s-amituo", ver:0, rounds:1, time:"07:00" }, pm:{ track:"s-amituo", ver:0, rounds:3, time:"21:00" } };
+// a plan whose track was taken off the shelf falls back to the first published chant
+const planSr = p => (LS_ALL[p.track] && LS_GROUPS.some(([k]) => LISTEN[k].includes(LS_ALL[p.track]))) ? LS_ALL[p.track] : (SONGS[0] && LS_ALL[SONGS[0].id]);
 const plan2 = () => (S.plan2 = S.plan2 || JSON.parse(JSON.stringify(PLAN_DEF)));
 const SLOT_NAME = { am:"早課", pm:"晚課" };
 const SEALS = [7, 21, 49, 108];
 const dayTasks = k => ((S.days[k] || {}).tasks || {});
-function trackLabel(p){ const sr = LS_ALL[p.track]; if (!sr) return "安靜撥珠"; return sr.eps.length > 1 ? `${sr.title}・${(sr.eps[p.ver] || sr.eps[0]).t}` : sr.title; }
+function trackLabel(p){ const sr = planSr(p); if (!sr) return "不播放"; const ep = sr.id === p.track ? sr.eps[p.ver] || sr.eps[0] : sr.eps[0]; return sr.eps.length > 1 ? `${sr.title}・${ep.t}` : sr.title; }
 function dayStage(k){ const t = dayTasks(k), n = (t.am ? 1 : 0) + (t.pm ? 1 : 0) + (t.dedi ? 1 : 0); return n === 3 ? 2 : (n || dayDone(k)) ? 1 : 0; }
 const lotusSvg = () => '<svg viewBox="0 0 32 32" aria-hidden="true"><use href="#lotusMark"/></svg>';
 // a preset: the planned chant with its vow; reaching it marks the task and warms the light, nothing pops up
@@ -2228,8 +2287,8 @@ function startPreset(slot){
   if (sess && !routine) endSession();
   $("p-beads").classList.remove("complete");
   save(); showTab("beads", true);
-  const sr = LS_ALL[p.track];
-  if (sr) selectTrack(sr, p.ver); else { talk.pause(); lsCur = null; }
+  const sr = planSr(p);
+  if (sr) selectTrack(sr, sr.id === p.track ? p.ver : 0); else { talk.pause(); lsCur = null; }
   renderHud();
 }
 function checkGoalRun(){
@@ -2306,10 +2365,9 @@ function openPlan(slot){
   $("plTitle").textContent = `${SLOT_NAME[slot]}設定`;
   const box = $("plTrack"); box.innerHTML = "";
   const opts = [];
-  LS_GROUPS.filter(([k]) => k === "song" || k === "bed").forEach(([k]) => LISTEN[k].forEach(sr => sr.eps.forEach((e, i) => opts.push([sr.id, i, sr.eps.length > 1 ? `${sr.title}・${e.t}` : sr.title]))));
-  opts.push(["", 0, "安靜撥珠（不播放）"]);
+  LS_GROUPS.filter(([k]) => k === "song").forEach(([k]) => LISTEN[k].forEach(sr => sr.eps.forEach((e, i) => opts.push([sr.id, i, sr.eps.length > 1 ? `${sr.title}・${e.t}` : sr.title]))));
   opts.forEach(([id, i, label]) => { const b = document.createElement("button"); b.textContent = label;
-    b.setAttribute("aria-pressed", p.track === id && (p.ver || 0) === i);
+    b.setAttribute("aria-pressed", planSr(p) && planSr(p).id === id && (planSr(p).id === p.track ? p.ver || 0 : 0) === i);
     b.onclick = () => { p.track = id; p.ver = i; save(); openPlan(slot); }; box.appendChild(b); });
   $("plRounds").querySelectorAll("button").forEach(b => { b.setAttribute("aria-pressed", +b.dataset.v === p.rounds); b.onclick = () => { p.rounds = +b.dataset.v; save(); openPlan(slot); }; });
   $("plTime").value = p.time; $("plIcsNote").hidden = true;
@@ -3352,7 +3410,7 @@ LISTEN.bed = [{ id:"b-bed", title:"雲禪睡前配樂", who:"雲禪自製・頌�
 const SONGS = (() => { try{ return JSON.parse(document.getElementById("songs").textContent).songs || []; }catch(e){ return []; } })();
 LISTEN.song = SONGS.map(sg => ({ id:sg.id, title:sg.item, who:"雲禪 AI 唱誦・經文校對中", src:"雲禪 AI 唱誦（自有版權）",
   tags:"有字幕", eps:sg.versions.map(v => ({ ...v, t:v.label, u:v.u, d:v.d, cues:v.cues })) }));
-const LS_GROUPS = [...(SONGS.length ? [["song","雲禪唱誦","AI 唱誦配經文字幕，可以邊聽邊撥珠"]] : []), ["bed","睡前配樂","雲禪自製，沒有版權疑慮，可搭配定時關閉"]];
+const LS_GROUPS = SONGS.length ? [["song","雲禪唱誦","AI 唱誦配經文字幕，可以邊聽邊撥珠"]] : [];
 const LS_ALL = {}; Object.values(LISTEN).forEach(g => g.forEach(s => LS_ALL[s.id] = s));
 // bead-screen chants that have a real recording we can play in place
 const INLINE = {};
@@ -3361,7 +3419,7 @@ const isSong = id => !!id && id.startsWith("s-");
 const songWord = it => it.lines ? it.lines[it.lines.length - 1].replace(/[，。]/g, "").slice(-2) : "";
 S.lpos = S.lpos || {}; S.lep = S.lep || {}; S.lheard = S.lheard || {};
 const talk = new Audio(); talk.preload = "none";
-let lsCur = null, lsSleepAt = 0, lsSleepMin = 0, lsLastT = 0;
+let lsCur = null, lsQueue = null, lsSleepAt = 0, lsSleepMin = 0, lsLastT = 0;
 const mmss = x => { x = Math.max(0, Math.floor(x||0)); const h = Math.floor(x/3600), m = Math.floor(x%3600/60), z = x%60; return h ? `${h}:${String(m).padStart(2,"0")}:${String(z).padStart(2,"0")}` : `${m}:${String(z).padStart(2,"0")}`; };
 const mins = x => Math.max(1, Math.round(x/60));
 const lsResumeIdx = sr => { const i = S.lep[sr.id]; return (i != null && i < sr.eps.length) ? i : 0; };
@@ -3375,7 +3433,7 @@ function playSeries(id, idx, opts){
   const ep = sr.eps[idx];
   lsCur = { s:sr, i:idx, ep }; S.lep[id] = idx; save(); lsMsg("");
   talk.src = ep.u; talk.volume = 1;
-  talk.loop = id.startsWith("n-") || id.startsWith("b-") || isSong(id) || !!(opts && opts.loop);
+  talk.loop = !lsQueue && (id.startsWith("n-") || id.startsWith("b-") || isSong(id) || !!(opts && opts.loop));
   if (isSong(id) && !pend().sutras.includes(sr.title)){ pend().sutras.push(sr.title); save(); }
   songLast = -1;
   const at = S.lpos[ep.u] || 0; lsLastT = at;
@@ -3439,6 +3497,7 @@ function songSync(force){
 talk.addEventListener("ended", () => {
   if (!lsCur) return;
   const { s:sr, i, ep } = lsCur; S.lheard[ep.u] = 1; delete S.lpos[ep.u]; save();
+  if (queueNext()) return;
   if (i + 1 < sr.eps.length) playSeries(sr.id, i + 1);
   else { S.lep[sr.id] = 0; lsMsg(`《${sr.title}》已全部聞畢，隨喜功德。`); paintListen(); }
 });
@@ -3447,7 +3506,7 @@ if (navigator.mediaSession){
   const h = (a, f) => { try{ navigator.mediaSession.setActionHandler(a, f); }catch(e){} };
   h("play", talkPlay); h("pause", () => talk.pause());
   h("seekbackward", () => { talk.currentTime = Math.max(0, talk.currentTime - 15); });
-  h("nexttrack", () => { if (lsCur && lsCur.i + 1 < lsCur.s.eps.length) playSeries(lsCur.s.id, lsCur.i + 1); });
+  h("nexttrack", () => { if (queueNext()) return; if (lsCur && lsCur.i + 1 < lsCur.s.eps.length) playSeries(lsCur.s.id, lsCur.i + 1); });
 }
 function paintNow(){
   if (!lsCur) return;
@@ -3537,7 +3596,7 @@ function renderTodayListen(){
   let id, idx = null, name, who, opts = null;
   // our own tracks only: the temple chant by day, the bedtime music (stops after 30 minutes) at night
   const sg = SONGS.length && LS_ALL[SONGS[0].id];
-  if (sg && h < 19){ id = sg.id; idx = 0; name = `${sg.title}・${sg.eps[0].t}`; who = "雲禪 AI 唱誦・有經文字幕"; }
+  if (sg){ id = sg.id; idx = 0; name = `${sg.title}・${sg.eps[0].t}`; who = "雲禪 AI 唱誦・有經文字幕"; }
   else { id = "b-bed"; name = "雲禪睡前配樂"; who = "頌缽與木魚・三十分鐘後自止"; opts = { sleep:30 }; }
   const lab = document.createElement("div"); lab.className = "tlab"; lab.innerHTML = "<b>今日聞法</b>";
   const nm = document.createElement("div"); nm.className = "tname"; nm.textContent = name;
@@ -3818,7 +3877,7 @@ function paintSBar(){
   const pick = !lsCur && !sess && S.pickText && LIB.texts.find(x => x.id === S.pickText);
   $("sName").textContent = lsCur ? lsCur.s.title : sess ? it.name : pick ? pick.title : "選擇經文";
   const gr = S.goalRun && S.goalRun.day === dkey(new Date()) ? S.goalRun : null;
-  $("sSub").textContent = gr ? `${SLOT_NAME[gr.slot]}・發願 ${gr.target / PER_LOOP} 輪` : done && routine ? "已圓滿・輕觸進入下一步" : !lsCur ? "安靜撥珠" :
+  $("sSub").textContent = gr ? `${SLOT_NAME[gr.slot]}・發願 ${gr.target / PER_LOOP} 輪` : done && routine ? "已圓滿・輕觸進入下一步" : !lsCur ? "輕觸選經文音樂" :
     isSong(lsCur.s.id) ? `雲禪唱誦・${lsCur.ep.t}` : "雲禪配樂";
 }
 // rolling lyrics: lyrSet() lays out the lines once per track, lyrAt() brings one line to the middle
@@ -3974,7 +4033,6 @@ function renderSutras(){
     }
     box.appendChild(c);
   };
-  card("安靜撥珠", "不播放，只聽撥珠聲", {}, !playingId, () => { talk.pause(); lsCur = null; paintListen(); if (sess && !routine) endSession(); });
   LS_GROUPS.filter(([k]) => ["song", "bed", "chant", "name"].includes(k)).forEach(([k]) => LISTEN[k].forEach(sr => {
     const versions = k === "song" && sr.eps.length > 1 ? sr.eps.map((e, i) => ({ label:e.t.replace("版", ""), on:playingId === sr.id && lsCur.i === i })) : null;
     card(sr.title, k === "song" ? "雲禪 AI 唱誦・有經文字幕" : sr.who, aboutOf(sr.id), playingId === sr.id, i => selectTrack(sr, i), versions);
@@ -3982,283 +4040,349 @@ function renderSutras(){
 }
 // choosing a track also chooses what the beads count: its own chant (in 遍) or free holy-name beading
 // choosing a track only changes what plays: beading stays one tap one bead, 108 beads one round
-function selectTrack(sr, idx = null){
+function selectTrack(sr, idx = null, queue = null){
+  lsQueue = queue;
   showTab("beads", true);   // show the stage first: drawing beads on a hidden (zero-size) stage throws
   if (sess && !routine) endSession();
   if (!(lsCur && lsCur.s.id === sr.id && !talk.paused && (idx == null || lsCur.i === idx))) playSeries(sr.id, idx, { loop:true });
+  talk.loop = !lsQueue;
   renderHud();
 }
-/* ---- 經文庫（v7）：每部經文一筆，資料來自經文庫的 texts、catalog、topics，與唱誦清單 ---- */
+/* ---- 經文音樂（v8，2026-11-01）：像音樂 App。只列已上架的唱誦：每部經是一張專輯，裡面是不同編曲（以後也可以附影片）；
+   「我的專輯」是使用者自己排的播放清單，依序播完再從頭。點曲目就在這裡播放，底部播放列按「去撥珠」回撥珠頁。
+   沒有「安靜撥珠」選項：不想聽就暫停，或直接撥。念珠一律親手撥，不自動計數。 ---- */
 const TOPICS = LIB.topics || { themes:[], for:[] };
 const CATALOG = LIB.catalog || {};
-const KIND_ORDER = ["聖號", "咒", "偈", "經", "配樂"];
-const KIND_NAME = { "聖號":"聖號", "咒":"咒語", "偈":"偈頌", "經":"經典", "配樂":"純配樂" };
-const KIND_SEAL = { "聖號":"號", "咒":"咒", "偈":"偈", "經":"經", "配樂":"樂" };
-const STYLE_NOTE = { "經典梵唄":"木魚定拍、大眾齊聲，傳統寺院唱誦的感覺", "古韻梵唱":"古箏、竹笛與頌缽，莊重平和", "輕律吟唱":"輕柔節奏，旋律感較明顯", "空靈慢唱":"輕柔人聲、長音，留白較多" };
-const THEME_ICON = {
-  health:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
-  study:'<path d="M4 5.5c2.5-1 5.5-1 8 .5 2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z"/><path d="M12 6v13.5"/>',
-  work:'<path d="M4 18l5-5 4 3 7-8"/><path d="M15 8h5v5"/>',
-  family:'<path d="M4 11l8-6 8 6v8H4z"/><path d="M10 19v-5h4v5"/>',
-  calm:'<path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"/>',
-  protect:'<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/>',
-  deceased:'<path d="M12 6c-2 2.5-2.4 6 0 9.5 2.4-3.5 2-7 0-9.5z"/><path d="M12 15.5C9 14 6.5 11.5 6 9c2.7.5 4.8 2.4 6 6.5zM12 15.5c3-1.5 5.5-4 6-6.5-2.7.5-4.8 2.4-6 6.5z"/><path d="M5 18c2.2 1.3 4.6 1.8 7 1.8s4.8-.5 7-1.8"/>',
-  daily:'<path d="M4 18h16M7 18a5 5 0 0 1 10 0M12 6v3M5.6 9.6l2 2M18.4 9.6l-2 2"/>',
-  wealth:'<ellipse cx="12" cy="7" rx="7" ry="2.6"/><path d="M5 7v5c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V7M5 12v5c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-5"/>',
-  bond:'<circle cx="8.5" cy="8" r="3"/><circle cx="15.5" cy="8" r="3"/><path d="M3 19c.6-3.2 2.9-5 5.5-5 1.4 0 2.6.5 3.5 1.4.9-.9 2.1-1.4 3.5-1.4 2.6 0 4.9 1.8 5.5 5"/>',
-  sleep:'<path d="M17.5 13.5A6.5 6.5 0 0 1 10.5 4a7 7 0 1 0 7 9.5z"/><path d="M15 4h4l-4 4h4"/>',
-  repent:'<path d="M12 4c1.2 1.2 1.2 2.4 0 3.6-1.2 1.2-1.2 2.4 0 3.6"/><path d="M6 14h12l-1.5 6h-9z"/><path d="M9 14v-1.5h6V14"/>'
-};
-const svgI = (d, w = 1.5) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const KIND_NAME = { "聖號":"聖號", "咒":"咒語", "偈":"偈頌", "經":"經典" };
+const STYLE_NOTE = { "經典梵唄":"木魚定拍、大眾齊聲", "古韻梵唱":"古箏、竹笛與頌缽，莊重平和", "輕律吟唱":"輕柔節奏，旋律感較明顯", "空靈慢唱":"輕柔人聲、長音，留白較多" };
+const svgI = (d, w = 1.6) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 const PLAY_I = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
-const STOP_I = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 7h10v10H7z"/></svg>';
-const songOfText = id => { const sg = SONGS.find(g => g.text_id === id); return sg ? LS_ALL[sg.id] : null; };
-// every scripture in the library becomes one entry; bedtime music is listed as its own kind
-const ENTRIES = [
-  ...LIB.texts.map(t => ({ id:t.id, title:t.title, kind:t.kind, lines:t.lines, src:t.source || {}, review:t.review || {},
-    cat:CATALOG[t.id] || {}, sr:songOfText(t.id), about:aboutOf((SONGS.find(g => g.text_id === t.id) || {}).id || "") })),
-  ...(LISTEN.bed || []).map(sr => ({ id:sr.id, title:sr.title, kind:"配樂", lines:[], src:{}, review:{ status:"verified" },
-    cat:{ themes:["calm"], for:["self"], meaning:aboutOf(sr.id).intro || "", practice:aboutOf(sr.id).use || "" }, sr, about:aboutOf(sr.id) }))
-];
-const entryOf = id => ENTRIES.find(e => e.id === id);
-const nameOf = (list, id) => (list.find(x => x.id === id) || {}).name || "";
-const summaryOf = e => e.cat.meaning || e.about.intro || e.lines.join("").slice(0, 40);
-const versionLyrics = (ep, fallback) => {
-  const raw = ep && (ep.lyrics_preview != null ? ep.lyrics_preview : ep.lyrics_display);
-  const src = raw && !Array.isArray(raw) && typeof raw === "object" ? (raw.lines || raw.items || raw.text || raw.preview) : raw;
-  const rows = Array.isArray(src) ? src : typeof src === "string" ? src.split(/\r?\n/) : [];
-  const lyrics = rows.map(row => {
-    if (typeof row === "string") return { text:row.trim(), start:null };
-    if (!row || typeof row !== "object") return null;
-    const text = String(row.text || row.display || row.line || row.lyric || row.content || "").trim();
-    const at = row.start != null ? row.start : row.start_time != null ? row.start_time : row.time;
-    return { text, start:Number.isFinite(Number(at)) ? Number(at) : null };
-  }).filter(row => row && row.text);
-  if (lyrics.length) return { rows:lyrics, fallback:false };
-  return { rows:(fallback || []).map(text => ({ text, start:null })), fallback:true };
-};
-const timingLabel = ep => {
-  if (!ep) return { text:"未播放歌曲", pending:false };
-  const method = String(ep.timing_method || "").toLowerCase();
-  const review = ep.timing_review && typeof ep.timing_review === "object" ? ep.timing_review.status : ep.timing_review;
-  const state = String(review || "").toLowerCase();
-  const hasCues = Array.isArray(ep.cues) && ep.cues.length > 0;
-  let text = "";
-  if (/vocal_snap/.test(method)) text = "人聲起點校正時間軸";
-  else if (/mms|forced|align/.test(method)) text = "強制對齊時間軸";
-  else if (/lrc|model/.test(method)) text = "LRC 時間軸";
-  else if (/estimate|proportion|weight|grid/.test(method)) text = "推算時間軸";
-  else if (hasCues || ep.timed) text = "已有逐句時間軸";
-  else text = "尚無逐句時間軸";
-  const confirmed = ["verified", "approved", "confirmed", "checked", "reviewed", "pass", "final"].includes(state);
-  if (confirmed) text += "・資料標記已確認";
-  else if (hasCues || method || ep.timed) text += "・待人工核對";
-  return { text, pending:!confirmed && (hasCues || !!method || !!ep.timed) };
-};
-let libMode = "themes", libFilter = null, libEntry = null, libVer = 0;
-const pv = new Audio(); pv.preload = "none";
-let pvIdx = -1;
-function pvStop(){ pv.pause(); pvIdx = -1; document.querySelectorAll(".ldprev.on").forEach(b => { b.classList.remove("on"); b.innerHTML = PLAY_I; b.setAttribute("aria-label", "試聽"); }); }
-pv.addEventListener("ended", pvStop);
+const PAUSE_I = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+const ADD_I = svgI('<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>');
+const DEL_I = svgI('<path d="M6 6l12 12M18 6L6 18"/>');
+const EQ = paused => `<span class="eq${paused ? " still" : ""}" aria-hidden="true"><i></i><i></i><i></i></span>`;
+// a cover per scripture: one of our own scene paintings, picked by its id so it never changes; catalog.cover overrides
+const COVERS = ["bg-pureland", "bg-lotus-pond", "bg-golden-hall", "bg-cloud-temple", "bg-sandalwood", "hero-listen"];
+const hashOf = s => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+const ALBUMS = SONGS.map(sg => {
+  const t = LIB.texts.find(x => x.id === sg.text_id) || {}, cat = CATALOG[sg.text_id] || {};
+  return { id:sg.text_id || sg.id, title:t.title || sg.item, kind:t.kind || "", lines:t.lines || [], src:t.source || {}, review:t.review || {},
+    cat, sr:LS_ALL[sg.id], about:aboutOf(sg.id), cover:cat.cover || `assets/img/${COVERS[hashOf(sg.text_id || sg.id) % COVERS.length]}.webp` };
+}).filter(a => a.sr);
+// every arrangement is one track; playlists keep its audio file name, which stays the same when songs are re-exported
+const TRACKS = ALBUMS.flatMap(a => a.sr.eps.map((ep, i) => ({ key:ep.u.split("/").pop().replace(/\.mp3$/, ""), a, i, ep })));
+const trackOf = key => TRACKS.find(t => t.key === key);
+const albumOf = id => ALBUMS.find(a => a.id === id);
+const curTrack = () => lsCur && TRACKS.find(t => t.a.sr.id === lsCur.s.id && t.i === lsCur.i);
+const isCurT = t => !!lsCur && lsCur.s.id === t.a.sr.id && lsCur.i === t.i;
+const myAlbums = () => (S.myAlbums = S.myAlbums || []);
+const plOf = id => myAlbums().find(p => p.id === id);
+const plTracks = p => p.keys.map(trackOf).filter(Boolean);
+const tSub = t => [STYLE_NOTE[t.ep.t] || "雲禪 AI 唱誦", t.ep.d ? mmss(t.ep.d) : ""].filter(Boolean).join("・");
+const el = (tag, cls, text) => { const x = document.createElement(tag); if (cls) x.className = cls; if (text != null) x.textContent = text; return x; };
+const img = (src, alt = "") => { const x = el("img"); x.src = src; x.alt = alt; x.loading = "lazy"; x.decoding = "async"; return x; };
+function coverEl(a, badge){
+  const c = el("span", "cov"); c.appendChild(img(a.cover)); c.appendChild(el("b", null, a.title));
+  if (badge) c.appendChild(el("i", null, badge));
+  return c;
+}
+function thumbEl(covers, state){   // state: null, "play" (playing) or "pause" (current but paused)
+  const th = el("span", "tthumb" + (covers.length > 1 ? " mos" : "")); th.setAttribute("aria-hidden", "true");
+  (covers.length > 1 ? [0, 1, 2, 3].map(i => covers[i % covers.length]) : covers).forEach(u => th.appendChild(img(u)));
+  if (state){ const s = el("span", "st"); s.innerHTML = EQ(state === "pause"); th.appendChild(s); }
+  return th;
+}
 
+// playing: a single track loops (repeating one chant is the practice); an own album plays through and starts over
+function playTrack(t, queue){
+  ac(); pvClose();
+  if (isCurT(t) && !queue){ talk.paused ? talkPlay() : talk.pause(); paintLib(); return; }
+  S.pickText = t.a.id; save();
+  selectTrack(t.a.sr, t.i, queue || null);
+  lyrKey = ""; renderHud(); paintLib();
+}
+function playAlbum(p, from = 0){
+  const ts = plTracks(p); if (!ts.length) return;
+  const pos = Math.min(from, ts.length - 1);
+  playTrack(ts[pos], { id:p.id, keys:ts.map(t => t.key), pos });
+}
+function queueNext(){
+  if (!lsQueue) return false;
+  const keys = lsQueue.keys.filter(trackOf); if (!keys.length){ lsQueue = null; return false; }
+  lsQueue.pos = (lsQueue.pos + 1) % keys.length; lsQueue.keys = keys;
+  const t = trackOf(keys[lsQueue.pos]);
+  S.pickText = t.a.id; save();
+  if (isCurT(t)){ talk.currentTime = 0; talkPlay(); } else playSeries(t.a.sr.id, t.i);
+  lyrKey = ""; renderHud(); paintLib();
+  return true;
+}
+
+let libMode = "explore", libTheme = null, libView = null;
 function openLib(){
-  pvStop(); libFilter = null; $("libQ").value = "";
+  pvClose(); libTheme = null; $("libQ").value = ""; libView = null;
   $("lib").classList.remove("deep"); $("libDetail").setAttribute("aria-hidden", "true");
   $("lib").hidden = false; renderLib(); $("libScroll").scrollTop = 0;
   setTimeout(() => $("libClose").focus(), 50);
 }
-function closeLib(){ pvStop(); $("lib").hidden = true; $("lib").classList.remove("deep"); }
+function closeLib(){ pvClose(); $("addSheet").hidden = true; $("lib").hidden = true; $("lib").classList.remove("deep"); libView = null; }
 function renderLib(){
-  // tiles: one tap filters the list below; tap again to clear
-  const tiles = $("libTiles"); tiles.innerHTML = "";
-  const list = TOPICS[libMode] || [];
-  list.forEach(x => {
-    const b = document.createElement("button"); b.className = "libtile" + (libMode === "for" ? " txt" : "");
-    const on = libFilter && libFilter.mode === libMode && libFilter.id === x.id;
-    b.classList.toggle("on", !!on); b.setAttribute("aria-pressed", !!on);
-    b.innerHTML = (libMode === "themes" ? svgI(THEME_ICON[x.id] || "") : "") + `<span></span>`;
-    b.querySelector("span").textContent = x.name;
-    b.onclick = () => { libFilter = on ? null : { mode:libMode, id:x.id }; renderLib();
-      if (libFilter) $("libListTitle").scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block:"start" }); };
-    tiles.appendChild(b);
-  });
   document.querySelectorAll(".libseg button").forEach(b => { const on = b.dataset.mode === libMode; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
-  // what is playing now, one tap back to its page
-  const now = $("libNow"); now.innerHTML = "";
-  const cur = lsCur && ENTRIES.find(e => e.sr && e.sr.id === lsCur.s.id);
-  if (cur){
-    const b = document.createElement("button"); b.className = "libnow";
-    b.innerHTML = "<i></i><span><small></small><b></b></span><em class='chev'>›</em>";
-    b.querySelector("small").textContent = talk.paused ? "上次聆聽" : "正在聆聽";
-    b.querySelector("b").textContent = `${cur.title}${lsCur.s.eps.length > 1 ? "・" + lsCur.ep.t : ""}`;
-    b.onclick = () => openEntry(cur.id); now.appendChild(b);
-  }
-  // list: filtered by the tile and the search words, grouped by kind
+  $("libExplore").hidden = libMode !== "explore"; $("libMine").hidden = libMode !== "mine";
+  libMode === "explore" ? renderExplore() : renderMine();
+  paintLibPlayer();
+}
+// repaint whatever is on screen after play / pause / a change of track
+function paintLib(){
+  if ($("lib").hidden) return;
+  if (libView){ const top = $("ldBody").scrollTop; libView.type === "album" ? openAlbum(libView.id, true) : openPl(libView.id, true); $("ldBody").scrollTop = top; }
+  else { const top = $("libScroll").scrollTop; renderLib(); $("libScroll").scrollTop = top; }
+  paintLibPlayer();
+}
+function trackRow(t, opt = {}){
+  const r = el("div", "trow" + (isCurT(t) ? " cur" : ""));
+  const m = el("button", "tmain");
+  const state = isCurT(t) ? (talk.paused ? "pause" : "play") : null;
+  if (opt.no != null){ const n = el("span", "tno"); n.setAttribute("aria-hidden", "true"); if (state) n.innerHTML = EQ(state === "pause"); else n.textContent = opt.no; m.appendChild(n); }
+  else m.appendChild(thumbEl([t.a.cover], state));
+  const tx = el("span", "t"); tx.appendChild(el("b", null, opt.no != null && !opt.full ? t.ep.t : `${t.a.title}・${t.ep.t}`));
+  tx.appendChild(el("span", null, opt.no != null ? [STYLE_NOTE[t.ep.t], t.ep.d ? mmss(t.ep.d) : ""].filter(Boolean).join("・") : tSub(t)));
+  m.appendChild(tx);
+  m.setAttribute("aria-label", `${state === "play" ? "暫停" : "播放"} ${t.a.title} ${t.ep.t}`);
+  m.onclick = () => opt.play ? opt.play() : playTrack(t);
+  r.appendChild(m);
+  const more = el("button", "tmore");
+  if (opt.remove){ more.innerHTML = DEL_I; more.setAttribute("aria-label", `從專輯移除 ${t.ep.t}`); more.onclick = opt.remove; }
+  else { more.innerHTML = ADD_I; more.setAttribute("aria-label", `把 ${t.a.title} ${t.ep.t} 加入專輯`); more.onclick = () => openAdd([t.key], `${t.a.title}・${t.ep.t}`); }
+  r.appendChild(more);
+  return r;
+}
+function renderExplore(){
   const q = $("libQ").value.trim();
-  const hit = e => {
-    if (libFilter && !(e.cat[libFilter.mode] || []).includes(libFilter.id)) return false;
-    if (!q) return true;
-    const words = [e.title, summaryOf(e), e.cat.practice, e.cat.origin, ...(e.cat.themes || []).map(id => { const x = TOPICS.themes.find(y => y.id === id); return x ? x.name + x.desc : ""; }),
-      ...(e.cat.for || []).map(id => nameOf(TOPICS.for, id)), KIND_NAME[e.kind]].join(" ");
-    return q.split(/\s+/).every(w => words.includes(w));
-  };
-  const shown = ENTRIES.filter(hit);
-  const ft = libFilter && (libFilter.mode === "themes" ? TOPICS.themes : TOPICS.for).find(x => x.id === libFilter.id);
-  $("libListTitle").innerHTML = ""; $("libListTitle").append(ft ? (libFilter.mode === "for" ? `迴向給${ft.name}` : ft.name) : q ? "搜尋結果" : "全部經文");
-  const n = document.createElement("small"); n.textContent = `${shown.length} 部`; $("libListTitle").appendChild(n);
-  $("libClear").hidden = !libFilter && !q;
-  $("libDesc").hidden = !(ft && ft.desc); $("libDesc").textContent = ft && ft.desc ? ft.desc : "";
-  const box = $("libList"); box.innerHTML = "";
-  if (!shown.length){ box.innerHTML = '<p class="libempty">找不到符合的經文。<br>換個詞試試，例如「平安」「往生」「考試」。</p>'; return; }
-  KIND_ORDER.forEach(k => {
-    const group = shown.filter(e => e.kind === k).sort((a, b) => (b.sr ? 1 : 0) - (a.sr ? 1 : 0));
-    if (!group.length) return;
-    const g = document.createElement("div"); g.className = "libgroup"; g.textContent = `${KIND_NAME[k]}・${group.length}`; box.appendChild(g);
-    group.forEach(e => {
-      const r = document.createElement("button"); r.className = "librow";
-      r.innerHTML = '<span class="libseal" aria-hidden="true"></span><span class="t"><b></b><span></span></span><em></em><span class="chev" aria-hidden="true">›</span>';
-      r.querySelector(".libseal").textContent = KIND_SEAL[k];
-      r.querySelector("b").textContent = e.title;
-      r.querySelector(".t span").textContent = summaryOf(e);
-      const tag = r.querySelector("em");
-      if (e.kind === "配樂") tag.textContent = "可整夜循環";
-      else if (e.sr){ tag.textContent = `♪ ${e.sr.eps.length} 種編曲`; }
-      else { tag.textContent = "經文"; tag.className = "plain"; }
-      r.onclick = () => openEntry(e.id);
-      box.appendChild(r);
-    });
+  // wish chips: only the wishes that have something to play
+  const chips = $("libChips"); chips.innerHTML = "";
+  const themes = (TOPICS.themes || []).filter(x => ALBUMS.some(a => (a.cat.themes || []).includes(x.id)));
+  chips.hidden = themes.length < 2;
+  [{ id:null, name:"全部" }, ...themes].forEach(x => {
+    const b = el("button", null, x.name), on = libTheme === x.id;
+    b.classList.toggle("on", on); b.setAttribute("aria-pressed", on);
+    b.onclick = () => { libTheme = x.id; renderExplore(); };
+    chips.appendChild(b);
+  });
+  const words = a => [a.title, a.cat.meaning, a.cat.practice, a.about.intro, a.about.use, KIND_NAME[a.kind], ...a.sr.eps.map(e => e.t),
+    ...(a.cat.themes || []).map(id => { const x = TOPICS.themes.find(y => y.id === id); return x ? x.name + x.desc : ""; }),
+    ...(a.cat.for || []).map(id => (TOPICS.for.find(y => y.id === id) || {}).name || "")].join(" ");
+  const hit = a => (!libTheme || (a.cat.themes || []).includes(libTheme)) && (!q || q.split(/\s+/).every(w => words(a).includes(w)));
+  const albums = ALBUMS.filter(hit);
+  const th = libTheme && TOPICS.themes.find(x => x.id === libTheme);
+  $("libListTitle").textContent = th ? th.name : q ? "搜尋結果" : "經文";
+  const covers = $("libCovers"); covers.innerHTML = "";
+  if (!albums.length){
+    covers.innerHTML = `<p class="libempty">${ALBUMS.length ? "找不到符合的經文。<br>換個詞試試，例如「平安」「往生」。" : "經文音樂準備中，敬請期待。"}</p>`;
+    $("libTrackTitle").parentNode.hidden = true; $("libTracks").innerHTML = ""; return;
+  }
+  albums.forEach(a => {
+    const b = el("button", "acard");
+    const playingHere = lsCur && lsCur.s.id === a.sr.id;
+    b.appendChild(coverEl(a, playingHere ? (talk.paused ? "暫停中" : "播放中") : ""));
+    b.appendChild(el("span", "an", a.title));
+    b.appendChild(el("span", "as", `${a.sr.eps.length} 種編曲`));
+    b.onclick = () => openAlbum(a.id);
+    covers.appendChild(b);
+  });
+  $("libTrackTitle").parentNode.hidden = false;
+  const box = $("libTracks"); box.innerHTML = "";
+  TRACKS.filter(t => albums.includes(t.a)).forEach(t => box.appendChild(trackRow(t)));
+}
+function renderMine(){
+  const box = $("libPls"); box.innerHTML = "";
+  if (!myAlbums().length){ box.innerHTML = '<p class="libempty">還沒有自己的專輯。<br>按上面的「新增專輯」，或在曲目右邊按 ⊕ 加進來。</p>'; return; }
+  myAlbums().forEach(p => {
+    const ts = plTracks(p), on = lsQueue && lsQueue.id === p.id;
+    const r = el("div", "trow" + (on ? " cur" : ""));
+    const m = el("button", "tmain");
+    m.appendChild(ts.length ? thumbEl([...new Set(ts.map(t => t.a.cover))], on ? (talk.paused ? "pause" : "play") : null) : Object.assign(el("span", "tthumb plus"), { innerHTML:svgI('<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>') }));
+    const tx = el("span", "t"); tx.appendChild(el("b", null, p.name)); tx.appendChild(el("span", null, `${ts.length} 首${on ? "・播放中" : ""}`)); m.appendChild(tx);
+    m.onclick = () => openPl(p.id);
+    r.appendChild(m);
+    if (ts.length){ const pl = el("button", "tmore"); pl.innerHTML = on && !talk.paused ? PAUSE_I : PLAY_I; pl.setAttribute("aria-label", `播放專輯 ${p.name}`);
+      pl.onclick = () => on ? (talk.paused ? talkPlay() : talk.pause(), paintLib()) : playAlbum(p); r.appendChild(pl); }
+    box.appendChild(r);
   });
 }
-// detail: read first (text, meaning, origin, story), pick how to listen, then start
-function openEntry(id){
-  const e = entryOf(id); if (!e) return;
-  pvStop(); libEntry = e;
-  const playingHere = lsCur && e.sr && lsCur.s.id === e.sr.id;
-  // default: what is playing, else the first arrangement, else quiet
-  libVer = playingHere ? lsCur.i + 1 : e.sr ? 1 : 0;
-  $("ldBar").textContent = e.title;
+function showDetail(title){
+  $("ldBar").textContent = title;
+  $("lib").classList.add("deep"); $("libDetail").setAttribute("aria-hidden", "false");
+}
+function openAlbum(id, repaint){
+  const a = albumOf(id); if (!a) return;
+  libView = { type:"album", id };
   const body = $("ldBody"); body.innerHTML = "";
-  const el = (tag, cls, text) => { const x = document.createElement(tag); if (cls) x.className = cls; if (text != null) x.textContent = text; return x; };
-  const hero = el("section", "ldhero");
-  hero.appendChild(el("span", "ldkind", KIND_NAME[e.kind] || e.kind));
-  hero.appendChild(el("h1", null, e.title));
-  const src = [e.src.sutra && e.src.sutra !== e.title ? `出自《${e.src.sutra}》` : "", e.src.translator || "", e.src.cbeta ? `CBETA ${e.src.cbeta}` : ""].filter(Boolean).join("・");
+  const playingHere = lsCur && lsCur.s.id === a.sr.id, now = playingHere && !talk.paused;
+  const hero = el("section", "ahero");
+  hero.appendChild(coverEl(a));
+  if (KIND_NAME[a.kind]) hero.appendChild(el("span", "ldkind", KIND_NAME[a.kind]));
+  hero.appendChild(el("h1", null, a.title));
+  const src = [a.src.sutra && a.src.sutra !== a.title ? `出自《${a.src.sutra}》` : "", a.src.translator || ""].filter(Boolean).join("・");
   if (src) hero.appendChild(el("p", "ldsrc", src));
-  if (e.kind !== "配樂" && (e.review.status !== "verified" || (e.cat.review && e.cat.review.status !== "verified"))) hero.appendChild(el("span", "ldreview", "內容校對中"));
+  hero.appendChild(el("p", "ldsrc", `${a.sr.eps.length} 種編曲・雲禪 AI 唱誦`));
+  const acts = el("div", "aacts");
+  const big = el("button", "abig"); big.innerHTML = (now ? PAUSE_I : PLAY_I) + `<span>${now ? "暫停" : playingHere ? "繼續播放" : "播放"}</span>`;
+  big.onclick = () => playTrack(playingHere ? TRACKS.find(t => t.a === a && t.i === lsCur.i) : TRACKS.find(t => t.a === a));
+  const add = el("button", "aghost"); add.innerHTML = ADD_I + "<span>加入專輯</span>";
+  add.onclick = () => openAdd(TRACKS.filter(t => t.a === a).map(t => t.key), a.title);
+  acts.append(big, add); hero.appendChild(acts);
   body.appendChild(hero);
-  const tags = el("div", "ldtags");
-  (e.cat.themes || []).forEach(t => { const n = nameOf(TOPICS.themes, t); if (n) tags.appendChild(el("span", null, n)); });
-  (e.cat.for || []).forEach(t => { const n = nameOf(TOPICS.for, t); if (n) tags.appendChild(el("span", "for", "迴向" + n)); });
-  if (tags.children.length) body.appendChild(tags);
   const sec = (title, node) => { const s = el("section", "ldsec"); s.appendChild(el("h4", null, title)); s.appendChild(node); body.appendChild(s); return s; };
-  if (e.kind !== "配樂"){
-    const intro = e.cat.basic_intro || e.cat.intro || e.cat.meaning || e.about.intro;
-    if (intro) sec("基本介紹", el("p", null, intro));
+  const list = el("div");
+  TRACKS.filter(t => t.a === a).forEach((t, n) => list.appendChild(trackRow(t, { no:n + 1 })));
+  sec("編曲", list);
+  // videos: an arrangement may carry its own video (our own mp4); listed only when there is one
+  const vids = TRACKS.filter(t => t.a === a && t.ep.video);
+  if (vids.length){
+    const g = el("div", "vids");
+    vids.forEach(t => { const b = el("button", "vcardx"); const c = el("span", "cov"); c.appendChild(img(t.ep.poster || a.cover));
+      const p = el("span"); p.innerHTML = PLAY_I; c.appendChild(p); b.appendChild(c); b.appendChild(el("b", null, t.ep.t));
+      b.onclick = () => openVideo(t); g.appendChild(b); });
+    sec("影片", g);
   }
-  // how to listen: quiet, or one of the arrangements, each with a short preview
-  const vers = el("div", "ldvers");
-  const opts = [{ name: e.kind === "配樂" ? "不播放" : "安靜撥珠", note: e.kind === "配樂" ? "只聽撥珠聲" : "不播放，只看經文、聽撥珠聲", d:null }];
-  if (e.sr) e.sr.eps.forEach(ep => opts.push({ ...ep, name:ep.t, note:STYLE_NOTE[ep.t] || e.sr.who, cue:ep.cues && ep.cues[0] ? ep.cues[0][0] : 0 }));
-  opts.forEach((o, i) => {
-    const c = el("button", "ldver"); c.setAttribute("aria-pressed", i === libVer);
-    c.appendChild(el("b", null, o.name)); c.appendChild(el("span", null, o.note));
-    if (o.d) c.appendChild(el("small", null, `時長 ${mmss(o.d)}・循環播放`));
-    c.onclick = ev => { if (ev.target.closest(".ldprev")) return; libVer = i; paintVers(); };
-    if (o.u){
-      const p = el("span", "ldprev"); p.setAttribute("role", "button"); p.setAttribute("tabindex", "0"); p.setAttribute("aria-label", "試聽"); p.innerHTML = PLAY_I;
-      const toggle = ev => { ev.stopPropagation(); ac();
-        if (pvIdx === i){ pvStop(); return; }
-        pvStop(); if (!talk.paused) talk.pause();
-        pv.src = o.u; pv.currentTime = 0;
-        pv.addEventListener("loadedmetadata", () => { try{ pv.currentTime = Math.max(0, o.cue - 1); }catch(_){} }, { once:true });
-        pv.play().catch(() => {}); pvIdx = i; p.classList.add("on"); p.innerHTML = STOP_I; p.setAttribute("aria-label", "停止試聽");
-        libVer = i; paintVers();
-        clearTimeout(pvStop.t); pvStop.t = setTimeout(() => { if (pvIdx === i) pvStop(); }, 30000);   // a preview, not the practice
-      };
-      p.onclick = toggle; p.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") toggle(ev); };
-      c.appendChild(p);
-    }
-    vers.appendChild(c);
-  });
-  sec(e.kind === "配樂" ? "播放" : "聆聽方式", vers);
-  const lyrics = el("div", "ldlyrics");
-  const lyricsMeta = el("div", "ldlyrics-meta"); lyrics.appendChild(lyricsMeta);
-  const lyricsNote = el("p", "ldlyrics-note"); lyrics.appendChild(lyricsNote);
-  const lyricsList = el("ol"); lyrics.appendChild(lyricsList);
-  if (e.kind !== "配樂") sec("歌詞預覽", lyrics);
-  function paintLyrics(){
-    if (e.kind === "配樂") return;
-    lyricsMeta.innerHTML = ""; lyricsList.innerHTML = "";
-    const ep = libVer > 0 ? opts[libVer] : null;
-    if (!ep){
-      lyricsNote.textContent = "安靜撥珠不播放歌曲；下方仍可預覽經文全文。";
-      lyricsMeta.appendChild(el("span", null, "無歌曲"));
-      return;
-    }
-    const addMeta = (text, cls) => { const x = el("span", cls || null, text); lyricsMeta.appendChild(x); };
-    if (ep.passes != null && String(ep.passes).trim()){
-      const passes = String(ep.passes).trim(); addMeta(/遍/.test(passes) ? passes : `${passes} 遍`);
-    } else addMeta("遍數待同步", "pending");
-    if (ep.d) addMeta(`實際曲長 ${mmss(ep.d)}`); else addMeta("曲長待同步", "pending");
-    const timing = timingLabel(ep); addMeta(timing.text, timing.pending ? "pending" : "");
-    const preview = versionLyrics(ep, e.lines);
-    lyricsNote.textContent = preview.fallback
-      ? "此版本的實際歌詞資料待同步；以下先顯示經文原文，不代表精確歌詞順序或重複遍數。"
-      : "以下為這個版本使用的原文歌詞與逐句時間預覽；實際唱字及時間仍待聽校。";
-    preview.rows.slice(0, 12).forEach(row => {
-      const li = el("li");
-      li.appendChild(el("time", null, row.start == null ? "" : mmss(row.start)));
-      li.appendChild(el("span", null, row.text)); lyricsList.appendChild(li);
-    });
-    if (preview.rows.length > 12) lyricsList.appendChild(el("li", "ldlyrics-empty", `另有 ${preview.rows.length - 12} 句，開始播放後依字幕顯示。`));
-    if (!preview.rows.length) lyricsList.appendChild(el("li", "ldlyrics-empty", "尚無可預覽的歌詞。"));
-  }
-  function paintVers(){
-    [...vers.children].forEach((c, i) => { c.classList.toggle("on", i === libVer); c.setAttribute("aria-pressed", i === libVer); });
-    const o = opts[libVer];
-    $("ldSel").innerHTML = "<span></span><b></b>";
-    $("ldSel").querySelector("span").textContent = libVer === 0 ? "不播放" : "邊聽邊撥";
-    $("ldSel").querySelector("b").textContent = libVer === 0 ? (e.kind === "配樂" ? "安靜撥珠" : `${e.title}・安靜撥珠`) : `${e.title}・${o.name}`;
-    paintLyrics();
-  }
-  paintVers();
-  if (e.lines.length){
+  const tags = el("div", "ldtags");
+  (a.cat.themes || []).forEach(x => { const n = (TOPICS.themes.find(y => y.id === x) || {}).name; if (n) tags.appendChild(el("span", null, n)); });
+  (a.cat.for || []).forEach(x => { const n = (TOPICS.for.find(y => y.id === x) || {}).name; if (n) tags.appendChild(el("span", "for", "迴向" + n)); });
+  if (tags.children.length) sec("適合", tags);
+  const para = (title, text) => { if (text) sec(title, el("p", null, text)); };
+  para("大意", a.cat.meaning || a.about.intro);
+  if (a.lines.length){
     const box = el("div", "ldtext"), ol = el("ol");
-    e.lines.forEach(l => ol.appendChild(el("li", null, l)));
+    a.lines.forEach(l => ol.appendChild(el("li", null, l)));
     box.appendChild(ol);
-    const s = sec(e.cat.excerpt ? "經文預覽（節選原文）" : "經文預覽（全文）", box);
-    if (e.lines.length > 7){
+    const s = sec("經文", box);
+    if (a.lines.length > 7){
       box.classList.add("fold");
-      const more = el("button", "ldmore", `展開全文（共 ${e.lines.length} 句）`);
-      more.onclick = () => { const f = box.classList.toggle("fold"); more.textContent = f ? `展開全文（共 ${e.lines.length} 句）` : "收合"; };
+      const more = el("button", "ldmore", `展開全文（共 ${a.lines.length} 句）`);
+      more.onclick = () => { const f = box.classList.toggle("fold"); more.textContent = f ? `展開全文（共 ${a.lines.length} 句）` : "收合"; };
       s.appendChild(more);
     }
   }
-  const para = (title, text) => { if (text) sec(title, el("p", null, text)); };
-  para("大意", e.cat.meaning || e.about.intro);
-  para("典籍由來", e.cat.origin);
-  para("故事", e.cat.story);
-  para("怎麼持誦", e.cat.practice || e.about.use);
-  if (e.kind !== "配樂") body.appendChild(el("p", "ldfoot", "經文全部免費。念珠一律由您親手撥，唱誦只陪您一起念。"));
-  $("lib").classList.add("deep"); $("libDetail").setAttribute("aria-hidden", "false");
-  body.scrollTop = 0; setTimeout(() => $("libBack").focus(), 60);
+  para("典籍由來", a.cat.origin);
+  para("故事", a.cat.story);
+  para("怎麼持誦", a.cat.practice || a.about.use);
+  body.appendChild(el("p", "ldfoot", (a.review.status !== "verified" ? "經文內容校對中。" : "") + "經文全部免費。念珠一律由您親手撥，唱誦只陪您一起念。"));
+  showDetail(a.title);
+  if (!repaint){ body.scrollTop = 0; setTimeout(() => $("libBack").focus(), 60); }
+  paintLibPlayer();
 }
-function startEntry(){
-  const e = libEntry; if (!e) return;
-  pvStop(); closeLib();
-  if (libVer > 0 && e.sr){ S.pickText = e.kind === "配樂" ? null : e.id; save(); selectTrack(e.sr, libVer - 1); }
-  else { talk.pause(); lsCur = null; paintListen(); if (sess && !routine) endSession(); S.pickText = e.kind === "配樂" ? null : e.id; save(); showTab("beads", true); }
-  lyrKey = ""; renderHud();
+function openPl(id, repaint){
+  const p = plOf(id); if (!p){ backHome(); return; }
+  libView = { type:"pl", id };
+  const body = $("ldBody"); body.innerHTML = "";
+  const ts = plTracks(p), on = lsQueue && lsQueue.id === p.id, now = on && !talk.paused;
+  const hero = el("section", "ahero");
+  hero.appendChild(ts.length ? thumbEl([...new Set(ts.map(t => t.a.cover))]) : Object.assign(el("span", "tthumb plus"), { innerHTML:svgI('<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>') }));
+  const h = el("h1", null, p.name); hero.appendChild(h);
+  const total = ts.reduce((s, t) => s + (t.ep.d || 0), 0);
+  hero.appendChild(el("p", "ldsrc", ts.length ? `${ts.length} 首・約 ${mins(total)} 分鐘・播完從頭再來` : "還沒有曲目"));
+  const acts = el("div", "aacts");
+  if (ts.length){
+    const big = el("button", "abig"); big.innerHTML = (now ? PAUSE_I : PLAY_I) + `<span>${now ? "暫停" : on ? "繼續播放" : "全部播放"}</span>`;
+    big.onclick = () => on ? (talk.paused ? talkPlay() : talk.pause(), paintLib()) : playAlbum(p);
+    acts.appendChild(big);
+  }
+  const ren = el("button", "aghost", "改名");
+  ren.onclick = () => {
+    const inp = el("input", "renin"); inp.value = p.name; inp.maxLength = 16; inp.setAttribute("aria-label", "專輯名稱");
+    h.replaceWith(inp); inp.focus(); inp.select();
+    const done = () => { const v = inp.value.trim(); if (v) p.name = v; save(); openPl(p.id, true); };
+    inp.onblur = done; inp.onkeydown = ev => { if (ev.key === "Enter") inp.blur(); };
+  };
+  const del = el("button", "adel", "刪除這張專輯");
+  del.onclick = () => {
+    if (!del.dataset.sure){ del.dataset.sure = 1; del.textContent = "確定刪除？再按一次"; setTimeout(() => { if (del.isConnected){ delete del.dataset.sure; del.textContent = "刪除這張專輯"; } }, 4000); return; }
+    S.myAlbums = myAlbums().filter(x => x.id !== p.id); if (on) lsQueue = null; save(); backHome();
+  };
+  acts.append(ren); hero.appendChild(acts);
+  body.appendChild(hero);
+  const sec = el("section", "ldsec"); sec.appendChild(el("h4", null, "曲目"));
+  if (!ts.length) sec.appendChild(el("p", "libempty", "到「探索」，在曲目右邊按 ⊕，就能加進這張專輯。"));
+  ts.forEach((t, n) => sec.appendChild(trackRow(t, { no:n + 1, full:true, play:() => playAlbum(p, n),
+    remove:() => { p.keys = p.keys.filter(k => k !== t.key); save(); openPl(p.id, true); } })));
+  body.appendChild(sec);
+  body.appendChild(del);
+  showDetail(p.name);
+  if (!repaint){ body.scrollTop = 0; setTimeout(() => $("libBack").focus(), 60); }
+  paintLibPlayer();
 }
+function backHome(){
+  libView = null; $("lib").classList.remove("deep"); $("libDetail").setAttribute("aria-hidden", "true"); renderLib(); setTimeout(() => $("libClose").focus(), 60);
+}
+// bottom player: what is playing, pause, and back to the beads
+function paintLibPlayer(){
+  const t = curTrack(), bar = $("libPlayer");
+  bar.hidden = !t; $("lib").classList.toggle("playing", !!t);
+  if (!t) return;
+  const cov = $("lpCov"); cov.innerHTML = ""; cov.appendChild(img(t.a.cover));
+  $("lpT").textContent = `${t.a.title}・${t.ep.t}`;
+  const p = lsQueue && plOf(lsQueue.id);
+  $("lpS").textContent = (talk.paused ? "已暫停・" : "") + (p ? `專輯：${p.name}` : "單曲循環");
+  $("lpPlay").innerHTML = talk.paused ? PLAY_I : PAUSE_I; $("lpPlay").setAttribute("aria-label", talk.paused ? "播放" : "暫停");
+}
+$("lpPlay").onclick = () => { ac(); if (!lsCur) return; talk.paused ? talkPlay() : talk.pause(); };
+$("lpOpen").onclick = () => { const p = lsQueue && plOf(lsQueue.id), t = curTrack(); if (p) openPl(p.id); else if (t) openAlbum(t.a.id); };
+$("lpGo").onclick = () => { closeLib(); showTab("beads", true); renderHud(); };
+["play", "pause"].forEach(ev => talk.addEventListener(ev, paintLib));
+
+// add to an own album: pick one, or name a new one
+let addKeys = [];
+function openAdd(keys, what){
+  addKeys = keys; $("addWhat").textContent = what; $("addMsg").textContent = ""; $("addName").value = "";
+  const box = $("addList"); box.innerHTML = "";
+  myAlbums().forEach(p => {
+    const b = el("button", "tmain"), has = keys.every(k => p.keys.includes(k));
+    const ts = plTracks(p);
+    b.appendChild(ts.length ? thumbEl([...new Set(ts.map(t => t.a.cover))]) : Object.assign(el("span", "tthumb plus"), { innerHTML:svgI('<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>') }));
+    const tx = el("span", "t"); tx.appendChild(el("b", null, p.name)); tx.appendChild(el("span", null, `${ts.length} 首`)); b.appendChild(tx);
+    if (has) b.appendChild(el("em", null, "已加入"));
+    b.onclick = () => addTo(p);
+    box.appendChild(b);
+  });
+  $("addSheet").hidden = false;
+  setTimeout(() => (myAlbums().length ? $("addClose") : $("addName")).focus(), 60);
+}
+function addTo(p){
+  addKeys.forEach(k => { if (!p.keys.includes(k)) p.keys.push(k); }); save();
+  $("addMsg").textContent = `已加入「${p.name}」`;
+  setTimeout(() => { $("addSheet").hidden = true; paintLib(); }, 900);
+}
+$("addMake").onclick = () => {
+  const name = $("addName").value.trim() || `我的專輯 ${myAlbums().length + 1}`;
+  const p = { id:"pl" + Date.now().toString(36), name, keys:[] }; myAlbums().push(p); addTo(p);
+};
+$("addName").addEventListener("keydown", ev => { if (ev.key === "Enter") $("addMake").click(); });
+$("addClose").onclick = () => { $("addSheet").hidden = true; };
+$("addSheet").addEventListener("click", ev => { if (ev.target === $("addSheet")) $("addSheet").hidden = true; });
+$("plNew").onclick = () => {
+  const p = { id:"pl" + Date.now().toString(36), name:`我的專輯 ${myAlbums().length + 1}`, keys:[] };
+  myAlbums().push(p); save(); openPl(p.id);
+  setTimeout(() => { const b = [...$("ldBody").querySelectorAll(".aghost")].find(x => x.textContent === "改名"); if (b) b.click(); }, 80);
+};
+// video: our own mp4 only; the chant pauses while it plays
+function openVideo(t){
+  if (!talk.paused) talk.pause();
+  $("vidTitle").textContent = `${t.a.title}・${t.ep.t}`;
+  const v = $("vidEl"); v.src = t.ep.video; v.poster = t.ep.poster || t.a.cover;
+  $("vidSheet").hidden = false; v.play().catch(() => {});
+}
+function pvClose(){ const v = $("vidEl"); v.pause(); v.removeAttribute("src"); v.load(); $("vidSheet").hidden = true; }
+$("vidClose").onclick = pvClose;
+
 $("libClose").onclick = closeLib;
-$("libBack").onclick = () => { pvStop(); $("lib").classList.remove("deep"); $("libDetail").setAttribute("aria-hidden", "true"); renderLib(); setTimeout(() => $("libClose").focus(), 60); };
-$("ldGo").onclick = startEntry;
-$("libClear").onclick = () => { libFilter = null; $("libQ").value = ""; renderLib(); };
-// typing searches the whole library: a tile filter would hide what the words ask for
-$("libQ").addEventListener("input", () => { libFilter = null; renderLib(); });
-document.querySelectorAll(".libseg button").forEach(b => b.onclick = () => { libMode = b.dataset.mode; renderLib(); });
-$("libQuiet").onclick = () => { closeLib(); talk.pause(); lsCur = null; S.pickText = null; save(); paintListen(); if (sess && !routine) endSession(); lyrKey = ""; renderHud(); };
-document.addEventListener("keydown", ev => { if (ev.key !== "Escape" || $("lib").hidden) return; $("lib").classList.contains("deep") ? $("libBack").click() : closeLib(); });
+$("libBack").onclick = backHome;
+$("libQ").addEventListener("input", () => { libTheme = null; renderExplore(); });
+document.querySelectorAll(".libseg button").forEach(b => b.onclick = () => { libMode = b.dataset.mode; renderLib(); $("libScroll").scrollTop = 0; });
+document.addEventListener("keydown", ev => {
+  if (ev.key !== "Escape" || $("lib").hidden) return;
+  if (!$("vidSheet").hidden) pvClose(); else if (!$("addSheet").hidden) $("addSheet").hidden = true;
+  else $("lib").classList.contains("deep") ? backHome() : closeLib();
+});
 
 // music picked from 經文音樂 that is not this item's own lead voice: the big button pauses / resumes it
 const pickedMusic = () => !!(lsCur && INLINE[curItem().name] !== lsCur.s.id && !lsCur.s.id.startsWith("q-") && !lsCur.s.id.startsWith("t-"));

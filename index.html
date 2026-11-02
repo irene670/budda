@@ -236,20 +236,46 @@ nav.tabs.locked{opacity:.45}
 .fishctl{display:flex;flex-direction:column;align-items:center;gap:.55rem;width:100%}
 
 /* ---- 問道 ---- */
+/* 問道（v3，2026-11-02）：一看就是聊天視窗——頂部聊天對象（蓮花頭像、「雲禪問道」、狀態），中間左右對話泡泡，
+   下方「點一下就能問」快速提問列＋輸入框。AI 未接上前，狀態寫「示範中」，題目給示範回答。 */
 #p-ask{display:flex;flex-direction:column;overflow:hidden}
-.chat{flex:1;overflow-y:auto;padding:1rem 16px;display:flex;flex-direction:column;gap:.85rem}
-.msg{max-width:90%;padding:.8rem 1rem;border-radius:18px;line-height:1.75;font-size:1.1rem;white-space:pre-wrap;word-break:break-word}
-.msg.ai{background:var(--bg-2);border:1px solid var(--line);align-self:flex-start;border-top-left-radius:6px}
-.msg.me{background:var(--brass);color:var(--brass-ink);align-self:flex-end;border-top-right-radius:6px;font-weight:500}
-.msg .who{display:block;font-family:var(--display);font-weight:900;color:var(--brass);font-size:.95rem;letter-spacing:.15em;margin-bottom:.2rem}
-.msg .say{display:inline-flex;margin-top:.5rem;background:none;border:1.5px solid var(--line);border-radius:999px;padding:.3rem .8rem;font-size:.95rem;color:var(--brass)}
+.chathead{flex:none;display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #e2b36326;background:var(--bg-2)}
+.chathead .av{width:44px;height:44px}
+.chathead b{display:block;font-family:var(--display);font-weight:900;font-size:1.2rem;letter-spacing:.12em;color:var(--paper);line-height:1.3}
+.chathead small{display:flex;align-items:center;gap:6px;font-size:.85rem;color:var(--muted)}
+.chathead small::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brass);box-shadow:0 0 6px var(--brass)}
+.av{flex:none;width:34px;height:34px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px #e2b36366}
+.chat{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:16px 12px 12px;display:flex;flex-direction:column;gap:12px}
+.sysmsg{align-self:center;max-width:90%;text-align:center;font-size:.85rem;line-height:1.5;color:var(--muted);background:#ffffff0a;border-radius:999px;padding:5px 14px}
+.row-ai,.row-me{display:flex;align-items:flex-end;gap:8px;max-width:100%}
+.row-me{justify-content:flex-end}
+.msg{position:relative;max-width:min(80%,30rem);padding:11px 15px;border-radius:20px;font-size:1.08rem;line-height:1.75;white-space:pre-wrap;word-break:break-word}
+.msg.ai{background:var(--bg-2);border:1px solid #e2b36333;border-bottom-left-radius:6px;color:var(--paper)}
+.msg.mine{background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c;border-bottom-right-radius:6px;font-weight:500}
+.msg .who{display:flex;align-items:center;gap:6px;font-family:var(--display);font-weight:900;color:var(--brass);font-size:.85rem;letter-spacing:.2em;margin-bottom:2px}
+.msg .demo{padding:0 8px;border-radius:999px;border:1px solid #e2b36366;font-family:var(--body);font-weight:400;font-size:.72rem;letter-spacing:.1em}
+.msg .cite{display:block;margin:10px 0;padding:8px 12px;border-left:2px solid var(--brass);background:#e2b36310;border-radius:0 10px 10px 0;font-family:var(--display);color:#ffe2a8}
+.msg .cite small{display:block;color:var(--brass);font-size:.8rem;margin-top:2px;font-family:var(--body)}
+.msg .say{display:inline-flex;margin-top:.5rem;background:none;border:1px solid #e2b36355;border-radius:999px;padding:.35rem .9rem;min-height:40px;align-items:center;font-size:.95rem;color:var(--brass)}
 .msg.note{background:none;border:1.5px dashed var(--warn);color:var(--warn);font-size:1rem}
-.sugg{display:flex;flex-direction:column;gap:.55rem}
-.sugg .lab{color:var(--muted);font-size:.95rem}
-.sugg button{background:var(--bg-2);border:1.5px solid var(--line);border-radius:16px;padding:.8rem 1rem;font-size:1.05rem;text-align:left;color:var(--paper)}
-.composer{display:flex;gap:.5rem;padding:.6rem 16px .7rem;border-top:1px solid var(--line);background:var(--bg-2)}
-.composer input{flex:1;min-width:0;font:inherit;font-size:1.1rem;background:var(--bg);border:1.5px solid var(--line);color:var(--paper);border-radius:16px;padding:.75rem .9rem}
-.mic{flex:none;width:3.2rem;border-radius:16px;background:var(--bg);border:1.5px solid var(--line);color:var(--brass);display:grid;place-items:center}
+.typing{display:inline-flex;gap:5px;padding:6px 2px}
+.typing i{width:8px;height:8px;border-radius:50%;background:var(--brass);opacity:.35;animation:typing 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes typing{0%,60%,100%{opacity:.3;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){.typing i{animation:none;opacity:.7}}
+.askdock{flex:none;border-top:1px solid #e2b36326;background:var(--bg-2);padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px))}
+.sugg{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 16px 8px;scroll-padding-inline:16px;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.sugg::-webkit-scrollbar{display:none}
+.sugglab{margin:0 16px 6px;font-size:.85rem;color:var(--muted);letter-spacing:.06em}
+.sugg button{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #e2b36366;background:#e2b3630f;color:var(--paper);font:inherit;font-size:1rem;white-space:nowrap;cursor:pointer;touch-action:manipulation}
+.sugg button:active{transform:scale(.97);background:#e2b36326}
+.composer{display:flex;align-items:center;gap:8px;padding:0 12px}
+.composer input{flex:1;min-width:0;min-height:48px;font:inherit;font-size:1.08rem;background:var(--bg);border:1px solid #e2b36355;color:var(--paper);border-radius:999px;padding:0 1.1rem}
+.composer input:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px #e2b36333}
+.composer .send{flex:none;width:48px;height:48px;border-radius:50%;border:0;display:grid;place-items:center;background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c;cursor:pointer}
+.composer .send svg{width:22px;height:22px}
+.composer .send:disabled{opacity:.4;cursor:default}
+.mic{flex:none;width:48px;height:48px;border-radius:50%;background:var(--bg);border:1px solid #e2b36355;color:var(--brass);display:grid;place-items:center}
 .mic svg{width:24px;height:24px}
 .mic.rec{background:var(--warn);color:var(--brass-ink)}
 
@@ -686,27 +712,6 @@ header.top .hq{gap:2px;align-items:center}
 .nowctl .btn{border-radius:999px}
 .nowctl .main{background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c;border:0}
 .lsnote{font-size:.82rem;line-height:1.6;opacity:.8;margin-top:8px}
-/* 問道 */
-.askhead{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #e2b36326;background:linear-gradient(180deg,#e2b36312,transparent)}
-.askhead img{width:56px;height:56px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px #e2b36366,0 0 22px #e2b36333}
-.askhead h2{margin:0;font-family:var(--display);font-weight:900;font-size:1.45rem;letter-spacing:.2em;color:var(--paper)}
-.askhead p{margin:2px 0 0;font-size:.9rem;color:var(--muted)}
-.asknote{margin:12px 16px 0;padding:10px 14px;border-radius:14px;border:1px dashed #e2b36366;color:var(--muted);font-size:.9rem;line-height:1.6}
-.chat{gap:14px;padding:16px}
-.msg{font-size:1.08rem;line-height:1.85;padding:14px 16px;border-radius:18px}
-.msg.ai{background:linear-gradient(180deg,#ffffff07,transparent),var(--bg-2);border:1px solid #e2b36333;border-left:2px solid var(--brass);border-top-left-radius:6px;font-family:var(--display);letter-spacing:.03em}
-.msg.me{background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c}
-.msg .who{letter-spacing:.3em;font-size:.85rem}
-.sugg{gap:8px}
-.sugg .lab{font-family:var(--display);letter-spacing:.3em;color:var(--brass);font-size:.9rem;margin-top:4px}
-.sugg button{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;border:1px solid #e2b36333;background:var(--bg-2);border-radius:14px;font-size:1rem}
-.sugg button::after{content:"›";color:var(--brass);font-size:1.2rem}
-.composer{gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid #e2b36326;background:var(--bg-2)}
-.composer input{border-radius:999px;padding:.8rem 1.1rem;border:1px solid #e2b36344}
-.composer .send{flex:none;width:48px;height:48px;border-radius:50%;border:0;display:grid;place-items:center;background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c;cursor:pointer}
-.composer .send svg{width:22px;height:22px}
-.composer .send:disabled{opacity:.5}
-.mic{border-radius:50%;width:48px;height:48px}
 /* ---- v2「今日」（2026-10-31 對焦定案）：全幅晨光意境、無框排版、三個每日任務、蓮花月曆 ---- */
 .today{max-width:34rem;margin:0 auto;padding:0 20px 56px;display:flex;flex-direction:column}
 .tday{position:relative;margin:0 -20px;padding:96px 24px 30px;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;background:url(assets/img/hero-home.webp) center 35%/cover no-repeat}
@@ -804,9 +809,6 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .dpreview{margin:14px 0 18px;padding:18px 16px;border-radius:18px;border:1px solid #e2b36340;background:linear-gradient(180deg,#e2b36312,transparent);font-family:var(--display);line-height:1.9;letter-spacing:.08em;color:#fff1cf}
 .dpreview p{margin:0}.dpreview .vv{margin-top:10px;color:var(--brass);letter-spacing:.2em}.dpreview .v2{margin-top:0}
 .dconfirm{gap:10px}.dconfirm .btn{flex:1}
-.msg .demo{display:inline-block;margin-left:8px;padding:0 8px;border-radius:999px;border:1px solid #e2b36366;font-family:var(--body);font-size:.72rem;letter-spacing:.1em;color:var(--brass);vertical-align:2px}
-.msg .cite{display:block;margin:10px 0;padding-left:12px;border-left:2px solid #e2b36388;color:#ffe2a8}
-.msg .cite small{display:block;color:var(--brass);font-size:.8rem;margin-top:2px;font-family:var(--body)}
 /* first launch: three full-screen steps over the Pure Land imagery */
 .onb{background:#0e0805 url(assets/img/bg-pureland.webp) center/cover;align-items:flex-end}
 .onb::before{content:"";position:fixed;inset:0;background:linear-gradient(180deg,#0e080533 0%,#0e0805aa 45%,#0e0805f2 75%)}
@@ -1104,27 +1106,20 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 
     <!-- 問道 -->
     <section class="panel" id="p-ask" hidden aria-label="問道">
-      <div class="askhead">
-        <img src="assets/img/lotus-dedication.webp" alt="" aria-hidden="true">
-        <div><h2>問道</h2><p>心燈以經文相伴，說說心裡的事</p></div>
+      <header class="chathead">
+        <img class="av" src="assets/img/lotus-dedication.webp" alt="" aria-hidden="true">
+        <div><b>雲禪問道</b><small id="askStatus">以經文相伴</small></div>
+      </header>
+      <div class="chat" id="chat" aria-live="polite" aria-label="雲禪問道的對話">
+        <div class="row-ai"><img class="av" src="assets/img/lotus-dedication.webp" alt="" aria-hidden="true"><div class="msg ai"><span class="who">雲禪問道</span><span>善來，阿彌陀佛。</span></div></div>
       </div>
-      <p class="asknote" id="askNote" hidden>心燈即將開放。現在可以先點下方的問題，看看心燈會怎麼陪你想。</p>
-      <div class="chat" id="chat" aria-live="polite">
-        <div class="msg ai"><span class="who">心燈</span><span>阿彌陀佛。心中若有疑惑、煩憂，或遇可疑來電、要求匯款之事，皆可在此相問。</span></div>
-        <div class="sugg" id="sugg">
-          <div class="lab">可以這樣問</div>
-          <button>有人來電說我中獎，要先匯手續費</button>
-          <button>近來夜裡難眠，心中煩亂</button>
-          <button>迴向是什麼意思？</button>
-          <button>與家人意見不合，該如何自處？</button>
-          <button>《心經》講的是什麼？</button>
-        </div>
+      <div class="askdock">
+        <form class="composer" id="composer">
+          <button type="button" class="mic" id="micBtn" aria-label="用說的" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+          <input id="askInput" type="text" placeholder="打字問問題……" autocomplete="off" aria-label="輸入想問的事" enterkeyhint="send">
+          <button class="send" id="askBtn" type="submit" aria-label="送出" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+        </form>
       </div>
-      <form class="composer" id="composer">
-        <button type="button" class="mic" id="micBtn" aria-label="用說的" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
-        <input id="askInput" type="text" placeholder="寫下心裡的疑問……" autocomplete="off" aria-label="輸入問題">
-        <button class="send" id="askBtn" type="submit" aria-label="請問"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
-      </form>
     </section>
 
     <!-- 紀錄 -->
@@ -2453,7 +2448,7 @@ $("tFish").onclick = () => showTab("fish");
 $("hLog").onclick = () => showTab("log");
 $("logBack").onclick = () => showTab("home");
 $("hDediLog").onclick = () => { dlFrom = "home"; showTab("dedilog"); };
-$("askNote").hidden = !!(window.claude && window.claude.use);
+$("askStatus").textContent = window.claude && window.claude.use ? "以經文相伴・回答都附出處" : "以經文相伴";
 $("tDedi").onclick = () => { setDediVerse("normal"); openDedi(); };
 
 /* ---- 計時念佛：坐著念，不撥珠（印光大師的建議） ---- */
@@ -3063,8 +3058,8 @@ function setAuto(bpm){
   if (bpm) { ac(); knock(); autoT = setInterval(knock, 60000/bpm); }
 }
 document.querySelectorAll("[data-auto]").forEach(b => b.onclick = () => setAuto(Number(b.dataset.auto)));
-/* ================= 問道 (AI)：引導者「心燈」，只引用經文庫 ================= */
-const RULES = `你是「雲禪」APP 裡的「心燈」，陪伴長輩的人，說話像一位溫和、有智慧、懂佛經與道德經的老朋友。對象是六十歲以上的台灣長輩。
+/* ================= 問道 (AI)：引導者「雲禪問道」（原名心燈，2026-11-02 改名），只引用經文庫 ================= */
+const RULES = `你是「雲禪」APP 裡的「雲禪問道」，陪伴長輩的人，說話像一位溫和、有智慧、懂佛經與道德經的老朋友。對象是六十歲以上的台灣長輩。
 規則：
 1. 全程用繁體中文，語氣溫潤、文雅、簡約，如一位慈悲的善知識；用字淺白易懂而不俚俗，每次回答三到五句。不用條列符號、不用 markdown、不用表情符號。
 2. 回答依序做四件事：先接住對方的感受；再引一句經文，只能從下方「可引用的經文」逐字照抄，並說出經名；接著用白話說明，加上一兩個今天就做得到的小建議；最後用一個溫和的問題，請對方想想自己的情況。沒有合適的經文就不要引用，不要憑記憶引其他經句。不說教、不推銷法會或捐獻、不批評任何宗教或信仰。
@@ -3079,12 +3074,27 @@ ${LIB.quotes.map(q => `「${q.text}」｜《${q.source.sutra}》｜${q.plain}`).
 const chat = document.getElementById("chat"), askInput = document.getElementById("askInput"), askBtn = document.getElementById("askBtn");
 let turns = [], samplePromise = null, busy = false;
 function getSample(){ if (!samplePromise) samplePromise = (window.claude && claude.use) ? claude.use("sample").catch(()=>null) : Promise.resolve(null); return samplePromise; }
+// chat rows: 雲禪問道 on the left with the lotus avatar, the user on the right; a reply starts as three typing dots
+const TYPING = '<span class="typing" aria-label="雲禪問道正在回覆"><i></i><i></i><i></i></span>';
 function bubble(cls, text){
-  const d = document.createElement("div"); d.className = "msg " + cls;
-  if (cls==="ai"){ const w = document.createElement("span"); w.className="who"; w.textContent="心燈"; d.appendChild(w); const t = document.createElement("span"); t.textContent = text; d.appendChild(t); d._t = t; }
+  const d = document.createElement("div"); d.className = "msg " + (cls === "me" ? "mine" : cls);   // "me" is taken by the 我的 page
+  let row = d;
+  if (cls === "ai" || cls === "me"){
+    row = document.createElement("div"); row.className = "row-" + cls;
+    if (cls === "ai"){ const av = document.createElement("img"); av.className = "av"; av.src = "assets/img/lotus-dedication.webp"; av.alt = ""; av.setAttribute("aria-hidden", "true"); row.appendChild(av); }
+    row.appendChild(d); d._row = row;
+  }
+  if (cls==="ai"){ const w = document.createElement("span"); w.className="who"; w.textContent="雲禪問道"; d.appendChild(w); const t = document.createElement("span"); if (text) t.textContent = text; else t.innerHTML = TYPING; d.appendChild(t); d._t = t; }
   else d.textContent = text;
-  chat.appendChild(d); chat.scrollTop = chat.scrollHeight; return d;
+  chat.appendChild(row); chat.scrollTop = chat.scrollHeight; return d;
 }
+// after an answer, bring the question to the top so a long reply is read from its start
+const showFrom = me => { chat.scrollTop += me._row.getBoundingClientRect().top - chat.getBoundingClientRect().top - 12; };
+function useSugg(q){   // an asked suggestion leaves the quick-question row; the row hides when none are left
+  const sg = $("sugg"); if (!sg) return; [...sg.children].forEach(b => { if (b.textContent === q) b.remove(); });
+  if (!sg.children.length){ sg.hidden = true; $("suggLab").hidden = true; }
+}
+askInput.addEventListener("input", () => { askBtn.disabled = busy || !askInput.value.trim(); });
 const ERR = {
   not_granted:"需要先允許這個頁面使用 Claude，才能回答問題。", sampling_disabled:"這個帳號目前無法使用 AI 問答。",
   rate_limited:"現在問的人比較多，請過一會兒再試。", session_expired:"登入已過期，請重新登入 Claude 後再試。",
@@ -3092,13 +3102,14 @@ const ERR = {
 };
 async function ask(q){
   q = q.trim(); if (!q || busy) return;
-  busy = true; askBtn.disabled = true; askInput.value = ""; const sg = document.getElementById("sugg"); if (sg) sg.hidden = true;
-  bubble("me", q); turns.push({ role:"user", content:q });
-  const b = bubble("ai", "思惟中……");
+  busy = true; askBtn.disabled = true; askInput.value = ""; useSugg(q);
+  const me = bubble("me", q); turns.push({ role:"user", content:q });
+  const b = bubble("ai", "");
   const sample = await getSample();
   if (!sample){
-    b._t.textContent = "心燈即將開放。正式上線後，心燈會依經文陪你想這件事；現在可以先點上方的問題，看看示範。";
-    turns.pop(); busy = false; askBtn.disabled = false; return;
+    await new Promise(r => setTimeout(r, 700));
+    b._t.textContent = "謝謝你的問題，我記下了。雲禪問道還在準備中，正式開放後，就能依經文回答你。\n若是陌生來電要你匯款，請先不要匯，撥 165 反詐騙專線問清楚；身體不適請撥 119；心情很低落時，可以撥 1925 安心專線。";
+    turns.pop(); busy = false; askBtn.disabled = !askInput.value.trim(); chat.scrollTop = chat.scrollHeight; return;
   }
   try {
     const recent = turns.slice(-10);
@@ -3109,10 +3120,10 @@ async function ask(q){
     turns.pop();
     b._t.textContent = (e && e.text) ? e.text : "";
     const n = bubble("note", ERR[e && e.code] || "連線不順，請再按一次「請問」。");
-    if (!(e && e.text)) b.remove();
+    if (!(e && e.text)) b._row.remove();
     if (e && (e.code==="not_granted" || e.code==="sampling_disabled")) { askInput.disabled = true; }
   }
-  busy = false; askBtn.disabled = false; chat.scrollTop = chat.scrollHeight;
+  busy = false; askBtn.disabled = !askInput.value.trim(); showFrom(me);
 }
 document.getElementById("composer").addEventListener("submit", e => { e.preventDefault(); ask(askInput.value); });
 // until the AI is connected, the suggested questions show prepared answers in 心燈's form: feeling, scripture with source, plain words, a question back
@@ -3123,15 +3134,18 @@ const DEMO = {
   "與家人意見不合，該如何自處？":["和最親的人意見不合，心裡最難受。", "隨其心淨，則佛土淨。", "《維摩詰所說經》", "先把自己的心安靜下來，再開口說話，同一句話聽起來就會不一樣。不用急著分對錯。", "如果先不談誰對，你最希望對方明白的是什麼？"],
   "《心經》講的是什麼？":["很多人一輩子都在讀這兩百多字。", "觀自在菩薩，行深般若波羅蜜多時，照見五蘊皆空，度一切苦厄。", "《般若波羅蜜多心經》", "心經講的是用智慧看清：身心的一切都在變化，沒有固定不變的東西。看清了，就不會被苦緊緊抓住。", "最近有什麼事，是你很想放下卻放不下的？"]
 };
-function demoAnswer(q){
+async function demoAnswer(q){
   const d = DEMO[q]; if (!d) return ask(q);
-  const sg = document.getElementById("sugg"); bubble("me", q);
-  const b = bubble("ai", ""); b._t.textContent = d[0];
+  if (busy) return; busy = true; askBtn.disabled = true; useSugg(q);
+  const me = bubble("me", q);
+  const b = bubble("ai", "");
+  await new Promise(r => setTimeout(r, 900));
+  b._t.textContent = d[0];
   const tag = document.createElement("span"); tag.className = "demo"; tag.textContent = "示範"; b.querySelector(".who").appendChild(tag);
   const c = document.createElement("span"); c.className = "cite"; c.textContent = d[1]; const src = document.createElement("small"); src.textContent = d[2]; c.appendChild(src);
   const rest = document.createElement("span"); rest.textContent = `${d[3]}\n\n${d[4]}`;
   b.append(c, rest);
-  chat.appendChild(sg); chat.scrollTop = chat.scrollHeight;   // keep the other questions within reach
+  busy = false; askBtn.disabled = !askInput.value.trim(); showFrom(me);
 }
 document.querySelectorAll("#sugg button").forEach(b => b.onclick = () => demoAnswer(b.textContent));
 /* ================= 功課 ================= */
@@ -3445,7 +3459,7 @@ if (SR){
       micBtn.classList.add("rec"); askInput.placeholder = "請說，正在聆聽……";
       r.onresult = e => { askInput.value = Array.from(e.results).map(x => x[0].transcript).join(""); };
       r.onerror = () => { micBtn.hidden = true; bubble("note", "此處暫不支援語音，請以文字提問。"); };
-      r.onend = () => { micBtn.classList.remove("rec"); askInput.placeholder = "寫下疑問"; if (askInput.value.trim()) ask(askInput.value); };
+      r.onend = () => { micBtn.classList.remove("rec"); askInput.placeholder = "打字問問題……"; if (askInput.value.trim()) ask(askInput.value); };
       r.start();
     }catch(e){ micBtn.hidden = true; }
   };

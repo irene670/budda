@@ -375,7 +375,7 @@ nav.tabs.locked{opacity:.45}
 .bprevgo{flex:none;display:flex;flex-direction:column;gap:4px}
 .bprevgo[hidden],.bgo[hidden]{display:none}
 .member{position:fixed;inset:0;z-index:70;overflow-y:auto;box-sizing:border-box;padding:max(.6rem,env(safe-area-inset-top)) 16px max(1.2rem,env(safe-area-inset-bottom));background:var(--bg);color:var(--paper)}
-.mbody{display:flex;flex-direction:column;gap:.8rem;max-width:30rem;margin:0 auto}
+.mbody{display:flex;flex-direction:column;gap:.65rem;max-width:30rem;margin:0 auto}
 .mbody[hidden]{display:none}
 .mtitle{margin:.4rem 0 0;text-align:center;font-family:var(--display);font-weight:900;font-size:1.55rem;letter-spacing:.14em;color:#ffe2a8}
 .mbody p{margin:0;font-size:1.08rem;line-height:1.7}
@@ -386,9 +386,9 @@ nav.tabs.locked{opacity:.45}
 .mbens{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.35rem;font-size:1.08rem;line-height:1.5}
 .mbens li{padding-left:1.4em;text-indent:-1.4em}
 .mbens li::before{content:"✓";display:inline-block;width:1.4em;text-indent:0;color:var(--brass)}
-.mplan{display:block;width:100%;min-height:60px;padding:.6rem .9rem;text-align:left;background:#0e0906b0;border:1.5px solid var(--line);border-radius:14px;color:var(--paper);font:inherit;cursor:pointer}
+.mplan{display:block;width:100%;min-height:60px;padding:.45rem .9rem;text-align:left;background:#0e0906b0;border:1.5px solid var(--line);border-radius:14px;color:var(--paper);font:inherit;cursor:pointer}
 .mplan b{display:block;font-size:1.2rem;font-weight:700}
-.mplan small{display:block;font-size:.98rem;color:var(--muted);margin-top:.15rem}
+.mplan small{display:block;font-size:.95rem;color:var(--paper);opacity:.85;margin-top:.05rem}
 .mplan[aria-checked="true"]{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass)}
 .mplans{display:flex;flex-direction:column;gap:8px}
 .mbody .mstate{text-align:center;color:#ffe2a8}
@@ -398,16 +398,23 @@ nav.tabs.locked{opacity:.45}
 .mlinks{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .6rem}
 .mlinks[hidden],.mtest[hidden]{display:none}
 .mtest{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:.5rem;border:1px dashed var(--muted);border-radius:10px;font-size:.9rem;color:var(--muted)}
-.dedi.withinv{overflow-y:auto;align-items:flex-start}
 @media (max-height:720px){.bchips{display:none}}
 #dedi .lotusimg{height:clamp(130px,26dvh,200px);width:auto}
 .dthanks{flex:none;margin:clamp(.2rem,1.4dvh,.8rem) 0 0;text-align:center;font-size:clamp(1rem,2.4dvh,1.12rem);line-height:1.5;letter-spacing:0;color:#fff4dc;opacity:0;animation:line 1s 6s both}
 .ddonate{flex:none;width:100%;text-align:center;font-size:1rem;line-height:1.5;color:#fff4dc;opacity:0;animation:line 1s 6s both}
 .ddonate[hidden]{display:none}
-.ddonate p{margin:0}
-.ddonate small{display:block;color:var(--muted);font-size:.9rem}
-.ddonate .blink{min-height:36px;font-size:.95rem}
-.bhint{text-align:center;color:var(--muted);font-size:.9rem;line-height:1.35;min-height:1.35em}
+.ddonate .blink{min-height:44px;font-size:1.05rem;color:#ffe2a8;text-shadow:0 1px 3px #000,0 0 10px #000,0 0 18px #000}
+.dthanks{text-shadow:0 1px 3px #000,0 0 10px #000}
+.dedi-in{overflow-y:auto;scrollbar-width:none}
+.dedi-in::-webkit-scrollbar{display:none}
+.dedi.withinv .lotusimg{height:clamp(110px,20dvh,180px)}
+.sheet.typing{bottom:auto;max-height:none;border-radius:0}
+.dquick{min-height:52px;margin-top:.6rem;background:none;border:1px solid var(--line);border-radius:999px;color:var(--paper);font:inherit;font-size:1.05rem;cursor:pointer}
+.bhint{text-align:center;color:var(--muted);font-size:.95rem;line-height:1.35}
+.bhint:empty{display:none}
+.bgobtn{display:flex;gap:10px}
+.bgobtn .line{flex:1.5 1 0;width:auto}
+.bgobtn .btn{flex:1 1 0;min-height:56px;padding-inline:.4rem;letter-spacing:.06em;font-size:1.1rem;white-space:nowrap}
 
 /* ---- 開始引導 ---- */
 .onb{position:fixed;inset:0;z-index:70;background:var(--bg);display:flex;align-items:center;justify-content:center;padding-inline:16px;overflow-y:auto}
@@ -1249,11 +1256,11 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
   <div id="dStepA">
     <div class="shead2"><h3>迴向</h3><button class="link" id="dLog">迴向紀錄 ›</button></div>
     <p class="dmerit" id="dMerit"></p>
-    <div class="lab" id="dPeopleL">迴向給（可多選，會記住）</div>
+    <div class="lab" id="dPeopleL">迴向給</div>
     <div id="dPeople" class="dpeople" role="group" aria-labelledby="dPeopleL"></div>
     <details class="dmore"><summary>更多選項</summary>
     <div class="lab">迴向偈</div><div class="seg" id="dVerseSeg"><button data-v="normal">普迴向</button><button data-v="jingtu">淨土迴向</button></div>
-    <label class="fld" for="dBy">迴向人（可不填，會記住）</label><input class="inp" id="dBy" type="text" placeholder="例：弟子 王小明" autocomplete="off">
+    <label class="fld" for="dBy">迴向人（可不填）</label><input class="inp" id="dBy" type="text" placeholder="例：弟子 王小明" autocomplete="off">
     </details>
     <button class="btn big" id="dNext">下一步</button>
     <button class="link" id="dClose">稍後</button>
@@ -1386,7 +1393,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
     <div class="d2" id="dStage2" hidden>
       <div class="dto" id="dTo"></div>
       <div class="dverse" id="dVerse"><span style="--d:.6s">願以此功德</span><span style="--d:1.9s">普及於一切</span><span style="--d:3.2s">我等與眾生</span><span style="--d:4.5s">皆共成佛道</span></div>
-      <p class="dthanks">感恩您今日的用心。<br>願這份善念，成為您與家人生活中的一份溫暖。</p>
+      <p class="dthanks">感恩您今日的用心</p>
       <div class="dfin">
         <button class="btn ghost" id="dCard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><circle cx="9" cy="9.5" r="1.8"/><path d="M20.5 15.5l-4.8-4.8L6 20.5"/></svg>製作祝福圖</button>
         <button class="btn" id="dDone">圓滿</button>
@@ -1403,25 +1410,25 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
     <h2>祝福圖</h2><span></span>
   </div>
   <div class="bprev"><canvas id="bCanvas" width="1080" height="1350" role="img" aria-label="祝福圖預覽"></canvas></div>
-  <div class="brow"><p class="blab">換圖片</p><button class="blink" id="bMember">雲禪護持會員 ›</button></div>
+  <div class="brow"><p class="blab">圖片</p><button class="blink" id="bMember">護持會員 ›</button></div>
   <div class="bbgs" id="bBgs" role="group" aria-label="選圖片"></div>
   <input type="file" id="bPhotoFile" accept="image/*" hidden>
   <div class="bnote">
-    <label class="blab" for="bNote">寫一句祝福（可不寫）</label>
-    <input class="inp" id="bNote" maxlength="20" placeholder="例如：願您平安喜樂" autocomplete="off" enterkeyhint="done">
+    <label class="blab" for="bNote">祝福語</label>
+    <input class="inp" id="bNote" maxlength="20" placeholder="可不寫" autocomplete="off" enterkeyhint="done">
     <div class="bchips" id="bChips"><button class="chip">平安吉祥</button><button class="chip">身體健康</button><button class="chip">阿彌陀佛</button></div>
-    <label class="bshow"><input type="checkbox" id="bShow">在圖上顯示功課與迴向對象</label>
-    <p class="bshownote" id="bShowNote" hidden>圖片分享後，收到的人會看到這個名稱。</p>
+    <label class="bshow"><input type="checkbox" id="bShow">圖上寫出迴向對象</label>
+    <p class="bshownote" id="bShowNote" hidden>收到圖的人會看到這個名字</p>
   </div>
   <div class="bprevgo" id="bPrevGo" hidden>
-    <small class="bhint">這是預覽，正式使用自己的照片需加入雲禪護持會員</small>
-    <button class="btn big" id="bJoin">了解加入護持會員</button>
-    <button class="blink" id="bBackFree">返回免費圖片</button>
+    <small class="bhint">這是預覽。加入護持會員才能分享</small>
+    <button class="btn big" id="bJoin">看護持會員</button>
+    <button class="blink" id="bBackFree">換回免費圖片</button>
   </div>
   <div class="bgo" id="bGo">
-    <button class="line" id="bShare"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5C6.8 3.5 2.7 6.9 2.7 11c0 3.7 3.2 6.8 7.6 7.4.3.1.7.2.8.5.1.2.1.6 0 .9l-.1.8c0 .2-.2 1 .9.5s5.7-3.4 7.8-5.8c1.4-1.6 2.1-3.1 2.1-4.8 0-4.1-4.1-7.5-9.8-7.5z"/></svg>分享圖片</button>
-    <button class="blink" id="bSave">存到手機</button>
-    <small class="bhint" id="bHint">按下後，在分享選單選「LINE」</small>
+    <div class="bgobtn"><button class="line" id="bShare"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5C6.8 3.5 2.7 6.9 2.7 11c0 3.7 3.2 6.8 7.6 7.4.3.1.7.2.8.5.1.2.1.6 0 .9l-.1.8c0 .2-.2 1 .9.5s5.7-3.4 7.8-5.8c1.4-1.6 2.1-3.1 2.1-4.8 0-4.1-4.1-7.5-9.8-7.5z"/></svg>分享圖片</button>
+    <button class="btn ghost" id="bSave">存到手機</button></div>
+    <small class="bhint" id="bHint"></small>
   </div>
 </div>
 
@@ -1430,36 +1437,33 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
   <div class="bhead"><button class="bback" id="mBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button><h2>護持會員</h2><span></span></div>
   <div class="mbody" id="mMain">
     <h3 class="mtitle" id="mTitle">一份平靜，一同護持</h3>
-    <p id="mLead">若雲禪曾為您帶來平靜與歡喜，邀請您加入雲禪護持會員，支持我們持續維護服務、用心製作內容，讓這份陪伴分享給更多有緣人。</p>
-    <button class="blink" id="mMore" aria-expanded="false">了解更多</button>
-    <div class="mfull" id="mFull" hidden>
-      <p>您也能使用自己的照片、更多祝福樣式，以及每個訂閱月的 AI 創作額度，把心意做成更有個人特色的祝福圖。</p>
-      <p>感恩您與雲禪同行。</p>
-      <p>如果每天的誦經、撥珠與迴向，曾為您的生活帶來一份平靜與歡喜，我們誠摯邀請您，一起護持雲禪的持續發展。</p>
-      <p>您的訂閱支持，將幫助我們持續維護 APP、製作更多優美的佛經音樂與祝福內容，讓更多有緣人能免費接觸佛法，感受善念的溫暖。</p>
-    </div>
+    <p id="mLead">加入雲禪護持會員，支持我們繼續做下去，也多了這些功能：</p>
     <ul class="mbens">
-      <li>用自己的照片製作專屬祝福圖</li>
-      <li>更多精美祝福圖片與常用版型</li>
-      <li>AI 產生背景圖（每個訂閱月 6 張）</li>
-      <li>AI 協助撰寫祝福語（每個訂閱月 60 次）</li>
+      <li>用自己的照片做祝福圖</li>
+      <li>更多圖片和樣式</li>
+      <li>AI 畫背景，每月 6 張</li>
+      <li>AI 寫祝福語，每月 60 次</li>
     </ul>
     <div class="mplans" role="radiogroup" aria-label="選擇方案">
       <button class="mplan" role="radio" data-plan="month"><b>月費 NT$99／月</b><small>自動續訂</small></button>
-      <button class="mplan" role="radio" data-plan="year"><b>年費 NT$790／年</b><small>自動續訂。整年一次扣款，平均每月約 NT$66</small></button>
+      <button class="mplan" role="radio" data-plan="year"><b>年費 NT$790／年</b><small>自動續訂，一次扣一整年，平均每月約 NT$66</small></button>
     </div>
     <p class="mstate" id="mState" role="status"></p>
     <button class="btn big" id="mBuy"></button>
     <button class="blink" id="mFree">繼續免費製作</button>
-    <p class="mfine">無論是否訂閱，誦經、撥珠、迴向與基本祝福分享，都能繼續免費使用。</p>
-    <p class="mfine">這是包含會員功能的自動續訂服務，並非捐款或功德金，也不是協會公益捐款。可依商店規則取消續訂；取消後通常仍可使用至已付款期間結束。AI 次數依訂閱月更新、不累積；年費不是一次取得全年次數。</p>
+    <p class="mfine">不訂閱也能繼續誦經、撥珠、迴向和分享祝福圖。</p>
+    <button class="blink" id="mMore" aria-expanded="false">訂閱須知</button>
+    <div class="mfull" id="mFull" hidden>
+      <p class="mfine">這是自動續訂的會員服務，不是捐款或功德金，也不是協會公益捐款。</p>
+      <p class="mfine">可以到商店取消續訂，取消後通常可用到已付款期間結束。</p>
+      <p class="mfine">AI 次數每個訂閱月更新，用不完不累積；年費也是按月給，不是一次給一整年。</p>
+    </div>
     <div class="mlinks" id="mLinks" hidden><button class="blink" id="mRestore">恢復購買</button><button class="blink" id="mManage">管理訂閱</button></div>
     <div class="mtest" id="mTest" hidden>僅本機測試，沒有真的付款：<button class="chip" data-r="cancel">模擬取消</button><button class="chip" data-r="pending">模擬確認中</button><button class="chip" data-r="reset">清除測試會員</button></div>
   </div>
   <div class="mbody" id="mOk" hidden>
     <h3 class="mtitle">感恩您</h3>
-    <p>感恩您成為雲禪護持會員。您的支持，是我們持續用心服務的力量。</p>
-    <p>會員功能已開通，現在可以繼續製作剛才的祝福圖。</p>
+    <p>感恩您成為雲禪護持會員。會員功能已開通。</p>
     <button class="btn big" id="mGoOn">繼續剛才的製作</button>
   </div>
 </div>
@@ -1469,17 +1473,16 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
   <div class="bhead"><button class="bback" id="doBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button><h2>公益捐款</h2><span></span></div>
   <div class="mbody" id="doMain">
     <h3 class="mtitle">一同關懷，讓善念延續</h3>
-    <p class="msub">協會公益捐款｜單次、自願</p>
+    <p class="msub">單次、自願，不捐也完全不影響使用</p>
     <p id="doFacts"></p>
-    <p>如果雲禪曾陪伴您度過一段安定的時光，也邀請您認識協會的公益計畫。每一份支持，都將依本次核准用途妥善運用。不論是否捐款，都感恩您願意分享善念。</p>
-    <p>接下來將開啟協會的外部捐款網站，由協會收款並處理捐款收據。這不是雲禪護持會員訂閱，也不會解鎖付費功能。</p>
+    <p>捐款在協會的網站完成，收款和收據都由協會處理。這不是會員訂閱，也不會開通任何功能。</p>
     <p class="mfine" id="doHost"></p>
     <button class="btn big" id="doGo">前往協會捐款網站</button>
-    <button class="blink" id="doStay">返回製作祝福圖</button>
+    <div class="mlinks"><button class="blink" id="doSnooze">暫時不顯示</button><button class="blink" id="doNever">不再顯示</button></div>
   </div>
   <div class="mbody" id="doBackMsg" hidden>
-    <p>歡迎回來。您可以繼續製作剛才的祝福圖。捐款結果與收據，請以協會網站或通知為準。</p>
-    <button class="btn big" id="doOk">返回製作祝福圖</button>
+    <p>歡迎回來。捐款結果和收據，請以協會網站或通知為準。</p>
+    <button class="btn big" id="doOk">返回</button>
   </div>
 </div>
 
@@ -1519,7 +1522,28 @@ function streak(){
 }
 const scrim = $("scrim");
 function openSheetEl(el){ closeSheets(); el.hidden = false; scrim.hidden = false; }
-function closeSheets(){ document.querySelectorAll(".sheet").forEach(s => s.hidden = true); scrim.hidden = true; }
+// iOS keeps a fixed sheet behind the keyboard, so while typing the sheet is pinned to the part of the screen that is still visible
+let vvFull = 0, fitFor = null;
+function fitSheet(){
+  const vv = window.visualViewport; if (!vv) return;
+  vvFull = Math.max(vvFull, vv.height);
+  const s = [...document.querySelectorAll(".sheet")].find(x => !x.hidden), a = document.activeElement;
+  document.querySelectorAll(".sheet.typing").forEach(x => { if (x !== s) x.classList.remove("typing"); });
+  if (!s) return;
+  const typing = s.contains(a) && a.tagName === "INPUT" && vvFull - vv.height > 120;
+  s.classList.toggle("typing", typing);
+  s.style.top = typing ? vv.offsetTop + "px" : ""; s.style.height = typing ? vv.height + "px" : "";
+  if (!typing) fitFor = null;
+  else if (fitFor !== a){   // only once per field, so scrolling the sheet by hand is never fought
+    fitFor = a; s.scrollTop += a.getBoundingClientRect().top - s.getBoundingClientRect().top - 56;
+  }
+}
+if (window.visualViewport){
+  visualViewport.addEventListener("resize", fitSheet); visualViewport.addEventListener("scroll", fitSheet);
+  addEventListener("orientationchange", () => { vvFull = 0; });
+  ["focusin", "focusout"].forEach(n => document.addEventListener(n, () => setTimeout(fitSheet, 60)));
+}
+function closeSheets(){ document.querySelectorAll(".sheet").forEach(s => s.hidden = true); scrim.hidden = true; fitSheet(); }
 scrim.onclick = closeSheets;
 
 /* ================= audio ================= */
@@ -2762,14 +2786,17 @@ function summaryText(){
 /* ---- 迴向：照實際功課的做法——功課結束，合掌，說出本次功德與迴向對象及所願，念迴向偈，最後圓滿 ---- */
 const WISH_BY_KIND = { alive:["身體健康", "平安吉祥", "消災解厄", "早日康復", "學業順利", "事業順利"],
   passed:["往生淨土", "離苦得樂", "蓮品增上"], all:["離苦得樂", "同霑法益", "皆共成佛道"] };
+const DEDI_PRESET = { 父母:"身體健康", 子女:"身體健康", 冤親債主:"離苦得樂", 一切眾生:"離苦得樂" };
 function dediState(){
   if (!S.dedi){
-    // first use: start from the family names and 追思 people the app already knows, plus the two traditional ones
-    const people = (S.fam || []).filter(n => n !== "一切眾生").map(n => ({ call:n, name:"", kind:"alive", wish:"身體健康" }))
-      .concat((S.mem || []).map(m => ({ call:m.name, name:"", kind:"passed", wish:"往生淨土" })),
-              [{ call:"冤親債主", name:"", kind:"all", wish:"離苦得樂" }, { call:"一切眾生", name:"", kind:"all", wish:"離苦得樂" }]);
-    people.forEach((x, i) => x.id = "p" + i);
-    S.dedi = { people, sel:[people[0] && people[0].id].filter(Boolean), by:"", verse:"normal", next:people.length };
+    // nobody is preset: a parent or child who is gone should not greet anyone here. Only people the user entered before carry over.
+    const people = (S.mem || []).map((m, i) => ({ id:"p" + i, call:m.name, name:"", kind:"passed", wish:"往生淨土" }));
+    S.dedi = { people, sel:[], by:"", verse:"normal", next:people.length, noSeed:true };
+  }
+  if (!S.dedi.noSeed){   // older installs: quietly remove the presets the user never changed or used
+    const used = new Set((S.dediLog || []).flatMap(r => r.who.map(w => w.id))), d = S.dedi;
+    d.people = d.people.filter(x => !(DEDI_PRESET[x.call] === x.wish && !x.name && !used.has(x.id)));
+    d.sel = d.sel.filter(i => d.people.some(x => x.id === i)); d.noSeed = true; save();
   }
   return S.dedi;
 }
@@ -2816,7 +2843,7 @@ function paintDedi(){
   const verse = st.verseSet ? st.verse : (passed ? "jingtu" : "normal");
   $("dVerseSeg").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === verse));
   $("dNext").disabled = !st.sel.length || dOpen != null;
-  $("dNext").textContent = dOpen != null ? "請先儲存或取消編輯" : st.sel.length ? "下一步" : "請先勾選迴向對象";
+  $("dNext").textContent = dOpen != null ? "請先儲存或取消" : st.sel.length ? "下一步" : st.people.length ? "請先勾選" : "請先新增";
 }
 function repaintPeople(){ if (!$("dediSheet").hidden) paintDedi(); if (!$("peopleSheet").hidden) paintPeopleList($("pmList"), false); }
 function paintPeopleList(box, selectable){
@@ -2832,7 +2859,7 @@ function paintPeopleList(box, selectable){
       r.appendChild(pick); return r;
     }
     pick.querySelector("b").textContent = personLabel(x);
-    pick.querySelector(".who span").textContent = `${KIND_NAME_P[x.kind] || ""}・祈願${x.wish}`;
+    pick.querySelector(".who span").textContent = (x.kind === "passed" ? "已往生・" : "") + `祈願${x.wish}`;
     if (selectable){
       pick.setAttribute("aria-pressed", st.sel.includes(x.id));
       pick.onclick = () => { st.sel = st.sel.includes(x.id) ? st.sel.filter(i => i !== x.id) : st.sel.concat(x.id); save(); paintDedi(); };
@@ -2848,14 +2875,19 @@ function paintPeopleList(box, selectable){
   st.people.forEach(x => { box.appendChild(row(x)); if (dOpen === x.id) box.appendChild(personForm(x)); });
   box.appendChild(row(null, true));
   if (dOpen === "new") box.appendChild(personForm(null));
+  if (!st.people.length && dOpen !== "new"){   // the empty start: add someone, or dedicate to everyone in one tap
+    const q = el("button", "dquick", "迴向給一切眾生");
+    q.onclick = () => { const n = { id:"p" + (st.next++), call:"一切眾生", name:"", kind:"all", wish:"離苦得樂" }; st.people.push(n); st.sel.push(n.id); save(); repaintPeople(); };
+    box.appendChild(q);
+  }
 }
 function focusForm(box){ const f = box.querySelector(".dform"); if (!f) return; f.scrollIntoView({ block:"nearest", behavior:"smooth" }); f.querySelector("input").focus({ preventScroll:true }); }
 // the inline editor: 稱呼 and 名字 side by side, 在世／已往生／眾生, then the wishes that fit
 function personForm(x){
   const st = dediState(), f = el("div", "dform"), uid = "pf" + (x ? x.id : "new");
   f.setAttribute("role", "group"); f.setAttribute("aria-label", x ? `編輯 ${personLabel(x)}` : "新增迴向對象");
-  f.innerHTML = `<div class="two"><div><label class="fld" for="${uid}c">稱呼</label><input class="inp" id="${uid}c" type="text" placeholder="例：媽媽、阿公" autocomplete="off" enterkeyhint="done"></div>
-    <div><label class="fld" for="${uid}n">名字（可不填）</label><input class="inp" id="${uid}n" type="text" placeholder="例：王秀英" autocomplete="off" enterkeyhint="done"></div></div>
+  f.innerHTML = `<div class="two"><div><label class="fld" for="${uid}c">稱呼</label><input class="inp" id="${uid}c" type="text" placeholder="例：家人" autocomplete="off" enterkeyhint="done"></div>
+    <div><label class="fld" for="${uid}n">名字</label><input class="inp" id="${uid}n" type="text" placeholder="可不填" autocomplete="off" enterkeyhint="done"></div></div>
     <p class="hint err" id="${uid}e" hidden>請填稱呼，例如「媽媽」。</p>
     <div class="lab">對方是</div><div class="seg"><button type="button" data-v="alive">在世</button><button type="button" data-v="passed">已往生</button><button type="button" data-v="all">眾生</button></div>
     <div class="lab">祈願</div><div class="row dwish"></div>
@@ -2965,7 +2997,7 @@ $("dStart").onclick = () => {
   const after = 0.4 + lines.length * 0.9;
   setDediVerse(verse, after);
   document.querySelectorAll("#dStage2 .dfin, #dStage2 .dthanks, #dDonate").forEach(x => x.style.animationDelay = (after + verseNow.length * 1.3 + 0.8) + "s");
-  paintDonate();
+  paintDonate(); fitDone();
   bell(); buzz([40,80,40]); dediMusicPlay(1.4);
   S.famSel = who.map(personLabel).join("、");
   const now = new Date(), m = pend();
@@ -3344,7 +3376,7 @@ function paintBless(g, im){
 let blessBg = "lotus", blessN = 0, blessFile = null, blessShow = false, blessFor = -1, blessPhoto = null;
 // the draft lives on this device only and never touches the dedication record; a photo stays in memory and is never stored or sent
 function keepDraft(){ S.blessDraft = { for:blessFor, note:$("bNote").value, show:blessShow }; save(); }
-const BLESS_HINT = "按下後，在分享選單選「LINE」";
+const BLESS_HINT = "";
 const photoPreview = () => blessBg === "photo" && !can("photo");
 // redraw the preview; the finished picture is kept ready so the share button can open the share menu right away
 async function renderBless(){
@@ -3369,7 +3401,7 @@ function paintBlessBgs(){
     box.appendChild(b);
   });
   // member tiles: marked in words before they are tapped; a tap only explains, it never interrupts the free picture
-  [["photo", "放自己的照片"], ["style", "更多會員樣式"], ["ai", "請 AI 畫背景"]].forEach(([id, name]) => {
+  [["photo", "自己的照片"], ["style", "更多樣式"], ["ai", "AI 畫背景"]].forEach(([id, name]) => {
     const b = document.createElement("button"); b.className = "mtile"; b.setAttribute("aria-pressed", blessBg === id);
     b.setAttribute("aria-label", `${name}，雲禪護持會員功能`);
     b.innerHTML = '<i>護持會員</i><span></span>'; b.querySelector("span").textContent = name;
@@ -3410,8 +3442,8 @@ $("bShare").onclick = async () => {
     const f = blessFile || (h.textContent = "製作中……", await readyBless());
     if (!f) throw new Error("no picture");
     if (canShareFile(f)){
-      try{ await navigator.share({ files:[f] }); h.textContent = "可返回繼續製作，也可以再分享一次"; }
-      catch(e){ h.textContent = e && e.name === "AbortError" ? BLESS_HINT : "這次沒有分享出去，圖還在，可以再按一次，或存到手機"; }
+      try{ await navigator.share({ files:[f] }); h.textContent = ""; }
+      catch(e){ h.textContent = e && e.name === "AbortError" ? BLESS_HINT : "沒有分享出去，可以再按一次"; }
     } else {
       const w = window.open("https://line.me/R/share?text=" + encodeURIComponent(shareText()), "_blank", "noopener");
       await saveBlob(f);
@@ -3427,7 +3459,7 @@ $("bSave").onclick = async () => {
   try{
     const f = blessFile || (h.textContent = "製作中……", await readyBless());
     if (!f) throw new Error("no picture");
-    h.textContent = await saveBlob(f) ? "已送出存檔，請到手機的下載或相簿查看" : BLESS_HINT;
+    h.textContent = await saveBlob(f) ? "圖片已存到手機的下載資料夾" : BLESS_HINT;
   }catch(e){ h.textContent = "目前無法存到手機，您仍可使用分享圖片。"; }
 };
 function askPhoto(){ if (blessPhoto){ blessBg = "photo"; paintBlessBgs(); renderBless(); } else { $("bPhotoFile").value = ""; $("bPhotoFile").click(); } }
@@ -3449,9 +3481,9 @@ const LOCAL_TEST = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 const BILLING = { ready:false };   // becomes true only when a real store adapter is added; it then also provides prices, restore and manage
 const PLANS = { month:"訂閱月費 NT$99／月", year:"訂閱年費 NT$790／年" };
 const PAY_FROM = {
-  photo:["讓您的祝福，更有自己的心意", "加入雲禪護持會員，可用家人、花草與生活照片製作專屬祝福圖；也一起支持雲禪持續陪伴更多人。"],
-  style:["讓每天的祝福，有更多美好樣貌", "可使用更多精美版型，同時支持雲禪持續製作免費的修持與祝福內容。"],
-  ai:["想把心中的美好景色，化成祝福嗎？", "雲禪護持會員可使用 AI 生成專屬背景；每個訂閱月含 6 張，您的支持也幫助雲禪持續發展。"]
+  photo:["用自己的照片做祝福圖", "加入雲禪護持會員就能使用，也一起支持雲禪："],
+  style:["更多圖片和樣式", "加入雲禪護持會員就能使用，也一起支持雲禪："],
+  ai:["請 AI 畫背景", "加入雲禪護持會員就能使用，也一起支持雲禪："]
 };
 const MEMBER_LEAD = $("mLead").textContent;
 const can = () => LOCAL_TEST && !!S.testMember;
@@ -3474,7 +3506,7 @@ function openMember(from){
 }
 function closeMember(){ $("member").hidden = true; paintBlessBgs(); renderBless(); }
 document.querySelectorAll(".mplan").forEach(b => b.onclick = () => { mPlan = b.dataset.plan; paintPlan(); });
-$("mMore").onclick = () => { const f = $("mFull"); f.hidden = !f.hidden; $("mMore").setAttribute("aria-expanded", !f.hidden); $("mMore").textContent = f.hidden ? "了解更多" : "收起"; };
+$("mMore").onclick = () => { const f = $("mFull"); f.hidden = !f.hidden; $("mMore").setAttribute("aria-expanded", !f.hidden); $("mMore").textContent = f.hidden ? "訂閱須知" : "收起"; };
 $("mBack").onclick = $("mFree").onclick = closeMember;
 $("mBuy").onclick = () => {
   if (!LOCAL_TEST) return;
@@ -3496,7 +3528,7 @@ $("mTest").querySelectorAll("button").forEach(b => b.onclick = () => {
    it is labelled, has no donation site to go to, and does nothing for anyone on the normal address. */
 const DONATION = { enabled:false, permit_state:"not_applied", legal_name:null, campaign:null, purpose:null, permit_no:null, start:null, end:null, url:null, allowed_hosts:[] };
 const DONATION_INTERNAL = /[?&]donation=test\b/.test(location.search);
-const DONATION_TEST = { internal:true, legal_name:"森藏永續文教協會", campaign:"內部測試（尚無核准計畫）", purpose:"內部測試（尚無核准用途）", permit_no:"尚未申請", start:"未定", end:"未定", url:null };
+const DONATION_TEST = { internal:true, legal_name:"森藏永續文教協會", campaign:"內部測試", purpose:"內部測試", permit_no:"尚未申請", start:"未定", end:"未定", url:null };
 function donationAvailability(){
   if (DONATION_INTERNAL) return DONATION_TEST;
   const d = DONATION;
@@ -3514,21 +3546,25 @@ function paintDonate(){
     if (f.never || now < (f.snooze || 0) || now - (f.last || 0) < 7 * DAY_MS) return;
     f.last = now; save();
   }
-  const p = document.createElement("p"); p.textContent = `${d.internal ? "（內部測試）" : ""}也歡迎了解${d.legal_name}的公益計畫。`;
-  const go = document.createElement("button"); go.className = "blink"; go.textContent = "了解協會公益捐款"; go.onclick = () => openDonate(d);
-  const note = document.createElement("small"); note.textContent = `捐款完全自願，不影響迴向、免費製圖或分享。本期勸募許可：${d.permit_no}`;
-  const later = document.createElement("button"); later.className = "blink"; later.textContent = "暫時不顯示";
-  later.onclick = () => { if (d.internal){ box.hidden = true; return; } f.snooze = now + 30 * DAY_MS; save(); paintDonate(); };
-  const no = document.createElement("button"); no.className = "blink"; no.textContent = "不再顯示這類邀請";
-  no.onclick = () => { if (d.internal){ box.hidden = true; return; } f.never = true; save(); paintDonate(); };
-  box.append(p, go, note, later, no); box.hidden = false; $("dedi").classList.add("withinv");
+  const go = document.createElement("button"); go.className = "blink"; go.textContent = "了解協會公益捐款 ›"; go.onclick = () => openDonate(d);
+  box.append(go); box.hidden = false; $("dedi").classList.add("withinv");
+}
+// long dedications: the lotus gives way so the buttons never leave the screen
+function fitDone(){
+  const inner = document.querySelector(".dedi-in"), l = inner.querySelector(".lotusimg");
+  l.style.height = "";
+  const over = inner.scrollHeight - inner.clientHeight;
+  if (over > 0) l.style.height = Math.max(64, l.offsetHeight - over - 4) + "px";
 }
 function openDonate(d){
   $("doFacts").innerHTML = "";
-  [["受款單位", d.legal_name], ["公益計畫", d.campaign], ["核准用途", d.purpose], ["勸募許可", d.permit_no], ["勸募期間", `${d.start} 至 ${d.end}`]].forEach(([k, v]) => {
+  [["受款單位", d.legal_name], ["公益計畫", d.campaign], ["用途", d.purpose], ["勸募許可", d.permit_no], ["勸募期間", d.internal ? "未定" : `${d.start} 至 ${d.end}`]].forEach(([k, v]) => {
     $("doFacts").append(`${k}：${v}`, document.createElement("br"));
   });
-  $("doHost").textContent = d.url ? `將前往：${new URL(d.url).hostname}` : "內部測試畫面，尚未開放捐款，也還沒有協會捐款網站。";
+  $("doHost").textContent = d.url ? `將前往：${new URL(d.url).hostname}` : "內部測試畫面，還不能捐款。";
+  const quiet = fn => () => { if (!d.internal){ fn(S.donInv || (S.donInv = {})); save(); } $("donate").hidden = true; paintDonate(); fitDone(); };
+  $("doSnooze").onclick = quiet(f => { f.snooze = Date.now() + 30 * DAY_MS; });
+  $("doNever").onclick = quiet(f => { f.never = true; });
   $("doGo").disabled = !d.url;
   $("doMain").hidden = false; $("doBackMsg").hidden = true; $("donate").hidden = false; $("donate").scrollTop = 0;
   $("doGo").onclick = () => {
@@ -3537,7 +3573,7 @@ function openDonate(d){
     $("doMain").hidden = true; $("doBackMsg").hidden = false;
   };
 }
-$("doBack").onclick = $("doStay").onclick = $("doOk").onclick = () => { $("donate").hidden = true; };
+$("doBack").onclick = $("doOk").onclick = () => { $("donate").hidden = true; };
 
 /* ---- 結束念誦 ---- */
 function summaryPhrase(){

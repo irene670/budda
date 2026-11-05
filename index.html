@@ -199,7 +199,7 @@ nav.tabs.locked{opacity:.45}
 .tlab b{color:var(--brass)}
 .done-badge{color:var(--jade);font-weight:700}
 .timer{font-family:var(--display);font-weight:900;font-size:4.6rem;font-variant-numeric:tabular-nums;line-height:1}
-.dverse.long span{font-size:1.3rem;letter-spacing:.2em}
+.dverse.long span{font-size:min(1.3rem,calc((100vw - 40px)/13.4));letter-spacing:.2em;white-space:nowrap}
 .undo{position:absolute;left:16px;right:16px;bottom:8rem;z-index:3;background:#000e;border:1.5px solid var(--brass);border-radius:16px;padding:.55rem .6rem .55rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.6rem;font-size:1.1rem}
 
 /* ---- sheets ---- */
@@ -333,6 +333,10 @@ nav.tabs.locked{opacity:.45}
 .dto{font-family:var(--display);font-weight:900;font-size:1.3rem;color:#ffe2a8;letter-spacing:.2em;animation:line 1.2s both}
 .dverse{display:flex;flex-direction:column;gap:clamp(.1rem,.8dvh,.35rem);margin:clamp(.1rem,.8dvh,.4rem) 0 0}
 .dverse span{font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,3.6dvh,1.65rem);letter-spacing:.35em;text-shadow:0 0 18px #ffcf7a66;opacity:0;animation:line 1.4s both;animation-delay:var(--d)}
+/* 偈文念完後淡出收起，把位置讓給完成頁（延遲由 JS 依行數設定） */
+.dverse{overflow:hidden;animation:verseOut 1.2s ease-in-out forwards paused}
+#dedi.go .dverse{animation-play-state:running}
+@keyframes verseOut{from{opacity:1;max-height:13rem}55%{opacity:0}to{opacity:0;max-height:0;margin-top:0}}
 @keyframes line{from{opacity:0;transform:translateY(10px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
 .dfin{opacity:0;animation:line 1s 6s both;display:flex;gap:12px;width:100%;margin-top:auto;padding-top:clamp(.4rem,2dvh,1.2rem)}
 .dfin .btn{flex:1 1 0;min-height:56px;padding-inline:.6rem;font-size:1.1rem;border-radius:999px;letter-spacing:.1em;white-space:nowrap}
@@ -859,7 +863,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .dmore{margin:10px 0}
 .dmore summary{color:var(--muted);font-size:.92rem;letter-spacing:.08em;padding:10px 0;cursor:pointer}
 .dpreview{margin:14px 0 18px;padding:18px 16px;border-radius:18px;border:1px solid #e2b36340;background:linear-gradient(180deg,#e2b36312,transparent);font-family:var(--display);line-height:1.9;letter-spacing:.08em;color:#fff1cf}
-.dpreview p{margin:0}.dpreview .vv{margin-top:10px;color:var(--brass);letter-spacing:.2em}.dpreview .v2{margin-top:0}
+.dpreview p{margin:0}.dpreview .vv{margin-top:10px;color:var(--brass);letter-spacing:.2em;white-space:nowrap;font-size:min(1em,calc((100vw - 104px)/13.4))}.dpreview .v2{margin-top:0}
 .dconfirm{gap:10px}.dconfirm .btn{flex:1}
 /* first launch: three full-screen steps over the Pure Land imagery */
 .onb{background:#0e0805 url(assets/img/bg-pureland.webp) center/cover;align-items:flex-end}
@@ -873,7 +877,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .onb .btn{min-height:54px;font-size:1.1rem;letter-spacing:.3em;background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c}
 .onb .choice{background:#0e0805aa;border:1px solid #e2b36355;border-radius:16px}
 .onb .choice[aria-pressed="true"]{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass)}
-@media (prefers-reduced-motion:reduce){.rays{animation:none}.lotus .petal,.lotus .seed,.dverse span,.dto,.dfin,.dthanks,.ddonate,.merit{animation-duration:.01s;animation-delay:0s}.finger{animation:none}}
+@media (prefers-reduced-motion:reduce){.rays{animation:none}.lotus .petal,.lotus .seed,.dverse span,.dto,.dfin,.dthanks,.ddonate,.merit{animation-duration:.01s;animation-delay:0s}.dverse{animation-duration:.01s}.finger{animation:none}}
 /* ---- 經文庫（v7，2026-10-31）：全螢幕兩層。首頁＝搜尋＋依心願／為誰迴向篩選＋分類清單；詳情＝預覽經文、介紹、
    典籍由來、故事、選編曲，再按「開始撥珠」。上方固定返回鍵，不必捲到底。設計成可容納上百部經。 ---- */
 .lib{position:fixed;inset:0;z-index:60;background:radial-gradient(120% 60% at 50% 0%,#2a1c12 0%,#170f0a 55%,#120b07 100%);color:var(--paper);overflow:hidden;overflow:clip}
@@ -2826,8 +2830,10 @@ function dediWords(w = dediWhat){
 let dOpen = null;   // id of the person whose editor is open, "new", or null
 const EDIT_I = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>';
 const KIND_NAME_P = { alive:"在世", passed:"已往生", all:"眾生" };
+let dVerseOnce = null;   // a verse picked by hand counts for this dedication only
 function openDedi(){
   const st = dediState();
+  dVerseOnce = null; delete st.verseSet;
   if (lsCur && !talk.paused) talk.pause();   // the dedication is spoken in quiet; the chant can be resumed afterwards
   $("dStepA").hidden = false; $("dStepB").hidden = true;
   $("dMerit").textContent = meritText();
@@ -2838,9 +2844,9 @@ function openDedi(){
 function paintDedi(){
   const st = dediState();
   paintPeopleList($("dPeople"), true);
-  // anyone who has passed away suggests the Pure Land verse, unless the user picked one
+  // anyone who has passed away brings the Pure Land verse, unless the user picked one just now
   const passed = st.people.some(x => st.sel.includes(x.id) && x.kind === "passed");
-  const verse = st.verseSet ? st.verse : (passed ? "jingtu" : "normal");
+  const verse = dVerseOnce || (passed ? "jingtu" : "normal");
   $("dVerseSeg").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === verse));
   $("dNext").disabled = !st.sel.length || dOpen != null;
   $("dNext").textContent = dOpen != null ? "請先儲存或取消" : st.sel.length ? "下一步" : st.people.length ? "請先勾選" : "請先新增";
@@ -2927,7 +2933,7 @@ function personForm(x){
   }
   return f;
 }
-$("dVerseSeg").querySelectorAll("button").forEach(b => b.onclick = () => { const st = dediState(); st.verse = b.dataset.v; st.verseSet = true; save(); paintDedi(); });
+$("dVerseSeg").querySelectorAll("button").forEach(b => b.onclick = () => { dVerseOnce = b.dataset.v; paintDedi(); });
 $("dBy").addEventListener("change", () => { dediState().by = $("dBy").value.trim(); save(); });
 $("dClose").onclick = closeSheets;
 // step 2: the whole dedication is read once before it is offered
@@ -2996,7 +3002,10 @@ $("dStart").onclick = () => {
   lines.forEach(([t, c], i) => { const e = document.createElement("span"); e.className = "dl " + c; e.style.setProperty("--d", (0.4 + i * 0.9) + "s"); e.textContent = t; to.appendChild(e); });
   const after = 0.4 + lines.length * 0.9;
   setDediVerse(verse, after);
-  document.querySelectorAll("#dStage2 .dfin, #dStage2 .dthanks, #dDonate").forEach(x => x.style.animationDelay = (after + verseNow.length * 1.3 + 0.8) + "s");
+  // the verse stays until it has been read, then fades and folds away; the finish page takes its place
+  const verseOut = after + 0.6 + (verseNow.length - 1) * 1.3 + 1.4 + 2.5;
+  $("dVerse").style.animationDelay = verseOut + "s";
+  document.querySelectorAll("#dStage2 .dfin, #dStage2 .dthanks, #dDonate").forEach(x => x.style.animationDelay = (verseOut + 0.9) + "s");
   paintDonate(); fitDone();
   bell(); buzz([40,80,40]); dediMusicPlay(1.4);
   S.famSel = who.map(personLabel).join("、");
@@ -3794,7 +3803,7 @@ function playSeries(id, idx, opts){
   if (idx == null) idx = (lsCur && lsCur.s.id === id) ? lsCur.i : lsResumeIdx(sr);
   if (lsCur && lsCur.s.id === id && lsCur.i === idx){ talk.paused ? talkPlay() : talk.pause(); return; }
   const ep = sr.eps[idx];
-  lsCur = { s:sr, i:idx, ep }; S.lep[id] = idx; save(); lsMsg("");
+  lsCur = { s:sr, i:idx, ep }; S.lep[id] = idx; rememberTrack(); save(); lsMsg("");
   talk.src = ep.u; talk.volume = 1;
   talk.loop = !lsQueue && (id.startsWith("n-") || id.startsWith("b-") || isSong(id) || !!(opts && opts.loop));
   if (isSong(id) && !pend().sutras.includes(sr.title)){ pend().sutras.push(sr.title); save(); }
@@ -4236,11 +4245,12 @@ const PLAY_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true
 const PAUSE_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
 function paintSBar(){
   const on = lsCur && !talk.paused, it = curItem(), done = $("p-beads").classList.contains("complete");
-  $("sPlay").innerHTML = on ? PAUSE_SVG : PLAY_SVG; $("sPlay").setAttribute("aria-label", on ? "暫停經文" : "播放經文");
+  const last = !lsCur && !sess ? lastTrack() : null;
+  $("sPlay").innerHTML = on ? PAUSE_SVG : PLAY_SVG; $("sPlay").setAttribute("aria-label", on ? "暫停經文" : lsCur ? "播放經文" : last ? `播放${last.a.title}` : "選擇經文");
   const pick = !lsCur && !sess && S.pickText && LIB.texts.find(x => x.id === S.pickText);
-  $("sName").textContent = lsCur ? lsCur.s.title : sess ? it.name : pick ? pick.title : "選擇經文";
+  $("sName").textContent = lsCur ? lsCur.s.title : sess ? it.name : last ? last.a.title : pick ? pick.title : "選擇經文";
   const gr = S.goalRun && S.goalRun.day === dkey(new Date()) ? S.goalRun : null;
-  $("sSub").textContent = gr ? `${SLOT_NAME[gr.slot]}・發願 ${gr.target / PER_LOOP} 輪` : done && routine ? "已圓滿・輕觸進入下一步" : !lsCur ? "輕觸選經文音樂" :
+  $("sSub").textContent = gr ? `${SLOT_NAME[gr.slot]}・發願 ${gr.target / PER_LOOP} 輪` : done && routine ? "已圓滿・輕觸進入下一步" : last ? `雲禪唱誦・${last.ep.t}` : !lsCur ? "輕觸選經文音樂" :
     isSong(lsCur.s.id) ? `雲禪唱誦・${lsCur.ep.t}` : "雲禪配樂";
 }
 // rolling lyrics: lyrSet() lays out the lines once per track, lyrAt() brings one line to the middle
@@ -4359,7 +4369,7 @@ $("meDediLog").onclick = () => { dlFrom = "me"; showTab("dedilog"); };
 $("mePeople").onclick = () => { dOpen = null; openSheetEl($("peopleSheet")); paintPeopleList($("pmList"), false); };
 $("pmClose").onclick = () => { closeSheets(); dOpen = null; if (activeTab === "me") renderMe(); };
 function openSutras(){ openLib(); }
-$("sPlay").onclick = () => { ac(); if (lsCur) talk.paused ? talkPlay() : talk.pause(); else openSutras(); };
+$("sPlay").onclick = () => { ac(); if (lsCur) talk.paused ? talkPlay() : talk.pause(); else if (!resumeLast()) openSutras(); };
 $("sPick").onclick = () => { if (routine && $("p-beads").classList.contains("complete")) nextStep(); else openSutras(); };
 $("musicClose").onclick = closeSheets;
 // what can play while beading, each with what it is and when it suits: chants, bedtime music, sutras, holy names
@@ -4396,6 +4406,7 @@ function selectTrack(sr, idx = null, queue = null){
   if (sess && !routine) endSession();
   if (!(lsCur && lsCur.s.id === sr.id && !talk.paused && (idx == null || lsCur.i === idx))) playSeries(sr.id, idx, { loop:true });
   talk.loop = !lsQueue;
+  rememberTrack(); save();
   renderHud();
 }
 /* ---- 經文音樂（v8，2026-11-01）：像音樂 App。只列已上架的唱誦：每部經是一張專輯，裡面是不同編曲（以後也可以附影片）；
@@ -4428,6 +4439,19 @@ const inTheme = (a, id) => TRACKS.some(t => t.a === a && tThemes(t).includes(id)
 const albumOf = id => ALBUMS.find(a => a.id === id);
 const curTrack = () => lsCur && TRACKS.find(t => t.a.sr.id === lsCur.s.id && t.i === lsCur.i);
 const isCurT = t => !!lsCur && lsCur.s.id === t.a.sr.id && lsCur.i === t.i;
+// the play button on the beads page picks up the last track (and own album) after the app is reopened
+function rememberTrack(){ const t = curTrack(); if (!t) return; S.lastT = t.key; S.lastPl = lsQueue ? lsQueue.id : null; S.pickText = t.a.id; }
+const lastTrack = () => {
+  const t = trackOf(S.lastT); if (t) return t;
+  const a = S.pickText && albumOf(S.pickText);   // chosen before the track itself was remembered
+  return a ? TRACKS.find(x => x.a === a && x.i === lsResumeIdx(a.sr)) : null;
+};
+function resumeLast(){
+  const t = lastTrack(); if (!t) return false;
+  const p = S.lastPl && plOf(S.lastPl), pos = p ? plTracks(p).indexOf(t) : -1;
+  pos >= 0 ? playAlbum(p, pos) : playTrack(t);
+  return true;
+}
 const myAlbums = () => (S.myAlbums = S.myAlbums || []);
 const plOf = id => myAlbums().find(p => p.id === id);
 const plTracks = p => p.keys.map(trackOf).filter(Boolean);

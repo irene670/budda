@@ -20,5 +20,8 @@
 !/assets/img/
 /assets/img/*
 !/assets/img/*.webp
+!/assets/fonts/
+/assets/fonts/*
+!/assets/fonts/*.woff2
 
 !/audio/迴向圓滿.mp3

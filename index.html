@@ -1106,6 +1106,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .cpopts .chip{min-height:44px;padding:.3rem .8rem;touch-action:manipulation}
 #csDone{position:sticky;bottom:0;flex:none;min-height:52px}
 .cpopts .chip.on{background:var(--brass);color:var(--brass-ink);border-color:var(--brass);font-weight:700}
+.cpinfo{margin:.5rem 0 0;color:#ffe2a8;font-size:1rem}
 .cplic{color:var(--muted);font-size:.86rem;line-height:1.45;margin:.5rem 0 0}
 .cpbook{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px}
 .cpbook button{display:flex;flex-direction:column;gap:2px;padding:0;background:none;border:0;color:var(--paper);text-align:left;font:inherit;touch-action:manipulation;min-width:0}
@@ -1627,6 +1628,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
   <div class="lab">書體</div><div class="cpfonts" id="csFonts"></div>
   <div class="lab">格子大小</div><div class="cpopts" id="csCols"></div>
   <div class="lab">一頁寫多少</div><div class="cpopts" id="csPage"></div>
+  <p class="cpinfo" id="csInfo" role="status"></p>
   <div class="lab">格內顯示</div><div class="cpopts" id="csShow"></div>
   <div class="lab">筆與紙</div><div class="cpopts" id="csBrush"></div><div class="cpopts" id="csPaper" style="margin-top:8px"></div>
   <p class="cplic">書體為開放授權字體：cwTeX 楷書、霞鶩文楷（SIL OFL）；王漢宗顏楷、隸書、行書、鋼筆行楷（GNU GPL v2）。</p>
@@ -4385,7 +4387,9 @@ const CP_FONTS = [["kai","楷書","kai"],["yankai","顏楷","yankai"],["lishu","
 const CP_PAPER = { xuan:{ n:"宣紙", bg:"#f3e9d3", line:"#b4483a", tpl:"#b4483a55", ink:"#17110c", py:"#7b5a43" },
                    gold:{ n:"金粟箋", bg:"#e9d3a0", line:"#9a3b2c", tpl:"#9a3b2c55", ink:"#17110c", py:"#6b4a2a" },
                    blue:{ n:"瓷青紙", bg:"#1d2b45", line:"#caa24f", tpl:"#e8c97a44", ink:"#f0cf7c", py:"#c8b78e" } };
-const cpSet = () => (S.cp = Object.assign({ font:"kai", cols:4, line:false, trace:true, zy:true, py:true, vert:true, brush:2, paper:"xuan" }, S.cp || {}));
+const CP_DEFAULT = { font:"kai", cols:4, line:false, trace:true, zy:true, py:true, vert:true, brush:2, paper:"xuan" };
+// always the same object: the settings sheet keeps hold of it, so it must never be swapped for a copy
+const cpSet = () => { S.cp = S.cp || {}; for (const k in CP_DEFAULT) if (S.cp[k] === undefined) S.cp[k] = CP_DEFAULT[k]; return S.cp; };
 const cpBookList = () => (S.cpBook = S.cpBook || []);
 const cpDrafts = () => (S.cpDrafts = S.cpDrafts || {});
 const cpBookMax = () => can() ? Infinity : BOOK_FREE;
@@ -4629,8 +4633,9 @@ function paintCpSheet(){
   cpOptChips($("csBrush"), [[1,"細筆"],[2,"中筆"],[3,"粗筆"]], v => c.brush === v, v => c.brush = v);
   cpOptChips($("csPaper"), Object.keys(CP_PAPER).map(k => [k, CP_PAPER[k].n]), v => c.paper === v, v => c.paper = v);
 }
-function cpApply(){ save(); cpLoadFont(S.cp.font).then(() => { if (cpW.draft){ const cur = cpCurrentId(); cpPaginate(); cpW.page = Math.max(0, cpW.pages.findIndex(p => p.includes(cur))); cpPaintPaper(); cpPaintRef(); } }); }
-$("cwOpt").onclick = () => { paintCpSheet(); $("cwSheet").hidden = false; };
+function cpApply(){ save(); cpLoadFont(S.cp.font).then(() => { if (cpW.draft){ const cur = cpCurrentId(); cpPaginate(); cpW.page = Math.max(0, cpW.pages.findIndex(p => p.includes(cur))); cpPaintPaper(); cpPaintRef(); cpPaintInfo(); } }); }
+function cpPaintInfo(){ const n = (cpW.pages[cpW.page] || []).length; $("csInfo").textContent = `現在一頁 ${n} 字，共 ${cpW.pages.length} 頁`; }
+$("cwOpt").onclick = () => { paintCpSheet(); cpPaintInfo(); $("cwSheet").hidden = false; };
 $("csDone").onclick = () => { $("cwSheet").hidden = true; };
 
 /* 完稿：右起直書的一張紙，首行經題，末行日期與抄寫時間。沒寫到的字留淡淡的底字。 */

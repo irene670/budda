@@ -1035,6 +1035,8 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .cpseg{display:flex;margin-top:16px;border-bottom:1px solid var(--line)}
 .cpseg button{flex:1;min-height:46px;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--muted);font:inherit;font-size:1.05rem;touch-action:manipulation}
 .cpseg button.on{color:var(--brass);font-weight:700;border-bottom-color:var(--brass)}
+.cpthemedesc{margin:8px 0 0;color:var(--muted);font-size:.95rem;line-height:1.5}
+.cpgrouph{margin:16px 0 0;font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.14em;color:var(--brass)}
 .cprow{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:10px 2px;box-sizing:border-box;text-align:left;background:none;border:0;border-bottom:1px solid #4a362766;color:var(--paper);touch-action:manipulation}
 .cprow b{display:block;font-family:var(--display);font-weight:700;font-size:1.12rem}
 .cprow span span{display:block;color:var(--muted);font-size:.95rem;margin-top:.1rem}
@@ -1337,6 +1339,8 @@ body.dedicp #dediSheet{z-index:66}
         <header class="cphead"><h2>抄經</h2><button class="blink" id="cpBookBtn">抄經本 <span id="cpBookN"></span> ›</button></header><p class="cpsub">一格一字，寫到一半會自動保存。</p><div class="cpsetrow"><span id="cpSetSum"></span><button id="cpSetBtn">設定書寫方式</button></div>
         <div id="cpResume" hidden></div>
         <div class="cpseg" id="cpSeg" role="group" aria-label="分類"></div>
+        <div class="libchips" id="cpChips" role="group" aria-label="依心願篩選"></div>
+        <p class="cpthemedesc" id="cpThemeDesc" hidden></p>
         <div id="cpList"></div>
       </div>
     </section>
@@ -5060,28 +5064,40 @@ async function cpOpenInfo(id){
   $("cpInfo").hidden = false;
 }
 $("ciBack").onclick = () => { $("cpInfo").hidden = true; };
-let cpTabGroup = "經文";
+let cpTabGroup = "全部", cpTheme = null;
 function renderCopy(){
   const p = $("cpList"); if (!p) return;
   const seg = $("cpSeg"); seg.innerHTML = "";
-  CB.groups.forEach(g => { const b = el("button", cpTabGroup === g.name ? "on" : "", g.name); b.setAttribute("aria-pressed", cpTabGroup === g.name); b.onclick = () => { cpTabGroup = g.name; renderCopy(); }; seg.appendChild(b); });
+  ["全部", ...CB.groups.map(g => g.name)].forEach(n => { const b = el("button", cpTabGroup === n ? "on" : "", n); b.setAttribute("aria-pressed", cpTabGroup === n); b.onclick = () => { cpTabGroup = n; renderCopy(); }; seg.appendChild(b); });
+  // the same wishes as the music library; only those with something to copy here
+  const groups = CB.groups.filter(g => cpTabGroup === "全部" || g.name === cpTabGroup), themesOf = t => (CATALOG[t.id] || {}).themes || [];
+  const themes = (TOPICS.themes || []).filter(x => groups.some(g => g.texts.some(t => themesOf(t).includes(x.id))));
+  if (!themes.some(x => x.id === cpTheme)) cpTheme = null;
+  const chips = $("cpChips"), keep = chips.scrollLeft; chips.innerHTML = "";
+  [{ id:null, name:"全部" }, ...themes].forEach(x => { const on = cpTheme === x.id, b = el("button", on ? "on" : "", x.name); b.setAttribute("aria-pressed", on); b.onclick = () => { cpTheme = x.id; renderCopy(); }; chips.appendChild(b); });
+  const onChip = chips.querySelector(".on"); chips.scrollLeft = keep; if (onChip && (onChip.offsetLeft < chips.scrollLeft || onChip.offsetLeft + onChip.offsetWidth > chips.scrollLeft + chips.clientWidth)) chips.scrollLeft = onChip.offsetLeft - 16;
+  const th = themes.find(x => x.id === cpTheme); $("cpThemeDesc").hidden = !th; $("cpThemeDesc").textContent = th ? th.desc : "";
   const drafts = Object.entries(cpDrafts()).filter(([k, v]) => CP[k] && v.done).sort((a, b) => b[1].at - a[1].at);
   const box = $("cpResume"); box.innerHTML = ""; box.hidden = !drafts.length;
   if (drafts.length){ const [id, d] = drafts[0], b = el("button", "cpresume"), t = el("span"); t.append(el("b", null, CP[id].title), el("span", null, `已寫 ${d.done}／${d.total} 字`)); b.append(t, el("em", null, "接著抄 ›")); b.onclick = () => cpOpenWrite(id, d.rep); box.appendChild(b); }
   p.innerHTML = "";
-  const g = CB.groups.find(x => x.name === cpTabGroup) || CB.groups[0];
-  (g ? g.texts : []).forEach(t => {
+  const row = t => {
     const n = cpChars(t, t.rep), b = el("button", "cprow"), tx = el("span"), times = cpBookList().filter(x => x.text === t.id).length;
     tx.append(el("b", null, t.title), el("span", null, `${t.rep > 1 ? `${t.rep} 遍・` : ""}${n} 字・約 ${Math.max(1, Math.round(n * .22))} 分鐘`));
     b.appendChild(tx); if (times) b.appendChild(el("em", null, `抄過 ${times} 次`));
     b.onclick = () => cpOpenInfo(t.id); p.appendChild(b);
+  };
+  groups.forEach(g => {
+    const list = g.texts.filter(t => !cpTheme || themesOf(t).includes(cpTheme)); if (!list.length) return;
+    if (cpTabGroup === "全部") p.appendChild(el("h3", "cpgrouph", g.name));
+    list.forEach(row);
   });
   $("cpSetSum").textContent = cpSetSummary();
   $("cpBookN").textContent = can() ? `${cpBookList().length} 篇` : `${cpBookList().length}／${BOOK_FREE}`;
 }
 $("cpBookBtn").onclick = cpOpenBook;
 function cpSetSummary(){
-  const c = cpSet(); if (!c.input) return "第一次抄經時會先設定";
+  const c = cpSet(); if (!c.input) return "還沒設定";
   const f = CP_FONTS.find(x => x[0] === c.font), size = { 3:"特大格", 4:"大格", 5:"中格", 7:"小格" }[c.cols];
   return [c.input === "finger" ? "手指書寫" : "觸控筆", c.input === "finger" ? (c.per === 4 ? "一次四字" : "一次一字") : size, c.trace ? f && f[1] : "空白"].filter(Boolean).join("・");
 }

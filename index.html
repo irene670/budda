@@ -1096,6 +1096,20 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .cptools .btn{flex:1;min-width:0;color:#2a1a0c;min-height:52px;padding:.2rem .4rem;font-size:1.02rem;border-radius:999px;background:linear-gradient(180deg,#f2cf86,#d39d45);white-space:nowrap}
 .cptip{position:absolute;left:12px;right:12px;bottom:12px;padding:8px 12px;background:#20160fe0;color:#ffe2a8;border-radius:12px;font-size:.98rem;line-height:1.4;pointer-events:none}
 .cpsheet{z-index:66}
+.cpway{display:flex;align-items:center;gap:12px;width:100%;min-height:96px;margin-top:14px;padding:14px 16px;box-sizing:border-box;text-align:left;background:#ffffff0a;border:1px solid #e2b36366;border-radius:18px;color:var(--paper);touch-action:manipulation}
+.cpway b{display:block;font-family:var(--display);font-size:1.3rem;color:#ffe2a8}
+.cpway span span{display:block;margin-top:.15rem;color:var(--muted);font-size:1rem;line-height:1.45}
+.cpway em{margin-left:auto;font-style:normal;color:var(--brass);font-size:1.4rem}
+.cpprev{display:block;margin:12px auto 4px;border-radius:6px}
+.cplab{margin:.9rem 0 .35rem;color:var(--muted);font-size:.95rem;letter-spacing:.06em}
+.cphint{position:absolute;z-index:3;top:calc(env(safe-area-inset-top,0px) + 50px);right:8px;max-width:15rem;margin:0;padding:8px 12px;background:var(--brass);color:#2a1a0c;border-radius:12px;font-size:1rem;font-weight:700;line-height:1.35;box-shadow:0 6px 18px #0009;animation:cpHint .45s ease-out both}
+.cphint[hidden]{display:none}
+.cphint::before{content:"";position:absolute;top:-7px;right:16px;border:8px solid transparent;border-top:0;border-bottom-color:var(--brass)}
+@keyframes cpHint{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+#cwOpt{position:relative}
+#cwOpt.pulse::after{content:"";position:absolute;inset:4px;border-radius:50%;border:2px solid var(--brass);animation:cpPulse 1.4s ease-out 3}
+@keyframes cpPulse{from{opacity:.95;transform:scale(.8)}to{opacity:0;transform:scale(1.5)}}
+@media (prefers-reduced-motion:reduce){.cphint{animation:none}#cwOpt.pulse::after{animation:none;opacity:.9}}
 .cpsheet .lab{margin-top:.5rem}
 .cpfonts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .cpfonts button{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:84px;padding:6px 2px;background:#f2e7d0;color:#2a1a0c;border:2px solid transparent;border-radius:12px;touch-action:manipulation}
@@ -1611,13 +1625,19 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
   <div class="cpscroll" id="ciBody"></div>
   <div class="cpfoot" id="ciFoot"></div>
 </div>
+<div class="cpfs" id="cpSetup" hidden role="dialog" aria-label="設定抄經方式">
+  <div class="bhead"><button class="bback" id="csuBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button></div>
+  <div class="cpscroll" id="csuBody"></div>
+  <div class="cpfoot" id="csuFoot" hidden></div>
+</div>
 <div class="cpw" id="cpWrite" hidden role="dialog" aria-label="抄經">
   <div class="cpwbar"><button class="cpico" id="cwBack" aria-label="先離開，會自動保存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><b id="cwTitle"></b><span class="cpprog" id="cwProg"></span><button class="cpico" id="cwOpt" aria-label="字帖與稿紙設定"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.2"/><circle cx="8" cy="17" r="2.2"/></svg></button></div>
+  <p class="cphint" id="cwHint" hidden>字體、大小都在這裡，隨時可以改</p>
   <div class="cpref" id="cwRef" aria-label="這一句的注音與拼音"></div>
   <button class="cpnote" id="cwNote" aria-label="這一句的注解，點一下看全部"><span id="cwNoteT"></span></button>
   <div class="cpstage" id="cwStage"><canvas id="cwPaper" aria-hidden="true"></canvas><canvas id="cwInk" aria-label="稿紙，用手指或觸控筆在格子裡書寫"></canvas><p class="cptip" id="cwTip" hidden></p></div>
   <div class="cptools" id="cwTools">
-    <button class="cptb" id="cwPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>上一頁</button>
+    <button class="cptb" id="cwPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span id="cwPrevT">上一頁</span></button>
     <button class="cptb" id="cwUndo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7L4 11l4 4"/><path d="M4 11h10a5 5 0 0 1 0 10h-3"/></svg>復原</button>
     <button class="cptb" id="cwClear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="1.5"/><path d="M9 9l6 6M15 9l-6 6"/></svg>重寫此格</button>
     <button class="btn" id="cwNext"></button>
@@ -1625,9 +1645,10 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 </div>
 <div class="sheet cpsheet" id="cwSheet" hidden role="dialog" aria-label="字帖與稿紙設定">
   <h3>字帖與稿紙</h3>
+  <div class="lab">書寫方式</div><div class="cpopts" id="csInput"></div>
   <div class="lab">書體</div><div class="cpfonts" id="csFonts"></div>
-  <div class="lab">格子大小</div><div class="cpopts" id="csCols"></div>
-  <div class="lab">一頁寫多少</div><div class="cpopts" id="csPage"></div>
+  <div class="lab" id="csColsLab">格子大小</div><div class="cpopts" id="csCols"></div>
+  <div class="lab" id="csPageLab">一頁寫多少</div><div class="cpopts" id="csPage"></div>
   <p class="cpinfo" id="csInfo" role="status"></p>
   <div class="lab">格內顯示</div><div class="cpopts" id="csShow"></div>
   <div class="lab">筆與紙</div><div class="cpopts" id="csBrush"></div><div class="cpopts" id="csPaper" style="margin-top:8px"></div>
@@ -4387,7 +4408,7 @@ const CP_FONTS = [["kai","楷書","kai"],["yankai","顏楷","yankai"],["lishu","
 const CP_PAPER = { xuan:{ n:"宣紙", bg:"#f3e9d3", line:"#b4483a", tpl:"#b4483a55", ink:"#17110c", py:"#7b5a43" },
                    gold:{ n:"金粟箋", bg:"#e9d3a0", line:"#9a3b2c", tpl:"#9a3b2c55", ink:"#17110c", py:"#6b4a2a" },
                    blue:{ n:"瓷青紙", bg:"#1d2b45", line:"#caa24f", tpl:"#e8c97a44", ink:"#f0cf7c", py:"#c8b78e" } };
-const CP_DEFAULT = { font:"kai", cols:4, line:false, trace:true, zy:true, py:true, vert:true, brush:2, paper:"xuan" };
+const CP_DEFAULT = { font:"kai", per:1, cols:4, line:false, trace:true, zy:true, py:true, vert:true, brush:2, paper:"xuan" };
 // always the same object: the settings sheet keeps hold of it, so it must never be swapped for a copy
 const cpSet = () => { S.cp = S.cp || {}; for (const k in CP_DEFAULT) if (S.cp[k] === undefined) S.cp[k] = CP_DEFAULT[k]; return S.cp; };
 const cpBookList = () => (S.cpBook = S.cpBook || []);
@@ -4453,11 +4474,13 @@ const cpW = { t:null, rep:1, cells:[], draft:null, page:0, pages:[], cell:0, ox:
 const cwStage = $("cwStage"), cwPaper = $("cwPaper"), cwInk = $("cwInk");
 function cpPaginate(){
   const c = cpSet(), W = cwStage.clientWidth, H = cwStage.clientHeight;
-  const cols = Math.max(1, c.cols), cell = Math.floor(W / cols), rows = Math.max(1, Math.floor(H / cell));
+  const finger = c.input === "finger";   // a finger needs room: one big box, or four
+  const cols = finger ? (c.per === 4 ? 2 : 1) : Math.max(1, c.cols);
+  const cell = finger ? Math.floor(Math.min(W, H) / cols) : Math.floor(W / cols), rows = finger ? cols : Math.max(1, Math.floor(H / cell));
   Object.assign(cpW, { cols, rows, cell, ox:Math.floor((W - cell * cols) / 2), oy:Math.floor((H - cell * rows) / 2) });
   const per = cols * rows, pages = []; let cur = [];
   cpW.cells.forEach((x, i) => {
-    if (cur.length && (cur.length >= per || (c.line && x.i === 0))){ pages.push(cur); cur = []; }
+    if (cur.length && (cur.length >= per || (!finger && c.line && x.i === 0))){ pages.push(cur); cur = []; }
     cur.push(i);
   });
   if (cur.length) pages.push(cur);
@@ -4477,12 +4500,12 @@ function cpGlyphZhuyin(g, z, x, y, s, color){   // 注音 stacked downwards; the
 }
 function cpDrawCell(g, c, x, y, s, pal, opt){
   const showZ = opt.zy && s >= 56, showP = opt.py && s >= 56;
-  const zw = showZ ? s * .17 : 0, ph = showP ? s * .16 : 0;
+  const zw = showZ ? Math.min(s * .17, 34) : 0, ph = showP ? Math.min(s * .16, 30) : 0;
   g.strokeStyle = pal.line; g.globalAlpha = .75; g.lineWidth = 1; g.strokeRect(x + .5, y + .5, s, s);
   g.globalAlpha = .28; g.setLineDash([3, 4]); g.beginPath(); g.moveTo(x + (s - zw) / 2, y + 3); g.lineTo(x + (s - zw) / 2, y + s - ph - 3); g.moveTo(x + 3, y + (s - ph) / 2); g.lineTo(x + s - zw - 3, y + (s - ph) / 2); g.stroke(); g.setLineDash([]); g.globalAlpha = 1;
   if (opt.trace){ g.fillStyle = pal.tpl; g.font = `${Math.round((s - Math.max(zw, ph)) * .86)}px ${cpFamily(opt.font)}`; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(c.ch, x + (s - zw) / 2, y + (s - ph) / 2 + s * .02); }
-  if (showZ) cpGlyphZhuyin(g, c.z, x + s - zw * .55, y + s * .13, Math.max(9, s * .115), pal.py);
-  if (showP){ g.fillStyle = pal.py; g.font = `${Math.max(9, s * .105)}px "Noto Sans TC",sans-serif`; g.textAlign = "center"; g.textBaseline = "alphabetic"; g.fillText(c.p, x + (s - zw) / 2, y + s - s * .045); }
+  if (showZ) cpGlyphZhuyin(g, c.z, x + s - zw * .55, y + Math.min(s * .13, 22), Math.min(18, Math.max(9, s * .115)), pal.py);
+  if (showP){ g.fillStyle = pal.py; g.font = `${Math.min(17, Math.max(9, s * .105))}px "Noto Sans TC",sans-serif`; g.textAlign = "center"; g.textBaseline = "alphabetic"; g.fillText(c.p, x + (s - zw) / 2, y + s - Math.min(s * .045, 8)); }
 }
 function cpPaintPaper(){
   const c = cpSet(), pal = CP_PAPER[c.paper] || CP_PAPER.xuan, W = cwStage.clientWidth, H = cwStage.clientHeight, dpr = cpW.dpr = Math.min(2, devicePixelRatio || 1);
@@ -4525,7 +4548,8 @@ function cpPaintRef(){
   const done = Object.keys(cpW.draft.st).filter(k => cpW.draft.st[k].length).length;
   $("cwProg").textContent = `${done}／${cpW.cells.length} 字`; $("cwProg").setAttribute("aria-label", `已寫 ${done} 字，共 ${cpW.cells.length} 字，第 ${cpW.page + 1} 頁，共 ${cpW.pages.length} 頁`);
   const last = cpW.page >= cpW.pages.length - 1;
-  $("cwNext").textContent = last ? "圓滿" : "下一頁";
+  const one = (cpW.pages[cpW.page] || []).length === 1 && S.cp.input === "finger";
+  $("cwNext").textContent = last ? "圓滿" : one ? "下一字" : "下一頁"; $("cwPrevT").textContent = one ? "上一字" : "上一頁";
   $("cwPrev").disabled = cpW.page === 0;
   $("cwUndo").disabled = !cpW.undo.length;
   $("cwTools").classList.toggle("left", S.hand === "L");
@@ -4541,6 +4565,7 @@ function cpSaveDraft(now){
 }
 async function cpOpenWrite(id, rep, fresh){
   const t = CP[id]; if (!t) return;
+  if (!cpSet().input){ cpOpenSetup(t, () => cpOpenWrite(id, rep, fresh)); return; }
   $("cpInfo").hidden = true;
   let d = fresh ? null : await IDB.get("draft:" + id, "cp");
   if (d && !d.st) d = null;
@@ -4553,6 +4578,7 @@ async function cpOpenWrite(id, rep, fresh){
   cpW.page = Math.max(0, cpW.pages.findIndex(p => p.includes(first < 0 ? cpW.cells.length - 1 : first)));
   cpPaintPaper(); cpPaintRef();
   if (!S.cpTip){ const tip = $("cwTip"); tip.hidden = false; tip.textContent = "慢慢寫字較粗，寫快較細；收筆時順勢一提，就有撇捺的筆鋒。"; }
+  if (!S.cpHint){ S.cpHint = true; save(); cpShowHint(); }
 }
 function cpCloseWrite(){ cpSaveDraft(true); $("cpWrite").hidden = true; $("cwSheet").hidden = true; keepAwake(activeTab === "beads"); renderCopy(); }
 // writing: one finger or a stylus. Once a stylus has been seen, the palm (touch) is ignored.
@@ -4564,9 +4590,10 @@ function cpCellAt(x, y){
   const n = S.cp.vert ? (cols - 1 - c) * rows + r : r * cols + c, ids = cpW.pages[cpW.page] || [];
   return ids[n] == null ? null : { id:ids[n], n };
 }
-const cpBase = () => cpW.cell * ([.065, .09, .125][S.cp.brush - 1] || .105);
+const cpBase = () => cpW.cell * ([.065, .09, .125][S.cp.brush - 1] || .09) * (cpW.cell > 200 ? .74 : cpW.cell > 120 ? .86 : 1);
 function cpFeed(x, y, t, pr){
-  const k = cpStroke, dt = Math.max(1, t - k.t), v = Math.hypot(x - k.x, y - k.y) / dt / cpW.cell * 1000;   // cells per second
+  const k = cpStroke; if (k.soft){ x = k.x + (x - k.x) * .55; y = k.y + (y - k.y) * .55; }   // a fingertip is wobbly: follow it a little softer
+  const dt = Math.max(1, t - k.t), v = Math.hypot(x - k.x, y - k.y) / dt / Math.max(cpW.cell, 110) * 1000;   // boxes per second; tiny boxes count as a normal one
   k.v = k.v * .6 + v * .4; k.dx = k.dx * .7 + (x - k.x) * .3; k.dy = k.dy * .7 + (y - k.y) * .3;
   const press = pr > 0 && pr !== .5 ? .55 + pr * 1.1 : 1;
   const target = cpBase() * press * (.34 + 1.05 * Math.exp(-k.v * .32));
@@ -4583,9 +4610,10 @@ cwInk.addEventListener("pointerdown", e => {
   const [x, y] = cpPos(e), hit = cpCellAt(x, y); if (!hit) return;
   e.preventDefault(); try{ cwInk.setPointerCapture(e.pointerId); }catch(_){}
   if (!S.cpTip){ S.cpTip = true; $("cwTip").hidden = true; }
+  cpHideHint();
   const [cx, cy] = cpSlot(hit.n), s = Math.floor(Math.random() * 4e9) + 1, g = cwInk.getContext("2d");
   g.setTransform(cpW.dpr, 0, 0, cpW.dpr, 0, 0);
-  cpStroke = { pid:e.pointerId, id:hit.id, cx, cy, s, b:new Brush(g, (CP_PAPER[S.cp.paper] || CP_PAPER.xuan).ink, s), pts:[], x, y, t:e.timeStamp, t0:e.timeStamp, w:cpBase() * .62, v:0, dx:0, dy:0 };
+  cpStroke = { pid:e.pointerId, id:hit.id, cx, cy, s, b:new Brush(g, (CP_PAPER[S.cp.paper] || CP_PAPER.xuan).ink, s), pts:[], x, y, t:e.timeStamp, t0:e.timeStamp, w:cpBase() * .62, v:0, dx:0, dy:0, soft:e.pointerType === "touch" };
   cpEmit(x, y, cpStroke.w);
 });
 cwInk.addEventListener("pointermove", e => {
@@ -4624,18 +4652,67 @@ $("cwNext").onclick = () => { if (cpW.page < cpW.pages.length - 1){ cpW.page++; 
 function cpRefit(){ if ($("cpWrite").hidden || !cpW.draft || cpStroke) return; const cur = cpCurrentId(); cpPaginate(); cpW.page = Math.max(0, cpW.pages.findIndex(p => p.includes(cur))); cpPaintPaper(); cpPaintRef(); }
 if (window.ResizeObserver) new ResizeObserver(() => requestAnimationFrame(cpRefit)).observe(cwStage); else window.addEventListener("resize", cpRefit);
 function cpOptChips(box, list, on, pick){ box.innerHTML = ""; list.forEach(([v, n]) => { const b = el("button", "chip" + (on(v) ? " on" : ""), n); b.setAttribute("aria-pressed", on(v)); b.onclick = () => { pick(v); paintCpSheet(); cpApply(); }; box.appendChild(b); }); }
+function cpFontGrid(box, ch, picked){
+  const c = cpSet(); box.innerHTML = "";
+  CP_FONTS.forEach(([k, n]) => { const b = el("button", c.font === k ? "on" : ""), g = el("b", null, ch); g.style.fontFamily = cpFamily(k); b.append(g, el("span", null, n)); b.setAttribute("aria-pressed", c.font === k); b.onclick = () => { c.font = k; picked(); }; box.appendChild(b); cpLoadFont(k); });
+}
+/* 第一次抄經：先選手指或觸控筆，再選字體與大小，下面的小稿紙隨選隨變。 */
+let cpSetupDone = null;
+function cpOpenSetup(t, then){ cpSetupDone = then; cpW.cells = cpCells(t, 1); cpSetupStep(1); $("cpSetup").hidden = false; }
+function cpSetupStep(n){
+  const c = S.cp, body = $("csuBody"), foot = $("csuFoot"); body.innerHTML = ""; foot.innerHTML = ""; body.scrollTop = 0;
+  if (n === 1){
+    body.appendChild(el("h1", null, "您想怎麼寫？")); body.appendChild(el("p", "cpsrc", "選一個順手的方式，之後隨時可以改。"));
+    [["finger","手指書寫","適合手機。字放大，一次寫一個或四個字。"],["pen","觸控筆","適合平板或有手寫筆。一頁可以寫很多字。"]].forEach(([v, a, b]) => {
+      const x = el("button", "cpway"), tx = el("span"); tx.append(el("b", null, a), el("span", null, b)); x.appendChild(tx); x.appendChild(el("em", null, "›"));
+      x.onclick = () => { c.input = v; save(); cpSetupStep(2); }; body.appendChild(x);
+    });
+    $("csuBack").onclick = () => { $("cpSetup").hidden = true; delete c.input; };
+    foot.hidden = true; return;
+  }
+  foot.hidden = false; const finger = c.input === "finger";
+  body.appendChild(el("h1", null, "選喜歡的樣子"));
+  const cv = document.createElement("canvas"); cv.className = "cpprev"; body.appendChild(cv);
+  const draw = async () => {
+    await cpLoadFont(c.font);
+    const n = finger ? (c.per === 4 ? 2 : 1) : c.cols, S0 = 216, dpr = Math.min(2, devicePixelRatio || 1), s = Math.floor(S0 / n), g = cv.getContext("2d"), pal = CP_PAPER.xuan;
+    cv.width = cv.height = S0 * dpr; cv.style.width = cv.style.height = S0 + "px"; g.setTransform(dpr, 0, 0, dpr, 0, 0); g.fillStyle = pal.bg; g.fillRect(0, 0, S0, S0);
+    for (let i = 0; i < n * n; i++){ const col = n - 1 - Math.floor(i / n), row = i % n, x0 = cpW.cells[i % cpW.cells.length]; cpDrawCell(g, x0, col * s, row * s, s, pal, c); }
+  };
+  const lab = t => body.appendChild(el("div", "cplab", t));
+  lab("書體"); const fs = el("div", "cpfonts"); body.appendChild(fs); const ch = cpW.cells[0].ch;
+  const paintFonts = () => cpFontGrid(fs, ch, () => { save(); paintFonts(); draw(); }); paintFonts();
+  lab(finger ? "一個畫面寫幾個字" : "格子大小"); const sz = el("div", "cpopts"); body.appendChild(sz);
+  const paintSz = () => finger ? cpSetChips(sz, [[1,"一個字"],[4,"四個字"]], v => c.per === v, v => c.per = v, () => { paintSz(); draw(); })
+    : cpSetChips(sz, [[3,"特大"],[4,"大"],[5,"中"],[7,"小"]], v => c.cols === v, v => c.cols = v, () => { paintSz(); draw(); });
+  paintSz();
+  lab("格內顯示"); const sh = el("div", "cpopts"); body.appendChild(sh);
+  const paintSh = () => cpSetChips(sh, [["trace","描紅字"],["zy","注音"],["py","拼音"]], v => c[v], v => c[v] = !c[v], () => { paintSh(); draw(); }); paintSh();
+  draw();
+  const go = el("button", "btn", "開始抄經"); go.onclick = () => { save(); $("cpSetup").hidden = true; const f = cpSetupDone; cpSetupDone = null; if (f) f(); }; foot.appendChild(go);
+  $("csuBack").onclick = () => cpSetupStep(1);
+}
+function cpSetChips(box, list, on, pick, after){ box.innerHTML = ""; list.forEach(([v, n]) => { const b = el("button", "chip" + (on(v) ? " on" : ""), n); b.setAttribute("aria-pressed", !!on(v)); b.onclick = () => { pick(v); save(); after(); }; box.appendChild(b); }); }
 function paintCpSheet(){
-  const c = cpSet(), fs = $("csFonts"); fs.innerHTML = "";
-  CP_FONTS.forEach(([k, n]) => { const b = el("button", c.font === k ? "on" : ""), g = el("b", null, cpW.cells[0] ? cpW.cells[cpCurrentId()].ch : "永"); g.style.fontFamily = cpFamily(k); b.append(g, el("span", null, n)); b.setAttribute("aria-pressed", c.font === k); b.onclick = () => { c.font = k; paintCpSheet(); cpApply(); }; fs.appendChild(b); cpLoadFont(k); });
-  cpOptChips($("csCols"), [[3,"特大"],[4,"大"],[5,"中"],[7,"小"]], v => c.cols === v, v => c.cols = v);
-  cpOptChips($("csPage"), [["page","滿頁"],["line","一句一頁"],["v","直書"],["h","橫書"]], v => v === "page" ? !c.line : v === "line" ? c.line : v === "v" ? c.vert : !c.vert, v => { if (v === "page") c.line = false; else if (v === "line") c.line = true; else c.vert = v === "v"; });
+  const c = cpSet(), finger = c.input === "finger";
+  cpOptChips($("csInput"), [["finger","手指書寫"],["pen","觸控筆"]], v => c.input === v, v => c.input = v);
+  cpFontGrid($("csFonts"), cpW.cells[0] ? cpW.cells[cpCurrentId()].ch : "永", () => { paintCpSheet(); cpApply(); });
+  $("csColsLab").textContent = finger ? "一個畫面寫幾個字" : "格子大小";
+  if (finger) cpOptChips($("csCols"), [[1,"一個字"],[4,"四個字"]], v => c.per === v, v => c.per = v);
+  else cpOptChips($("csCols"), [[3,"特大"],[4,"大"],[5,"中"],[7,"小"]], v => c.cols === v, v => c.cols = v);
+  const showPage = !finger || c.per === 4; $("csPageLab").hidden = $("csPage").hidden = !showPage;
+  $("csPageLab").textContent = finger ? "排列方向" : "一頁寫多少";
+  cpOptChips($("csPage"), finger ? [["v","直書"],["h","橫書"]] : [["page","滿頁"],["line","一句一頁"],["v","直書"],["h","橫書"]], v => v === "page" ? !c.line : v === "line" ? c.line : v === "v" ? c.vert : !c.vert, v => { if (v === "page") c.line = false; else if (v === "line") c.line = true; else c.vert = v === "v"; });
   cpOptChips($("csShow"), [["trace","描紅字"],["zy","注音"],["py","拼音"]], v => c[v], v => c[v] = !c[v]);
   cpOptChips($("csBrush"), [[1,"細筆"],[2,"中筆"],[3,"粗筆"]], v => c.brush === v, v => c.brush = v);
   cpOptChips($("csPaper"), Object.keys(CP_PAPER).map(k => [k, CP_PAPER[k].n]), v => c.paper === v, v => c.paper = v);
 }
 function cpApply(){ save(); cpLoadFont(S.cp.font).then(() => { if (cpW.draft){ const cur = cpCurrentId(); cpPaginate(); cpW.page = Math.max(0, cpW.pages.findIndex(p => p.includes(cur))); cpPaintPaper(); cpPaintRef(); cpPaintInfo(); } }); }
 function cpPaintInfo(){ const n = (cpW.pages[cpW.page] || []).length; $("csInfo").textContent = `現在一頁 ${n} 字，共 ${cpW.pages.length} 頁`; }
-$("cwOpt").onclick = () => { paintCpSheet(); cpPaintInfo(); $("cwSheet").hidden = false; };
+let cpHintT = 0;
+function cpShowHint(){ $("cwHint").hidden = false; $("cwOpt").classList.add("pulse"); clearTimeout(cpHintT); cpHintT = setTimeout(cpHideHint, 8000); }
+function cpHideHint(){ clearTimeout(cpHintT); $("cwHint").hidden = true; $("cwOpt").classList.remove("pulse"); }
+$("cwOpt").onclick = () => { cpHideHint(); paintCpSheet(); cpPaintInfo(); $("cwSheet").hidden = false; };
 $("csDone").onclick = () => { $("cwSheet").hidden = true; };
 
 /* 完稿：右起直書的一張紙，首行經題，末行日期與抄寫時間。沒寫到的字留淡淡的底字。 */

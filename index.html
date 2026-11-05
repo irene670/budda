@@ -1066,7 +1066,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .cpfoot .blink{min-height:40px}
 .cpreps{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--muted)}
 .cpreps .chip{min-height:44px;min-width:52px}
-.cpreps .chip.on{background:var(--brass);color:var(--brass-ink);border-color:var(--brass);font-weight:700}
+.cpreps .chip.on{background:transparent;color:var(--brass);border-color:var(--brass);font-weight:700}
 /* 書寫 */
 .cpw{position:fixed;inset:0;z-index:62;display:flex;flex-direction:column;background:#20160f;color:var(--paper);padding-top:env(safe-area-inset-top,0px);box-sizing:border-box;overscroll-behavior:none}
 .cpw[hidden]{display:none}
@@ -1097,7 +1097,9 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .cptip{position:absolute;left:12px;right:12px;bottom:12px;padding:8px 12px;background:#20160fe0;color:#ffe2a8;border-radius:12px;font-size:.98rem;line-height:1.4;pointer-events:none}
 .cpsheet{z-index:66}
 #cwMusic.on{color:var(--brass)}
-#cmDone{position:sticky;bottom:0;flex:none;min-height:52px}
+#cwMusicS{overflow:hidden}
+#cmList{flex:1 1 auto;min-height:0;overflow-y:auto}
+#cmDone{flex:none;width:100%;min-height:52px}
 .cmrow{display:flex;align-items:center;gap:10px;width:100%;min-height:60px;padding:8px 2px;box-sizing:border-box;text-align:left;background:none;border:0;border-bottom:1px solid #4a362766;color:var(--paper);touch-action:manipulation}
 .cmrow b{display:block;font-family:var(--display);font-weight:700;font-size:1.05rem}
 .cmrow span.t{min-width:0;flex:1}
@@ -1122,14 +1124,24 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 @media (prefers-reduced-motion:reduce){.cphint{animation:none}#cwOpt.pulse::after{animation:none;opacity:.9}}
 .cpsheet .lab{margin-top:.5rem}
 .cpfonts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.cpfonts button{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:84px;padding:6px 2px;background:#f2e7d0;color:#2a1a0c;border:2px solid transparent;border-radius:12px;touch-action:manipulation}
+.cpfonts button{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:84px;padding:6px 2px;background:transparent;color:var(--paper);border:1.5px solid var(--line);border-radius:12px;touch-action:manipulation}
 .cpfonts button b{font-size:2.2rem;line-height:1.1;font-weight:400}
-.cpfonts button span{font:inherit;font-size:.86rem;color:#6b5238}
-.cpfonts button.on{border-color:var(--brass);box-shadow:0 0 0 2px #e2b36355}
+.cpfonts button span{font:inherit;font-size:.86rem;color:var(--muted)}
+.cpfonts button.on{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass);color:#ffe2a8}
+.cpfonts button.on span{color:#ffe2a8}
 .cpopts{display:flex;flex-wrap:wrap;gap:8px}
 .cpopts .chip{min-height:44px;padding:.3rem .8rem;touch-action:manipulation}
-#csDone{position:sticky;bottom:0;z-index:2;flex:none;min-height:52px;box-shadow:0 -10px 14px 6px var(--bg-2)}
-.cpopts .chip.on{background:var(--brass);color:var(--brass-ink);border-color:var(--brass);font-weight:700}
+#cwSheet{display:flex;flex-direction:column;gap:10px;overflow:hidden;max-height:min(84dvh,calc(100dvh - 64px))}
+.csscroll{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:.45rem;-webkit-overflow-scrolling:touch}
+.csscroll>*{flex:none}
+#csDone{flex:none;width:100%;min-height:52px}
+.btn.cpline{background:transparent;border:1.5px solid var(--brass);color:#ffe2a8;border-radius:999px;box-shadow:none;letter-spacing:.2em}
+.cpopts .chip,.cpreps .chip{background:transparent}
+.cpopts .chip.on{background:transparent;color:var(--brass);border-color:var(--brass);font-weight:700}
+.cpsetrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+.cpsetrow span{min-width:0;color:var(--muted);font-size:.95rem;line-height:1.4}
+.cpsetrow button{flex:none;min-height:44px;padding:.3rem .95rem;background:transparent;border:1.5px solid var(--brass);border-radius:999px;color:#ffe2a8;font:inherit;font-size:1rem;white-space:nowrap;touch-action:manipulation;cursor:pointer}
+.cpway.on{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass)}
 .cpinfo{margin:.5rem 0 0;color:#ffe2a8;font-size:1rem}
 .cplic{color:var(--muted);font-size:.86rem;line-height:1.45;margin:.5rem 0 0}
 .cpbook{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px}
@@ -1162,9 +1174,9 @@ body.dedicp #dediSheet{z-index:66}
 .dedi.copy .dedi-in>.dcopy{margin-top:auto}
 #dedi.copy .lotusimg{margin-top:-2.4rem;height:clamp(84px,16dvh,140px)}
 .cpfonts button.blank{grid-column:1/-1;flex-direction:row;justify-content:center;gap:12px;min-height:60px}
-.cpfonts button.blank i{flex:none;width:32px;height:32px;box-sizing:border-box;border:1.5px dashed #6b5238;border-radius:3px}
+.cpfonts button.blank i{flex:none;width:32px;height:32px;box-sizing:border-box;border:1.5px dashed var(--muted);border-radius:3px}
 .cpfonts button.blank span{display:block;text-align:left}
-.cpfonts button.blank span b{display:inline;font-size:1.1rem;line-height:1.3;font-weight:700;color:#2a1a0c;margin-right:.5em}
+.cpfonts button.blank span b{display:inline;font-size:1.1rem;line-height:1.3;font-weight:700;color:inherit;margin-right:.5em}
 .cpfonts button.blank span span{display:inline}
 .cpbook b{font-family:var(--display);font-size:1.02rem;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cpbook span{color:var(--muted);font-size:.9rem}
@@ -1322,7 +1334,7 @@ body.dedicp #dediSheet{z-index:66}
     <!-- 問道 -->
     <section class="panel" id="p-copy" hidden aria-label="抄經">
       <div class="cppage">
-        <header class="cphead"><h2>抄經</h2><button class="blink" id="cpBookBtn">抄經本 <span id="cpBookN"></span> ›</button></header><p class="cpsub">一格一字，寫到一半會自動保存。</p>
+        <header class="cphead"><h2>抄經</h2><button class="blink" id="cpBookBtn">抄經本 <span id="cpBookN"></span> ›</button></header><p class="cpsub">一格一字，寫到一半會自動保存。</p><div class="cpsetrow"><span id="cpSetSum"></span><button id="cpSetBtn">設定書寫方式</button></div>
         <div id="cpResume" hidden></div>
         <div class="cpseg" id="cpSeg" role="group" aria-label="分類"></div>
         <div id="cpList"></div>
@@ -1688,10 +1700,11 @@ body.dedicp #dediSheet{z-index:66}
 <div class="sheet cpsheet" id="cwMusicS" hidden role="dialog" aria-label="邊聽邊抄">
   <h3>邊聽邊抄</h3>
   <div id="cmList"></div>
-  <button class="btn" id="cmDone">好了</button>
+  <button class="btn cpline" id="cmDone">好了</button>
 </div>
 <div class="sheet cpsheet" id="cwSheet" hidden role="dialog" aria-label="字帖與稿紙設定">
   <h3>字帖與稿紙</h3>
+  <div class="csscroll">
   <div class="lab">書寫方式</div><div class="cpopts" id="csInput"></div>
   <div class="lab">書體</div><div class="cpfonts" id="csFonts"></div>
   <div class="lab" id="csColsLab">格子大小</div><div class="cpopts" id="csCols"></div>
@@ -1700,7 +1713,8 @@ body.dedicp #dediSheet{z-index:66}
   <div class="lab" id="csShowLab">格內顯示</div><div class="cpopts" id="csShow"></div>
   <div class="lab">筆與紙</div><div class="cpopts" id="csBrush"></div><div class="cpopts" id="csPaper" style="margin-top:8px"></div>
   <p class="cplic">書體為開放授權字體：cwTeX 楷書、霞鶩文楷（SIL OFL）；王漢宗顏楷、隸書、行書、鋼筆行楷（GNU GPL v2）。</p>
-  <button class="btn" id="csDone">好了</button>
+  </div>
+  <button class="btn cpline" id="csDone">好了</button>
 </div>
 <div class="cpfs" id="cpDone" hidden role="dialog" aria-label="抄經圓滿">
   <div class="cpview"><img id="cdImg" alt="抄好的經文"></div>
@@ -4776,16 +4790,17 @@ function cpFontGrid(box, ch, picked){
 }
 /* 第一次抄經：先選手指或觸控筆，再選字體與大小，下面的小稿紙隨選隨變。 */
 let cpSetupDone = null;
-function cpOpenSetup(t, then){ cpSetupDone = then; cpW.cells = cpCells(t, 1); cpSetupStep(1); $("cpSetup").hidden = false; }
+let cpSetupHad = null;
+function cpOpenSetup(t, then){ cpSetupDone = then; cpSetupHad = cpSet().input || null; cpW.cells = cpCells(t, 1); cpSetupStep(1); $("cpSetup").hidden = false; }
 function cpSetupStep(n){
   const c = S.cp, body = $("csuBody"), foot = $("csuFoot"); body.innerHTML = ""; foot.innerHTML = ""; body.scrollTop = 0;
   if (n === 1){
     body.appendChild(el("h1", null, "您想怎麼寫？")); body.appendChild(el("p", "cpsrc", "選一個順手的方式，之後隨時可以改。"));
     [["finger","手指書寫","適合手機。字放大，一次寫一個或四個字。"],["pen","觸控筆","適合平板或有手寫筆。一頁可以寫很多字。"]].forEach(([v, a, b]) => {
-      const x = el("button", "cpway"), tx = el("span"); tx.append(el("b", null, a), el("span", null, b)); x.appendChild(tx); x.appendChild(el("em", null, "›"));
+      const x = el("button", "cpway" + (c.input === v ? " on" : "")), tx = el("span"); tx.append(el("b", null, a), el("span", null, b)); x.appendChild(tx); x.appendChild(el("em", null, "›"));
       x.onclick = () => { c.input = v; save(); cpSetupStep(2); }; body.appendChild(x);
     });
-    $("csuBack").onclick = () => { $("cpSetup").hidden = true; delete c.input; };
+    $("csuBack").onclick = () => { $("cpSetup").hidden = true; if (cpSetupHad) c.input = cpSetupHad; else delete c.input; save(); renderCopy(); };
     foot.hidden = true; return;
   }
   foot.hidden = false; const finger = c.input === "finger";
@@ -4793,7 +4808,7 @@ function cpSetupStep(n){
   const cv = document.createElement("canvas"); cv.className = "cpprev"; body.appendChild(cv);
   const draw = async () => {
     await cpLoadFont(c.font);
-    const n = finger ? (c.per === 4 ? 2 : 1) : c.cols, S0 = 216, dpr = Math.min(2, devicePixelRatio || 1), s = Math.floor(S0 / n), g = cv.getContext("2d"), pal = CP_PAPER.xuan;
+    const n = finger ? (c.per === 4 ? 2 : 1) : c.cols, S0 = 216, dpr = Math.min(2, devicePixelRatio || 1), s = Math.floor(S0 / n), g = cv.getContext("2d"), pal = CP_PAPER[c.paper] || CP_PAPER.xuan;
     cv.width = cv.height = S0 * dpr; cv.style.width = cv.style.height = S0 + "px"; g.setTransform(dpr, 0, 0, dpr, 0, 0); g.fillStyle = pal.bg; g.fillRect(0, 0, S0, S0);
     for (let i = 0; i < n * n; i++){ const col = n - 1 - Math.floor(i / n), row = i % n, x0 = cpW.cells[i % cpW.cells.length]; cpDrawCell(g, x0, col * s, row * s, s, pal, c); }
   };
@@ -4801,13 +4816,19 @@ function cpSetupStep(n){
   lab("書體"); const fs = el("div", "cpfonts"); body.appendChild(fs); const ch = cpW.cells[0].ch;
   const paintFonts = () => cpFontGrid(fs, ch, () => { save(); paintFonts(); paintSh(); draw(); }); paintFonts();
   lab(finger ? "一個畫面寫幾個字" : "格子大小"); const sz = el("div", "cpopts"); body.appendChild(sz);
-  const paintSz = () => finger ? cpSetChips(sz, [[1,"一個字"],[4,"四個字"]], v => c.per === v, v => c.per = v, () => { paintSz(); draw(); })
+  const paintSz = () => finger ? cpSetChips(sz, [[1,"一個字"],[4,"四個字"]], v => c.per === v, v => c.per = v, () => { paintSz(); paintDir(); draw(); })
     : cpSetChips(sz, [[3,"特大"],[4,"大"],[5,"中"],[7,"小"]], v => c.cols === v, v => c.cols = v, () => { paintSz(); draw(); });
   paintSz();
   lab("讀音顯示"); const shLab = body.lastChild, sh = el("div", "cpopts"); body.appendChild(sh);
   const paintSh = () => (shLab.textContent = cpShowLab(c), 0) || cpSetChips(sh, cpShowOpts(c), v => c[v], v => c[v] = !c[v], () => { paintSh(); paintFonts(); draw(); }); paintSh();
+  lab("排列方向"); const dirLab = body.lastChild, dir = el("div", "cpopts"); body.appendChild(dir);
+  const paintDir = () => { dirLab.hidden = dir.hidden = finger && c.per !== 4; cpSetChips(dir, [[true,"直書"],[false,"橫書"]], v => c.vert === v, v => c.vert = v, paintDir); }; paintDir();
+  lab("筆"); const bw = el("div", "cpopts"); body.appendChild(bw);
+  const paintBw = () => cpSetChips(bw, [[1,"細筆"],[2,"中筆"],[3,"粗筆"]], v => c.brush === v, v => c.brush = v, paintBw); paintBw();
+  lab("稿紙"); const pp = el("div", "cpopts"); body.appendChild(pp);
+  const paintPp = () => cpSetChips(pp, Object.keys(CP_PAPER).map(k => [k, CP_PAPER[k].n]), v => c.paper === v, v => c.paper = v, () => { paintPp(); draw(); }); paintPp();
   draw();
-  const go = el("button", "btn", "開始抄經"); go.onclick = () => { save(); $("cpSetup").hidden = true; const f = cpSetupDone; cpSetupDone = null; if (f) f(); }; foot.appendChild(go);
+  const go = el("button", "btn cpline", cpSetupDone ? "開始抄經" : "儲存設定"); go.onclick = () => { save(); $("cpSetup").hidden = true; const f = cpSetupDone; cpSetupDone = null; if (f) f(); else { flash("以後都用這個方式抄經"); renderCopy(); } }; foot.appendChild(go);
   $("csuBack").onclick = () => cpSetupStep(1);
 }
 // 空白 keeps the grid bare, so 注音 and 拼音 only show in the bar above it
@@ -5055,9 +5076,16 @@ function renderCopy(){
     b.appendChild(tx); if (times) b.appendChild(el("em", null, `抄過 ${times} 次`));
     b.onclick = () => cpOpenInfo(t.id); p.appendChild(b);
   });
+  $("cpSetSum").textContent = cpSetSummary();
   $("cpBookN").textContent = can() ? `${cpBookList().length} 篇` : `${cpBookList().length}／${BOOK_FREE}`;
 }
 $("cpBookBtn").onclick = cpOpenBook;
+function cpSetSummary(){
+  const c = cpSet(); if (!c.input) return "第一次抄經時會先設定";
+  const f = CP_FONTS.find(x => x[0] === c.font), size = { 3:"特大格", 4:"大格", 5:"中格", 7:"小格" }[c.cols];
+  return [c.input === "finger" ? "手指書寫" : "觸控筆", c.input === "finger" ? (c.per === 4 ? "一次四字" : "一次一字") : size, c.trace ? f && f[1] : "空白"].filter(Boolean).join("・");
+}
+$("cpSetBtn").onclick = () => { const g = CB.groups.find(x => x.name === cpTabGroup) || CB.groups[0]; cpOpenSetup(g.texts[0], null); };
 
 /* ================= tabs ================= */
 setTimeout(applyBackdrop, 0);   // the photo backdrop is CSS, so it shows even before the beads are drawn

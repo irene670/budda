@@ -339,7 +339,7 @@ nav.tabs.locked{opacity:.45}
 @keyframes verseOut{from{opacity:1;max-height:13rem}55%{opacity:0}to{opacity:0;max-height:0;margin-top:0}}
 @keyframes line{from{opacity:0;transform:translateY(10px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
 .dfin{opacity:0;animation:line 1s 6s both;display:flex;gap:12px;width:100%;margin-top:auto;padding-top:clamp(.4rem,2dvh,1.2rem)}
-.dfin .btn{flex:1 1 0;min-height:56px;padding-inline:.6rem;font-size:1.1rem;border-radius:999px;letter-spacing:.1em;white-space:nowrap}
+.dfin .btn{flex:1 1 0;min-width:0;min-height:56px;padding-inline:.6rem;font-size:min(1.1rem,5.4vw);border-radius:999px;letter-spacing:.1em;white-space:nowrap}
 .dfin .btn.ghost{flex-grow:1.3;background:#0e0906b0;border:1px solid #e2b36366;color:var(--paper)}
 .dfin #dDone{background:linear-gradient(180deg,#e2b36340,#e2b36314);border:1.5px solid var(--brass);color:#ffe2a8;letter-spacing:.3em;box-shadow:0 0 24px #d9a95b44,inset 0 1px 0 #ffffff1a}
 .dfin .btn svg{width:1.2em;height:1.2em;flex:none}
@@ -417,8 +417,8 @@ nav.tabs.locked{opacity:.45}
 .bhint{text-align:center;color:var(--muted);font-size:.95rem;line-height:1.35}
 .bhint:empty{display:none}
 .bgobtn{display:flex;gap:10px}
-.bgobtn .line{flex:1.5 1 0;width:auto}
-.bgobtn .btn{flex:1 1 0;min-height:56px;padding-inline:.4rem;letter-spacing:.06em;font-size:1.1rem;white-space:nowrap}
+.bgobtn .line{flex:1.5 1 0;width:auto;min-width:0;white-space:nowrap;font-size:min(1.2rem,5.2vw)}
+.bgobtn .btn{flex:1 1 0;min-width:0;min-height:56px;padding-inline:.4rem;letter-spacing:.06em;font-size:min(1.1rem,5vw);white-space:nowrap}
 
 /* ---- 開始引導 ---- */
 .onb{position:fixed;inset:0;z-index:70;background:var(--bg);display:flex;align-items:center;justify-content:center;padding-inline:16px;overflow-y:auto}
@@ -1096,6 +1096,16 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .cptools .btn{flex:1;min-width:0;color:#2a1a0c;min-height:52px;padding:.2rem .4rem;font-size:1.02rem;border-radius:999px;background:linear-gradient(180deg,#f2cf86,#d39d45);white-space:nowrap}
 .cptip{position:absolute;left:12px;right:12px;bottom:12px;padding:8px 12px;background:#20160fe0;color:#ffe2a8;border-radius:12px;font-size:.98rem;line-height:1.4;pointer-events:none}
 .cpsheet{z-index:66}
+#cwMusic.on{color:var(--brass)}
+#cmDone{position:sticky;bottom:0;flex:none;min-height:52px}
+.cmrow{display:flex;align-items:center;gap:10px;width:100%;min-height:60px;padding:8px 2px;box-sizing:border-box;text-align:left;background:none;border:0;border-bottom:1px solid #4a362766;color:var(--paper);touch-action:manipulation}
+.cmrow b{display:block;font-family:var(--display);font-weight:700;font-size:1.05rem}
+.cmrow span.t{min-width:0;flex:1}
+.cmrow span.t span{display:block;color:var(--muted);font-size:.92rem}
+.cmrow .ic{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:#ffffff12;color:var(--brass)}
+.cmrow .ic svg{width:20px;height:20px}
+.cmrow.cur b{color:#ffe2a8}
+.cmempty{margin:.2rem 0 .4rem;color:var(--muted);line-height:1.5}
 .cpway{display:flex;align-items:center;gap:12px;width:100%;min-height:96px;margin-top:14px;padding:14px 16px;box-sizing:border-box;text-align:left;background:#ffffff0a;border:1px solid #e2b36366;border-radius:18px;color:var(--paper);touch-action:manipulation}
 .cpway b{display:block;font-family:var(--display);font-size:1.3rem;color:#ffe2a8}
 .cpway span span{display:block;margin-top:.15rem;color:var(--muted);font-size:1rem;line-height:1.45}
@@ -1118,13 +1128,44 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .cpfonts button.on{border-color:var(--brass);box-shadow:0 0 0 2px #e2b36355}
 .cpopts{display:flex;flex-wrap:wrap;gap:8px}
 .cpopts .chip{min-height:44px;padding:.3rem .8rem;touch-action:manipulation}
-#csDone{position:sticky;bottom:0;flex:none;min-height:52px}
+#csDone{position:sticky;bottom:0;z-index:2;flex:none;min-height:52px;box-shadow:0 -10px 14px 6px var(--bg-2)}
 .cpopts .chip.on{background:var(--brass);color:var(--brass-ink);border-color:var(--brass);font-weight:700}
 .cpinfo{margin:.5rem 0 0;color:#ffe2a8;font-size:1rem}
 .cplic{color:var(--muted);font-size:.86rem;line-height:1.45;margin:.5rem 0 0}
 .cpbook{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px}
 .cpbook button{display:flex;flex-direction:column;gap:2px;padding:0;background:none;border:0;color:var(--paper);text-align:left;font:inherit;touch-action:manipulation;min-width:0}
-.cpbook img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:right top;border-radius:10px;background:#3a2a1e}
+.cpbook img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:right top;border-radius:10px;background:#3a2a1e}
+.cpbook .cbmonth{grid-column:1/-1;margin:12px 0 -2px;font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:.1em;color:var(--brass)}
+.cbthumb{position:relative;display:block}
+.cbthumb i{position:absolute;left:6px;bottom:6px;padding:2px 8px;border-radius:999px;background:#0e0906d9;color:#ffe2a8;font-style:normal;font-size:.85rem;line-height:1.4}
+.cvwrap{position:relative;flex:1;min-height:0;display:flex}
+.cvwrap .cpview{flex:1;min-width:0;touch-action:pan-y pinch-zoom}
+.cvwrap .cpview img{cursor:zoom-in}
+.cvwrap .cpview.zoom{display:block;touch-action:auto}
+.cvwrap .cpview.zoom img{display:block;max-width:none;max-height:none;width:260%;cursor:zoom-out}
+.cvnav{position:absolute;top:50%;width:44px;height:44px;margin-top:-22px;display:flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:#0e0906b8;color:#ffe2a8;touch-action:manipulation;cursor:pointer}
+.cvnav[hidden],.cvwrap.zoomed .cvnav{display:none}
+.cvnav svg{width:22px;height:22px}
+.cvnav.prev{left:6px}.cvnav.next{right:6px}
+.cpmeta .cpded{display:block;color:#ffe2a8}
+.cpmeta small{display:block;font-size:.9rem;opacity:.85}
+#cpView .bhead{grid-template-columns:auto 1fr}
+#cvCount{text-align:right;white-space:nowrap;letter-spacing:.04em;font-weight:600;font-size:1.05rem}
+#cpView .cpfoot{flex-direction:row;align-items:center;gap:14px}
+#cpView .cpfoot .btn{flex:1;min-width:0;padding-inline:.5rem;white-space:nowrap;font-size:min(1.05rem,5vw)}
+#cpView .cplinks{flex:none}
+@media (max-height:640px){.cpmeta{padding-block:2px;font-size:.92rem}.cpmeta b{font-size:1.05rem}.cpmeta small{display:none}}
+body.dedicp .scrim{z-index:65}
+body.dedicp #dediSheet{z-index:66}
+.dpcopy{display:block;max-width:60%;max-height:24dvh;margin:0 auto 12px;border-radius:4px;border:1px solid #e2b36366}
+.dcopy{flex:none;position:relative;z-index:1;max-width:76%;max-height:clamp(150px,32dvh,300px);object-fit:contain;border-radius:3px;border:1px solid #e2b36399;box-shadow:0 0 38px #ffcf7a66;animation:line 1.4s both}
+.dedi.copy .dedi-in>.dcopy{margin-top:auto}
+#dedi.copy .lotusimg{margin-top:-2.4rem;height:clamp(84px,16dvh,140px)}
+.cpfonts button.blank{grid-column:1/-1;flex-direction:row;justify-content:center;gap:12px;min-height:60px}
+.cpfonts button.blank i{flex:none;width:32px;height:32px;box-sizing:border-box;border:1.5px dashed #6b5238;border-radius:3px}
+.cpfonts button.blank span{display:block;text-align:left}
+.cpfonts button.blank span b{display:inline;font-size:1.1rem;line-height:1.3;font-weight:700;color:#2a1a0c;margin-right:.5em}
+.cpfonts button.blank span span{display:inline}
 .cpbook b{font-family:var(--display);font-size:1.02rem;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cpbook span{color:var(--muted);font-size:.9rem}
 .cpempty{margin:2rem 0;text-align:center;color:var(--muted);line-height:1.7}
@@ -1502,6 +1543,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
   <canvas id="motes" aria-hidden="true"></canvas>
   <div class="rays" aria-hidden="true"></div>
   <div class="dedi-in">
+    <img class="dcopy" id="dCopyImg" alt="抄好的經文" hidden>
     <img class="lotusimg" src="assets/img/lotus-dedication.webp" alt="" aria-hidden="true">
     <svg class="lotus" viewBox="-130 -140 260 175" aria-hidden="true">
       <defs>
@@ -1592,7 +1634,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
       <p class="mfine">AI 次數每個訂閱月更新，用不完不累積；年費也是按月給，不是一次給一整年。</p>
     </div>
     <div class="mlinks" id="mLinks" hidden><button class="blink" id="mRestore">恢復購買</button><button class="blink" id="mManage">管理訂閱</button></div>
-    <div class="mtest" id="mTest" hidden>僅本機測試，沒有真的付款：<button class="chip" data-r="cancel">模擬取消</button><button class="chip" data-r="pending">模擬確認中</button><button class="chip" data-r="reset">清除測試會員</button></div>
+    <div class="mtest" id="mTest" hidden>僅測試用，沒有真的付款：<button class="chip" data-r="cancel">模擬取消</button><button class="chip" data-r="pending">模擬確認中</button><button class="chip" data-r="reset">清除測試會員</button></div>
   </div>
   <div class="mbody" id="mOk" hidden>
     <h3 class="mtitle">感恩您</h3>
@@ -1631,7 +1673,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
   <div class="cpfoot" id="csuFoot" hidden></div>
 </div>
 <div class="cpw" id="cpWrite" hidden role="dialog" aria-label="抄經">
-  <div class="cpwbar"><button class="cpico" id="cwBack" aria-label="先離開，會自動保存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><b id="cwTitle"></b><span class="cpprog" id="cwProg"></span><button class="cpico" id="cwOpt" aria-label="字帖與稿紙設定"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.2"/><circle cx="8" cy="17" r="2.2"/></svg></button></div>
+  <div class="cpwbar"><button class="cpico" id="cwBack" aria-label="先離開，會自動保存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><b id="cwTitle"></b><span class="cpprog" id="cwProg"></span><button class="cpico" id="cwMusic" aria-label="邊聽邊抄，選擇唱誦"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></button><button class="cpico" id="cwOpt" aria-label="字帖與稿紙設定"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.2"/><circle cx="8" cy="17" r="2.2"/></svg></button></div>
   <p class="cphint" id="cwHint" hidden>字體、大小都在這裡，隨時可以改</p>
   <div class="cpref" id="cwRef" aria-label="這一句的注音與拼音"></div>
   <button class="cpnote" id="cwNote" aria-label="這一句的注解，點一下看全部"><span id="cwNoteT"></span></button>
@@ -1643,6 +1685,11 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
     <button class="btn" id="cwNext"></button>
   </div>
 </div>
+<div class="sheet cpsheet" id="cwMusicS" hidden role="dialog" aria-label="邊聽邊抄">
+  <h3>邊聽邊抄</h3>
+  <div id="cmList"></div>
+  <button class="btn" id="cmDone">好了</button>
+</div>
 <div class="sheet cpsheet" id="cwSheet" hidden role="dialog" aria-label="字帖與稿紙設定">
   <h3>字帖與稿紙</h3>
   <div class="lab">書寫方式</div><div class="cpopts" id="csInput"></div>
@@ -1650,7 +1697,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
   <div class="lab" id="csColsLab">格子大小</div><div class="cpopts" id="csCols"></div>
   <div class="lab" id="csPageLab">一頁寫多少</div><div class="cpopts" id="csPage"></div>
   <p class="cpinfo" id="csInfo" role="status"></p>
-  <div class="lab">格內顯示</div><div class="cpopts" id="csShow"></div>
+  <div class="lab" id="csShowLab">格內顯示</div><div class="cpopts" id="csShow"></div>
   <div class="lab">筆與紙</div><div class="cpopts" id="csBrush"></div><div class="cpopts" id="csPaper" style="margin-top:8px"></div>
   <p class="cplic">書體為開放授權字體：cwTeX 楷書、霞鶩文楷（SIL OFL）；王漢宗顏楷、隸書、行書、鋼筆行楷（GNU GPL v2）。</p>
   <button class="btn" id="csDone">好了</button>
@@ -1658,17 +1705,21 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 <div class="cpfs" id="cpDone" hidden role="dialog" aria-label="抄經圓滿">
   <div class="cpview"><img id="cdImg" alt="抄好的經文"></div>
   <p class="cpmeta" id="cdMeta"></p>
-  <div class="cpfoot"><button class="btn" id="cdDedi">迴向</button><div class="cplinks"><button class="blink" id="cdSave">存到手機</button><button class="blink" id="cdBook">看抄經本</button><button class="blink" id="cdClose">回抄經</button></div></div>
+  <div class="cpfoot"><button class="btn" id="cdDedi">迴向</button><div class="cplinks"><button class="blink" id="cdBook">看抄經本</button><button class="blink" id="cdClose">回抄經</button></div></div>
 </div>
 <div class="cpfs" id="cpBook" hidden role="dialog" aria-label="我的抄經本">
   <div class="bhead"><button class="bback" id="cbBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button><h2>抄經本</h2></div>
   <div class="cpscroll"><p class="cpsrc" id="cbSum"></p><div class="cpbook" id="cbGrid"></div></div>
 </div>
 <div class="cpfs" id="cpView" hidden role="dialog" aria-label="抄經紀錄">
-  <div class="bhead"><button class="bback" id="cvBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button></div>
-  <div class="cpview"><img id="cvImg" alt="抄好的經文"></div>
+  <div class="bhead"><button class="bback" id="cvBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button><h2 id="cvCount"></h2><span></span></div>
+  <div class="cvwrap" id="cvWrap">
+    <div class="cpview" id="cvStage"><img id="cvImg" alt="抄好的經文"></div>
+    <button class="cvnav prev" id="cvPrev" aria-label="上一篇"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="cvnav next" id="cvNext" aria-label="下一篇"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
   <p class="cpmeta" id="cvMeta"></p>
-  <div class="cpfoot"><button class="btn" id="cvSave">存到手機</button><div class="cplinks"><button class="blink" id="cvDel">刪除這篇</button></div></div>
+  <div class="cpfoot"><button class="btn" id="cvDedi">迴向</button><div class="cplinks"><button class="blink" id="cvDel">刪除這篇</button></div></div>
 </div>
 <div class="sheet cpsheet cpfull" id="cpFull" hidden role="dialog" aria-label="抄經本已滿">
   <h3>抄經本已滿 21 篇</h3>
@@ -1737,7 +1788,7 @@ if (window.visualViewport){
   addEventListener("orientationchange", () => { vvFull = 0; });
   ["focusin", "focusout"].forEach(n => document.addEventListener(n, () => setTimeout(fitSheet, 60)));
 }
-function closeSheets(){ document.querySelectorAll(".sheet").forEach(s => s.hidden = true); scrim.hidden = true; fitSheet(); }
+function closeSheets(){ document.querySelectorAll(".sheet").forEach(s => s.hidden = true); scrim.hidden = true; document.body.classList.remove("dedicp"); fitSheet(); }
 scrim.onclick = closeSheets;
 
 /* ================= audio ================= */
@@ -2996,14 +3047,17 @@ function dediState(){
 }
 const personLabel = x => x.name ? `${x.call} ${x.name}` : x.call;
 function meritText(){
+  if (dediCopy) return `此次抄寫《${dediCopy.m.title}》`;   // a copied sutra is dedicated on its own; the beads wait for their own dedication
   const m = pend(), parts = [];
   if (m.beads) parts.push(`撥珠 ${fmt(m.beads)} 珠`);
   if (m.sutras.length) parts.push(m.sutras.map(t => `恭聽《${t}》`).join("、"));
   if (m.fish) parts.push(`敲木魚 ${fmt(m.fish)} 下`);
+  if (m.copied && m.copied.length) parts.push("抄寫" + m.copied.map(x => `《${x.title}》`).join("、"));
   return parts.length ? "此次" + parts.join("，") : "此次誠心合掌";
 }
 // this dedication in plain words: how many beads, and which text was chanted or heard
 let dediWhat = null;
+let dediFitT = 0, dediCopy = null;   // the entry of 抄經本 being dedicated, with its picture
 // what the beads were for: a sutra or mantra by its name, a holy name by the words themselves (南無阿彌陀佛)
 const beadWork = () => { const it = curItem(); return it.lines ? it.name : (it.text || it.name); };
 const workName = n => /經|咒|偈|文|陀羅尼|懺/.test(n) ? `《${n}》` : n;
@@ -3022,8 +3076,11 @@ let dOpen = null;   // id of the person whose editor is open, "new", or null
 const EDIT_I = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>';
 const KIND_NAME_P = { alive:"在世", passed:"已往生", all:"眾生" };
 let dVerseOnce = null;   // a verse picked by hand counts for this dedication only
-function openDedi(){
+function openDedi(copied){
   const st = dediState();
+  if (dediCopy && dediCopy.url) URL.revokeObjectURL(dediCopy.url);
+  dediCopy = copied && copied.id ? { m:copied, url:null } : null; blessCopy = null;
+  if (dediCopy){ const c = dediCopy; IDB.get("book:" + c.m.id, "cp").then(b => { if (b && c === dediCopy) c.url = URL.createObjectURL(b); }); }
   dVerseOnce = null; delete st.verseSet;
   if (lsCur && !talk.paused) talk.pause();   // the dedication is spoken in quiet; the chant can be resumed afterwards
   $("dStepA").hidden = false; $("dStepB").hidden = true;
@@ -3031,6 +3088,7 @@ function openDedi(){
   $("dBy").value = st.by || "";
   dOpen = null;
   paintDedi(); openSheetEl($("dediSheet")); $("dediSheet").scrollTop = 0; dediMusicLoad();
+  document.body.classList.toggle("dedicp", !!dediCopy);   // the sheet rises over the 抄經 page, which stays underneath if this is cancelled
 }
 function paintDedi(){
   const st = dediState();
@@ -3133,6 +3191,7 @@ $("dNext").onclick = () => {
   const who = st.people.filter(x => st.sel.includes(x.id)); if (!who.length) return;
   const verse = $("dVerseSeg").querySelector('[aria-pressed="true"]').dataset.v, pv = $("dPreview"); pv.innerHTML = "";
   const add = (t, c) => { const e = document.createElement("p"); if (c) e.className = c; e.textContent = t; pv.appendChild(e); };
+  if (dediCopy && dediCopy.url){ const im = document.createElement("img"); im.className = "dpcopy"; im.alt = "抄好的經文"; im.src = dediCopy.url; pv.appendChild(im); }
   if (st.by) add(st.by);
   add(meritText() + "，以此功德，迴向給");
   who.forEach(x => add(`${personLabel(x)}　祈願${x.wish}`));
@@ -3141,22 +3200,22 @@ $("dNext").onclick = () => {
 };
 $("dBack").onclick = () => { $("dStepA").hidden = false; $("dStepB").hidden = true; };
 let dlFrom = "beads";
-$("dLog").onclick = () => { dlFrom = activeTab; closeSheets(); showTab("dedilog"); };
+$("dLog").onclick = () => { dlFrom = activeTab; closeSheets(); cpHideAll(); showTab("dedilog"); };
 $("dlBack").onclick = () => showTab(dlFrom === "dedilog" ? "beads" : dlFrom);
 const VERSE_NAME = { normal:"普迴向偈", jingtu:"淨土迴向偈" };
 function renderDediLog(){
-  const log = S.dediLog || [], beads = log.reduce((a, r) => a + r.beads, 0);
-  $("dlTotal").textContent = log.length ? `共迴向 ${log.length} 次・累計 ${fmt(beads)} 珠` : "還沒有迴向紀錄。撥珠或聽經後，按撥珠頁左下角的蓮花「迴向」。";
+  const log = S.dediLog || [], beads = log.reduce((a, r) => a + r.beads, 0), copies = log.reduce((a, r) => a + (r.copied || []).length, 0);
+  $("dlTotal").textContent = log.length ? [`共迴向 ${log.length} 次`, beads || !copies ? `累計 ${fmt(beads)} 珠` : "", copies ? `抄經 ${copies} 篇` : ""].filter(Boolean).join("・") : "還沒有迴向紀錄。撥珠或聽經後，按撥珠頁左下角的蓮花「迴向」。";
   // totals per person: every time they were included, and the beads of those dedications
   const per = new Map();
-  log.forEach(r => r.who.forEach(w => { const k = w.id || w.label, x = per.get(k) || { label:w.label, wish:w.wish, n:0, beads:0, last:0 };
-    x.n++; x.beads += r.beads; if (r.t >= x.last){ x.last = r.t; x.label = w.label; x.wish = w.wish; } per.set(k, x); }));
+  log.forEach(r => r.who.forEach(w => { const k = w.id || w.label, x = per.get(k) || { label:w.label, wish:w.wish, n:0, beads:0, copies:0, last:0 };
+    x.n++; x.beads += r.beads; x.copies += (r.copied || []).length; if (r.t >= x.last){ x.last = r.t; x.label = w.label; x.wish = w.wish; } per.set(k, x); }));
   const pp = $("dlPeople"); pp.innerHTML = "";
   [...per.values()].sort((a, b) => b.n - a.n || b.last - a.last).forEach(x => {
     const d = document.createElement("div"); d.className = "dlp";
     d.innerHTML = '<div><b></b><span></span></div><div class="n"><span class="a"></span><small></small></div>';
     d.querySelector("b").textContent = x.label; d.querySelector("div span").textContent = `祈願${x.wish}`;
-    d.querySelector(".a").textContent = `${x.n} 次`; d.querySelector("small").textContent = `${fmt(x.beads)} 珠`;
+    d.querySelector(".a").textContent = `${x.n} 次`; d.querySelector("small").textContent = [x.beads || !x.copies ? `${fmt(x.beads)} 珠` : "", x.copies ? `抄經 ${x.copies} 篇` : ""].filter(Boolean).join("・");
     pp.appendChild(d);
   });
   const ll = $("dlList"); ll.innerHTML = "";
@@ -3166,11 +3225,14 @@ function renderDediLog(){
     if (r.beads) parts.push(`撥珠 ${fmt(r.beads)} 珠`);
     if (r.sutras.length) parts.push(r.sutras.map(x => `《${x}》`).join(""));
     if (r.fish) parts.push(`木魚 ${fmt(r.fish)} 下`);
+    if (r.copied && r.copied.length) parts.push("抄寫" + r.copied.map(x => `《${x.title}》`).join(""));
     e.innerHTML = '<time></time><div class="m"></div><div class="w"></div><div class="v"></div>';
     e.querySelector("time").textContent = `${t.getFullYear()}/${t.getMonth()+1}/${t.getDate()}　${String(t.getHours()).padStart(2,"0")}:${String(t.getMinutes()).padStart(2,"0")}${r.by ? "　" + r.by : ""}`;
     e.querySelector(".m").textContent = parts.join("・") || "誠心合掌";
     e.querySelector(".w").textContent = "迴向給　" + r.who.map(w => `${w.label}（${w.wish}）`).join("、");
     e.querySelector(".v").textContent = VERSE_NAME[r.verse] || "";
+    const kept = (r.copied || []).find(x => cpBookList().some(y => y.id === x.id));
+    if (kept){ const b = el("button", "blink", "看抄好的經文 ›"); b.onclick = () => cpOpenView(kept.id); e.appendChild(b); }
     ll.appendChild(e);
   });
 }
@@ -3181,11 +3243,16 @@ $("dStart").onclick = () => {
   const who = st.people.filter(x => st.sel.includes(x.id));
   if (!who.length) return;
   const verse = $("dVerseSeg").querySelector('[aria-pressed="true"]').dataset.v;
-  closeSheets(); stopListen(); setAuto(0);
+  closeSheets(); stopListen(); setAuto(0); cpHideAll();
+  const dc = dediCopy, ci = $("dCopyImg");
+  ci.hidden = !(dc && dc.url); ci.onload = () => fitDone(); if (dc && dc.url) ci.src = dc.url; else ci.removeAttribute("src");
+  if (dc && dc.url){ const im = new Image(); im.src = dc.url; blessCopy = { im, url:dc.url }; }
+  dedi.classList.toggle("copy", !!dc);
   dedi.hidden = false; dedi.classList.remove("go"); void dedi.offsetWidth; dedi.classList.add("go");
   $("dStage1").hidden = true; $("dStage2").hidden = false;
   const m0 = pend();
-  dediWhat = { copied:(m0.copied || []).slice(), beads:m0.beads, fish:m0.fish, texts:m0.sutras.length ? m0.sutras.slice() : m0.beads ? [beadWork()] : [] };
+  dediWhat = dc ? { copied:[{ id:dc.m.id, title:dc.m.title, chars:dc.m.chars }], beads:0, fish:0, texts:[] }
+    : { copied:(m0.copied || []).slice(), beads:m0.beads, fish:m0.fish, texts:m0.sutras.length ? m0.sutras.slice() : m0.beads ? [beadWork()] : [] };
   const lines = [st.by, "此次" + dediWords() + "，", "以此功德，迴向給"].filter(Boolean).map(t => [t, ""])
     // four or more people go on one wrapped line, so the whole dedication still fits on one screen
     .concat(who.length > 3 ? [[who.map(personLabel).join("、"), "p"]] : who.map(x => [`${personLabel(x)}　祈願${x.wish}`, "p"]));
@@ -3198,20 +3265,24 @@ $("dStart").onclick = () => {
   $("dVerse").style.animationDelay = verseOut + "s";
   document.querySelectorAll("#dStage2 .dfin, #dStage2 .dthanks, #dDonate").forEach(x => x.style.animationDelay = (verseOut + 0.9) + "s");
   paintDonate(); fitDone();
+  clearTimeout(dediFitT); if (dc) dediFitT = setTimeout(() => { if (!dedi.hidden) fitDone(true); }, (verseOut + 1.3) * 1000);
   bell(); buzz([40,80,40]); dediMusicPlay(1.4);
   S.famSel = who.map(personLabel).join("、");
-  const now = new Date(), m = pend();
+  const now = new Date(), m = pend(), done = dediWhat.copied.map(x => ({ id:x.id, title:x.title, chars:x.chars }));
   S.ded.push(`${now.getMonth()+1}/${now.getDate()}　${meritText()}，迴向給${S.famSel}`);
-  (S.dediLog = S.dediLog || []).push({ t:now.getTime(), beads:m.beads, fish:m.fish, sutras:m.sutras.slice(), by:st.by, verse,
+  (S.dediLog = S.dediLog || []).push({ t:now.getTime(), beads:dc ? 0 : m.beads, fish:dc ? 0 : m.fish, sutras:dc ? [] : m.sutras.slice(), copied:done, by:st.by, verse,
     who:who.map(x => ({ id:x.id, label:personLabel(x), wish:x.wish, kind:x.kind })) });
-  S.pend = { beads:0, fish:0, sutras:[], copied:[] };   // dedicated: the count on the bead page starts again from zero
+  done.forEach(x => { const b = cpBookList().find(y => y.id === x.id); if (b) (b.dedi = b.dedi || []).push({ t:now.getTime(), who:S.famSel }); });
+  if (dc){ const l = m.copied || [], i = l.findIndex(x => x.id === dc.m.id || (!x.id && x.title === dc.m.title)); if (i >= 0) l.splice(i, 1); }   // beads and listening keep waiting for their own dedication
+  else S.pend = { beads:0, fish:0, sutras:[], copied:[] };   // dedicated: the count on the bead page starts again from zero
   const td = today(); td.tasks = Object.assign(td.tasks || {}, { dedi:true });
   save(); renderHud();
   moteBoost = 1; startMotes();
 };
 document.getElementById("dDone").onclick = document.getElementById("dLater").onclick = () => {
   dedi.hidden = true; moteRun = false; $("bless").hidden = $("member").hidden = $("donate").hidden = true; dediMusicStop();
-  afterDedicate(dedi.classList.contains("go"));
+  if (dedi.classList.contains("copy")){ dedi.classList.remove("copy"); showTab("copy", true); cpOpenBook(); }   // back to the album, where the piece now shows it was dedicated
+  else afterDedicate(dedi.classList.contains("go"));
   if (activeTab === "log") renderLog(); if (activeTab === "home") renderHome();
 };
 function startMotes(){
@@ -3511,7 +3582,9 @@ function lunar(d){
 function shareText(){ return blessMsg(); }
 const imgCache = {};
 function loadImg(id){ return imgCache[id] ||= new Promise(ok => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ok(null); im.src = `assets/img/${id}.webp`; }); }
-const blessBgs = () => [["lotus","蓮花光"], ["lotus-dedication","蓮台"]].concat(BACKDROPS.filter(([id]) => id !== "cloth"));
+let blessCopy = null;   // the copied sutra just dedicated: offered as the first picture of the blessing card
+const blessBgs = () => (blessCopy ? [["copy","我抄的經"]] : []).concat([["lotus","蓮花光"], ["lotus-dedication","蓮台"]], BACKDROPS.filter(([id]) => id !== "cloth"));
+const blessBase = () => blessCopy ? "copy" : blessBgs().some(([x]) => x === S.blessBg) ? S.blessBg : "lotus";
 const SERIF = '"Noto Serif TC", serif';
 // the drawn lotus in rays: the original card, and the default background
 function paintLotus(g){
@@ -3546,8 +3619,41 @@ function paintPhoto(g, im){
 const blessPassed = () => ((S.dediLog || []).at(-1)?.who || []).some(w => w.kind === "passed");
 function blessTitle(){ const h = new Date().getHours(); return blessPassed() ? "平安" : h >= 5 && h < 11 ? "早安" : h >= 11 && h < 18 ? "平安" : "晚安"; }
 const blessMsg = () => $("bNote").value.trim() || (blessPassed() ? "願這份善念，化為一份溫暖" : "願您今日平安喜樂，心中自在");
+// the card with the user's own copied sutra: the page sits in the middle, the words stack up from the bottom
+function paintBlessCopy(g, im){
+  const bg = g.createRadialGradient(540,620,40,540,620,900); bg.addColorStop(0,"#4a2c12"); bg.addColorStop(.6,"#1a0e06"); bg.addColorStop(1,"#080403");
+  g.fillStyle = bg; g.fillRect(0,0,1080,1350);
+  g.textAlign = "center";
+  g.fillStyle = "#e2b363";
+  let top;
+  if (blessShow){
+    g.font = `900 52px ${SERIF}`; g.fillText("今 日 功 課", 540, 96);
+    g.fillStyle = "#f7eedd"; g.font = `700 40px ${SERIF}`; g.fillText(wrapText(g, dediWords(), 980)[0], 540, 156); top = 186;
+  } else { g.font = `900 84px ${SERIF}`; g.fillText(blessTitle(), 540, 122); top = 158; }
+  const vl = verseNow[0].length > 6 ? verseNow : [verseNow[0] + "　" + verseNow[1], verseNow[2] + "　" + verseNow[3]];
+  const lh = vl.length > 2 ? 50 : 60, vh = vl.length * lh;
+  g.font = `900 40px ${SERIF}`;
+  const who = blessShow ? wrapText(g, `迴向給　${S.famSel}`, 980).slice(0, 2) : [];
+  g.font = `900 54px ${SERIF}`;
+  const msg = wrapText(g, blessMsg(), 980).slice(0, 2);
+  const bottom = 1296 - 40 - vh - who.length * 52 - msg.length * 70 - 34;
+  const k = Math.min(920 / im.width, (bottom - top) / im.height), w = im.width * k, h = im.height * k, x = (1080 - w) / 2, y = top + (bottom - top - h) / 2;
+  g.save(); g.shadowColor = "rgba(255,200,110,.45)"; g.shadowBlur = 40; g.fillStyle = "#000"; g.fillRect(x, y, w, h); g.restore();
+  g.drawImage(im, x, y, w, h); g.strokeStyle = "#e2b363"; g.lineWidth = 3; g.strokeRect(x - 1.5, y - 1.5, w + 3, h + 3);
+  let ty = bottom + 74;
+  g.save(); g.shadowColor = "rgba(255,200,110,.55)"; g.shadowBlur = 24; g.fillStyle = "#fff4dc"; g.font = `900 54px ${SERIF}`;
+  msg.forEach(t => { g.fillText(t, 540, ty); ty += 70; }); g.restore();
+  ty -= 8; g.fillStyle = "#ffe2a8"; g.font = `900 40px ${SERIF}`;
+  who.forEach(t => { g.fillText(t, 540, ty); ty += 52; });
+  g.fillStyle = "#f7eedd"; g.font = `600 ${vl.length > 2 ? 36 : 42}px ${SERIF}`;
+  vl.forEach(t => { g.fillText(t, 540, ty); ty += lh; });
+  const now = new Date();
+  g.fillStyle = "#d6c6aa"; g.font = '500 30px "Noto Sans TC", sans-serif';
+  g.fillText(`${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`, 540, 1318);
+}
 function paintBless(g, im){
   g.save(); g.clearRect(0,0,1080,1350);
+  if (blessBg === "copy" && im){ paintBlessCopy(g, im); g.restore(); return; }
   im ? paintPhoto(g, im) : paintLotus(g);
   g.textAlign = "center"; g.shadowColor = "rgba(0,0,0,.85)"; g.shadowBlur = im ? 18 : 0;
   if (blessShow){
@@ -3582,7 +3688,8 @@ const photoPreview = () => blessBg === "photo" && !can("photo");
 async function renderBless(){
   const n = ++blessN; blessFile = null;
   try{ await document.fonts.ready; }catch(e){}
-  const im = blessBg === "photo" ? blessPhoto : blessBg === "lotus" ? null : await loadImg(blessBg);
+  if (blessBg === "copy" && blessCopy) try{ await blessCopy.im.decode(); }catch(e){}
+  const im = blessBg === "photo" ? blessPhoto : blessBg === "lotus" ? null : blessBg === "copy" ? blessCopy && blessCopy.im : await loadImg(blessBg);
   if (n !== blessN) return;
   const c = $("bCanvas"); paintBless(c.getContext("2d"), im);
   $("bPrevGo").hidden = !photoPreview(); $("bGo").hidden = photoPreview();
@@ -3595,9 +3702,9 @@ function paintBlessBgs(){
   const box = $("bBgs"); box.innerHTML = "";
   blessBgs().forEach(([id, name]) => {
     const b = document.createElement("button"); b.setAttribute("aria-pressed", blessBg === id); b.setAttribute("aria-label", `背景：${name}`);
-    b.style.backgroundImage = id === "lotus" ? "radial-gradient(circle at 50% 45%,#f3c7a0 0 14%,#7a4a22 30%,#1a0e06 75%)" : `url(assets/img/${id}.webp)`;
+    b.style.backgroundImage = id === "lotus" ? "radial-gradient(circle at 50% 45%,#f3c7a0 0 14%,#7a4a22 30%,#1a0e06 75%)" : id === "copy" ? `url(${blessCopy.url})` : `url(assets/img/${id}.webp)`;
     const t = document.createElement("span"); t.textContent = name; b.appendChild(t);
-    b.onclick = () => { blessBg = S.blessBg = id; save(); paintBlessBgs(); renderBless(); };   // a free picture also ends any photo preview
+    b.onclick = () => { blessBg = id; if (id !== "copy"){ S.blessBg = id; save(); } paintBlessBgs(); renderBless(); };   // a free picture also ends any photo preview
     box.appendChild(b);
   });
   // member tiles: marked in words before they are tapped; a tap only explains, it never interrupts the free picture
@@ -3616,7 +3723,7 @@ function openBless(){
   if (id !== blessFor){
     const d = S.blessDraft && S.blessDraft.for === id ? S.blessDraft : {};
     blessFor = id; blessPhoto = null; blessShow = !!d.show; $("bNote").value = d.note || ""; $("bShow").checked = blessShow; $("bShowNote").hidden = !blessShow;
-    blessBg = blessBgs().some(([x]) => x === S.blessBg) ? S.blessBg : "lotus";
+    blessBg = blessBase();
   }
   $("bHint").textContent = BLESS_HINT;
   paintBlessBgs(); paintChips(); $("bless").hidden = false; renderBless();
@@ -3670,14 +3777,15 @@ $("bPhotoFile").onchange = e => {
   im.onerror = () => { URL.revokeObjectURL(url); $("bHint").textContent = "這張照片打不開，請換一張試試。"; };
   im.src = url;
 };
-$("bBackFree").onclick = () => { blessBg = blessBgs().some(([x]) => x === S.blessBg) ? S.blessBg : "lotus"; paintBlessBgs(); renderBless(); };
+$("bBackFree").onclick = () => { blessBg = blessBase(); paintBlessBgs(); renderBless(); };
 $("bJoin").onclick = () => openMember("photo");
 $("bMember").onclick = () => openMember("link");
 
 /* ---- 雲禪護持會員 ----
    Store billing is not connected: on the live site nothing can be bought and nobody can become a member.
    The mock below only runs on this computer's localhost and is labelled as a test. */
-const LOCAL_TEST = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+// the owner's test link (?donation=test) gets the same mock online; the normal address never does, so nobody there can become a member
+const LOCAL_TEST = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) || /[?&]donation=test\b/.test(location.search);
 const BILLING = { ready:false };   // becomes true only when a real store adapter is added; it then also provides prices, restore and manage
 const PLANS = { month:"訂閱月費 NT$99／月", year:"訂閱年費 NT$790／年" };
 const PAY_FROM = {
@@ -3695,7 +3803,7 @@ function paintPlan(){
 }
 function openMember(from){
   if (can() && from !== "link"){
-    $("bHint").textContent = "（本機測試）會員樣式與 AI 尚未接上"; return;
+    $("bHint").textContent = "（測試）會員樣式與 AI 尚未接上"; return;
   }
   const t = PAY_FROM[from];   // reached from a feature: its own short words replace the general opening, so the prices stay in view
   $("mTitle").textContent = t ? t[0] : "一份平靜，一同護持"; $("mLead").textContent = t ? t[1] : MEMBER_LEAD;
@@ -3705,7 +3813,10 @@ function openMember(from){
   $("mLinks").hidden = !open; $("mTest").hidden = !LOCAL_TEST;
   paintPlan(); $("member").hidden = false; $("member").scrollTop = 0;
 }
-function closeMember(){ $("member").hidden = true; paintBlessBgs(); renderBless(); }
+function closeMember(){
+  $("member").hidden = true; paintBlessBgs(); renderBless();
+  if (cpPending && can()) cpCommit();   // joined while the 抄經本 was full: the writing goes straight in and nothing old is replaced
+}
 document.querySelectorAll(".mplan").forEach(b => b.onclick = () => { mPlan = b.dataset.plan; paintPlan(); });
 $("mMore").onclick = () => { const f = $("mFull"); f.hidden = !f.hidden; $("mMore").setAttribute("aria-expanded", !f.hidden); $("mMore").textContent = f.hidden ? "訂閱須知" : "收起"; };
 $("mBack").onclick = $("mFree").onclick = closeMember;
@@ -3751,11 +3862,15 @@ function paintDonate(){
   box.append(go); box.hidden = false; $("dedi").classList.add("withinv");
 }
 // long dedications: the lotus gives way so the buttons never leave the screen
-function fitDone(){
-  const inner = document.querySelector(".dedi-in"), l = inner.querySelector(".lotusimg");
-  l.style.height = "";
-  const over = inner.scrollHeight - inner.clientHeight;
+function fitDone(glide){
+  const inner = document.querySelector(".dedi-in"), l = inner.querySelector(".lotusimg"), ci = $("dCopyImg"), was = [ci.style.maxHeight, l.style.height];
+  ci.style.transition = l.style.transition = "none"; l.style.height = ""; ci.style.maxHeight = "";
+  let over = inner.scrollHeight - inner.clientHeight;
+  if (over > 0 && !ci.hidden){ ci.style.maxHeight = Math.max(96, ci.offsetHeight - over - 4) + "px"; over = inner.scrollHeight - inner.clientHeight; }
   if (over > 0) l.style.height = Math.max(64, l.offsetHeight - over - 4) + "px";
+  if (glide){ const to = [ci.style.maxHeight, l.style.height]; ci.style.maxHeight = was[0]; l.style.height = was[1]; void inner.offsetHeight;   // the verse has folded away: the page settles back to its size
+    ci.style.transition = l.style.transition = "max-height .8s ease,height .8s ease"; ci.style.maxHeight = to[0]; l.style.height = to[1]; }
+  else { ci.style.transition = ""; l.style.transition = ""; }
 }
 function openDonate(d){
   $("doFacts").innerHTML = "";
@@ -4499,7 +4614,7 @@ function cpGlyphZhuyin(g, z, x, y, s, color){   // 注音 stacked downwards; the
   if (neutral) g.fillText("˙", x, y - s * .75);
 }
 function cpDrawCell(g, c, x, y, s, pal, opt){
-  const showZ = opt.zy && s >= 56, showP = opt.py && s >= 56;
+  const showZ = opt.trace && opt.zy && s >= 56, showP = opt.trace && opt.py && s >= 56;   // 空白 is a bare grid: the reading stays in the bar above
   const zw = showZ ? Math.min(s * .17, 34) : 0, ph = showP ? Math.min(s * .16, 30) : 0;
   g.strokeStyle = pal.line; g.globalAlpha = .75; g.lineWidth = 1; g.strokeRect(x + .5, y + .5, s, s);
   g.globalAlpha = .28; g.setLineDash([3, 4]); g.beginPath(); g.moveTo(x + (s - zw) / 2, y + 3); g.lineTo(x + (s - zw) / 2, y + s - ph - 3); g.moveTo(x + 3, y + (s - ph) / 2); g.lineTo(x + s - zw - 3, y + (s - ph) / 2); g.stroke(); g.setLineDash([]); g.globalAlpha = 1;
@@ -4576,11 +4691,11 @@ async function cpOpenWrite(id, rep, fresh){
   cpPaginate(); cpPaintRef(); cpPaginate();   // the sentence bar sets how much room the paper has
   const first = cpW.cells.findIndex((_, i) => !(d.st[i] || []).length);   // back to where the writing stopped
   cpW.page = Math.max(0, cpW.pages.findIndex(p => p.includes(first < 0 ? cpW.cells.length - 1 : first)));
-  cpPaintPaper(); cpPaintRef();
+  cpPaintPaper(); cpPaintRef(); cpPaintMusic();
   if (!S.cpTip){ const tip = $("cwTip"); tip.hidden = false; tip.textContent = "慢慢寫字較粗，寫快較細；收筆時順勢一提，就有撇捺的筆鋒。"; }
   if (!S.cpHint){ S.cpHint = true; save(); cpShowHint(); }
 }
-function cpCloseWrite(){ cpSaveDraft(true); $("cpWrite").hidden = true; $("cwSheet").hidden = true; keepAwake(activeTab === "beads"); renderCopy(); }
+function cpCloseWrite(){ cpSaveDraft(true); cpStopMusic(); $("cpWrite").hidden = true; $("cwSheet").hidden = true; $("cwMusicS").hidden = true; keepAwake(activeTab === "beads"); renderCopy(); }
 // writing: one finger or a stylus. Once a stylus has been seen, the palm (touch) is ignored.
 let cpStroke = null, cpPenSeen = false;
 const cpPos = e => { const r = cwInk.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
@@ -4654,7 +4769,10 @@ if (window.ResizeObserver) new ResizeObserver(() => requestAnimationFrame(cpRefi
 function cpOptChips(box, list, on, pick){ box.innerHTML = ""; list.forEach(([v, n]) => { const b = el("button", "chip" + (on(v) ? " on" : ""), n); b.setAttribute("aria-pressed", on(v)); b.onclick = () => { pick(v); paintCpSheet(); cpApply(); }; box.appendChild(b); }); }
 function cpFontGrid(box, ch, picked){
   const c = cpSet(); box.innerHTML = "";
-  CP_FONTS.forEach(([k, n]) => { const b = el("button", c.font === k ? "on" : ""), g = el("b", null, ch); g.style.fontFamily = cpFamily(k); b.append(g, el("span", null, n)); b.setAttribute("aria-pressed", c.font === k); b.onclick = () => { c.font = k; picked(); }; box.appendChild(b); cpLoadFont(k); });
+  CP_FONTS.forEach(([k, n]) => { const on = c.trace && c.font === k, b = el("button", on ? "on" : ""), g = el("b", null, ch); g.style.fontFamily = cpFamily(k); b.append(g, el("span", null, n)); b.setAttribute("aria-pressed", on); b.onclick = () => { c.font = k; c.trace = true; picked(); }; box.appendChild(b); cpLoadFont(k); });
+  const blank = el("button", "blank" + (c.trace ? "" : " on")), tx = el("span"); blank.appendChild(el("i"));
+  tx.append(el("b", null, "空白"), el("span", null, "沒有底字，自己寫")); blank.appendChild(tx);
+  blank.setAttribute("aria-pressed", !c.trace); blank.onclick = () => { c.trace = false; picked(); }; box.appendChild(blank);
 }
 /* 第一次抄經：先選手指或觸控筆，再選字體與大小，下面的小稿紙隨選隨變。 */
 let cpSetupDone = null;
@@ -4681,17 +4799,20 @@ function cpSetupStep(n){
   };
   const lab = t => body.appendChild(el("div", "cplab", t));
   lab("書體"); const fs = el("div", "cpfonts"); body.appendChild(fs); const ch = cpW.cells[0].ch;
-  const paintFonts = () => cpFontGrid(fs, ch, () => { save(); paintFonts(); draw(); }); paintFonts();
+  const paintFonts = () => cpFontGrid(fs, ch, () => { save(); paintFonts(); paintSh(); draw(); }); paintFonts();
   lab(finger ? "一個畫面寫幾個字" : "格子大小"); const sz = el("div", "cpopts"); body.appendChild(sz);
   const paintSz = () => finger ? cpSetChips(sz, [[1,"一個字"],[4,"四個字"]], v => c.per === v, v => c.per = v, () => { paintSz(); draw(); })
     : cpSetChips(sz, [[3,"特大"],[4,"大"],[5,"中"],[7,"小"]], v => c.cols === v, v => c.cols = v, () => { paintSz(); draw(); });
   paintSz();
-  lab("格內顯示"); const sh = el("div", "cpopts"); body.appendChild(sh);
-  const paintSh = () => cpSetChips(sh, [["trace","描紅字"],["zy","注音"],["py","拼音"]], v => c[v], v => c[v] = !c[v], () => { paintSh(); draw(); }); paintSh();
+  lab("讀音顯示"); const shLab = body.lastChild, sh = el("div", "cpopts"); body.appendChild(sh);
+  const paintSh = () => (shLab.textContent = cpShowLab(c), 0) || cpSetChips(sh, cpShowOpts(c), v => c[v], v => c[v] = !c[v], () => { paintSh(); paintFonts(); draw(); }); paintSh();
   draw();
   const go = el("button", "btn", "開始抄經"); go.onclick = () => { save(); $("cpSetup").hidden = true; const f = cpSetupDone; cpSetupDone = null; if (f) f(); }; foot.appendChild(go);
   $("csuBack").onclick = () => cpSetupStep(1);
 }
+// 空白 keeps the grid bare, so 注音 and 拼音 only show in the bar above it
+const cpShowLab = c => c.trace ? "格內顯示" : "上方顯示";
+const cpShowOpts = c => (c.trace ? [["trace","描紅字"]] : []).concat([["zy","注音"],["py","拼音"]]);
 function cpSetChips(box, list, on, pick, after){ box.innerHTML = ""; list.forEach(([v, n]) => { const b = el("button", "chip" + (on(v) ? " on" : ""), n); b.setAttribute("aria-pressed", !!on(v)); b.onclick = () => { pick(v); save(); after(); }; box.appendChild(b); }); }
 function paintCpSheet(){
   const c = cpSet(), finger = c.input === "finger";
@@ -4703,22 +4824,41 @@ function paintCpSheet(){
   const showPage = !finger || c.per === 4; $("csPageLab").hidden = $("csPage").hidden = !showPage;
   $("csPageLab").textContent = finger ? "排列方向" : "一頁寫多少";
   cpOptChips($("csPage"), finger ? [["v","直書"],["h","橫書"]] : [["page","滿頁"],["line","一句一頁"],["v","直書"],["h","橫書"]], v => v === "page" ? !c.line : v === "line" ? c.line : v === "v" ? c.vert : !c.vert, v => { if (v === "page") c.line = false; else if (v === "line") c.line = true; else c.vert = v === "v"; });
-  cpOptChips($("csShow"), [["trace","描紅字"],["zy","注音"],["py","拼音"]], v => c[v], v => c[v] = !c[v]);
+  $("csShowLab").textContent = cpShowLab(c);
+  cpOptChips($("csShow"), cpShowOpts(c), v => c[v], v => c[v] = !c[v]);
   cpOptChips($("csBrush"), [[1,"細筆"],[2,"中筆"],[3,"粗筆"]], v => c.brush === v, v => c.brush = v);
   cpOptChips($("csPaper"), Object.keys(CP_PAPER).map(k => [k, CP_PAPER[k].n]), v => c.paper === v, v => c.paper = v);
 }
 function cpApply(){ save(); cpLoadFont(S.cp.font).then(() => { if (cpW.draft){ const cur = cpCurrentId(); cpPaginate(); cpW.page = Math.max(0, cpW.pages.findIndex(p => p.includes(cur))); cpPaintPaper(); cpPaintRef(); cpPaintInfo(); } }); }
 function cpPaintInfo(){ const n = (cpW.pages[cpW.page] || []).length; $("csInfo").textContent = `現在一頁 ${n} 字，共 ${cpW.pages.length} 頁`; }
+/* 邊聽邊抄：這部經的唱誦排最前面，其他已上架的也能選。聲音只陪著，不帶進度也不提醒；離開書寫頁就停。 */
+function cpPaintMusic(){
+  const on = !!lsCur && !talk.paused; $("cwMusic").classList.toggle("on", on);
+  $("cwMusic").setAttribute("aria-label", on ? "唱誦播放中，點一下換曲或暫停" : "邊聽邊抄，選擇唱誦");
+  if ($("cwMusicS").hidden) return;
+  const box = $("cmList"), id = cpW.t && cpW.t.id; box.innerHTML = "";
+  const mine = TRACKS.filter(t => t.a.id === id), rest = TRACKS.filter(t => t.a.id !== id);
+  const row = t => { const cur = isCurT(t), now = cur && !talk.paused, b = el("button", "cmrow" + (cur ? " cur" : "")), ic = el("span", "ic"), tx = el("span", "t"); ic.innerHTML = now ? PAUSE_I : PLAY_I;
+    tx.append(el("b", null, t.a.title), el("span", null, [t.ep.t, t.ep.d ? mmss(t.ep.d) : ""].filter(Boolean).join("・"))); b.append(ic, tx); b.setAttribute("aria-label", `${now ? "暫停" : "播放"} ${t.a.title} ${t.ep.t}`); b.onclick = () => { playTrack(t); cpPaintMusic(); }; return b; };
+  const lab = t => box.appendChild(el("div", "lab", t));
+  lab("這部經的唱誦");
+  if (mine.length) mine.forEach(t => box.appendChild(row(t))); else box.appendChild(el("p", "cmempty", "這部經的唱誦還在準備中，可以先聽其他經文。"));
+  if (rest.length){ lab("其他唱誦"); rest.forEach(t => box.appendChild(row(t))); }
+}
+const cpStopMusic = () => { if (lsCur && !talk.paused) talk.pause(); };
+["play", "pause"].forEach(ev => talk.addEventListener(ev, () => { if (!$("cpWrite").hidden) cpPaintMusic(); }));
+$("cwMusic").onclick = () => { cpHideHint(); $("cwSheet").hidden = true; $("cwMusicS").hidden = false; cpPaintMusic(); };
+$("cmDone").onclick = () => { $("cwMusicS").hidden = true; };
 let cpHintT = 0;
 function cpShowHint(){ $("cwHint").hidden = false; $("cwOpt").classList.add("pulse"); clearTimeout(cpHintT); cpHintT = setTimeout(cpHideHint, 8000); }
 function cpHideHint(){ clearTimeout(cpHintT); $("cwHint").hidden = true; $("cwOpt").classList.remove("pulse"); }
-$("cwOpt").onclick = () => { cpHideHint(); paintCpSheet(); cpPaintInfo(); $("cwSheet").hidden = false; };
+$("cwOpt").onclick = () => { cpHideHint(); $("cwMusicS").hidden = true; paintCpSheet(); cpPaintInfo(); $("cwSheet").hidden = false; };
 $("csDone").onclick = () => { $("cwSheet").hidden = true; };
 
 /* 完稿：右起直書的一張紙，首行經題，末行日期與抄寫時間。沒寫到的字留淡淡的底字。 */
 async function cpRender(){
   const { t, cells, draft:d } = cpW, c = S.cp, pal = CP_PAPER[c.paper] || CP_PAPER.xuan, n = cells.length;
-  const s = 96, rows = Math.max(9, Math.min(20, Math.ceil(Math.sqrt(n * 1.3)))), textCols = Math.ceil(n / rows), cols = textCols + 3;
+  const s = 96, rows = Math.max(9, Math.min(20, Math.ceil(Math.sqrt(n * 1.3)))), textCols = Math.ceil(n / rows), cols = textCols + 2;
   const mx = 72, my = 84, W = cols * s + mx * 2, H = rows * s + my * 2;
   const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
   const g = cv.getContext("2d"), left = W - mx - cols * s;
@@ -4732,14 +4872,13 @@ async function cpRender(){
   for (let i = 0; i < n; i++){
     const col = 1 + Math.floor(i / rows), row = i % rows, x = X(col), y = my + row * s, list = d.st[i];
     if (list && list.length) cpDrawStrokes(g, list, x, y, s, pal.ink);
-    else { g.fillStyle = pal.tpl; g.font = `${s * .72}px ${font}`; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(cells[i].ch, x + s / 2, y + s / 2); }
+    else if (c.trace){ g.fillStyle = pal.tpl; g.font = `${s * .72}px ${font}`; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(cells[i].ch, x + s / 2, y + s / 2); }
   }
-  const now = new Date(), tail = `${[...String(now.getFullYear())].map(cpCn).join("")}年${cpCn(now.getMonth() + 1)}月${cpCn(now.getDate())}日敬書`, mins = Math.max(1, Math.round(d.ms / 60000));
-  const sub = `抄寫${mins >= 60 ? cpCn(Math.floor(mins / 60)) + "時" + (mins % 60 ? cpCn(mins % 60) + "分" : "") : cpCn(mins) + "分鐘"}`;
+  const now = new Date(), tail = `${[...String(now.getFullYear())].map(cpCn).join("")}年${cpCn(now.getMonth() + 1)}月${cpCn(now.getDate())}日敬書`;
   const column = (txt, col, size, color) => { const chs = [...txt], gap = Math.min(size * 1.25, (rows * s - size) / chs.length); g.fillStyle = color; g.font = `${size}px ${font}`; chs.forEach((ch, i) => g.fillText(ch, X(col) + s / 2, my + size * .7 + gap * i)); };
   g.textAlign = "center"; g.textBaseline = "middle";
-  column(tail, cols - 2, s * .46, pal.ink); column(sub, cols - 1, s * .4, pal.py);
-  const sealS = s * .62, sx = X(cols - 2) + (s - sealS) / 2, sy = my + rows * s - sealS - 8;   // a small red seal under the date
+  column(tail, cols - 1, s * .46, pal.ink);
+  const sealS = s * .62, sx = X(cols - 1) + (s - sealS) / 2, sy = my + rows * s - sealS - 8;   // a small red seal under the date
   g.fillStyle = c.paper === "blue" ? "#b8412f" : "#a8321f"; g.fillRect(sx, sy, sealS, sealS);
   g.fillStyle = "#f7eedd"; g.font = `${sealS * .4}px ${font}`; [["敬", .3, .3], ["書", .3, .72], ["抄", .72, .3], ["經", .72, .72]].forEach(([ch, a, b]) => g.fillText(ch, sx + sealS * (1.02 - a), sy + sealS * b));
   const blob = await new Promise(r => cv.toBlob(r, "image/jpeg", .88));
@@ -4772,9 +4911,9 @@ async function cpCommit(replace){
   await IDB.put("book:" + meta.id, blob, "cp");
   cpBookList().push(meta);
   const today = S.days[dkey(new Date())] = S.days[dkey(new Date())] || {}; today.copied = (today.copied || 0) + meta.chars;
-  const p = pend(); (p.copied = p.copied || []).push({ title:meta.title, chars:meta.chars });
+  const p = pend(); (p.copied = p.copied || []).push({ id:meta.id, title:meta.title, chars:meta.chars });
   await IDB.del("draft:" + meta.text, "cp"); delete cpDrafts()[meta.text]; cpW.draft = null; save();
-  cpPending = null; $("cpFull").hidden = true; $("cpWrite").hidden = true; keepAwake(activeTab === "beads");
+  cpStopMusic(); cpPending = null; $("cpFull").hidden = true; $("cpWrite").hidden = true; $("cwMusicS").hidden = true; keepAwake(activeTab === "beads");
   cpShowDone(meta, blob);
 }
 $("cfJoin").onclick = () => openMember("book");
@@ -4788,31 +4927,75 @@ async function cpSaveBlob(blob, m){
 }
 let cpUrl = null;
 const cpSetImg = (im, blob) => { if (cpUrl) URL.revokeObjectURL(cpUrl); cpUrl = URL.createObjectURL(blob); im.src = cpUrl; };
-function cpMetaHtml(box, m){ box.innerHTML = ""; box.appendChild(el("b", null, `《${m.title}》`)); box.appendChild(document.createTextNode(`${cpDate(m.at)}・抄寫 ${cpMins(m.ms)}・${m.chars} 字`)); }
-function cpShowDone(m, blob){ cpSetImg($("cdImg"), blob); cpMetaHtml($("cdMeta"), m); $("cpDone").hidden = false; $("cdSave").onclick = () => cpSaveBlob(blob, m); }
-$("cdDedi").onclick = () => { $("cpDone").hidden = true; renderCopy(); openDedi(); };
+function cpMetaHtml(box, m, extra){
+  box.innerHTML = ""; box.appendChild(el("b", null, `《${m.title}》`));
+  box.appendChild(document.createTextNode(`${cpDate(m.at)}・抄寫 ${cpMins(m.ms)}・${m.chars} 字`));
+  const last = (m.dedi || []).at(-1);
+  if (last) box.appendChild(el("span", "cpded", `已迴向給 ${last.who}${m.dedi.length > 1 ? `・共迴向 ${m.dedi.length} 次` : ""}`));
+  if (extra) box.appendChild(el("small", null, extra));
+}
+let cpLast = null;
+function cpShowDone(m, blob){ cpLast = m; cpSetImg($("cdImg"), blob); cpMetaHtml($("cdMeta"), m, "已收進抄經本"); $("cpDone").hidden = false; }
+const cpHideAll = () => ["cpDone", "cpView", "cpBook"].forEach(id => { $(id).hidden = true; });
+$("cdDedi").onclick = () => { renderCopy(); openDedi(cpLast); };
 $("cdClose").onclick = () => { $("cpDone").hidden = true; renderCopy(); };
 $("cdBook").onclick = () => { $("cpDone").hidden = true; cpOpenBook(); };
+/* 抄經本是一本相簿：依月份排，點開可左右換篇、點圖放大。抄完就自動收進來，迴向與否都看得到。 */
+const cpSorted = () => [...cpBookList()].sort((a, b) => b.at - a.at);
 function cpOpenBook(){
-  const list = [...cpBookList()].sort((a, b) => b.at - a.at), g = $("cbGrid"); g.innerHTML = "";
+  const list = cpSorted(), g = $("cbGrid"); g.innerHTML = "";
   $("cbSum").textContent = can() ? `共 ${list.length} 篇` : `${list.length}／${BOOK_FREE} 篇・存在這支手機裡`;
   if (!list.length) g.innerHTML = '<p class="cpempty" style="grid-column:1/-1">還沒有抄好的經文。<br>抄完一篇，就會收進這裡。</p>';
+  let month = "";
   list.forEach(m => {
-    const b = el("button"), im = document.createElement("img"); im.alt = m.title; im.loading = "lazy";
-    IDB.get("book:" + m.id, "cp").then(bl => { if (bl) im.src = URL.createObjectURL(bl); });
-    b.append(im, el("b", null, m.title), el("span", null, `${cpDate(m.at)}・${cpMins(m.ms)}`));
-    b.onclick = async () => {
-      const bl = await IDB.get("book:" + m.id, "cp"); if (!bl){ flash("這篇的圖片找不到了"); return; }
-      cpSetImg($("cvImg"), bl); cpMetaHtml($("cvMeta"), m); $("cpView").hidden = false;
-      $("cvSave").onclick = () => cpSaveBlob(bl, m);
-      const del = $("cvDel"); del.textContent = "刪除這篇"; delete del.dataset.sure;
-      del.onclick = async () => { if (!del.dataset.sure){ del.dataset.sure = "1"; del.textContent = "確定刪除？"; return; }
-        await IDB.del("book:" + m.id, "cp"); S.cpBook = cpBookList().filter(x => x.id !== m.id); save(); $("cpView").hidden = true; cpOpenBook(); renderCopy(); };
-    };
+    const d = new Date(m.at), mk = `${d.getFullYear()} 年 ${d.getMonth() + 1} 月`;
+    if (mk !== month){ month = mk; g.appendChild(el("h3", "cbmonth", mk)); }
+    const b = el("button"), box = el("div", "cbthumb"), im = document.createElement("img"); im.alt = ""; im.loading = "lazy";
+    IDB.get("book:" + m.id, "cp").then(bl => { if (!bl) return; const u = URL.createObjectURL(bl); im.onload = () => URL.revokeObjectURL(u); im.src = u; });
+    box.appendChild(im); if ((m.dedi || []).length) box.appendChild(el("i", null, "已迴向"));
+    b.append(box, el("b", null, m.title), el("span", null, `${d.getMonth() + 1}月${d.getDate()}日`));
+    b.setAttribute("aria-label", `${m.title}，${cpDate(m.at)}${(m.dedi || []).length ? "，已迴向" : ""}`);
+    b.onclick = () => cpOpenView(m.id);
     g.appendChild(b);
   });
   $("cpBook").hidden = false;
 }
+let cvList = [], cvI = 0, cvSeq = 0, cvMoved = false;
+function cpOpenView(id){ cvList = cpSorted(); cvI = Math.max(0, cvList.findIndex(x => x.id === id)); if (!cvList.length) return; $("cpView").hidden = false; cvPaint(); }
+function cvZoom(on){
+  const st = $("cvStage"); st.classList.toggle("zoom", on); $("cvWrap").classList.toggle("zoomed", on);
+  if (on){ st.scrollLeft = st.scrollWidth; st.scrollTop = 0; }   // the text starts at the top right
+}
+async function cvPaint(){
+  const m = cvList[cvI], seq = ++cvSeq; if (!m) return;
+  cvZoom(false);
+  $("cvCount").textContent = cvList.length > 1 ? `${cvI + 1}／${cvList.length}` : "";
+  $("cvPrev").hidden = cvI <= 0; $("cvNext").hidden = cvI >= cvList.length - 1;
+  cpMetaHtml($("cvMeta"), m, "點圖片可以放大");
+  $("cvDedi").textContent = (m.dedi || []).length ? "再迴向一次" : "迴向";
+  const del = $("cvDel"); del.textContent = "刪除這篇"; delete del.dataset.sure;
+  const bl = await IDB.get("book:" + m.id, "cp"); if (seq !== cvSeq) return;
+  if (!bl){ $("cvImg").removeAttribute("src"); flash("這篇的圖片找不到了"); return; }
+  cpSetImg($("cvImg"), bl);
+}
+const cvStep = n => { const i = cvI + n; if (i < 0 || i >= cvList.length) return; cvI = i; cvPaint(); };
+$("cvPrev").onclick = () => cvStep(-1);
+$("cvNext").onclick = () => cvStep(1);
+$("cvImg").onclick = () => { if (cvMoved) return; cvZoom(!$("cvStage").classList.contains("zoom")); };
+{ // a sideways swipe turns the page, unless the picture is zoomed in and the finger is reading it
+  let x0 = null, y0 = 0; const st = $("cvStage");
+  st.addEventListener("pointerdown", e => { x0 = e.clientX; y0 = e.clientY; cvMoved = false; });
+  st.addEventListener("pointermove", e => { if (x0 != null && Math.hypot(e.clientX - x0, e.clientY - y0) > 10) cvMoved = true; });
+  st.addEventListener("pointerup", e => { if (x0 == null) return; const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
+    if (!st.classList.contains("zoom") && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) cvStep(dx < 0 ? 1 : -1); });
+  st.addEventListener("pointercancel", () => { x0 = null; });
+}
+$("cvDedi").onclick = () => { const m = cvList[cvI]; if (m) openDedi(m); };
+$("cvDel").onclick = async () => {
+  const del = $("cvDel"), m = cvList[cvI]; if (!m) return;
+  if (!del.dataset.sure){ del.dataset.sure = "1"; del.textContent = "確定刪除？"; return; }
+  await IDB.del("book:" + m.id, "cp"); S.cpBook = cpBookList().filter(x => x.id !== m.id); save(); $("cpView").hidden = true; cpOpenBook(); renderCopy();
+};
 $("cbBack").onclick = () => { $("cpBook").hidden = true; renderCopy(); };
 $("cvBack").onclick = () => { $("cpView").hidden = true; };
 /* 經文說明：音樂庫的專輯頁與抄經說明頁共用 */
@@ -5025,7 +5208,7 @@ function renderMe(){
   S.seals = S.seals || {};
   $("meSeals").innerHTML = SEALS.map(m => `<div><span class="seal${S.seals[m] ? " on" : ""}">${m}</span>${S.seals[m] ? S.seals[m].slice(5).replace("-", "/") + " 達成" : `連續 ${m} 天`}</div>`).join("");
   const log = S.dediLog || [];
-  $("meDediSum").textContent = log.length ? `${log.length} 次・${fmt(log.reduce((a, r) => a + r.beads, 0))} 珠` : "尚無紀錄";
+  $("meDediSum").textContent = log.length ? `${log.length} 次` : "尚無紀錄";
   $("mePeopleSum").textContent = `${dediState().people.length} 位`;
   $("meBookSum").textContent = `${cpBookList().length} 篇`;
   $("msBig").setAttribute("aria-pressed", !!S.big);

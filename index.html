@@ -366,6 +366,26 @@ nav.tabs.locked{opacity:.45}
 .bbgs button{position:relative;flex:none;width:clamp(3.6rem,8.5dvh,4.6rem);aspect-ratio:4/5;border-radius:10px;border:1.5px solid var(--line);background:#2a1d14 center/cover no-repeat;padding:0;overflow:hidden;cursor:pointer}
 .bbgs button span{position:absolute;left:0;right:0;bottom:0;padding:12px 2px 4px;font-size:.78rem;line-height:1.2;color:#fff4dc;background:linear-gradient(transparent,#000d);text-align:center}
 .bbgs button[aria-pressed="true"]{border-color:var(--brass);box-shadow:0 0 0 2px var(--brass)}
+#gm .bprev{min-height:9rem;container-type:size}
+#gm .bprev canvas{width:min(100cqw,80cqh);height:auto;max-width:none}
+#gm .bhead,.sv .bhead{grid-template-columns:4.6rem 1fr 4.6rem}
+#gm .bhead h2,.sv .bhead h2{white-space:nowrap;font-size:1.2rem;letter-spacing:.12em}
+#gm .bbgs button{width:clamp(3.2rem,8dvh,4.2rem)}
+.gmedit{flex:none;display:flex;flex-direction:column;gap:8px}
+#gm.editing .gmmain{display:none}
+#gm:not(.editing) #gmDone{display:none}
+#gm.typing #gmTpl,#gm.typing #gmHello,#gm.typing #gmWish{display:none}
+#gmDone{width:100%;min-height:48px}
+.gmedit[hidden]{display:none}
+.gmchips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding:2px 16px}
+.gmchips::-webkit-scrollbar{display:none}
+.gmchips .chip{flex:none;min-height:44px;padding:.3rem .8rem;font-size:1.02rem;white-space:nowrap;background:#0e0906b0}
+.gmchips .chip[aria-pressed="true"]{border-color:var(--brass);color:#ffe2a8;box-shadow:0 0 0 1px var(--brass)}
+.gmtools{display:flex;gap:10px}
+.gmtools .btn{flex:1 1 0;min-width:0;min-height:48px;padding-inline:.4rem;letter-spacing:.06em;font-size:min(1.08rem,5vw);white-space:nowrap}
+#gmShare{width:100%}
+#gmGo{display:flex;flex-direction:column;gap:8px}
+#gmGo[hidden]{display:none}
 .bnote{flex:none;display:flex;flex-direction:column;gap:6px}
 .bnote .inp{min-height:48px}
 .bchips{display:flex;gap:8px}
@@ -393,33 +413,32 @@ nav.tabs.locked{opacity:.45}
 .sv{z-index:72;display:flex;flex-direction:column;gap:.7rem}
 .sv[hidden]{display:none}
 .sv .bhead{flex:none}
-.sv .bhead h2{white-space:nowrap;font-size:1.25rem;letter-spacing:.1em}
-.svlead{margin:0;text-align:center;color:var(--muted);font-size:.95rem;line-height:1.5}
 .svchat{box-sizing:border-box;flex:none;display:flex;gap:.5rem;align-items:flex-start;width:100%;max-width:26rem;margin:0 auto;padding:.9rem .7rem 1.2rem;border-radius:16px;background:#8aa4c4}
 .svchat[hidden]{display:none}
 .svav{flex:none;display:grid;place-items:center;width:2.1rem;height:2.1rem;border-radius:50%;background:#e4e9f0;color:#5d6b7c;font-size:.95rem}
 .svmsg{flex:1;min-width:0}
 .svwho{margin:0 0 .25rem;color:#fff;font-size:.9rem}
-.svcard{overflow:hidden;border-radius:14px;background:#fff;color:#1d1d1d}
-.svhero{position:relative;box-sizing:border-box;container-type:inline-size;aspect-ratio:1200/630;background:#140d09 center/cover no-repeat}
-.svhin{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2cqw;padding:0 6cqw 5cqw;text-align:center}
-.svhin b{font-family:var(--display);font-weight:900;line-height:1.45;color:#fff4dc;text-wrap:balance}
-.svhin i{font-style:normal;font-size:3.6cqw;color:#e2b363}
-.svhin u{position:absolute;right:4cqw;bottom:3cqw;text-decoration:none;font-family:var(--display);font-weight:900;font-size:3.6cqw;color:#e2b363}
-.svbody{display:flex;flex-direction:column;gap:.35rem;padding:.75rem .85rem .85rem}
-.svbody strong{font-size:1.08rem;line-height:1.4}
-.svbody p{margin:0;font-size:.95rem;line-height:1.55;color:#555}
-.svbtn{min-height:44px;margin-top:.3rem;border:0;border-radius:10px;background:#8a5f1c;color:#fff;font:inherit;font-size:1rem;font-weight:500;cursor:pointer}
-.svfoot{padding:.5rem .85rem;border-top:1px solid #e8e8e8;font-size:.9rem;color:#777}
+.svcard{position:relative;display:block;width:100%;padding:0;border:0;border-radius:14px;overflow:hidden;background:none;container-type:inline-size;cursor:pointer}
+.svcard img{display:block;width:100%;height:auto}
 .svimg{display:block;max-width:82%;max-height:52dvh;border-radius:14px}
-.svland{box-sizing:border-box;flex:none;display:flex;flex-direction:column;gap:.7rem;width:100%;max-width:26rem;min-height:22rem;margin:0 auto;padding:1.2rem 1.1rem;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,#140d09d9,#140d09f2 62%,#140d09),url(assets/img/hero-home.webp) center top/cover no-repeat}
+.svland{box-sizing:border-box;flex:none;display:flex;flex-direction:column;gap:.8rem;width:100%;max-width:26rem;margin:0 auto;padding-bottom:1rem}
 .svland[hidden]{display:none}
-.svland h3{margin:0;font-family:var(--display);font-weight:900;font-size:1.05rem;letter-spacing:.2em;color:var(--brass)}
-.svland blockquote{margin:auto 0 0;font-family:var(--display);font-weight:900;font-size:1.3rem;line-height:1.7;letter-spacing:.06em;text-align:center;text-wrap:balance;color:var(--paper)}
+.svlcard{position:relative;overflow:hidden;border-radius:16px;container-type:inline-size}
+.svlcard img{display:block;width:100%;height:auto}
 .svland .s{margin:0;text-align:center;font-size:.95rem;color:var(--brass)}
-.svland .p{margin:0 0 auto;text-align:center;font-size:1rem;line-height:1.7;color:var(--muted)}
-.svland .fake{display:grid;place-items:center;min-height:56px;border:1.5px solid var(--brass);border-radius:999px;font-family:var(--display);font-weight:900;font-size:1.1rem;letter-spacing:.3em;color:#ffe2a8}
-.svend{flex:none;display:flex;flex-direction:column;gap:.4rem;width:100%;max-width:26rem;margin:auto auto 0}
+.svland .p{margin:0;text-align:center;font-size:1.05rem;line-height:1.7;color:var(--muted)}
+.svland h3{margin:0;text-align:center;font-family:var(--display);font-weight:900;font-size:1.25rem;letter-spacing:.2em;color:#ffe2a8}
+.svcount{margin:0;padding:.8rem 0;border-block:1px solid var(--line);text-align:center;font-size:1.1rem;color:#ffe2a8}
+.svcount b{font-family:var(--display);font-weight:900;font-size:1.4rem}
+.svabout{display:flex;flex-direction:column;gap:.5rem;padding:.4rem .6rem 0}
+.svabout p{margin:0;text-align:center;font-size:1.05rem;line-height:1.7}
+.svabout ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.3rem;text-align:center;color:var(--muted);font-size:1rem}
+.svcta{display:flex;flex-direction:column;gap:.3rem;padding-top:.4rem}
+.svcta .btn{min-height:56px}
+.svcta .blink{display:grid;place-items:center}
+.svend{flex:none;width:100%;max-width:26rem;margin:auto auto 0}
+.svend[hidden]{display:none}
+.svend .btn{width:100%}
 .mbody[hidden]{display:none}
 .mtitle{margin:.4rem 0 0;text-align:center;font-family:var(--display);font-weight:900;font-size:1.55rem;letter-spacing:.14em;color:#ffe2a8}
 .mbody p{margin:0;font-size:1.08rem;line-height:1.7}
@@ -824,6 +843,11 @@ header.top .hq{gap:2px;align-items:center}
 .thello{font-family:var(--display);font-weight:900;font-size:2.6rem;letter-spacing:.12em;color:#fff4dc;margin-top:6px!important;text-shadow:0 2px 18px #000a}
 .tfeast{margin-top:10px!important;font-size:.9rem;color:#f3e6c8;letter-spacing:.08em}
 .tfeast::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--brass);margin-right:8px;vertical-align:2px}
+.tgm{display:flex;align-items:center;gap:14px;width:100%;min-height:68px;margin:6px 0 14px;padding:8px 14px 8px 8px;border-radius:16px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b3631f,#e2b36308);color:#ffe2a8;font:inherit;font-size:1.12rem;text-align:left;cursor:pointer}
+.tgm b{font-weight:700;color:#fff4dc}
+.tgmi{flex:none;width:44px;height:52px;border-radius:8px;background:url(assets/img/lotus-dedication.webp) center/cover}
+.tgm:active{background:linear-gradient(180deg,#e2b36340,#e2b36318)}
+.tgm:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .tquote{text-align:center;padding:30px 4px 10px}
 .tquote .q{font-family:var(--display);font-weight:600;font-size:1.28rem;line-height:1.9;letter-spacing:.1em;color:#fff1cf;text-wrap:balance;margin:0}
 .tquote .src{margin:12px 0 0;font-size:.82rem;letter-spacing:.08em;color:var(--brass)}
@@ -1285,6 +1309,7 @@ body.dedicp #dediSheet{z-index:66}
           <p class="tfeast" id="tFeast" hidden></p>
         </header>
         <div class="tsect"><span>今日修持</span><em id="tProg"></em></div>
+        <button class="tgm" id="tGm"><span class="tgmi" aria-hidden="true"></span><span>傳一張<b id="tGmW">早安圖</b></span></button>
         <div class="ttasks" id="tTasks"></div>
         <section class="tquote" id="tQuote" aria-label="每日法語"></section>
         <div class="tstreak" id="tStreak"></div>
@@ -1681,24 +1706,48 @@ body.dedicp #dediSheet{z-index:66}
   </div>
 </div>
 
+<div class="bless altar" id="gm" hidden role="dialog" aria-label="早安圖">
+  <div class="bhead"><button class="bback" id="gmBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button><h2 id="gmTitle">早安圖</h2><span></span></div>
+  <div class="bprev"><canvas id="gmC" width="1080" height="1350" role="img" aria-label="早安圖預覽"></canvas></div>
+  <div class="gmedit" id="gmEdit" hidden>
+    <div class="bbgs" id="gmTpl" role="group" aria-label="選圖片"></div>
+    <div class="gmchips" id="gmHello" role="group" aria-label="選問候語"></div>
+    <div class="gmchips" id="gmWish" role="group" aria-label="選祝福語"></div>
+    <input class="inp" id="gmOwn" maxlength="20" placeholder="寫下想說的話" autocomplete="off" enterkeyhint="done" hidden>
+  </div>
+  <input type="file" id="gmFile" accept="image/*" hidden>
+  <div class="bprevgo" id="gmJoinBox" hidden>
+    <button class="btn big" id="gmJoin">看護持會員</button>
+    <button class="blink" id="gmFree">換回免費圖片</button>
+  </div>
+  <div class="bgo" id="gmGo">
+    <button class="btn ghost" id="gmDone">完成</button>
+    <div class="gmtools gmmain"><button class="btn ghost" id="gmNext">換一張</button><button class="btn ghost" id="gmEditBtn">改圖改字</button></div>
+    <button class="line gmmain" id="gmShare"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5C6.8 3.5 2.7 6.9 2.7 11c0 3.7 3.2 6.8 7.6 7.4.3.1.7.2.8.5.1.2.1.6 0 .9l-.1.8c0 .2-.2 1 .9.5s5.7-3.4 7.8-5.8c1.4-1.6 2.1-3.1 2.1-4.8 0-4.1-4.1-7.5-9.8-7.5z"/></svg><span>分享到 LINE</span></button>
+    <small class="bhint" id="gmHint"></small>
+  </div>
+</div>
+
 <!-- 雲禪護持會員：自動續訂的會員訂閱，不是捐款。由使用者主動點會員功能才進來，離開後回到原本的祝福圖 -->
 <div class="member altar sv" id="sv" hidden role="dialog" aria-label="分享預覽">
   <div class="bhead"><button class="bback" id="svBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button><h2>分享預覽</h2><span></span></div>
-  <p class="svlead" id="svLead"></p>
   <div class="svchat" id="svChat"><span class="svav" aria-hidden="true">親</span><div class="svmsg" id="svMsg"></div></div>
   <div class="svland" id="svLand" hidden>
-    <h3>雲禪</h3>
-    <blockquote id="svLT"></blockquote>
+    <div class="svlcard" id="svLCard"></div>
     <p class="s" id="svLS"></p>
     <p class="p" id="svLP"></p>
-    <div class="fake">撥一串珠</div>
-    <p class="svlead">不用登入，按下去直接到撥珠頁。</p>
-    <button class="blink" id="svLandBack">回到聊天室</button>
+    <p class="svcount">這份祝福已被分享 <b id="svCount"></b> 次</p>
+    <section class="svabout">
+      <h3>雲禪</h3>
+      <p>在手機上撥佛珠、聽經、抄經，再把這份心意迴向給掛念的人。</p>
+      <ul><li>親手撥珠，一念一珠</li><li>照著字帖抄經，抄完收進抄經本</li><li>每天換一張早安圖，傳給親友</li></ul>
+    </section>
+    <div class="svcta">
+      <button class="btn svdo" id="svReply">回傳一張早安圖</button>
+      <button class="blink" id="svBeads">先撥一串珠</button>
+    </div>
   </div>
-  <div class="svend">
-    <p class="svlead">LINE 卡片還沒接上，按下面會用目前的方式傳圖片。</p>
-    <button class="btn" id="svGo">繼續分享</button>
-  </div>
+  <div class="svend" id="svEnd"><button class="btn" id="svGo">繼續分享</button></div>
 </div>
 <div class="member altar" id="member" hidden role="dialog" aria-label="雲禪護持會員">
   <div class="bhead"><button class="bback" id="mBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button><h2>護持會員</h2><span></span></div>
@@ -2793,11 +2842,11 @@ function renderToday(){
   $("tHello").textContent = h < 11 ? "早安" : h < 18 ? "午安" : "晚安";
   $("tFeast").hidden = !f; if (f) $("tFeast").textContent = `今逢${f.name}`;
   // daily quote
-  const q = quoteToday(), qb = $("tQuote"); qb.innerHTML = '<p class="q"></p><p class="src"></p><p class="plain"></p><div class="acts"><button class="share" id="tqCard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/></svg><span>分享普法</span></button></div>';
+  const q = quoteToday(), qb = $("tQuote"); qb.innerHTML = '<p class="q"></p><p class="src"></p><p class="plain"></p><div class="acts"><button class="share" id="tqCard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/></svg><span>做成早安圖</span></button></div>';
   q.text.split(/(?<=[；。！？])/).filter(Boolean).forEach(part => { const sp = document.createElement("span"); sp.style.display = "block"; sp.textContent = part; qb.querySelector(".q").appendChild(sp); }); qb.querySelector(".src").textContent = quoteSrc(q) + (quoteDraft(q) ? "・經文校對中" : "");
   qb.querySelector(".plain").textContent = q.plain;
-  $("tqCard").onclick = async () => { const t = $("tqCard").querySelector("span"); t.textContent = "製作圖卡中……"; const r = await shareGreeting();
-    t.textContent = r === "shared" ? "已分享，隨喜功德" : r === "saved" ? "圖卡已存好" : "分享普法"; };
+  $("tqCard").onclick = () => openGm({ quote:true });
+  $("tGm").onclick = () => openGm(); $("tGmW").textContent = gmHello() + "圖";
   // tasks
   const t = today().tasks || {}, box = $("tTasks"); box.innerHTML = "";
   const row = (stage, title, detail, action, adjust) => {
@@ -3852,7 +3901,7 @@ $("bShare").onclick = async () => {
   try{
     const f = blessFile || (h.textContent = "製作中……", await readyBless());
     if (!f) throw new Error("no picture");
-    if (LOCAL_TEST && !await svAsk(svBless(f))){ h.textContent = BLESS_HINT; b.disabled = false; return; }
+    if (LOCAL_TEST && !await svAsk(await svBless(f))){ h.textContent = BLESS_HINT; b.disabled = false; return; }
     if (canShareFile(f)){
       try{ await navigator.share({ files:[f] }); h.textContent = ""; }
       catch(e){ h.textContent = e && e.name === "AbortError" ? BLESS_HINT : "沒有分享出去，可以再按一次"; }
@@ -4466,6 +4515,131 @@ async function greetingCard(){
   g.fillText(`${now.getMonth()+1}月${now.getDate()}日・雲禪${quoteDraft(qo) ? "・試用版，經文校對中" : ""}`, 540, 1310);
   return new Promise(res => c.toBlob(res, "image/png"));
 }
+/* ================= 早安圖：開畫面就有一張做好的，換一張、改圖改字都是選的，不必打字 ================= */
+const GM_TPL = [["bg-lotus-pond","荷塘"], ["bg-cloud-temple","雲海"], ["hero-home","日出"], ["bg-pureland","淨土"], ["lotus-dedication","蓮花"], ["bg-golden-hall","金殿"], ["hero-listen","夜雲"], ["bg-sandalwood","檀香"]];
+const GM_AM = ["願您今日平安喜樂", "身體健康，萬事如意", "天天好心情", "闔家平安，心想事成", "阿彌陀佛，平安吉祥", "想念您，多保重", "今天也要開開心心"];
+const GM_PM = ["願您一夜好眠", "放下今天，安心休息", "闔家平安，晚安", "阿彌陀佛，平安吉祥", "想念您，多保重", "今天辛苦了"];
+const gmHello = () => { const h = new Date().getHours(); return h >= 18 || h < 4 ? "晚安" : h < 11 ? "早安" : "午安"; };
+const gmWishes = () => gmHello() === "晚安" ? GM_PM : GM_AM;
+function gmHellos(){
+  const l = lunar(new Date()), x = l && l.day === 1 ? ["初一吉祥"] : l && l.day === 15 ? ["十五平安"] : [];
+  return [gmHello(), ...x, ...["早安", "午安", "晚安", "平安", "吉祥"].filter(t => t !== gmHello())];
+}
+let gmS = null, gmPhoto = null, gmN = 0;
+const gmPool = () => gmHello() === "晚安" ? ["lotus-dedication", "bg-golden-hall", "hero-listen", "bg-sandalwood"] : ["bg-lotus-pond", "bg-cloud-temple", "hero-home", "bg-pureland"];
+function gmFresh(){
+  const d = dayNo(), pool = gmPool();
+  return { tpl:pool[d % pool.length], hello:gmHello(), wish:gmWishes()[d % gmWishes().length], own:"", quote:false };
+}
+const gmNow = () => gmS || gmFresh();
+const gmStroke = (g, t, x, y, fill, line, w) => { g.lineJoin = "round"; g.strokeStyle = line; g.lineWidth = w; g.strokeText(t, x, y); g.fillStyle = fill; g.fillText(t, x, y); };
+function gmLines(g, t, max){
+  const ls = [];
+  (t.match(/[^，；。！？]+[，；。！？]?/g) || [t]).forEach(x => {
+    const n = ls.length ? ls[ls.length - 1] + x : "";
+    if (n && g.measureText(n).width <= max){ ls[ls.length - 1] = n; return; }
+    const parts = Math.ceil(g.measureText(x).width / max), c = [...x], step = Math.ceil(c.length / parts);
+    for (let i = 0; i < c.length; i += step) ls.push(c.slice(i, i + step).join(""));
+  });
+  return ls;
+}
+// o: tpl, hello, wish, quote. cue: the words only a LINE card carries, since only there the whole picture is a link
+async function gmDraw(g, o, cue){
+  try{ await document.fonts.ready; }catch(e){}
+  const im = o.tpl === "photo" ? gmPhoto : await loadImg(o.tpl);
+  g.clearRect(0, 0, 1080, 1350); g.fillStyle = "#1a120d"; g.fillRect(0, 0, 1080, 1350);
+  if (im){ const k = Math.max(1080 / im.width, 1350 / im.height), w = im.width * k, h = im.height * k; g.drawImage(im, (1080 - w) / 2, (1350 - h) / 2, w, h); }
+  g.textAlign = "center";
+  const hi = "#ffe08a", hl = "#3a1505", ink = "#ffffff", il = "#3a1505", sub = "#ffe08a";
+  g.font = `900 ${o.hello.length > 2 ? 150 : 200}px ${SERIF}`; gmStroke(g, o.hello, 540, 240, hi, hl, 24);
+  const foot = 1212;   // the words stack up from here; the middle of the picture stays open
+  if (o.quote){
+    const q = quoteToday(); let size = 92; g.font = `900 ${size}px ${SERIF}`; let ls = gmLines(g, q.text, 960);
+    if (ls.length > 3){ size = 76; g.font = `900 ${size}px ${SERIF}`; ls = gmLines(g, q.text, 980); }
+    const lh = size * 1.3, top = foot - 86 - (ls.length - 1) * lh; ls.forEach((t, i) => gmStroke(g, t, 540, top + i * lh, ink, il, 16));
+    g.font = `900 52px ${SERIF}`; gmStroke(g, `《${q.source.sutra.split("（")[0]}》`, 540, foot + 4, sub, il, 12);
+  } else {
+    const t = o.own || o.wish; let size = 128, ls;
+    for (const z of [128, 112, 96, 84]){ size = z; g.font = `900 ${z}px ${SERIF}`; ls = gmLines(g, t, 980); if (ls.length <= (z > 96 ? 2 : 3)) break; }
+    const lh = size * 1.3, top = foot - (ls.length - 1) * lh; ls.forEach((x, i) => gmStroke(g, x, 540, top + i * lh, ink, il, 18));
+  }
+  if (cue){ g.font = `900 60px ${SERIF}`; gmStroke(g, "點圖片，一起撥一串珠", 540, 1296, "#ffffff", "#3a1505", 12); }
+}
+const gmPreview = () => gmS.tpl === "photo" && !can("photo");
+async function gmRender(){
+  const n = ++gmN, c = document.createElement("canvas"); c.width = 1080; c.height = 1350;
+  await gmDraw(c.getContext("2d"), gmS, false);
+  if (n !== gmN) return;
+  $("gmC").getContext("2d").drawImage(c, 0, 0);
+  $("gmJoinBox").hidden = !gmPreview(); $("gmGo").hidden = gmPreview();
+  S.gm = { day:dkey(new Date()) + gmHello(), ...gmS }; save();
+}
+function gmPaintEdit(){
+  const box = $("gmTpl"); box.innerHTML = "";
+  GM_TPL.forEach(([id, name]) => {
+    const b = el("button"); b.setAttribute("aria-pressed", gmS.tpl === id); b.setAttribute("aria-label", `圖片：${name}`);
+    b.style.backgroundImage = `url(assets/img/${id}.webp)`;
+    b.appendChild(el("span", null, name)); b.onclick = () => { gmS.tpl = id; gmPaintEdit(); gmRender(); }; box.appendChild(b);
+  });
+  const m = el("button", "mtile"); m.setAttribute("aria-pressed", gmS.tpl === "photo"); m.setAttribute("aria-label", "自己的照片，雲禪護持會員功能");
+  m.innerHTML = "<i>護持會員</i><span>自己的照片</span>"; m.onclick = () => { $("gmFile").value = ""; $("gmFile").click(); }; box.appendChild(m);
+  const hb = $("gmHello"); hb.innerHTML = "";
+  gmHellos().forEach(t => { const b = el("button", "chip", t); b.setAttribute("aria-pressed", gmS.hello === t); b.onclick = () => { gmS.hello = t; gmPaintEdit(); gmRender(); }; hb.appendChild(b); });
+  const wb = $("gmWish"); wb.innerHTML = "";
+  const add = (t, on, f) => { const b = el("button", "chip", t); b.setAttribute("aria-pressed", on); b.onclick = f; wb.appendChild(b); };
+  add("今日法語", gmS.quote, () => { gmS.quote = true; gmS.own = ""; gmPaintEdit(); gmRender(); });
+  gmWishes().forEach(t => add(t, !gmS.quote && !gmS.own && gmS.wish === t, () => { gmS.quote = false; gmS.own = ""; gmS.wish = t; gmPaintEdit(); gmRender(); }));
+  add("自己寫", !!gmS.own, () => { gmS.quote = false; gmTyping(true); });
+}
+function openGm(o = {}){
+  const d = S.gm && S.gm.day === dkey(new Date()) + gmHello() ? S.gm : null;   // a saved morning card never greets the evening
+  gmS = d ? { ...gmFresh(), ...d } : gmFresh(); delete gmS.day;
+  if (gmS.tpl === "photo" && !gmPhoto) gmS.tpl = gmFresh().tpl;
+  Object.assign(gmS, o); $("gmHint").textContent = ""; $("gmTitle").textContent = gmHello() + "圖"; $("gm").hidden = false; gmEditing(false); gmPaintEdit(); gmRender(); gmFit();
+}
+function closeGm(){ $("gm").hidden = true; }
+$("gmBack").onclick = closeGm;
+const gmEditing = on => { $("gmEdit").hidden = !on; $("gm").classList.toggle("editing", on); if (!on) gmTyping(false); };
+function gmTyping(on){ $("gm").classList.toggle("typing", on); $("gmOwn").hidden = !on; if (on){ $("gmOwn").value = gmS.own; $("gmOwn").focus(); } else $("gmOwn").blur(); }
+$("gmEditBtn").onclick = () => gmEditing(true);
+$("gmDone").onclick = () => { if ($("gm").classList.contains("typing")) gmTyping(false); else gmEditing(false); gmPaintEdit(); };
+// the keyboard must not cover the words being typed
+const gmFit = () => { const v = window.visualViewport; if (v && !$("gm").hidden){ $("gm").style.height = v.height + "px"; $("gm").style.bottom = "auto"; window.scrollTo(0, 0); } };
+if (window.visualViewport) visualViewport.addEventListener("resize", gmFit);
+$("gmNext").onclick = () => {
+  const ids = gmPool(), w = gmWishes(), f = gmFresh();
+  gmS.tpl = ids[(ids.indexOf(gmS.tpl) + 1) % ids.length]; gmS.quote = false; gmS.own = ""; gmS.hello = f.hello; gmS.wish = w[(w.indexOf(gmS.wish) + 1) % w.length];
+  gmPaintEdit(); gmRender();
+};
+$("gmOwn").oninput = e => { gmS.own = e.target.value.trim(); gmRender(); };
+$("gmOwn").onkeydown = e => { if (e.key === "Enter") $("gmDone").click(); };
+$("gmFile").onchange = e => {
+  const f = e.target.files && e.target.files[0]; if (!f) return;
+  const im = new Image(), url = URL.createObjectURL(f);
+  im.onload = () => { gmPhoto = im; gmS.tpl = "photo"; gmPaintEdit(); gmRender(); URL.revokeObjectURL(url); };
+  im.onerror = () => { URL.revokeObjectURL(url); $("gmHint").textContent = "這張照片打不開，請換一張試試。"; };
+  im.src = url;
+};
+$("gmJoin").onclick = () => openMember("photo");
+$("gmFree").onclick = () => { gmS.tpl = gmFresh().tpl; gmPaintEdit(); gmRender(); };
+$("gmShare").onclick = async () => {
+  const b = $("gmShare"), h = $("gmHint"); b.disabled = true; h.textContent = "";
+  try{
+    const blob = await new Promise(r => $("gmC").toBlob(r, "image/jpeg", .9));
+    if (!blob) throw new Error("no picture");
+    const f = new File([blob], `早安圖_${dkey(new Date())}.jpg`, { type:"image/jpeg" });
+    if (LOCAL_TEST && !await svAsk(gmS.tpl === "photo" ? { blob:f } : await svGm(gmS))){ b.disabled = false; return; }
+    if (canShareFile(f)){
+      try{ await navigator.share({ files:[f] }); S.gmSent = (S.gmSent || 0) + 1; save(); }
+      catch(e){ if (!e || e.name !== "AbortError") h.textContent = "沒有分享出去，可以再按一次"; }
+    } else {
+      const w = window.open("https://line.me/R/share?text=" + encodeURIComponent(gmS.hello), "_blank", "noopener");
+      await saveBlob(f); h.textContent = w ? "圖片已存好，在 LINE 選這張圖傳送" : "圖片已存好，請打開 LINE 選這張圖傳送";
+    }
+  }catch(e){ h.textContent = "圖還沒做好，請再按一次"; }
+  b.disabled = false;
+};
+
 /* ---- test address only: how a share will look in LINE, until LIFF is connected. Nothing here is sent. ---- */
 let svDone = null, svUrl = null;
 function svClose(go){
@@ -4474,53 +4648,35 @@ function svClose(go){
   const d = svDone; svDone = null; if (d) d(go);
 }
 const svAsk = o => new Promise(res => { svDone = res; svPaint(o); $("sv").hidden = false; $("sv").scrollTop = 0; });
-const svView = land => {
-  $("svChat").hidden = land; $("svLand").hidden = !land;
-  $("svLead").textContent = land ? "收到的人按下按鈕後看到的頁面（模擬）" : "對方在 LINE 聊天室看到的樣子（模擬）";
-};
-// lines of scripture only break between clauses, never inside one
-function svClauses(box, text){ box.textContent = ""; (text.match(/[^，；。！？]+[，；。！？]?/g) || [text]).forEach(c => { const x = el("span", null, c); x.style.display = "inline-block"; box.appendChild(x); }); return box; }
+const svView = land => { $("svChat").hidden = land; $("svLand").hidden = !land; $("svEnd").hidden = land; $("sv").scrollTop = 0; };
 function svPaint(o){
   svView(false);
   const box = $("svMsg"); box.innerHTML = ""; box.appendChild(el("p", "svwho", "親友"));
   if (o.blob){
     svUrl = URL.createObjectURL(o.blob);
-    const im = el("img", "svimg"); im.src = svUrl; im.alt = "傳出去的圖片"; box.append(im, el("p", "svwho", o.note));
-    box.lastChild.style.marginTop = ".5rem"; return;
+    const im = el("img", "svimg"); im.src = svUrl; im.alt = "傳出去的圖片"; box.appendChild(im); return;
   }
-  const card = el("div", "svcard"), hero = el("div", "svhero");
-  hero.style.backgroundImage = (o.q ? "linear-gradient(#140d09a8,#140d09a8)," : "") + `url("${o.img}")`;
-  if (o.pos) hero.style.backgroundPosition = o.pos;
-  if (o.q){
-    const hin = el("div", "svhin"), t = svClauses(el("b"), o.q);
-    t.style.fontSize = (o.q.length > 24 ? 4.3 : o.q.length > 14 ? 5.2 : 6.4) + "cqw";
-    hin.append(t, el("i", null, o.sutra), el("u", null, "雲禪")); hero.appendChild(hin);
-  }
-  const body = el("div", "svbody"), btn = el("button", "svbtn", "我也來撥一串");
-  if (o.title) body.appendChild(el("strong", null, o.title));
-  body.appendChild(el("p", null, o.text)); body.appendChild(btn);
-  btn.onclick = () => { svView(true); $("sv").scrollTop = 0; };
-  card.append(hero, body, el("div", "svfoot", "雲禪")); box.appendChild(card);
-  svClauses($("svLT"), o.land.t); $("svLS").textContent = o.land.s; $("svLS").hidden = !o.land.s; $("svLP").textContent = o.land.p;
+  const card = el("button", "svcard"), im = el("img"); im.src = o.img; im.alt = ""; card.setAttribute("aria-label", "打開這張圖");
+  card.appendChild(im); card.onclick = () => svView(true); box.appendChild(card);
+  const big = el("img"); big.src = o.bare; big.alt = "早安圖"; $("svLCard").replaceChildren(big);
+  $("svLS").textContent = o.land.s; $("svLS").hidden = !o.land.s; $("svLP").textContent = o.land.p; $("svLP").hidden = !o.land.p;
+  $("svCount").textContent = "128";   // a sample until the service counts real shares
 }
-function svLotus(){ const c = document.createElement("canvas"); c.width = 1080; c.height = 1350; paintLotus(c.getContext("2d")); return c.toDataURL("image/jpeg", .8); }
 // a picture with the user's own photo, sutra or names stays a picture: a card would have to upload it
-function svBless(f){
-  if (blessBg === "photo" || blessBg === "copy" || blessShow) return { blob:f, note:"這張含有您的照片、抄經或名字，會用圖片傳出，收到的人沒有按鈕。" };
-  return { img:blessBg === "lotus" ? svLotus() : `assets/img/${blessBg}.webp`, pos:blessBg === "lotus" ? "center 33%" : "", title:blessTitle(), text:blessMsg(),
-    land:{ t:"一份祝福，送給您", s:"", p:"靜下來，撥一串珠。" } };
+const svBless = f => (blessBg === "photo" || blessBg === "copy" || blessShow) ? { blob:f } : svGm({ wish:blessMsg() });
+async function svGm(over){
+  const o = { ...gmNow(), ...over }, a = document.createElement("canvas"), b = document.createElement("canvas");
+  a.width = b.width = 1080; a.height = b.height = 1350;
+  await gmDraw(a.getContext("2d"), o, true); await gmDraw(b.getContext("2d"), o, false);
+  const q = o.quote ? quoteToday() : null;
+  return { img:a.toDataURL("image/jpeg", .86), bare:b.toDataURL("image/jpeg", .86), land:{ s:q ? quoteSrc(q) : "", p:q ? q.plain : "" } };
 }
-function svQuote(){
-  const q = quoteToday();
-  return { q:q.text, sutra:`《${q.source.sutra.split("（")[0]}》`, text:q.plain, img:"assets/img/hero-home.webp",
-    land:{ t:q.text, s:quoteSrc(q), p:q.plain } };
-}
-$("svBack").onclick = () => svClose(false);
+$("svBack").onclick = () => { if ($("svChat").hidden) svView(false); else svClose(false); };
 $("svGo").onclick = () => svClose(true);
-$("svLandBack").onclick = () => svView(false);
+$("svReply").onclick = () => { svClose(false); $("bless").hidden = true; openGm(); };
+$("svBeads").onclick = () => { svClose(false); $("bless").hidden = true; closeGm(); showTab("beads", true); };
 
 async function shareGreeting(){
-  if (LOCAL_TEST && !await svAsk(svQuote())) return "cancel";
   let blob; try{ blob = await greetingCard(); }catch(e){ return "fail"; }
   if (!blob) return "fail";
   const name = `早安圖_${dkey(new Date())}.png`;
@@ -5130,7 +5286,7 @@ const cpHideAll = () => ["cpDone", "cpView", "cpBook"].forEach(id => { $(id).hid
 const cpShareMeta = async m => {
   const b = m && await IDB.get("book:" + m.id, "cp");
   if (!b){ flash("這篇的圖片找不到了"); return; }
-  if (LOCAL_TEST && !await svAsk({ blob:b, note:"抄經圖是您親手寫的，會用圖片傳出，收到的人沒有按鈕。" })) return;
+  if (LOCAL_TEST && !await svAsk({ blob:b })) return;
   cpSaveBlob(b, m);
 };
 $("cdShare").onclick = () => cpShareMeta(cpLast);

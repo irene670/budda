@@ -20,8 +20,12 @@
 !/assets/img/
 /assets/img/*
 !/assets/img/*.webp
+!/assets/img/og-*.jpg
 !/assets/fonts/
 /assets/fonts/*
 !/assets/fonts/*.woff2
 
 !/audio/迴向圓滿.mp3
+
+# 接待頁：tools/make_landing.py 只輸出校對通過的經句；預覽在 _preview/，不推
+!/q/

@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>雲禪</title>
+<meta name="description" content="在手機上撥珠、聽經、抄經與迴向。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="雲禪">
+<meta property="og:title" content="雲禪">
+<meta property="og:description" content="撥一串珠，抄一篇經，迴向這份心意。">
+<meta property="og:url" content="https://irene670.github.io/budda/">
+<meta property="og:image" content="https://irene670.github.io/budda/assets/img/og-home.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1a120d">
 <link rel="icon" href="icon-192.png">
@@ -380,6 +389,37 @@ nav.tabs.locked{opacity:.45}
 .bprevgo[hidden],.bgo[hidden]{display:none}
 .member{position:fixed;inset:0;z-index:70;overflow-y:auto;box-sizing:border-box;padding:max(.6rem,env(safe-area-inset-top)) 16px max(1.2rem,env(safe-area-inset-bottom));background:var(--bg);color:var(--paper)}
 .mbody{display:flex;flex-direction:column;gap:.65rem;max-width:30rem;margin:0 auto}
+/* test address only: a mock of the LINE chat, so its colours are LINE's and not the app's */
+.sv{z-index:72;display:flex;flex-direction:column;gap:.7rem}
+.sv[hidden]{display:none}
+.sv .bhead{flex:none}
+.sv .bhead h2{white-space:nowrap;font-size:1.25rem;letter-spacing:.1em}
+.svlead{margin:0;text-align:center;color:var(--muted);font-size:.95rem;line-height:1.5}
+.svchat{box-sizing:border-box;flex:none;display:flex;gap:.5rem;align-items:flex-start;width:100%;max-width:26rem;margin:0 auto;padding:.9rem .7rem 1.2rem;border-radius:16px;background:#8aa4c4}
+.svchat[hidden]{display:none}
+.svav{flex:none;display:grid;place-items:center;width:2.1rem;height:2.1rem;border-radius:50%;background:#e4e9f0;color:#5d6b7c;font-size:.95rem}
+.svmsg{flex:1;min-width:0}
+.svwho{margin:0 0 .25rem;color:#fff;font-size:.9rem}
+.svcard{overflow:hidden;border-radius:14px;background:#fff;color:#1d1d1d}
+.svhero{position:relative;box-sizing:border-box;container-type:inline-size;aspect-ratio:1200/630;background:#140d09 center/cover no-repeat}
+.svhin{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2cqw;padding:0 6cqw 5cqw;text-align:center}
+.svhin b{font-family:var(--display);font-weight:900;line-height:1.45;color:#fff4dc;text-wrap:balance}
+.svhin i{font-style:normal;font-size:3.6cqw;color:#e2b363}
+.svhin u{position:absolute;right:4cqw;bottom:3cqw;text-decoration:none;font-family:var(--display);font-weight:900;font-size:3.6cqw;color:#e2b363}
+.svbody{display:flex;flex-direction:column;gap:.35rem;padding:.75rem .85rem .85rem}
+.svbody strong{font-size:1.08rem;line-height:1.4}
+.svbody p{margin:0;font-size:.95rem;line-height:1.55;color:#555}
+.svbtn{min-height:44px;margin-top:.3rem;border:0;border-radius:10px;background:#8a5f1c;color:#fff;font:inherit;font-size:1rem;font-weight:500;cursor:pointer}
+.svfoot{padding:.5rem .85rem;border-top:1px solid #e8e8e8;font-size:.9rem;color:#777}
+.svimg{display:block;max-width:82%;max-height:52dvh;border-radius:14px}
+.svland{box-sizing:border-box;flex:none;display:flex;flex-direction:column;gap:.7rem;width:100%;max-width:26rem;min-height:22rem;margin:0 auto;padding:1.2rem 1.1rem;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,#140d09d9,#140d09f2 62%,#140d09),url(assets/img/hero-home.webp) center top/cover no-repeat}
+.svland[hidden]{display:none}
+.svland h3{margin:0;font-family:var(--display);font-weight:900;font-size:1.05rem;letter-spacing:.2em;color:var(--brass)}
+.svland blockquote{margin:auto 0 0;font-family:var(--display);font-weight:900;font-size:1.3rem;line-height:1.7;letter-spacing:.06em;text-align:center;text-wrap:balance;color:var(--paper)}
+.svland .s{margin:0;text-align:center;font-size:.95rem;color:var(--brass)}
+.svland .p{margin:0 0 auto;text-align:center;font-size:1rem;line-height:1.7;color:var(--muted)}
+.svland .fake{display:grid;place-items:center;min-height:56px;border:1.5px solid var(--brass);border-radius:999px;font-family:var(--display);font-weight:900;font-size:1.1rem;letter-spacing:.3em;color:#ffe2a8}
+.svend{flex:none;display:flex;flex-direction:column;gap:.4rem;width:100%;max-width:26rem;margin:auto auto 0}
 .mbody[hidden]{display:none}
 .mtitle{margin:.4rem 0 0;text-align:center;font-family:var(--display);font-weight:900;font-size:1.55rem;letter-spacing:.14em;color:#ffe2a8}
 .mbody p{margin:0;font-size:1.08rem;line-height:1.7}
@@ -1642,6 +1682,24 @@ body.dedicp #dediSheet{z-index:66}
 </div>
 
 <!-- 雲禪護持會員：自動續訂的會員訂閱，不是捐款。由使用者主動點會員功能才進來，離開後回到原本的祝福圖 -->
+<div class="member altar sv" id="sv" hidden role="dialog" aria-label="分享預覽">
+  <div class="bhead"><button class="bback" id="svBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button><h2>分享預覽</h2><span></span></div>
+  <p class="svlead" id="svLead"></p>
+  <div class="svchat" id="svChat"><span class="svav" aria-hidden="true">親</span><div class="svmsg" id="svMsg"></div></div>
+  <div class="svland" id="svLand" hidden>
+    <h3>雲禪</h3>
+    <blockquote id="svLT"></blockquote>
+    <p class="s" id="svLS"></p>
+    <p class="p" id="svLP"></p>
+    <div class="fake">撥一串珠</div>
+    <p class="svlead">不用登入，按下去直接到撥珠頁。</p>
+    <button class="blink" id="svLandBack">回到聊天室</button>
+  </div>
+  <div class="svend">
+    <p class="svlead">LINE 卡片還沒接上，按下面會用目前的方式傳圖片。</p>
+    <button class="btn" id="svGo">繼續分享</button>
+  </div>
+</div>
 <div class="member altar" id="member" hidden role="dialog" aria-label="雲禪護持會員">
   <div class="bhead"><button class="bback" id="mBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>返回</button><h2>護持會員</h2><span></span></div>
   <div class="mbody" id="mMain">
@@ -3794,6 +3852,7 @@ $("bShare").onclick = async () => {
   try{
     const f = blessFile || (h.textContent = "製作中……", await readyBless());
     if (!f) throw new Error("no picture");
+    if (LOCAL_TEST && !await svAsk(svBless(f))){ h.textContent = BLESS_HINT; b.disabled = false; return; }
     if (canShareFile(f)){
       try{ await navigator.share({ files:[f] }); h.textContent = ""; }
       catch(e){ h.textContent = e && e.name === "AbortError" ? BLESS_HINT : "沒有分享出去，可以再按一次"; }
@@ -4407,7 +4466,61 @@ async function greetingCard(){
   g.fillText(`${now.getMonth()+1}月${now.getDate()}日・雲禪${quoteDraft(qo) ? "・試用版，經文校對中" : ""}`, 540, 1310);
   return new Promise(res => c.toBlob(res, "image/png"));
 }
+/* ---- test address only: how a share will look in LINE, until LIFF is connected. Nothing here is sent. ---- */
+let svDone = null, svUrl = null;
+function svClose(go){
+  $("sv").hidden = true;
+  if (svUrl){ URL.revokeObjectURL(svUrl); svUrl = null; }
+  const d = svDone; svDone = null; if (d) d(go);
+}
+const svAsk = o => new Promise(res => { svDone = res; svPaint(o); $("sv").hidden = false; $("sv").scrollTop = 0; });
+const svView = land => {
+  $("svChat").hidden = land; $("svLand").hidden = !land;
+  $("svLead").textContent = land ? "收到的人按下按鈕後看到的頁面（模擬）" : "對方在 LINE 聊天室看到的樣子（模擬）";
+};
+// lines of scripture only break between clauses, never inside one
+function svClauses(box, text){ box.textContent = ""; (text.match(/[^，；。！？]+[，；。！？]?/g) || [text]).forEach(c => { const x = el("span", null, c); x.style.display = "inline-block"; box.appendChild(x); }); return box; }
+function svPaint(o){
+  svView(false);
+  const box = $("svMsg"); box.innerHTML = ""; box.appendChild(el("p", "svwho", "親友"));
+  if (o.blob){
+    svUrl = URL.createObjectURL(o.blob);
+    const im = el("img", "svimg"); im.src = svUrl; im.alt = "傳出去的圖片"; box.append(im, el("p", "svwho", o.note));
+    box.lastChild.style.marginTop = ".5rem"; return;
+  }
+  const card = el("div", "svcard"), hero = el("div", "svhero");
+  hero.style.backgroundImage = (o.q ? "linear-gradient(#140d09a8,#140d09a8)," : "") + `url("${o.img}")`;
+  if (o.pos) hero.style.backgroundPosition = o.pos;
+  if (o.q){
+    const hin = el("div", "svhin"), t = svClauses(el("b"), o.q);
+    t.style.fontSize = (o.q.length > 24 ? 4.3 : o.q.length > 14 ? 5.2 : 6.4) + "cqw";
+    hin.append(t, el("i", null, o.sutra), el("u", null, "雲禪")); hero.appendChild(hin);
+  }
+  const body = el("div", "svbody"), btn = el("button", "svbtn", "我也來撥一串");
+  if (o.title) body.appendChild(el("strong", null, o.title));
+  body.appendChild(el("p", null, o.text)); body.appendChild(btn);
+  btn.onclick = () => { svView(true); $("sv").scrollTop = 0; };
+  card.append(hero, body, el("div", "svfoot", "雲禪")); box.appendChild(card);
+  svClauses($("svLT"), o.land.t); $("svLS").textContent = o.land.s; $("svLS").hidden = !o.land.s; $("svLP").textContent = o.land.p;
+}
+function svLotus(){ const c = document.createElement("canvas"); c.width = 1080; c.height = 1350; paintLotus(c.getContext("2d")); return c.toDataURL("image/jpeg", .8); }
+// a picture with the user's own photo, sutra or names stays a picture: a card would have to upload it
+function svBless(f){
+  if (blessBg === "photo" || blessBg === "copy" || blessShow) return { blob:f, note:"這張含有您的照片、抄經或名字，會用圖片傳出，收到的人沒有按鈕。" };
+  return { img:blessBg === "lotus" ? svLotus() : `assets/img/${blessBg}.webp`, pos:blessBg === "lotus" ? "center 33%" : "", title:blessTitle(), text:blessMsg(),
+    land:{ t:"一份祝福，送給您", s:"", p:"靜下來，撥一串珠。" } };
+}
+function svQuote(){
+  const q = quoteToday();
+  return { q:q.text, sutra:`《${q.source.sutra.split("（")[0]}》`, text:q.plain, img:"assets/img/hero-home.webp",
+    land:{ t:q.text, s:quoteSrc(q), p:q.plain } };
+}
+$("svBack").onclick = () => svClose(false);
+$("svGo").onclick = () => svClose(true);
+$("svLandBack").onclick = () => svView(false);
+
 async function shareGreeting(){
+  if (LOCAL_TEST && !await svAsk(svQuote())) return "cancel";
   let blob; try{ blob = await greetingCard(); }catch(e){ return "fail"; }
   if (!blob) return "fail";
   const name = `早安圖_${dkey(new Date())}.png`;
@@ -5014,7 +5127,12 @@ function cpMetaHtml(box, m, extra){
 let cpLast = null;
 function cpShowDone(m, blob){ cpLast = m; cpSetImg($("cdImg"), blob); cpMetaHtml($("cdMeta"), m, "已收進抄經本"); $("cpDone").hidden = false; }
 const cpHideAll = () => ["cpDone", "cpView", "cpBook"].forEach(id => { $(id).hidden = true; });
-const cpShareMeta = async m => { const b = m && await IDB.get("book:" + m.id, "cp"); if (b) cpSaveBlob(b, m); else flash("這篇的圖片找不到了"); };
+const cpShareMeta = async m => {
+  const b = m && await IDB.get("book:" + m.id, "cp");
+  if (!b){ flash("這篇的圖片找不到了"); return; }
+  if (LOCAL_TEST && !await svAsk({ blob:b, note:"抄經圖是您親手寫的，會用圖片傳出，收到的人沒有按鈕。" })) return;
+  cpSaveBlob(b, m);
+};
 $("cdShare").onclick = () => cpShareMeta(cpLast);
 $("cvShare").onclick = () => cpShareMeta(cvList[cvI]);
 $("cdDedi").onclick = () => { renderCopy(); openDedi(cpLast); };
@@ -5760,6 +5878,11 @@ setHand(S.hand); bindDrag();
 $("fCount").textContent = fmt(today().fish);
 renderHud(); paintPlay(); renderHome();
 S.onboarded = true; showTab("beads", true);
+// arriving from a shared card: the page already said what this is, so go straight to the beads with the defaults
+const fromCard = /[?&]from=card\b/.test(location.search);
+if (fromCard){ const m = location.search.match(/[?&]c=(q\d+)\b/); S.src = S.src || ("card:" + (m ? m[1] : "")); }
+if (fromCard && !S.onb2){ S.onb2 = true; S.onboarded = true; S.tutDone = false; save(); setHand(S.hand || "R"); showTab("beads", true); }
+if (fromCard) history.replaceState(null, "", location.pathname);
 if (!S.onb2) startOnboarding();   // v2 first launch: welcome, backdrop, how to bead
 document.addEventListener("visibilitychange", () => { if (document.hidden) save(); else if (activeTab === "beads") keepAwake(true); });
 

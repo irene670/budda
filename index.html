@@ -72,8 +72,8 @@ nav.tabs.locked{opacity:.45}
 .btn:disabled{opacity:.5}
 .btn.ghost{background:transparent;color:var(--paper);border:1.5px solid var(--line)}
 .btn.huge{width:100%;padding:1rem;font-size:1.4rem;letter-spacing:.06em;border-radius:20px}
-.link{background:none;border:0;color:var(--muted);font-size:1rem;text-decoration:underline;padding:.4rem}
-.chip{background:var(--bg);border:1.5px solid var(--line);border-radius:999px;padding:.45rem .95rem;font-size:1rem;color:var(--paper)}
+.link{min-height:44px;background:none;border:0;color:var(--muted);font-size:1rem;text-decoration:underline;padding:.4rem}
+.chip{min-height:44px;background:var(--bg);border:1.5px solid var(--line);border-radius:999px;padding:.45rem .95rem;font-size:1rem;color:var(--paper)}
 .chip[aria-pressed="true"]{border-color:var(--brass);color:var(--brass);font-weight:700}
 .seg{display:inline-flex;background:var(--bg);border:1.5px solid var(--line);border-radius:16px;padding:3px}
 .seg button{background:none;border:0;border-radius:12px;padding:.45rem 1rem;font-size:1rem;color:var(--muted)}
@@ -338,7 +338,7 @@ nav.tabs.locked{opacity:.45}
 .d1 .lab{color:var(--muted);font-size:1rem;letter-spacing:.1em;margin-top:.4rem}
 .dfam{justify-content:center}
 .dfam .chip{background:#0e0906aa}
-.btn.big{padding:.9rem 2.6rem;font-size:1.2rem;letter-spacing:.06em;border-radius:16px;box-shadow:0 0 30px #d9a95b55}
+.btn.big{padding:.9rem 2.6rem;font-size:1.2rem;letter-spacing:.06em;border-radius:16px}
 .dto{font-family:var(--display);font-weight:900;font-size:1.3rem;color:#ffe2a8;letter-spacing:.2em;animation:line 1.2s both}
 .dverse{display:flex;flex-direction:column;gap:clamp(.1rem,.8dvh,.35rem);margin:clamp(.1rem,.8dvh,.4rem) 0 0}
 .dverse span{font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,3.6dvh,1.65rem);letter-spacing:.35em;text-shadow:0 0 18px #ffcf7a66;opacity:0;animation:line 1.4s both;animation-delay:var(--d)}
@@ -348,10 +348,9 @@ nav.tabs.locked{opacity:.45}
 @keyframes verseOut{from{opacity:1;max-height:13rem}55%{opacity:0}to{opacity:0;max-height:0;margin-top:0}}
 @keyframes line{from{opacity:0;transform:translateY(10px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
 .dform .seg button{min-width:0;padding-inline:.2rem;white-space:nowrap}
-.dfin{opacity:0;animation:line 1s 6s both;display:flex;gap:12px;width:100%;margin-top:auto;padding-top:clamp(.4rem,2dvh,1.2rem)}
-.dfin .btn{flex:1 1 0;min-width:0;min-height:56px;padding-inline:.6rem;font-size:min(1.1rem,5.4vw);border-radius:16px;letter-spacing:.1em;white-space:nowrap}
-.dfin .btn.ghost{flex-grow:1.3;background:#140c07f2;border:1px solid #e2b36399;color:#fff4dc}
-.dfin #dDone{background:linear-gradient(180deg,#3a2612f5,#1c1109f5);border:1.5px solid var(--brass);color:#ffe2a8;letter-spacing:.06em;box-shadow:0 0 24px #d9a95b44,inset 0 1px 0 #ffffff1a}
+.dfin{opacity:0;animation:line 1s 6s both;display:flex;flex-direction:column;align-items:stretch;gap:4px;width:100%;margin-top:auto;padding-top:clamp(.4rem,2dvh,1.2rem)}
+.dfin .btn{flex:none;min-width:0;min-height:56px;padding-inline:.6rem;font-size:min(1.1rem,5.4vw);border-radius:16px;letter-spacing:.1em;white-space:nowrap}
+.dfin #dDone{color:#ffe2a8;text-shadow:0 1px 3px #000,0 0 10px #000}
 .dfin .btn svg{width:1.2em;height:1.2em;flex:none}
 /* 祝福圖：預覽在上、背景與祝福的話在中、分享到 LINE 在下，一頁看完 */
 .bless{position:fixed;inset:0;z-index:65;display:flex;flex-direction:column;gap:clamp(.4rem,1.4dvh,.8rem);box-sizing:border-box;padding:max(.6rem,env(safe-area-inset-top)) 16px max(.9rem,env(safe-area-inset-bottom));background:radial-gradient(80% 60% at 50% 30%,#3b2410 0%,#150c06 62%,#070403 100%);animation:dfade .35s ease-out}
@@ -365,7 +364,7 @@ nav.tabs.locked{opacity:.45}
 .bbgs{flex:none;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding:2px 16px}
 .bbgs::-webkit-scrollbar{display:none}
 .bbgs button{position:relative;flex:none;width:clamp(3.6rem,8.5dvh,4.6rem);aspect-ratio:4/5;border-radius:10px;border:1.5px solid var(--line);background:#2a1d14 center/cover no-repeat;padding:0;overflow:hidden;cursor:pointer}
-.bbgs button span{position:absolute;left:0;right:0;bottom:0;padding:12px 2px 4px;font-size:.9rem;line-height:1.2;color:#fff4dc;background:linear-gradient(transparent,#000d);text-align:center}
+.bbgs button span{position:absolute;left:0;right:0;bottom:0;padding:12px 0 4px;font-size:.9rem;line-height:1.2;white-space:nowrap;letter-spacing:0;color:#fff4dc;background:linear-gradient(transparent,#000d);text-align:center}
 .bbgs button[aria-pressed="true"]{border-color:var(--brass);box-shadow:0 0 0 2px var(--brass)}
 .gmui .bprev{min-height:9rem;container-type:size}
 .gmui .bprev canvas{width:min(100cqw,80cqh);height:auto;max-width:none}
@@ -458,7 +457,7 @@ nav.tabs.locked{opacity:.45}
 .bnote{flex:none;display:flex;flex-direction:column;gap:6px}
 .bnote .inp{min-height:48px}
 .bchips{display:flex;gap:8px}
-.bchips .chip{flex:1 1 0;min-height:40px;padding:.3rem .2rem;font-size:1rem;white-space:nowrap;background:#0e0906b0}
+.bchips .chip{flex:1 1 0;min-height:44px;padding:.3rem .2rem;font-size:1rem;white-space:nowrap;background:#0e0906b0}
 .bchips .chip[aria-pressed="true"]{border-color:var(--brass);color:var(--brass)}
 .bgo{flex:none;display:flex;flex-direction:column;gap:4px}
 .bgo .line{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;min-height:56px;border:0;border-radius:16px;background:#06c755;color:#fff;font:inherit;font-size:1.2rem;font-weight:700;letter-spacing:.08em;cursor:pointer}
@@ -580,7 +579,7 @@ nav.tabs.locked{opacity:.45}
 .dthanks{flex:none;margin:clamp(.2rem,1.4dvh,.8rem) 0 0;text-align:center;font-size:clamp(1rem,2.4dvh,1.12rem);line-height:1.5;letter-spacing:0;color:#fff4dc;opacity:0;animation:line 1s 6s both}
 .ddonate{flex:none;width:100%;text-align:center;font-size:1rem;line-height:1.5;color:#fff4dc;opacity:0;animation:line 1s 6s both}
 .ddonate[hidden]{display:none}
-.ddonate .blink{min-height:44px;font-size:1.1rem;color:#ffe2a8;text-shadow:0 1px 3px #000,0 0 10px #000,0 0 18px #000}
+.ddonate .blink{min-height:44px;font-size:1.1rem;color:#ffe2a8;background:#140c07cc;border-radius:12px;padding:0 16px}
 .dthanks{text-shadow:0 1px 3px #000,0 0 10px #000}
 .dedi-in{overflow-y:auto;scrollbar-width:none}
 .dedi-in::-webkit-scrollbar{display:none}
@@ -716,7 +715,7 @@ button,a,summary,.lsitem{touch-action:manipulation}
 @keyframes splaySpin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.splay.loading::after{animation:none;border-color:var(--brass);opacity:.4}}
 .spick{flex:1;min-width:0;min-height:48px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;background:none;border:0;padding:0;color:var(--paper);font:inherit;text-align:left;cursor:pointer;text-shadow:0 1px 8px #000,0 0 18px #000a}
-.spick span{font-size:.78rem;color:var(--brass);letter-spacing:.22em;opacity:.9}
+.spick span{font-size:.9rem;color:var(--brass);letter-spacing:.22em;opacity:.9}
 .spick b{font-family:var(--display);font-size:1.25rem;font-weight:900;letter-spacing:.08em;color:#fff1cf;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .spick b::after{content:"⌄";font-family:var(--body);font-weight:400;font-size:.8em;color:var(--brass);margin-left:.4em;position:relative;top:-.15em}
 .splay:focus-visible,.spick:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:12px}
@@ -795,7 +794,7 @@ button,a,summary,.lsitem{touch-action:manipulation}
 #p-beads .dedibtn span{font-size:1.05rem;letter-spacing:.24em;padding-left:.24em}
 #p-beads .sbar.right .spick{align-items:flex-end;text-align:right}
 #p-beads .spick b{font-size:1.15rem}
-#p-beads .spick span{font-size:.72rem;letter-spacing:.12em;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#p-beads .spick span{font-size:.9rem;letter-spacing:.06em;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #dediSheet{max-height:min(86dvh,calc(100dvh - 64px));overflow:hidden}
 #dediSheet.typing{max-height:none}
 #dediSheet.typing .csfoot{display:none}
@@ -831,7 +830,7 @@ button,a,summary,.lsitem{touch-action:manipulation}
 .dform .err{color:#f0a58a;margin:0}
 .dform .ddel{margin-left:auto;min-height:44px;padding:0 6px;background:none;border:0;color:#f0a58a;font:inherit;font-size:.9rem;cursor:pointer}
 .dwish .chip[aria-pressed="true"]{border-color:var(--brass);color:var(--brass)}
-.dto .dl{display:block;animation:line 1.2s both;animation-delay:var(--d);font-size:calc(clamp(.98rem,2.3dvh,1.1rem) * var(--dscale,1));font-weight:600;letter-spacing:.14em;line-height:1.6;color:#fff4dc;text-shadow:0 1px 2px #000,0 0 14px #000,0 0 28px #000c}
+.dto .dl{display:block;text-wrap:balance;animation:line 1.2s both;animation-delay:var(--d);font-size:calc(clamp(.98rem,2.3dvh,1.1rem) * var(--dscale,1));font-weight:600;letter-spacing:.14em;line-height:1.6;color:#fff4dc;text-shadow:0 1px 2px #000,0 0 14px #000,0 0 28px #000c}
 .dto .dl.p{text-wrap:balance;font-size:calc(1.15rem * var(--dscale,1));letter-spacing:.12em;font-weight:600;color:#fff1cf}
 .glow{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 4s ease;background:radial-gradient(85% 60% at 55% 48%,#ffd88a5c,transparent 70%)}
 #p-beads.complete .glow{opacity:1}
@@ -851,7 +850,7 @@ button,a,summary,.lsitem{touch-action:manipulation}
 header.top nav.tabs{display:flex;gap:2px;border:0;background:none;padding:0;transition:none}
 header.top nav.tabs button{width:46px;min-height:48px;padding:2px 0;position:relative;justify-content:center;gap:1px;color:var(--muted);border-radius:12px;touch-action:manipulation}
 header.top nav.tabs button svg{width:22px;height:22px;stroke-width:1.5}
-header.top nav.tabs button span{font-size:13px;line-height:1.2;letter-spacing:.02em;white-space:nowrap}
+header.top nav.tabs button span{font-size:.84rem;line-height:1.2;letter-spacing:.02em;white-space:nowrap}
 header.top nav.tabs button[aria-selected="true"]{color:var(--brass)}
 header.top nav.tabs button:focus-visible{outline:2px solid var(--brass);outline-offset:-2px}
 header.top .hq{gap:2px;align-items:center}
@@ -949,15 +948,16 @@ header.top .hq{gap:2px;align-items:center}
 .lsnote{font-size:.9rem;line-height:1.6;opacity:.8;margin-top:8px}
 /* ---- v2「今日」（2026-10-31 對焦定案）：全幅晨光意境、無框排版、三個每日任務、蓮花月曆 ---- */
 .today{max-width:34rem;margin:0 auto;padding:0 20px 56px;display:flex;flex-direction:column}
-.tday{position:relative;margin:0 -20px;padding:56px 24px 16px;min-height:clamp(170px,24dvh,230px);display:flex;flex-direction:column;justify-content:flex-end;background:url(assets/img/hero-home.webp) center 35%/cover no-repeat}
+.tday{position:relative;margin:0 -20px;padding:24px 24px 12px;min-height:clamp(116px,15dvh,150px);display:flex;flex-direction:column;justify-content:flex-end;background:url(assets/img/hero-home.webp) center 35%/cover no-repeat}
 .tday::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0e080522 0%,#0e080533 45%,#140d09 100%),linear-gradient(90deg,#0e0805aa,transparent 70%)}
 .tday>*{position:relative;margin:0}
-.tday+.tsect{margin-top:12px}
+.tday+.tgm{margin-top:12px}
+.tgm+.tsect{margin-top:16px}
 .tdate{font-size:.9rem;letter-spacing:.14em;color:#f3d9a0;text-shadow:0 1px 8px #000}
 .thello{font-family:var(--display);font-weight:700;font-size:2.6rem;letter-spacing:.12em;color:#fff4dc;margin-top:6px!important;text-shadow:0 2px 18px #000a}
 .tfeast{margin-top:10px!important;font-size:.9rem;color:#f3e6c8;letter-spacing:.08em}
 .tfeast::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--brass);margin-right:8px;vertical-align:2px}
-.tgm{display:flex;align-items:center;gap:14px;width:100%;min-height:68px;margin:6px 0 14px;padding:8px 14px 8px 8px;border-radius:16px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b3631f,#e2b36308);color:#ffe2a8;font:inherit;font-size:1.1rem;text-align:left;cursor:pointer}
+.tgm{display:flex;align-items:center;gap:14px;width:100%;min-height:68px;margin:6px 0 0;padding:8px 14px 8px 8px;border-radius:16px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b3631f,#e2b36308);color:#ffe2a8;font:inherit;font-size:1.1rem;text-align:left;cursor:pointer}
 .tgm b{font-weight:700;color:#fff4dc}
 .tgmt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left}
 .tgmt small{font-size:.9rem;font-weight:400;letter-spacing:.02em;color:var(--muted)}
@@ -973,7 +973,7 @@ header.top .hq{gap:2px;align-items:center}
 /* 分享普法: an obvious, quiet button — gold hairline pill with a share glyph, warm glow on press */
 .tquote .share{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 26px 0 22px;border-radius:16px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b3631f,#e2b36308);color:#ffe2a8;font:inherit;font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:.06em;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff14,0 4px 16px #0005;transition:background .2s,box-shadow .2s}
 .tquote .share svg{width:20px;height:20px;flex:none}
-.tquote .share:active{background:linear-gradient(180deg,#e2b36340,#e2b36318);box-shadow:inset 0 1px 0 #ffffff14,0 0 18px #e2b36344}
+.tquote .share:active{background:#e2b36326}
 .tquote .share:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .tsect{display:flex;align-items:center;gap:12px;margin:30px 0 6px;font-family:var(--display);font-size:.9rem;font-weight:700;letter-spacing:.1em;color:var(--brass)}
 .tsect::after{content:"";order:2;flex:1;height:1px;background:linear-gradient(90deg,#e2b36355,transparent)}
@@ -981,13 +981,17 @@ header.top .hq{gap:2px;align-items:center}
 #tMonth{letter-spacing:.12em}
 .tnav{display:flex;gap:4px}.tnav button{width:44px;height:44px;border:0;background:none;color:var(--brass);font-size:1.4rem;cursor:pointer}
 .ttasks{display:flex;flex-direction:column}
-.ttask{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid #e2b3631f}
+.ttask{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #e2b3631f}
 .ttask:last-child{border-bottom:0}
 .ttask svg{width:36px;height:36px}
 .ttask b{display:block;font-family:var(--display);font-size:1.2rem;letter-spacing:.06em;color:var(--paper)}
 .ttask .d{display:block;margin-top:3px;font-size:.9rem;line-height:1.6;color:var(--muted);white-space:pre-line}
-.ttask .adj{background:none;border:0;padding:4px 0 0;color:var(--brass);font:inherit;font-size:.9rem;letter-spacing:.08em;cursor:pointer;min-height:32px}
-.ttask .go{min-height:42px;padding:0 20px;border:0;border-radius:999px;background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c;font:inherit;font-weight:700;letter-spacing:.06em;padding-left:calc(20px + .2em);cursor:pointer;box-shadow:inset 0 1px 0 #fff6}
+.ttask>div{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center}
+.ttask b{white-space:nowrap}
+@media (max-width:360px){.ttask{grid-template-columns:28px minmax(0,1fr) auto;gap:8px}.ttask>div{column-gap:4px}.ttask .adj{padding:0 4px}}
+.ttask>div .d{grid-column:1/-1}
+.ttask .adj{grid-row:1;grid-column:2;justify-self:start;white-space:nowrap;background:none;border:0;padding:0 8px;margin-block:-8px;color:var(--brass);font:inherit;font-size:.9rem;letter-spacing:.06em;cursor:pointer;min-height:44px}
+.ttask .go{min-height:44px;padding:0 20px;border:0;border-radius:999px;background:linear-gradient(180deg,#f2cf86,#d39d45);color:#2a1a0c;font:inherit;font-weight:700;letter-spacing:.06em;padding-left:calc(20px + .2em);cursor:pointer;box-shadow:inset 0 1px 0 #fff6}
 .ttask .ok{font-family:var(--display);font-size:.9rem;letter-spacing:.06em;color:var(--brass)}
 svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .l0{color:#f7eedd40}.l1{color:var(--brass)}.l1 svg{fill:#e2b36333}.l2{color:#ffd88a}.l2 svg{fill:#e2b363;filter:drop-shadow(0 0 6px #e2b36399)}
@@ -1086,11 +1090,12 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .lib.deep .libview.detail{transform:none;opacity:1}
 .lib.deep #libHome{transform:translateX(-18%);opacity:0;pointer-events:none}
 @media (prefers-reduced-motion:reduce){.libview{transition:none}}
-.libbar{flex:0 0 auto;display:grid;grid-template-columns:64px 1fr 64px;align-items:center;gap:4px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;
+.libbar{flex:0 0 auto;display:grid;grid-template-columns:minmax(84px,auto) 1fr minmax(84px,auto);align-items:center;gap:4px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;
   background:linear-gradient(#170f0af2,#170f0ad9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid #e2b36322;position:relative;z-index:2}
 .libbar h2{margin:0;text-align:center;font-family:var(--display);font-size:1.1rem;font-weight:700;letter-spacing:.1em;padding-left:.24em;color:#f6e7c4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.libback{width:44px;height:44px;border-radius:50%;border:1px solid #e2b36355;background:#140d0999;color:var(--brass);display:grid;place-items:center;cursor:pointer;padding:0}
-.libback svg{width:22px;height:22px}
+.libback{justify-self:start;display:inline-flex;align-items:center;gap:.15rem;min-height:44px;padding:0 .4rem 0 0;background:none;border:0;color:var(--paper);font:inherit;font-size:1.1rem;cursor:pointer}
+.libback svg{width:1.3em;height:1.3em}
+@media (max-width:360px){.libbar{grid-template-columns:auto minmax(0,1fr) auto}.libbar h2{letter-spacing:.02em;padding-left:0}}
 .libtimer{justify-self:end;min-width:48px;height:44px;padding:0 10px;box-sizing:border-box;border-radius:999px;border:1px solid #e2b36366;background:transparent;color:var(--brass);font:inherit;font-size:.9rem;white-space:nowrap;touch-action:manipulation;cursor:pointer}
 .libtimer.on{border-color:var(--brass);color:#ffe2a8}
 .libback:focus-visible,.libseg button:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
@@ -1131,7 +1136,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
    我的專輯＝使用者自己排的播放清單。點曲目就在這裡播放，底部播放列按「去撥珠」回撥珠頁。 ---- */
 .libchips{display:flex;gap:8px;overflow-x:auto;margin:14px -16px 0;padding:2px 16px 4px;scrollbar-width:none}
 .libchips::-webkit-scrollbar{display:none}
-.libchips button{flex:0 0 auto;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid #e2b36333;background:#ffffff08;color:#efdfc0;font:inherit;font-size:.9rem;letter-spacing:.06em;cursor:pointer}
+.libchips button{flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #e2b36333;background:#ffffff08;color:#efdfc0;font:inherit;font-size:.9rem;letter-spacing:.06em;cursor:pointer}
 .libchips button.on{background:#e2b363;border-color:#e2b363;color:#2a1a0c;font-weight:700}
 .libcovers{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px}
 .libcpbox{grid-column:1/-1;display:flex;flex-direction:column;gap:10px}
@@ -1142,7 +1147,7 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .cov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cov::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 1px #e2b36333 inset;background:linear-gradient(90deg,#120b0700 45%,#120b07aa),linear-gradient(#120b0700 55%,#120b07cc)}
 .cov b{position:absolute;z-index:1;top:9%;right:8%;max-height:84%;overflow:hidden;writing-mode:vertical-rl;font-family:var(--display);font-weight:900;font-size:clamp(1.05rem,5vw,1.45rem);line-height:1.15;letter-spacing:.12em;color:#fff4dc;text-shadow:0 2px 12px #000d}
-.cov i{position:absolute;z-index:1;left:8px;bottom:8px;font-style:normal;font-size:.7rem;letter-spacing:.1em;padding:3px 8px;border-radius:999px;background:#e2b363;color:#2a1a0c;font-weight:700}
+.cov i{position:absolute;z-index:1;left:8px;bottom:8px;font-style:normal;font-size:.9rem;letter-spacing:.1em;padding:3px 8px;border-radius:999px;background:#e2b363;color:#2a1a0c;font-weight:700}
 .acard .an{font-family:var(--display);font-weight:700;font-size:1rem;color:#f8ecd0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .acard .as{margin-top:-5px;font-size:.9rem;color:var(--muted)}
 .acard:active,.tmain:active,.newpl:active{transform:scale(.98)}
@@ -1219,12 +1224,15 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .vidbox video{display:block;width:100%;max-height:62dvh;margin-top:12px;border-radius:12px;background:#000}
 @media (prefers-reduced-motion:reduce){.eq i{animation:none;transform:scaleY(.6)}}
 
-/* 按鈕統一（2026-10-31）：全部以「分享普法」的金色細邊膠囊為準。主要按鈕是金邊、暖金字；次要按鈕邊框更淡、字是米白 */
-.btn,.btn.big,.btn.huge,.btn.main,.todaycard .btn,.onb .btn,.ttask .go,.vcard.verse .btn.ghost{border-radius:16px;border:1px solid #e2b36399;background:linear-gradient(180deg,#e2b3631f,#e2b36308);color:#ffe2a8;font-family:var(--display);font-weight:700;box-shadow:inset 0 1px 0 #ffffff14,0 4px 16px #0005;transition:background .2s,box-shadow .2s,transform .12s ease-out}
+/* 按鈕（2026-11-07 使用者同意，取代 2026-10-31）：每頁一個主要按鈕金色實心，其他深底金框；設定相關頁用 .cpline，無底色金框 */
+.btn,.btn.big,.btn.huge,.btn.main,.todaycard .btn,.onb .btn,.ttask .go.pri{border-radius:16px;border:1px solid var(--brass);background:var(--brass);color:var(--brass-ink);font-family:var(--display);font-weight:700;box-shadow:none;transition:background .2s,filter .2s,transform .12s ease-out}
+.ttask .go,.vcard.verse .btn.ghost{border-radius:16px;border:1px solid #e2b36399;background:#e2b36314;color:#ffe2a8;font-family:var(--display);font-weight:700;box-shadow:none}
+.ttask .go.pri{background:var(--brass);border-color:var(--brass);color:var(--brass-ink)}
 .btn{min-height:48px;letter-spacing:.06em}
-.btn.ghost{border-color:#e2b36347;background:linear-gradient(180deg,#f7eedd0d,#f7eedd03);color:var(--paper);font-weight:600;box-shadow:inset 0 1px 0 #ffffff0d}
-.btn:active,.ttask .go:active{background:linear-gradient(180deg,#e2b36340,#e2b36318);box-shadow:inset 0 1px 0 #ffffff14,0 0 18px #e2b36344;filter:none}
-.btn.ghost:active{background:linear-gradient(180deg,#e2b36326,#e2b3630d)}
+.btn.ghost{border-color:#e2b36347;background:#f7eedd08;color:var(--paper);font-weight:600;box-shadow:none}
+.btn:disabled{background:#e2b36314;border-color:#e2b36333;color:var(--muted)}
+.btn:active,.ttask .go.pri:active{filter:brightness(.88)}
+.ttask .go:active,.btn.ghost:active,.btn.cpline:active{background:#e2b36326;filter:none}
 .btn.huge,.btn.big{letter-spacing:.06em}
 .btn:focus-visible,.ttask .go:focus-visible,.ldgo:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 /* 抄經（2026-11-05）：清單與說明沿用金色細字語言；稿紙本身是紙，亮的 */
@@ -1353,7 +1361,6 @@ svg use{fill:none;stroke:currentColor;stroke-width:1.3}
 .cpsetrow svg{flex:none;width:1.1em;height:1.1em}
 .cpsetrow span{flex:1;min-width:0;line-height:1.3;text-wrap:balance}
 .cpsetrow em{flex:none;font-style:normal;color:var(--brass)}
-.cpsetrow.unset{min-height:52px;margin-top:12px;padding:0 14px;border:1.5px solid var(--brass);border-radius:16px;color:#ffe2a8}
 .cppage .libchips{margin-top:12px}
 .cppage .libchips button.on{background:#e2b36326;border-color:var(--brass);color:#ffe2a8}
 .cpway.on{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass)}
@@ -1438,8 +1445,8 @@ body.dedicp #dediSheet{z-index:66}
           <h2 class="thello">今日</h2>
           <p class="tfeast" id="tFeast" hidden></p>
         </header>
-        <div class="tsect"><span>今日修持</span><em id="tProg"></em></div>
         <button class="tgm" id="tGm"><span class="tgmi" aria-hidden="true"></span><span class="tgmt"><span>傳一張<b id="tGmW">祝福圖</b></span><small id="tGmSub" hidden></small></span></button>
+        <div class="tsect"><span>今日修持</span><em id="tProg"></em></div>
         <div class="ttasks" id="tTasks"></div>
         <section class="tquote" id="tQuote" aria-label="每日法語"></section>
         <section class="tspon" id="tSpon" hidden aria-label="贊助雲禪"><p id="tSponTxt"></p><div class="acts"><button class="blink" id="tSponGo">了解贊助 ›</button><button class="blink" id="tSponNo">以後再說</button></div></section>
@@ -1584,7 +1591,7 @@ body.dedicp #dediSheet{z-index:66}
         <header class="mehead">
           <p class="mekick">雲禪・我的修持</p>
           <p class="mevip" id="meVip" hidden></p>
-          <p class="mestreak">連續修持 <b id="msStreak">0</b> 天</p>
+          <p class="mestreak">連續精進 <b id="msStreak">0</b> 天</p>
           <table class="mestats">
             <thead><tr><td></td><th scope="col">撥珠</th><th scope="col">抄經字</th><th scope="col">迴向</th></tr></thead>
             <tbody>
@@ -1595,7 +1602,7 @@ body.dedicp #dediSheet{z-index:66}
         </header>
         <div class="tsect"><span>精進印記</span></div>
         <div class="meseals" id="meSeals"></div>
-        <div class="tsect"><span>迴向</span></div>
+        <div class="tsect"><span>我的紀錄</span></div>
         <div class="melist">
           <button id="meGx" hidden><span>共修好友</span><em id="meGxSum"></em></button>
           <button id="meCards"><span>我的祝福圖</span><em id="meCardsN"></em></button>
@@ -1621,7 +1628,7 @@ body.dedicp #dediSheet{z-index:66}
     </section>
     <section class="panel" id="p-dedilog" hidden aria-label="迴向紀錄">
       <div class="log dlog">
-        <button class="btn ghost back" id="dlBack">‹ 返回</button>
+        <button class="bback" id="dlBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>返回</span></button>
         <div class="hero hero-dedi"><h2>迴向紀錄</h2><p class="hint" id="dlTotal"></p></div>
         <h3>各迴向對象累計</h3><div class="dlpeople" id="dlPeople"></div>
         <h3>每一次迴向</h3><div class="dllist" id="dlList"></div>
@@ -1665,7 +1672,7 @@ body.dedicp #dediSheet{z-index:66}
   <div class="lab">發願</div><div class="seg" id="plRounds"><button data-v="1">1 輪</button><button data-v="3">3 輪</button><button data-v="7">7 輪</button></div>
   <label class="fld" for="plTime">行事曆提醒時間</label><input class="inp" id="plTime" type="time">
   <button class="btn ghost" id="plIcs">加入手機行事曆提醒</button><p class="hint">雲禪不會自己通知，加入行事曆後，手機才會在時間到時提醒。</p><p class="hint" id="plIcsNote" hidden></p></div>
-  <button class="btn" id="plDone" style="flex:none">完成</button>
+  <button class="btn cpline" id="plDone" style="flex:none">完成</button>
 </div>
 <div class="sheet" id="daySheet" hidden role="dialog" aria-label="當日紀錄"><h3 id="dsTitle"></h3><p class="hint" id="dsLunar"></p><div id="dsBody"></div><button class="btn ghost" id="dsClose">關閉</button></div>
 <div class="sheet" id="dediSheet" hidden role="dialog" aria-label="迴向">
@@ -1695,7 +1702,7 @@ body.dedicp #dediSheet{z-index:66}
 <div class="sheet" id="musicSheet" hidden role="dialog" aria-label="選擇經文"><h3>選擇經文</h3><p class="hint">點經名就開始播放；念珠一樣由您親手撥。</p><div id="musicBody"></div><button class="btn ghost" id="musicClose">關閉</button></div>
 <div class="lib" id="lib" hidden role="dialog" aria-modal="true" aria-label="經文音樂">
   <div class="libview" id="libHome">
-    <header class="libbar"><button class="libback" id="libClose" aria-label="返回撥珠"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2>經文音樂</h2><button class="libtimer" id="libTimer" aria-label="定時停止">定時</button></header>
+    <header class="libbar"><button class="libback" id="libClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>返回</span></button><h2>經文音樂</h2><button class="libtimer" id="libTimer" aria-label="定時停止">定時</button></header>
     <div class="libseg" role="tablist"><button data-mode="explore" role="tab" class="on" aria-selected="true">探索</button><button data-mode="mine" role="tab" aria-selected="false">我的專輯</button></div>
     <div class="libscroll" id="libScroll">
       <div id="libExplore">
@@ -1714,7 +1721,7 @@ body.dedicp #dediSheet{z-index:66}
     </div>
   </div>
   <div class="libview detail" id="libDetail" aria-hidden="true">
-    <header class="libbar"><button class="libback" id="libBack" aria-label="返回"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="ldBar"></h2><span></span></header>
+    <header class="libbar"><button class="libback" id="libBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>返回</span></button><h2 id="ldBar"></h2><span></span></header>
     <div class="libscroll" id="ldBody"></div>
   </div>
   <div class="libplayer" id="libPlayer" hidden>
@@ -1778,7 +1785,7 @@ body.dedicp #dediSheet{z-index:66}
   <div class="lab">佛珠畫面</div><div class="seg" data-set="flat"><button data-v="0">立體</button><button data-v="1">平面（舊手機）</button></div>
   <div class="row" style="margin-top:.4rem"><button class="chip" id="resetBtn">本圈重數</button><button class="chip" id="tutAgain">撥珠教學</button><button class="chip" id="onbAgain">初始引導</button></div>
   </div></details>
-  <button class="btn" id="setClose" style="margin-top:.4rem">完成</button>
+  <button class="btn cpline" id="setClose" style="margin-top:.4rem">完成</button>
 </div>
 
 <!-- 迴向 -->
@@ -1812,8 +1819,8 @@ body.dedicp #dediSheet{z-index:66}
       <div class="dverse" id="dVerse"><span style="--d:.6s">願以此功德</span><span style="--d:1.9s">普及於一切</span><span style="--d:3.2s">我等與眾生</span><span style="--d:4.5s">皆共成佛道</span></div>
       <p class="dthanks">感恩您今日的用心</p>
       <div class="dfin">
-        <button class="btn ghost" id="dCard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><circle cx="9" cy="9.5" r="1.8"/><path d="M20.5 15.5l-4.8-4.8L6 20.5"/></svg>分享祝福圖</button>
-        <button class="btn" id="dDone">圓滿</button>
+        <button class="btn" id="dCard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><circle cx="9" cy="9.5" r="1.8"/><path d="M20.5 15.5l-4.8-4.8L6 20.5"/></svg>分享祝福圖</button>
+        <button class="blink" id="dDone">圓滿</button>
       </div>
       <div class="ddonate" id="dDonate" hidden></div>
     </div>
@@ -1883,7 +1890,7 @@ body.dedicp #dediSheet{z-index:66}
   <div class="bgo" id="gmGo">
     <div class="gmbar"><button class="btn ghost" id="gmDone">完成</button></div>
     <div class="gmchips gmquick" id="gmQuick" role="group" aria-label="選問候語"></div>
-    <div class="gmtools gmmain"><button class="btn ghost" id="gmNext">今日三張</button><button class="btn ghost" id="gmEditBtn">改圖改字</button></div>
+    <div class="gmtools gmmain"><button class="btn ghost" id="gmNext">今日祝福</button><button class="btn ghost" id="gmEditBtn">改圖改字</button></div>
     <div class="gmsent"><p id="gmSentQ">想再傳給別的親友嗎？</p><div class="gmchips" id="gmAgain" role="group" aria-label="再傳給誰"></div><button class="btn ghost" id="gmFin">完成</button></div>
     <button class="line gmline" id="gmShare"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5C6.8 3.5 2.7 6.9 2.7 11c0 3.7 3.2 6.8 7.6 7.4.3.1.7.2.8.5.1.2.1.6 0 .9l-.1.8c0 .2-.2 1 .9.5s5.7-3.4 7.8-5.8c1.4-1.6 2.1-3.1 2.1-4.8 0-4.1-4.1-7.5-9.8-7.5z"/></svg><span id="gmShareT"><span>分享到 LINE</span></span></button>
     <small class="gmtip" data-tip hidden>按下後，在跳出的選單裡點 LINE</small>
@@ -2006,7 +2013,7 @@ body.dedicp #dediSheet{z-index:66}
   <div class="cpfoot" id="csuFoot" hidden></div>
 </div>
 <div class="cpw" id="cpWrite" hidden role="dialog" aria-label="抄經">
-  <div class="cpwbar"><button class="cpico" id="cwBack" aria-label="先離開，會自動保存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><b id="cwTitle"></b><span class="cpprog" id="cwProg"></span><button class="cpico" id="cwMusic" aria-label="邊聽邊抄，選擇唱誦"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></button><button class="cpico" id="cwOpt" aria-label="字帖與稿紙設定"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.2"/><circle cx="8" cy="17" r="2.2"/></svg></button></div>
+  <div class="cpwbar"><button class="bback" id="cwBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>返回</span></button><b id="cwTitle"></b><span class="cpprog" id="cwProg"></span><button class="cpico" id="cwMusic" aria-label="邊聽邊抄，選擇唱誦"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></button><button class="cpico" id="cwOpt" aria-label="字帖與稿紙設定"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.2"/><circle cx="8" cy="17" r="2.2"/></svg></button></div>
   <p class="cphint" id="cwHint" hidden>字體、大小都在這裡，隨時可以改</p>
   <div class="cpref" id="cwRef" aria-label="這一句的注音與拼音"></div>
   <button class="cpnote" id="cwNote" aria-label="這一句的注解，點一下看全部"><span id="cwNoteT"></span></button>
@@ -3096,6 +3103,7 @@ function renderToday(){
   ["am", "pm"].forEach(k => { const p = plan2()[k];
     row(t[k] ? 2 : 0, SLOT_NAME[k], `${trackLabel(p)}\n發願 ${p.rounds} 輪（${p.rounds * 108} 珠）${S.remindOn ? `・行事曆 ${p.time}` : ""}`, t[k] ? ok("已圓滿") : go("開始", () => startPreset(k)), () => openPlan(k)); });
   row(t.dedi ? 2 : 0, "迴向", t.dedi ? `今日已迴向・目前累計 ${fmt(pend().beads)} 珠` : `累計 ${fmt(pend().beads)} 珠，尚未迴向`, t.dedi && !pend().beads ? ok("已圓滿") : go("迴向", () => { ac(); openDedi(); }));
+  const nextGo = box.querySelector(".go"); if (nextGo) nextGo.classList.add("pri");   // 下一件要做的事才是主要按鈕
   const n = (t.am ? 1 : 0) + (t.pm ? 1 : 0) + (t.dedi ? 1 : 0);
   $("tProg").textContent = n === 3 ? "今日圓滿" : `${n} / 3`;
   // streak and seals (earned seals are kept even if a later day is missed)
@@ -3477,6 +3485,8 @@ function openDedi(copied){
   paintDedi(); openSheetEl($("dediSheet")); $("dediSheet").querySelectorAll(".csscroll").forEach(x => x.scrollTop = 0); dediMusicLoad();
   document.body.classList.toggle("dedicp", !!dediCopy);   // the sheet rises over the 抄經 page, which stays underneath if this is cancelled
 }
+// 只迴向給一切眾生時，按鈕已經說清楚了，不再多一頁確認；選了特定對象才看確認頁
+const dediOnlyAll = st => { const who = st.people.filter(x => st.sel.includes(x.id)); return who.length === 1 && who[0].kind === "all"; };
 function paintDedi(){
   const st = dediState();
   paintPeopleList($("dPeople"), true);
@@ -3485,8 +3495,8 @@ function paintDedi(){
   const verse = dVerseOnce || (passed ? "jingtu" : "normal");
   $("dVerseSeg").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === verse));
   const empty = !st.people.length;   // nobody yet: the main button simply dedicates to everyone
-  $("dNext").disabled = (!st.sel.length && !empty) || dOpen != null; $("dNext").classList.toggle("wide", empty && dOpen == null);
-  $("dNext").textContent = dOpen != null ? "請先儲存或取消" : st.sel.length ? "下一步" : empty ? "迴向給一切眾生" : "請先勾選";
+  $("dNext").disabled = (!st.sel.length && !empty) || dOpen != null; const onlyAll = empty || dediOnlyAll(st); $("dNext").classList.toggle("wide", onlyAll && dOpen == null);
+  $("dNext").textContent = dOpen != null ? "請先儲存或取消" : onlyAll ? "迴向給一切眾生" : st.sel.length ? "下一步" : "請先勾選";
 }
 function repaintPeople(){ if (!$("dediSheet").hidden) paintDedi(); if (!$("peopleSheet").hidden) paintPeopleList($("pmList"), false); }
 function paintPeopleList(box, selectable){
@@ -3574,6 +3584,7 @@ $("dNext").onclick = () => {
   if (!st.people.length){ const n = { id:"p" + (st.next++), call:"一切眾生", name:"", kind:"all", wish:"離苦得樂" }; st.people.push(n); st.sel.push(n.id); paintDedi(); }
   save();
   const who = st.people.filter(x => st.sel.includes(x.id)); if (!who.length) return;
+  if (dediOnlyAll(st)){ $("dStart").click(); return; }
   const verse = $("dVerseSeg").querySelector('[aria-pressed="true"]').dataset.v, pv = $("dPreview"); pv.innerHTML = "";
   const add = (t, c) => { const e = document.createElement("p"); if (c) e.className = c; e.textContent = t; pv.appendChild(e); };
   if (dediCopy && dediCopy.url){ const im = document.createElement("img"); im.className = "dpcopy"; im.alt = "抄好的經文"; im.src = dediCopy.url; pv.appendChild(im); }
@@ -5443,7 +5454,30 @@ const inFrame = (() => { try{ return window.top !== window; }catch(e){ return tr
 const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
 let installEvt = null;
 window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; if (activeTab === "home") renderInstall(); });
-if ("serviceWorker" in navigator && !inFrame && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(() => {});
+let swReg = null;
+if ("serviceWorker" in navigator && !inFrame && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register("sw.js", { updateViaCache:"none" }).then(r => swReg = r).catch(() => {});
+// 手機的分頁可以開著好幾天，單頁 APP 又不會自己重新載入：打開或回到 APP 時比對線上版本，有新版就換。
+// 比的是伺服器給的更新時間，不用版本號，曲目管理程式改 sw.js 時才不必同步。
+const pageTime = Date.parse(document.lastModified) || 0;
+let updAt = 0;
+const updBusy = () => (lsCur && !talk.paused) || document.querySelector('[role="dialog"]:not([hidden]),.sheet:not([hidden])');
+async function checkUpdate(){
+  if (inFrame || !/^https?:$/.test(location.protocol) || !navigator.onLine || Date.now() - updAt < 60000) return;
+  updAt = Date.now();
+  try{ swReg && swReg.update(); }catch(e){}
+  try{
+    const res = await fetch("index.html?u=" + Date.now(), { method:"HEAD", cache:"no-store" });
+    const lm = res.ok && res.headers.get("last-modified"), t = lm ? Date.parse(lm) : 0;
+    if (!t || t - pageTime < 2000 || updBusy()) return;
+    if (sessionStorage.getItem("updTried") === lm) return;   // 換過一次還是舊的就不再試，不會一直重新整理
+    sessionStorage.setItem("updTried", lm);
+    localStorage.setItem(KEY, JSON.stringify(S));
+    location.reload();
+  }catch(e){}
+}
+setTimeout(checkUpdate, 1500);
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") checkUpdate(); });
+window.addEventListener("pageshow", e => { if (e.persisted) checkUpdate(); });
 function renderInstall(){
   const box = $("hInstall"), ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
   if (inFrame || standalone() || S.installHide || (!installEvt && !ios)){ box.hidden = true; return; }
@@ -5476,6 +5510,7 @@ const CP_PAPER = { xuan:{ n:"宣紙", bg:"#f3e9d3", line:"#b4483a", tpl:"#b4483a
                    blue:{ n:"瓷青紙", bg:"#1d2b45", line:"#caa24f", tpl:"#e8c97a44", ink:"#f0cf7c", py:"#c8b78e" } };
 const CP_DEFAULT = { font:"kai", per:1, cols:4, line:false, trace:true, zy:true, py:true, vert:true, brush:2, paper:"xuan", auto:false };
 // always the same object: the settings sheet keeps hold of it, so it must never be swapped for a copy
+const cpGuessInput = () => matchMedia("(min-width:700px)").matches ? "pen" : "finger";   // 手機用手指、平板用觸控筆，要改在書寫頁右上角
 const cpSet = () => { S.cp = S.cp || {}; for (const k in CP_DEFAULT) if (S.cp[k] === undefined) S.cp[k] = CP_DEFAULT[k]; return S.cp; };
 const cpBookList = () => (S.cpBook = S.cpBook || []);
 const cpDrafts = () => (S.cpDrafts = S.cpDrafts || {});
@@ -5631,7 +5666,7 @@ function cpSaveDraft(now){
 }
 async function cpOpenWrite(id, rep, fresh){
   const t = CP[id]; if (!t) return;
-  if (!cpSet().input){ cpOpenSetup(t, () => cpOpenWrite(id, rep, fresh)); return; }
+  if (!cpSet().input){ S.cp.input = cpGuessInput(); save(); }
   $("cpInfo").hidden = true;
   let d = fresh ? null : await IDB.get("draft:" + id, "cp");
   if (d && !d.st) d = null;
@@ -5644,7 +5679,7 @@ async function cpOpenWrite(id, rep, fresh){
   cpW.page = Math.max(0, cpW.pages.findIndex(p => p.includes(first < 0 ? cpW.cells.length - 1 : first)));
   cpPaintPaper(); cpPaintRef(); cpPaintMusic();
   if (!S.cpTip){ const tip = $("cwTip"); tip.hidden = false; tip.textContent = "慢慢寫字較粗，寫快較細；收筆時順勢一提，就有撇捺的筆鋒。"; }
-  if (!S.cpHint){ S.cpHint = true; save(); cpShowHint(); }
+  else if (!S.cpHint){ S.cpHint = true; save(); cpShowHint(); }   // 一次一個提示，第一次先教寫字，下次才說設定在哪
 }
 function cpCloseWrite(){ cpAutoOff(); cpSaveDraft(true); cpStopMusic(); $("cpWrite").hidden = true; $("cwSheet").hidden = true; $("cwMusicS").hidden = true; keepAwake(activeTab === "beads"); renderCopy(); }
 // writing: one finger or a stylus. Once a stylus has been seen, the palm (touch) is ignored.
@@ -6061,12 +6096,12 @@ function renderCopy(){
     if (cpTabGroup === "全部") p.appendChild(el("h3", "cpgrouph", g.name));
     list.forEach(row);
   });
-  const unset = !cpSet().input; $("cpSetSum").textContent = cpSetSummary(); $("cpSetGo").textContent = unset ? "設定 ›" : "調整 ›"; $("cpSetBtn").classList.toggle("unset", unset);
+  $("cpSetSum").textContent = cpSetSummary(); $("cpSetGo").textContent = "調整 ›";
   $("cpBookN").textContent = can() ? `${cpBookList().length} 篇` : `${cpBookList().length}／${BOOK_FREE}`;
 }
 $("cpBookBtn").onclick = cpOpenBook;
 function cpSetSummary(){
-  const c = cpSet(); if (!c.input) return "還沒設定書寫方式";
+  const c = { ...cpSet() }; c.input = c.input || cpGuessInput();
   const f = CP_FONTS.find(x => x[0] === c.font), size = { 3:"特大格", 4:"大格", 5:"中格", 7:"小格" }[c.cols];
   return [c.input === "finger" ? "手指書寫" : "觸控筆", c.input === "finger" ? (c.per === 4 ? "一次四字" : "一次一字") : size, c.trace ? f && f[1] : "空白"].filter(Boolean).join("・");
 }
@@ -6223,7 +6258,7 @@ function renderMe(){
   const statLen = Math.max(...Object.keys(cells).map(i => $(i).textContent.length));   // big totals: the whole table shrinks together
   document.querySelector(".mestats").style.setProperty("--statfs", statLen <= 5 ? "1.5rem" : statLen <= 7 ? "1.2rem" : ".98rem");
   S.seals = S.seals || {};
-  $("meSeals").innerHTML = SEALS.map(m => `<div><span class="seal${S.seals[m] ? " on" : ""}">${m}</span>${S.seals[m] ? S.seals[m].slice(5).replace("-", "/") + " 達成" : `連續<br>${m} 天`}</div>`).join("");
+  $("meSeals").innerHTML = SEALS.map(m => `<div><span class="seal${S.seals[m] ? " on" : ""}">${m}</span>${S.seals[m] ? S.seals[m].slice(5).replace("-", "/") + " 達成" : `${m} 天`}</div>`).join("");
   const log = S.dediLog || [];
   $("meDediSum").textContent = log.length ? `${log.length} 次` : "尚無紀錄";
   $("mePeopleSum").textContent = `${dediState().people.length} 位`;
@@ -6445,7 +6480,7 @@ function renderExplore(){
     const b = el("button", "acard");
     const playingHere = lsCur && lsCur.s.id === a.sr.id;
     b.appendChild(coverEl(a, playingHere ? (talk.paused ? "暫停中" : "播放中") : ""));
-    b.appendChild(el("span", "an", a.title));
+    b.setAttribute("aria-label", `${a.title}，${a.sr.eps.length} 首`);   // 經名寫在封面上，下面不重複
     b.appendChild(el("span", "as", `${a.sr.eps.length} 首`));
     b.onclick = () => openAlbum(a.id);
     covers.appendChild(b);
